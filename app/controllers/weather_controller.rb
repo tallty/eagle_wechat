@@ -17,4 +17,7 @@ class WeatherController < ApplicationController
 	def statement
 		
 	end
+	def server_x
+		
+	end
 end
