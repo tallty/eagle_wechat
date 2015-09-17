@@ -14,4 +14,7 @@ class WeatherController < ApplicationController
 	def meteorologic
 		
 	end
+	def statement
+		
+	end
 end

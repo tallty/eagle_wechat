@@ -21,6 +21,7 @@ Rails.application.routes.draw do
          get 'port'
          get 'server'
          get 'meteorologic'
+         get 'statement'
        end
   #
   #     collection do
