@@ -1,0 +1,41 @@
+.warp {
+	background-color: #F0F0F2;
+}
+.sef-container {
+	padding: 10px 8px;
+}
+.tab-title {
+	background-color: #000;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 900;
+	padding: 10px 0 10px 0;
+	line-height: 28px;
+	div {
+		padding: 0;
+	}
+	.icon {
+		font-size: 15px;
+	}
+}
+.tab-line {
+	background-color: #fff;
+	font-size: 12px;
+	.mes-line {
+		padding: 8px 0 0 0;
+	}
+	.number {
+		color: #2B6BE4;
+	}
+	.small-tab {
+		color: #B8B8B8;
+	}
+	.icon-twoline {
+		line-height: 48px;
+		padding-left: 0;
+	}
+	.line-hr {
+		border: 1px dashed #B8B8B8;
+		margin: 0 5px;
+	}
+}
