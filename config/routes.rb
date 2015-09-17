@@ -23,6 +23,7 @@ Rails.application.routes.draw do
          get 'meteorologic'
          get 'statement'
          get 'server_x'
+         get 'result'
        end
   #
   #     collection do

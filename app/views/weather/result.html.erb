@@ -1,0 +1,139 @@
+<div class="warp">
+	<div class="sef-container">
+		<div class="optimize">
+			<div class="optimize-chart" style="height: 10px"></div>
+			<div class="optimize-click text-muted">点击优化</div>
+			<p class="text-center text-muted">立即优化，让系统更健康</p>
+		</div>
+		<div class="optimize-item">
+			<ul class="nav">
+				<li>
+					<i class="fa fa-trash-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>清理缓存</span>
+					<span class="pull-right"><i class="fa fa-check fa-lg"></i></span>
+				</li>
+				<hr>
+				<li>
+					<i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>关闭自启项</span>
+					<span class="pull-right"><i class="fa fa-check fa-lg"></i></span>
+				</li>
+				<hr>
+				<li>
+					<i class="fa fa-shield"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>修护系统出现的问题</span>
+					<span class="pull-right"><i class="fa fa-check fa-lg"></i></span>
+				</li>
+				<hr>
+				<li>
+					<i class="fa fa-calculator"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>残留数据</span>
+					<span class="pull-right"><i class="fa fa-check fa-lg"></i></span>
+				</li>
+				<hr>
+				<li>
+					<i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>临时文件</span>
+					<span class="pull-right"><i class="fa fa-check fa-lg"></i></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function(){
+		var item = $(".optimize-item").height() + 20;
+		var body = document.body.clientHeight - 20;
+		var chatWidth = $(".optimize-chart").width();
+
+		$(".optimize").height(body - item);
+		$(".optimize-chart").height(body - item -50);		
+
+		$(".optimize-click").css("top", (body - item - 50) / 2 + 45);
+		$(".optimize-click").css("left", chatWidth / 2 - 18);
+		// 路径配置
+		require.config({
+		  paths: {
+		    echarts: '/assets/echarts'
+		  }
+		});
+
+		// 使用
+		require(
+		  [
+		  'echarts',
+		  'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+		  ],
+		  function (ec) {
+		    $(".optimize-chart").each(function(){
+		      var myChart = ec.init($(this).get(0));
+		      var labelTop = {
+		          normal : {
+		          	color: '#1A87D8',
+		              label : {
+		                  show : true,
+		                  position : 'center',
+		                  formatter : '{b}',
+		                  textStyle: {
+		                      baseline : 'top'
+		                  }
+		              },
+		              labelLine : {
+		                  show : false
+		              }
+		          }
+		      };
+		      var labelFromatter = {
+		          normal : {
+		              label : {
+		                  formatter : function (params){
+		                      return 100 - params.value
+		                  },
+		                  textStyle: {
+		                      baseline : 'middle',
+		                      fontSize: 70,
+		                      color: '#38B3E8'
+		                  }
+		              }
+		          },
+		      }
+		      var labelBottom = {
+		          normal : {
+		              color: '#EDEDED',
+		              label : {
+		                  show : true,
+		                  position : 'center'
+		              },
+		              labelLine : {
+		                  show : false
+		              }
+		          },
+		          emphasis: {
+		              color: 'rgba(0,0,0,0)'
+		          }
+		      };
+		      var radius = ['58%', '70%'];
+		      option = {
+		          series : [
+		              {
+		                  type : 'pie',
+		                  center : ['50%', '50%'],
+		                  radius : radius,
+		                  y: '55%',   // for funnel
+		                  x:'80%', // for funnel
+		                  itemStyle : labelFromatter,
+		                  data : [
+		                      {name:'other', value:15, itemStyle : labelBottom},
+		                      {name:'', value:85,itemStyle : labelTop}
+		                  ]
+		              }
+		          ]
+		      };
+		    // 为echarts对象加载数据 
+		    myChart.setOption(option); 
+		    });
+		  }
+		);
+	});
+</script>

@@ -1,3 +1,6 @@
+html, body{
+	height: 100%;
+}
 // <!--active页面样式（活跃告警页）-->
 .active-line {
 	padding-top: 10px;
@@ -44,9 +47,9 @@
 
 // <!--server-x页面样式（服务器详情）-->
 .pie-text {
-  p {
-    padding-left: 15px;
-  }
+	p {
+		padding-left: 15px;
+	}
 }
 .server-x-text {
   padding: 10px 0;
@@ -58,10 +61,10 @@
   padding-bottom: 10px;
 }
 .right3 {
-  padding: 20px 0;
-  .btn {
-    margin-top: 20px;
-  }
+	padding: 20px 0;
+	.btn {
+		margin-top: 20px;
+	}
 }
 .state {
   background-color: rgb(121, 120, 120);
@@ -71,3 +74,37 @@
   }
 }
 
+.tab {
+	font-size: 12px;
+}
+
+/**weather#result**/
+.optimize{
+	background-color: #DEDCDD !important;
+	width: 100%;
+	.optimize-chart{
+		position: relative;
+	}
+	.optimize-click{
+		position: absolute;
+	}
+}
+.optimize-item{
+	padding: 10px 5px;
+	background-color: #fff;
+	.nav{
+		hr{
+			margin: 0;
+			border-color: #CBCBCB;
+		}
+		li{
+			font-size: 16px;
+			height: 50px;
+			line-height: 50px;
+			padding: 0 20px;
+		}
+		.fa-check{
+			color: #1A87D8;
+		}
+	} 
+}
