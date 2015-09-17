@@ -11,7 +11,7 @@ html, body{
 
 // <!--server页面样式（服务器）-->
 .server-number {
-	color: #B8B8B8;
+	color: #ddd;
   font-size: 12px;
   padding-top: 10px;
 }
@@ -36,6 +36,11 @@ html, body{
 }
 .fa-green {
   color: green;
+  font-size: 8px;
+  padding-right: 5px;
+}
+.fa-orange {
+  color: orange;
   font-size: 8px;
   padding-right: 5px;
 }
