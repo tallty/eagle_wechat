@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: eagle_development
+  database: eagle_wechat_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: eagle_test
+  database: eagle_wechat_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: eagle_production
+  database: eagle_wechat_production
   username: eagle
   password: <%= ENV['EAGLE_DATABASE_PASSWORD'] %>
