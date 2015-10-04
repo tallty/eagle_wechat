@@ -1,0 +1,54 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>管理员详细信息</h5>
+            <%= link_to new_admin_user_path, remote: true, format: :js, class: "ibox-title-new member-new" do %>
+              <i class="fa fa-plus fa-lg"></i>
+            <% end %>
+        </div>
+        <div class="ibox-content"> 
+          <table class="footable table table-stripped text-center toggle-arrow-tiny" data-page-size="2">
+            <thead>
+              <tr>
+                <th class="text-center" data-toggle="true">No.</th>
+                <th class="text-center">姓名</th>
+                <th class="text-center">电话</th>
+                <th class="text-center">邮箱</th>
+                <th class="text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody data-no-turbolink>
+            <% @users.each_with_index do |user, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= user.name %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <%= link_to edit_admin_user_path(user), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
+                    <span class="glyphicon glyphicon-edit"></span>
+                  <% end %>
+                  <%= link_to admin_user_path(user), method: :delete, class: 'btn btn-xs btn-danger' do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="text-center" colspan="5">
+                  <ul class="pagination"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="customerModalContent"></div>
+  

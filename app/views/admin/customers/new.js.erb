@@ -1,0 +1,3 @@
+$(".modal-backdrop").remove();
+$("#customerModalContent").html("<%= escape_javascript( render "customers_modal", customer: @customer  )%>");
+$('#customerModal').modal('show');

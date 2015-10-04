@@ -1,0 +1,55 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+      <!-- brand -->
+      <li class="nav-header">
+        <div class="profile-element text-center" style="color: #fff;">
+          <p class="block"><strong><%= Time.now.strftime("%A %R %p")%></strong></p>
+        </div>
+        <div class="logo-element">
+          Eagle
+        </div>
+      </li>
+
+      <li class="">
+        <a href="">
+          <i class="fa fa-users"></i> <span class="nav-label">客户</span>
+          <span class="fa arrow"></span>
+        </a>      
+        <ul class="nav nav-second-level collapse">
+          <% Customer.all.each do |customer| %>
+            <li class="">
+              <a href="#">
+                <i class="fa fa-globe"></i><span class="nav-label"><%= customer.abbreviation%></span>
+                  <span class="fa arrow"></span>
+              </a>
+              <ul class="nav nav-third-level collapse">
+                <li class="">
+                  <%= link_to "<span class='nav-label'>人员</span>".html_safe, admin_member_path(customer) %>  
+                </li>
+                <li class="">
+                  <%= link_to "<span class='nav-label'>服务器</span>".html_safe, admin_customer_machines_path(customer) %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="">
+        <a href="#">
+          <i class="fa fa-globe"></i><span class="nav-label">系统</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level collapse">
+          <li class="">
+            <%= link_to "<i class='fa fa-user'></i> <span class='nav-label'>管理员</span>".html_safe, admin_users_path %>
+          </li>
+          <li class="">
+            <%= link_to "<i class='fa fa-user'></i> <span class='nav-label'>客户</span>".html_safe, admin_customers_path %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,3 @@
+$(".modal-backdrop").remove();
+$("#machineModalContent").html("<%= escape_javascript( render "machines_modal", machine: @machine  )%>");
+$('#machineModal').modal('show');

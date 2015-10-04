@@ -1,0 +1,7 @@
+<% if @machine.errors.present? %>
+	$(".modal-backdrop").remove();
+	$("#machineModalContent").html("<%= escape_javascript( render "machines_modal", machine: @machine )%>");
+	$('#machineModal').modal('show');
+<% else %>
+	location.href = "<%= admin_customer_machines_path %>"
+<% end  %>
