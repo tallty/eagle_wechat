@@ -1,0 +1,116 @@
+html, body{
+	height: 100%;
+	font-size: 13px!important;
+}
+// <!--active页面样式（活跃告警页）-->
+.active-line {
+	padding-top: 10px;
+	div {
+		padding: 0 0 5px 0;
+	}
+}
+
+// <!--server页面样式（服务器）-->
+.server-number {
+	color: #777;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.server-xs4 {
+  padding-left: 10px;
+}
+.server-line {
+	padding-left: 0!important;
+  p {
+    margin-bottom: 0;
+  }
+}
+.server-tab {
+	padding-left: 22px!important;
+}
+
+// <!--全局圆点样式-->
+.fa-red {
+  color: #DC4888;
+  font-size: 8px;
+  padding-right: 5px;
+}
+.fa-green {
+  color: #80FD95;
+  font-size: 8px;
+  padding-right: 5px;
+}
+.fa-orange {
+  color: orange;
+  font-size: 8px;
+  padding-right: 5px;
+}
+.fa-icon {
+  font-size: 8px;
+  padding-right: 5px;
+}
+
+
+// <!--server-x页面样式（服务器详情）-->
+.pie-text {
+	p {
+		padding-left: 15px;
+	}
+}
+.server-x-text {
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+// <!--statement页面样式（日报表）-->
+.air-fw2 {
+  padding-bottom: 10px;
+}
+.right3 {
+	padding: 20px 0;
+	.btn {
+		margin-top: 20px;
+	}
+}
+.state {
+  background-color: rgb(121, 120, 120);
+  div {
+    padding: 5px 0;
+    color: #fff; 
+  }
+}
+
+.tab {
+	font-size: 12px;
+}
+
+/**weather#result**/
+.optimize{
+	background-color: #DEDCDD !important;
+	width: 100%;
+	.optimize-chart{
+		position: relative;
+	}
+	.optimize-click{
+		position: absolute;
+	}
+}
+.optimize-item{
+	padding: 10px 5px;
+	background-color: #fff;
+	.nav{
+		hr{
+			margin: 0;
+			border-color: #CBCBCB;
+		}
+		li{
+			font-size: 16px;
+			height: 50px;
+			line-height: 50px;
+			padding: 0 20px;
+		}
+		.fa-check{
+			color: #1A87D8;
+		}
+	} 
+}

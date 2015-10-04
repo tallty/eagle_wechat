@@ -1,0 +1,65 @@
+.warp {
+	background-color: #F0F0F2;
+}
+.sef-container {
+	padding: 10px 8px;
+}
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	color: #000;
+}
+.tab-title {
+	background-color: #2E2F3A;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 900;
+	padding: 10px 0 10px 0;
+	line-height: 28px;
+	div {
+		padding: 0;
+	}
+	.icon {
+		font-size: 15px;
+	}
+}
+.tab-line {
+	background-color: #fff;
+	padding-bottom: 5px;
+	margin-bottom: 14px;
+	box-shadow: 4px 5px 3px #E4E4E4;
+	.mes-line {
+		padding: 8px 0 0 0;
+		.first-line {
+			padding-bottom: 25px;
+		}
+		.line {
+			padding-right: 0;
+		}
+		.max-point {
+			padding-left: 20px;
+		}
+ 		.number {
+			color: #2B6BE4;
+			span {
+				padding: 0 5px;
+			}
+		}
+		.large-title {
+			font-size: 14px;
+		}
+	}
+.small-tab {
+	color: #777;
+	font-size: 11px;
+	line-height: 20px;
+}
+	.icon-twoline {
+		line-height: 55px;
+		padding-left: 5px;
+		padding-right: 10px;
+	}
+	.line-hr {
+		border: 1px dashed #B8B8B8;
+		margin: 0 5px;
+	}
+}

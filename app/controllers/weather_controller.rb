@@ -1,0 +1,27 @@
+class WeatherController < ApplicationController
+	def active
+		
+	end
+	def history
+		
+	end
+	def port
+		
+	end
+	def server
+		
+	end
+	def meteorologic
+		
+	end
+	def statement
+		
+	end
+	def server_x
+		
+	end
+
+	def result
+		
+	end
+end

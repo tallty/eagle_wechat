@@ -6,9 +6,7 @@ class MachinesController < ApplicationController
     @machine = Machine.new(machine_params)
     p @machine
     render :text => 'ok'
-    
   end
-
   
   private
     # Use callbacks to share common setup or constraints between actions.
