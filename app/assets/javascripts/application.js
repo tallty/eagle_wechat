@@ -11,13 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-<<<<<<< HEAD
 //= require jquery.turbolinks
-=======
 //= require bootstrap-sprockets
->>>>>>> 11785b377754f4aad9f5c271d29f25828710a448
 //= require jquery_ujs
-//= require bootstrap-sprockets
 //= require ./frame/inspinia
 //= require ./frame/pace.min
 //= require ./frame/jquery.slimscroll.min
@@ -28,9 +24,3 @@
 //= require_tree ./echarts/chart
 //= require_tree ./application/.
 //= require turbolinks
-<<<<<<< HEAD
-=======
-//= require ./echarts/echarts
-//= require_tree ./echarts
-//= require_tree .
->>>>>>> 11785b377754f4aad9f5c271d29f25828710a448

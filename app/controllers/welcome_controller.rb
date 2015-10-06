@@ -1,9 +1,8 @@
 class WelcomeController < ApplicationController
-<<<<<<< HEAD
-
+  before_action :authenticate_user! 
+  
   def index
     
   end
-=======
->>>>>>> 11785b377754f4aad9f5c271d29f25828710a448
+
 end
