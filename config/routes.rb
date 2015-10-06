@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
   root to: 'welcome#index'
 
   resources :cpus
@@ -19,9 +18,6 @@ Rails.application.routes.draw do
     end
     
   end
-=======
-  # You can have the root of your site routed with "root"
-  root 'welcome#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -76,5 +72,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
->>>>>>> 11785b377754f4aad9f5c271d29f25828710a448
 end
