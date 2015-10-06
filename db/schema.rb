@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20151001031803) do
+ActiveRecord::Schema.define(version: 20151006080719) do
 
   create_table "cpus", force: :cascade do |t|
     t.string   "model_info", limit: 255
@@ -35,6 +34,22 @@ ActiveRecord::Schema.define(version: 20151001031803) do
   end
 
   add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
+
+  create_table "machine_details", force: :cascade do |t|
+    t.string   "cpu_name",                 limit: 255
+    t.string   "mhz",                      limit: 255
+    t.integer  "cpu_real",                 limit: 4
+    t.integer  "cpu_total",                limit: 4
+    t.string   "memory_swap_total",        limit: 255
+    t.string   "memory_total",             limit: 255
+    t.string   "network_external_address", limit: 255
+    t.string   "network_address",          limit: 255
+    t.integer  "machine_id",               limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "machine_details", ["machine_id"], name: "index_machine_details_on_machine_id", using: :btree
 
   create_table "machines", force: :cascade do |t|
     t.string   "identifier",       limit: 255
@@ -92,8 +107,5 @@ ActiveRecord::Schema.define(version: 20151001031803) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-=======
-ActiveRecord::Schema.define(version: 0) do
->>>>>>> 11785b377754f4aad9f5c271d29f25828710a448
 
 end

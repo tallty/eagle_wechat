@@ -1,5 +1,6 @@
 class Machine < ActiveRecord::Base
   belongs_to :customer
+  has_one :machine_detail
   enum operating_status: { stoped: 0, running: 1 }
 
   after_initialize :generate_identifier
