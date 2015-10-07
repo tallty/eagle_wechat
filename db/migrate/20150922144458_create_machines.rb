@@ -9,5 +9,6 @@ class CreateMachines < ActiveRecord::Migration
       t.references :customer, index:true
       t.timestamps null: false
     end
+    add_index :machines, :identifier
   end
 end

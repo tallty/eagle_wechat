@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
-  resources :cpus
   resources :machines, only: [:create]
   
   devise_for :users, controllers: {
