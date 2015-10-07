@@ -21,6 +21,8 @@ class MachinesController < ApplicationController
     detail.network_address = machine_params["info"]["net_work"]["network_address"]
     detail.save
 
+    machine.operating_status = 1
+    machine.save
     render :text => 'ok'
   end
   
