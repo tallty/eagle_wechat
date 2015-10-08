@@ -35,6 +35,9 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'unicorn'
 gem 'devise'
 
+gem 'weixin_rails_middleware'
+gem 'weixin_authorize', git: "https://github.com/shtzr840329/weixin_authorize.git", branch: 'news_message_api'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
