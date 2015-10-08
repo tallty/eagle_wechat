@@ -10,6 +10,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
+/config/initializers/weixin_rails_middleware.rb
 /tmp
 public/assets/
 public/uploads/
