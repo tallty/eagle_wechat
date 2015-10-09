@@ -10,7 +10,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
-/config/initializers/weixin_rails_middleware.rb
+/config/initializers/qy_wechat_config.rb
 /tmp
 public/assets/
 public/uploads/
