@@ -14,12 +14,6 @@
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require ./frame/inspinia
-//= require ./frame/pace.min
-//= require ./frame/jquery.slimscroll.min
-//= require ./frame/jquery.metisMenu
-//= require ./frame/switchery
-//= require ./frame/footable.all.min
 //= require ./echarts/echarts
 //= require_tree ./echarts/chart
 //= require_tree ./application/.

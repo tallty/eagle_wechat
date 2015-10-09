@@ -1,0 +1,17 @@
+/**后台管理页面与前台界面共用全局样式**/
+
+body{
+	background-color: #2F4050;
+}
+.eagle-content{
+	padding: 20px 10px 40px 10px;
+	.p-xs{
+		padding: 0 10px !important;
+	}
+}
+//toastr
+#toast-container{
+	.toast-error:before, .toast-success:before, .toast-warning:before, .toast-info:before{
+		content: " ";	
+	}
+}

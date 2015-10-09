@@ -18,7 +18,6 @@
  *= require ./frame/switchery
  *= require ./frame/toastr.min
  *= require_tree ./admin/.
- *= require global
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";

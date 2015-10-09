@@ -10,13 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *= require_self
- *= require ./frame/animate
- *= require ./frame/font-awesome
- *= require ./frame/footable.core
- *= require ./frame/style
- *= require ./frame/switchery
  *= require_tree ./application/.
- *= require global
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";

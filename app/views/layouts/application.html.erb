@@ -10,27 +10,7 @@
 </head>
 
   <body>
-    <div id="wrapper">
-      <!-- 左侧导航栏部分 -->
-      <%= render partial: "/share/left_bar" %>
-
-      <!-- 右侧内容页 -->
-      <div id="page-wrapper" class="gray-bg">
-        <!-- 顶部导航 -->
-        <%= render partial: "/share/top_bar" %>
-
-        <!-- 右侧中间内容部分 -->
-        <div class="row wrapper eagle-content <%= controller.controller_path.gsub('/','__') + '__' + controller.action_name %>">
           <%= yield %>
-        </div>
-
-        <!-- 页脚 -->
-        <%= render partial: "/share/footer" %>
-
-        <!-- 皮肤及设置 -->
-        <%#= render partial: "/share/setting" %>
-      </div>
-    </div>  
   </body>
 
 </html>
