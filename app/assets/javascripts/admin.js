@@ -21,6 +21,5 @@
 //= require ./frame/jquery.metisMenu
 //= require ./frame/switchery
 //= require ./frame/footable.all.min
-//= require ./frame/toastr.min
 //= require_tree ./admin/.
 //= require turbolinks
