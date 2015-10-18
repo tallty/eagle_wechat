@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   mount QyWechat::Engine, at: "/"
   # root to: 'welcome#index'
 
-  resources :machines, only: [:create]
+  resources :machines do
+    collection do
+      post :base_hardware_info
+      post :real_hardware_info
+    end
+  end
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -18,6 +23,9 @@ Rails.application.routes.draw do
     end
     
   end
+
+  resources :oauths, only: [:index]
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
