@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008101727) do
+ActiveRecord::Schema.define(version: 20151018134731) do
 
   create_table "cpus", force: :cascade do |t|
     t.string   "model_info", limit: 255
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20151008101727) do
   end
 
   add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
+
+  create_table "disk_infos", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "full_name",  limit: 255
+    t.integer  "disk_size",  limit: 4
+    t.integer  "machine_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "disk_infos", ["machine_id"], name: "index_disk_infos_on_machine_id", using: :btree
 
   create_table "diymenus", force: :cascade do |t|
     t.integer  "public_account_id", limit: 4
