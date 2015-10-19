@@ -38,7 +38,6 @@ gem 'redis', '3.2.1'
 gem "redis-namespace"
 gem 'qy_wechat'
 gem "qy_wechat_api", git: "https://github.com/lanrion/qy_wechat_api.git"
-# gem 'weixin_authorize', git: "https://github.com/shtzr840329/weixin_authorize.git", branch: 'news_message_api'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
