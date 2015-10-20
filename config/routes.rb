@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   mount QyWechat::Engine, at: "/"
-  # root to: 'welcome#index'
+  get 'welcome/index'
 
   resources :machines do
     collection do

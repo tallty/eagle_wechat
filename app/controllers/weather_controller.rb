@@ -3,7 +3,6 @@ class WeatherController < ApplicationController
 		
 	end
 	def history
-		
 	end
 	def port
 		
@@ -18,8 +17,8 @@ class WeatherController < ApplicationController
 		
 	end
 	def server_x
-	  user = $group_client.oauth.get_user_info(params["code"], "wx02a2998a8f377c0b")
-	  p user
+	  # user = $group_client.oauth.get_user_info(params["code"], "wx02a2998a8f377c0b")
+	  # p user
 	end
 
 	def result

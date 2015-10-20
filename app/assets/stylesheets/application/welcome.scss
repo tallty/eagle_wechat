@@ -2,19 +2,20 @@
 	background-color: #F0F0F2;
 }
 .sef-container {
-	padding: 10px 8px;
+	padding: 15px 10px;
 }
 a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
 	color: #000;
 }
 .tab-title {
-	background-color: #2E2F3A;
+	background-color: #000;
 	color: #fff;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 900;
-	padding: 10px 0 10px 0;
-	line-height: 28px;
+	padding: 0 15px;
+	height: 35px;
+	line-height: 35px;
 	div {
 		padding: 0;
 	}
@@ -35,6 +36,9 @@ a:link, a:visited, a:hover, a:active {
 		.line {
 			padding-right: 0;
 		}
+		.p-l-0{
+			padding-left: 0;
+		}
 		.max-point {
 			padding-left: 20px;
 		}
@@ -54,7 +58,7 @@ a:link, a:visited, a:hover, a:active {
 	line-height: 20px;
 }
 	.icon-twoline {
-		line-height: 55px;
+		line-height: 60px;
 		padding-left: 5px;
 		padding-right: 10px;
 	}

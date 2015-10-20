@@ -5,6 +5,7 @@ html, body{
 // <!--active页面样式（活跃告警页）-->
 .active-line {
 	padding-top: 10px;
+	height: 60px;
 	div {
 		padding: 0 0 5px 0;
 	}
@@ -31,22 +32,18 @@ html, body{
 
 // <!--全局圆点样式-->
 .fa-red {
-  color: #DC4888;
-  font-size: 8px;
+  color: #f60100;
   padding-right: 5px;
 }
 .fa-green {
-  color: #80FD95;
-  font-size: 8px;
+  color: #5de035;
   padding-right: 5px;
 }
 .fa-orange {
   color: orange;
-  font-size: 8px;
   padding-right: 5px;
 }
 .fa-icon {
-  font-size: 8px;
   padding-right: 5px;
 }
 
