@@ -32,6 +32,9 @@ class MachinesController < ApplicationController
   end
 
   def real_hardware_info
+    $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
+    $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
+    $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
     $redis.hset "real_hardware_info/#{real_hardware_params['identifier']}", "#{real_hardware_params['datetime']}", "#{real_hardware_params['info']}"
     render :text => 'ok'
   end
@@ -55,7 +58,7 @@ class MachinesController < ApplicationController
       params.require(:machine).permit(:identifier, :datetime, info: [ 
                                                       cpu: [ :real, :top], 
                                                       file_system: [:lost_file_system, :percent_used],
-                                                      memory: [:memory_total_bytes, :total ], 
+                                                      memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes ], 
                                                       net_work: [:rx, :tx]
                                                     ])
     end

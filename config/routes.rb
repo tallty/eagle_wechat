@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :task_logs do
+    collection do
+      post :run
+    end
+  end
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords'
