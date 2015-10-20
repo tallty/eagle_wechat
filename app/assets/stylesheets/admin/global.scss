@@ -15,3 +15,21 @@ body{
 		content: " ";	
 	}
 }
+
+.ibox-title{
+	position: relative;
+	.ibox-title-new{
+		position: absolute;
+		height: 44px;
+		width: 44px;
+		line-height: 44px;
+		top: 0;
+		right: 0;
+		color: #fff;
+		background-color: #1AB394;
+		text-align: center;
+		&:hover{
+			background-color: #18A689;
+		}
+	}
+}
