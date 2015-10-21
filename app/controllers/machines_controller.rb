@@ -45,6 +45,8 @@ class MachinesController < ApplicationController
   end
 
   def show
+    @detail = @machine.machine_detail
+    @infos = MachineInfo.get_list("info", @machine.identifier)
   end
 
   def detail
