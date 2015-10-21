@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       post :base_hardware_info
       post :real_hardware_info
     end
+    member do 
+      get 'detail'
+    end
   end
   
   resources :task_logs do

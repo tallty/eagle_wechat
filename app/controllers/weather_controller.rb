@@ -8,7 +8,7 @@ class WeatherController < ApplicationController
 		
 	end
 	def select_server
-		
+		@machines = Machine.all
 	end
 	def server
 		

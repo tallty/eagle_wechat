@@ -1,4 +1,5 @@
 class MachinesController < ApplicationController
+  before_action :set_machine, only: [:show, :detail]
   protect_from_forgery :except => :index
   skip_before_filter :verify_authenticity_token,:only => [:base_hardware_info, :real_hardware_info]
   respond_to :json
@@ -37,6 +38,16 @@ class MachinesController < ApplicationController
     $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
     $redis.hset "real_hardware_info/#{real_hardware_params['identifier']}", "#{real_hardware_params['datetime']}", "#{real_hardware_params['info']}"
     render :text => 'ok'
+  end
+
+  def index
+    @machines = Machine.all
+  end
+
+  def show
+  end
+
+  def detail
   end
   
   private
