@@ -6,6 +6,6 @@ class MachineInfo
   end
 
   def self.get_info(info, machine_id)
-    info = $redis.lpop("#{machine_id}_#{info}")
+    info = $redis.lindex("#{machine_id}_#{info}", 0)
   end
 end
