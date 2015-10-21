@@ -11,7 +11,7 @@
 			<% @machines.each do |machine| %>
 				<%= link_to machine do %>
 				<div class="col-xs-12 server-line active-line">
-					<div class="col-xs-4"><%= machine.identifier %></div>
+					<div class="col-xs-4"><%= machine.identifier.try(:truncate, 6) %></div>
 					<div class="col-xs-2"><p>
 						<i class="fa fa-circle fa-red"></i><%= "70%" %></p>
 						<p class="server-number">
