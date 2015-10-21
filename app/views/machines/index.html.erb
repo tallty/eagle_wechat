@@ -1,0 +1,16 @@
+<div class="warp">
+	<div class="sef-container">
+		<div class="tab-title col-xs-12 server-tab">选择服务器</div>
+		<div class="tab-line text-center clearfix">
+		<% @machines.each do |machine| %>
+			<%= link_to machine do %>
+				<div class="col-xs-12 server-line active-line" style="line-height: 40px;">
+					<div class="col-xs-4">NS11253017</div>
+					<div class="col-xs-8 text-right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></div>
+				</div>
+			<% end %>
+				<hr class="line-hr">
+		<% end %>
+		</div>
+	</div>
+</div>

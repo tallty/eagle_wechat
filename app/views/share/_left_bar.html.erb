@@ -36,16 +36,16 @@
         </ul>
       </li>
 
-      <li class="">
+      <li class="<%= "active" if params[:controller] == "admin/users" || params[:controller] == "admin/customers" %>">
         <a href="#">
           <i class="fa fa-globe"></i><span class="nav-label">系统</span>
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse">
-          <li class="">
+          <li class="<%= "active" if params[:controller] == "admin/users" %>">
             <%= link_to "<i class='fa fa-user'></i> <span class='nav-label'>管理员</span>".html_safe, admin_users_path %>
           </li>
-          <li class="">
+          <li class="<%= "active" if params[:controller] == "admin/customers" %>">
             <%= link_to "<i class='fa fa-user'></i> <span class='nav-label'>客户</span>".html_safe, admin_customers_path %>
           </li>
         </ul>

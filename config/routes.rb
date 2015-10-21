@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
   mount QyWechat::Engine, at: "/"
-  # root to: 'welcome#index'
+  get 'welcome/index'
 
   resources :machines do
     collection do
       post :base_hardware_info
       post :real_hardware_info
+    end
+    member do 
+      get 'detail'
     end
   end
   
@@ -47,10 +50,8 @@ Rails.application.routes.draw do
          get 'active'
          get 'history'
          get 'port'
-         get 'server'
          get 'meteorologic'
          get 'statement'
-         get 'server_x'
          get 'result'
        end
   #
