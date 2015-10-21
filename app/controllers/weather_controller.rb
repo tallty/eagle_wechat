@@ -7,6 +7,9 @@ class WeatherController < ApplicationController
 	def port
 		
 	end
+	def select_server
+		
+	end
 	def server
 		
 	end
@@ -20,7 +23,7 @@ class WeatherController < ApplicationController
 	  # user = $group_client.oauth.get_user_info(params["code"], "wx02a2998a8f377c0b")
 	  # p user
 	end
-
+ 
 	def result
 		
 	end
