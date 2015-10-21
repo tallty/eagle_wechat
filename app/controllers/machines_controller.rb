@@ -56,10 +56,10 @@ class MachinesController < ApplicationController
 
     def real_hardware_params
       params.require(:machine).permit(:identifier, :datetime, info: [ 
-                                                      cpu: [ :real, :top, :cpu_used ], 
-                                                      file_system: [:lost_file_system, :percent_used],
-                                                      memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes ], 
-                                                      net_work: [:rx, :tx]
+                                                      cpu: [ :real, :top, :cpu_used, :date_time ], 
+                                                      file_system: [:lost_file_system, :percent_used, :date_time],
+                                                      memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes, :date_time ], 
+                                                      net_work: [:rx, :tx, :date_time]
                                                     ])
     end
 end
