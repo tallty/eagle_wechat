@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   resources :task_logs do
     collection do
-      post :run
+      post :fetch
     end
   end
 
