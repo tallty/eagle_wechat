@@ -1,15 +1,11 @@
 Rails.application.routes.draw do
 
   mount QyWechat::Engine, at: "/"
-  get 'welcome/index'
 
   resources :machines do
     collection do
       post :base_hardware_info
       post :real_hardware_info
-    end
-    member do 
-      get 'detail'
     end
   end
   
@@ -44,20 +40,21 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Example resource route with options:
+    #日报表
+    get 'welcome/index'    
+
+    #index : 服务器(第三个菜单)，show：服务器详情（含诊断指向诊断结果）
+    resources :machine_details, only: [:index, :show]
+
     resources :weather do
        collection do
-         get 'active'
-         get 'history'
-         get 'port'
-         get 'meteorologic'
-         get 'statement'
-         get 'result'
+         get 'active'    #活跃告警
+         get 'history'    #历史告警
+         get 'port'    #调用接口
+         get 'meteorologic'    #气象数据
+         get 'statement'    #日报表中链接指向
+         get 'result'    #诊断结果
        end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
      end
 
   # Example resource route with sub-resources:
