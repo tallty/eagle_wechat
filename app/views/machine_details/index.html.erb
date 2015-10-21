@@ -13,7 +13,7 @@
 				<div class="col-xs-12 server-line active-line">
 					<div class="col-xs-4"><%= machine.identifier.try(:truncate, 9) %></div>
 					<div class="col-xs-2"><p>
-						<i class="fa fa-circle fa-red"></i><%= "70%" %></p>
+						<i class="fa fa-circle fa-red"></i><%= eval(MachineInfo.get_info("cpu", machine.identifier))["cpu_used"] %>%</p>
 						<p class="server-number">
 							<%= machine.machine_detail(:cpu_real) %>/
 							<%= machine.machine_detail(:cpu_total) %>
