@@ -20,10 +20,10 @@
 						</p>
 					</div>
 					<div class="col-xs-2">
-						
+						<p><i class="fa fa-circle fa-green"></i><%= machine.machine_detail.memory_total.delete('kB').to_i >> 20 %>G</p>
 						<p class="server-number">
-							<%= ((eval(MachineInfo.get_info("memory", machine.identifier))["memory_total_bytes"].to_f - eval(MachineInfo.get_info("memory", machine.identifier))["memory_free_bytes"].to_f) / 1073741824).round(1) %>G/
-							<%= (eval(MachineInfo.get_info("memory", machine.identifier))["memory_total_bytes"].to_f / 1073741824).round(1) %>G
+							<%= (((MachineInfo.get_info("memory", machine.identifier))["memory_total_bytes"].to_f - (MachineInfo.get_info("memory", machine.identifier))["memory_free_bytes"].to_f) / 1073741824).round(1) %>G/
+							<%= ((MachineInfo.get_info("memory", machine.identifier))["memory_total_bytes"].to_f / 1073741824).round(1) %>G
 						</p>
 					</div>
 					<div class="col-xs-2"><i class="fa fa-circle fa-green"></i>正常</div>
