@@ -10,7 +10,6 @@ class OauthsController < ApplicationController
     else
       url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}", "STATE#wechat_redirect")
       uri = URI.encode(url)
-      # url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02a2998a8f377c0b&redirect_uri=http://shtzr198434.tunnel.mobi/#{params['target_url']}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
       redirect_to uri
     end
   end
