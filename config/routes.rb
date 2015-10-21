@@ -50,11 +50,8 @@ Rails.application.routes.draw do
          get 'active'
          get 'history'
          get 'port'
-         get 'select_server'
-         get 'server'
          get 'meteorologic'
          get 'statement'
-         get 'server_x'
          get 'result'
        end
   #
