@@ -3,7 +3,7 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :identifier
       t.string :name
-      t.int :rate
+      t.integer :rate
 
       t.timestamps null: false
     end
