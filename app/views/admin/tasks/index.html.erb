@@ -3,6 +3,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
+            <h5>[<%= @customer.name %>] 任务列表</h5>
             <%= link_to new_admin_customer_task_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
               <i class="fa fa-plus fa-lg"></i>
             <% end %>
