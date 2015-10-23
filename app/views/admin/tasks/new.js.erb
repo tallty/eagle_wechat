@@ -1,0 +1,3 @@
+$(".modal-backdrop").remove();
+$("#taskModalContent").html("<%= escape_javascript( render "tasks_modal", task: @task  )%>");
+$('#taskModal').modal('show');

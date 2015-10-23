@@ -3,8 +3,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>[<%= @customer.name %>] 服务器信息</h5>
-            <%= link_to new_admin_customer_machine_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
+            <%= link_to new_admin_customer_task_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
               <i class="fa fa-plus fa-lg"></i>
             <% end %>
         </div>
@@ -15,27 +14,25 @@
                 <th class="text-center" data-toggle="true">No.</th>
                 <th class="text-center">名称</th>
                 <th class="text-center">识别码</th>
-                <th class="text-center">运行状态</th>
-                <th class="text-center">说明</th>
+                <th class="text-center">运行频率</th>
                 <th class="text-center">操作</th>
               </tr>
             </thead>
             <tbody data-no-turbolink>
-            <% @customer.machines.each_with_index do |machine, index| %>
+            <% @customer.tasks.each_with_index do |task, index| %>
               <tr>
                 <td><%= index + 1 %></td>
-                <td><%= machine.name %></td>
-                <td><%= machine.identifier %></td>
-                <td><%= machine.operating_status %></td>
-                <td><%= machine.explain %></td>
+                <td><%= task.name %></td>
+                <td><%= task.identifier %></td>
+                <td><%= task.rate %></td>
                 <td>
-                  <%= link_to edit_admin_customer_machine_path(id: machine.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
+                  <%= link_to edit_admin_customer_task_path(id:task.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
                   <% end %>
-                  <%= link_to [:admin, machine.customer, machine], class: 'btn btn-xs btn-info' do %>
+                  <%= link_to [:admin, task.customer, task], class: 'btn btn-xs btn-info' do %>
                     <span class="glyphicon glyphicon-list-alt"></span>
                   <% end %>
-                  <%= link_to [:admin, machine.customer, machine], method: :delete, class: 'btn btn-xs btn-danger' do %>
+                  <%= link_to admin_customer_task_path(id:task.id), method: :delete, class: 'btn btn-xs btn-danger' do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
@@ -55,5 +52,5 @@
     </div>
   </div>
 </div>
-<div id="machineModalContent"></div>
+<div id="taskModalContent"></div>
   

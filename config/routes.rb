@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :users
     resources :members
     resources :customers do
-      resources :machines, shallow: true
+      resources :machines
       resources :tasks
       resources :interfaces
     end

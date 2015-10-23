@@ -1,0 +1,19 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>任务详情</h5>
+				</div>
+				<div class="ibox-content"> 
+					<p>任务名称：<%= @task.try(:name) %></p>
+					<p>任务标识符：<%= @task.try(:identifier) %></p>
+					<p>任务运行频率：<%= @task.try(:rate) %></p>
+					<br>
+					<%= link_to "返回", admin_customer_tasks_path, class: "btn btn-primary" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

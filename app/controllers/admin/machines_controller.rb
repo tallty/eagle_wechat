@@ -49,14 +49,12 @@ module Admin
     # PATCH/PUT /machines/1
     # PATCH/PUT /machines/1.json
     def update
-      respond_to do |format|
-        if @machine.update(machine_params)
-          format.html { redirect_to @machine, notice: 'Machine was successfully updated.' }
-          format.json { render :show, status: :ok, location: @machine }
-        else
-          format.html { render :edit }
-          format.json { render json: @machine.errors, status: :unprocessable_entity }
-        end
+      if @machine.update(machine_params)
+        flash.now[:notice] = "客户接口更新成功"
+        respond_with @machine
+      else
+        flash.now[:notice] = "客户接口更新失败"
+        render :edit
       end
     end
 

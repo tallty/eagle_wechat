@@ -14,7 +14,7 @@
 class Customer < ActiveRecord::Base
   has_many :machines, dependent: :destroy
   has_many :members, dependent: :destroy
-  has_many :interface, dependent: :destroy
-  has_many :task, dependent: :destroy
+  has_many :interfaces, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   validates :name, presence: true
 end
