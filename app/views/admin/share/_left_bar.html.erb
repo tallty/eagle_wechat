@@ -27,13 +27,13 @@
                 <li class="">
                   <%= link_to "<span class='nav-label'>人员</span>".html_safe, admin_member_path(customer) %>  
                 </li>
-                <li class="<%= "active" if params[:controller] == "admin/machines" %>">
+                <li class="<%= "active" if params[:controller] == "admin/machines" && params[:customer_id] == "#{customer.id}" %>">
                   <%= link_to "<span class='nav-label'>服务器</span>".html_safe, admin_customer_machines_path(customer) %>
                 </li>
-                <li class="<%= "active" if params[:controller] == "admin/tasks" %>">
+                <li class="<%= "active" if params[:controller] == "admin/tasks" && params[:customer_id] == "#{customer.id}" %>">
                   <%= link_to "<span class='nav-label'>任务列表</span>".html_safe, admin_customer_tasks_path(customer) %>
                 </li>
-                <li class="<%= "active" if params[:controller] == "admin/interfaces" %>">
+                <li class="<%= "active" if params[:controller] == "admin/interfaces" && params[:customer_id] == "#{customer.id}" %>">
                   <%= link_to "<span class='nav-label'>接口列表</span>".html_safe, admin_customer_interfaces_path(customer) %>
                 </li>
               </ul>
