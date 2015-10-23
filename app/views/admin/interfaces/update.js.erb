@@ -1,0 +1,7 @@
+<% if @interface.errors.present? %>
+	$(".modal-backdrop").remove();
+	$("#interfaceModalContent").html("<%= escape_javascript( render "interfaces_modal", interface: @interface )%>");
+	$('#interfaceModal').modal('show');
+<% else %>
+	location.href = "<%= admin_customer_interfaces_path %>"
+<% end  %>
