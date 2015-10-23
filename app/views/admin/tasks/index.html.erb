@@ -1,0 +1,57 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>[<%= @customer.name %>] 任务列表</h5>
+            <%= link_to new_admin_customer_task_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
+              <i class="fa fa-plus fa-lg"></i>
+            <% end %>
+        </div>
+        <div class="ibox-content"> 
+          <table class="footable table table-stripped text-center toggle-arrow-tiny" data-page-size="2">
+            <thead>
+              <tr>
+                <th class="text-center" data-toggle="true">No.</th>
+                <th class="text-center">名称</th>
+                <th class="text-center">识别码</th>
+                <th class="text-center">运行频率</th>
+                <th class="text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody data-no-turbolink>
+            <% @customer.tasks.each_with_index do |task, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= task.name %></td>
+                <td><%= task.identifier %></td>
+                <td><%= task.rake %></td>
+                <td>
+                  <%= link_to edit_admin_task_path(task), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
+                    <span class="glyphicon glyphicon-edit"></span>
+                  <% end %>
+                  <%= link_to admin_task_path(task), class: 'btn btn-xs btn-default' do %>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                  <% end %>
+                  <%= link_to admin_task_path(task), method: :delete, class: 'btn btn-xs btn-danger' do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="text-center" colspan="6">
+                  <ul class="pagination"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="taskModalContent"></div>
+  
