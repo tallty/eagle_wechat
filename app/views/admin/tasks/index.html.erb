@@ -29,6 +29,9 @@
                   <%= link_to edit_admin_customer_task_path(id:task.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
                   <% end %>
+                  <%= link_to [:admin, task.customer, task], class: 'btn btn-xs btn-info' do %>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                  <% end %>
                   <%= link_to admin_customer_task_path(id:task.id), method: :delete, class: 'btn btn-xs btn-danger' do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>

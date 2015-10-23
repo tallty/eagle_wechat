@@ -28,7 +28,7 @@
                   <%= link_to edit_admin_customer_interface_path(customer_id: params[:customer_id], id: interface.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
                   <% end %>
-                  <%= link_to [:admin, interface.customer, interface], class: 'btn btn-xs btn-default' do %>
+                  <%= link_to [:admin, interface.customer, interface], class: 'btn btn-xs btn-info' do %>
                     <span class="glyphicon glyphicon-list-alt"></span>
                   <% end %>
                   <%= link_to [:admin, interface.customer, interface], method: :delete, data: { confirm: "确定要删除吗？" }, class: 'btn btn-xs btn-danger' do %>

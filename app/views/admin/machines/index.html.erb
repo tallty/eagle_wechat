@@ -29,13 +29,13 @@
                 <td><%= machine.operating_status %></td>
                 <td><%= machine.explain %></td>
                 <td>
-                  <%= link_to edit_admin_machine_path(machine), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
+                  <%= link_to edit_admin_customer_machine_path(id: machine.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
                   <% end %>
-                  <%= link_to admin_machine_path(machine), class: 'btn btn-xs btn-default' do %>
+                  <%= link_to [:admin, machine.customer, machine], class: 'btn btn-xs btn-info' do %>
                     <span class="glyphicon glyphicon-list-alt"></span>
                   <% end %>
-                  <%= link_to admin_machine_path(machine), method: :delete, class: 'btn btn-xs btn-danger' do %>
+                  <%= link_to [:admin, machine.customer, machine], method: :delete, class: 'btn btn-xs btn-danger' do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
