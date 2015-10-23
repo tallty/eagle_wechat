@@ -11,14 +11,14 @@
         </div>
       </li>
 
-      <li class="<%= "active" if params[:controller] == "admin/machines" %>">
+      <li class="<%= "active" if params[:customer_id].present? %>">
         <a href="">
           <i class="fa fa-users"></i> <span class="nav-label">客户</span>
           <span class="fa arrow"></span>
         </a>      
         <ul class="nav nav-second-level collapse">
           <% Customer.all.each do |customer| %>
-            <li class="<%= "active" if params[:controller] == "admin/machines" && params[:customer_id] == "#{customer.id}" %>">
+            <li class="<%= "active" if params[:customer_id] == "#{customer.id}" %>">
               <a href="#">
                 <i class="fa fa-globe"></i><span class="nav-label"><%= customer.abbreviation%></span>
                   <span class="fa arrow"></span>
@@ -29,6 +29,12 @@
                 </li>
                 <li class="<%= "active" if params[:controller] == "admin/machines" %>">
                   <%= link_to "<span class='nav-label'>服务器</span>".html_safe, admin_customer_machines_path(customer) %>
+                </li>
+                <li class="<%= "active" if params[:controller] == "admin/tasks" %>">
+                  <%= link_to "<span class='nav-label'>任务列表</span>".html_safe, admin_customer_tasks_path(customer) %>
+                </li>
+                <li class="<%= "active" if params[:controller] == "admin/interfaces" %>">
+                  <%= link_to "<span class='nav-label'>接口列表</span>".html_safe, admin_customer_interfaces_path(customer) %>
                 </li>
               </ul>
             </li>
