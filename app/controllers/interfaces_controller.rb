@@ -1,2 +1,0 @@
-class InterfacesController < ApplicationController
-end
