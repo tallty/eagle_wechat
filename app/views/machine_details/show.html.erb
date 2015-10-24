@@ -25,8 +25,8 @@
 				<p><i class="fa fa-circle fa-icon"></i>频率：<%= @machine.machine_detail.mhz %></p>
 			</div>
 			<div class="col-xs-6 pie-text">
-				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used %></p>
-				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total %></p>
+				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used >> 20 %>G</p>
+				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total.delete("kB").to_i >> 20 %>G</p>
 			</div>
 		</div>
 
@@ -133,8 +133,8 @@
 						x:'60%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= 100 - @machine.cpu_percent.delete("%").to_f.round(1)  %>, itemStyle : labelBottom},
-						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f .round(1) %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100 - @machine.cpu_percent.delete("%").to_f %>, itemStyle : labelBottom},
+						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
 						]
 					},
 					{
@@ -145,8 +145,8 @@
 						x:'80%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_f.round(1) %>, itemStyle : labelBottom},
-						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f.round(1) %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_f %>, itemStyle : labelBottom},
+						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f %>,itemStyle : labelTop}
 						]
 					}
 					]
