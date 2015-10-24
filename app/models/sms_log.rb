@@ -13,14 +13,19 @@
 
 class SmsLog < ActiveRecord::Base
   belongs_to :customer
-
-  def self.send_task_notification task
+  belongs_to :task
+  def self.send_task_notification task, current_state
     members = task.try(:customer).try(:members)
     sended_users = members.group(:openid).pluck(:openid)
 
-    # 
-    text_message = "[上海气象局科科技服务中心]#{task.name}."
-    task.customer.create(content: text_message)
+    if current_state
+      # 告警内容
+      text_message = "[上海气象局科科技服务中心]#{task.name}."
+    else
+      # 取消告警内容
+      text_message = "[上海气象局科科技服务中心]#{task.name}."
+    end
+    task.create(content: text_message, customer: task.try(:customer), warning_state: current_state)
     $group_client.message.send_text(sended_users, [], [], 1, text_message)
   end
 
@@ -33,8 +38,12 @@ class SmsLog < ActiveRecord::Base
 
       # 上一次上报的时间
       now_time = DateTime.now.to_i
-      if ((now_time - time.to_i)/60 > task.rate )
-        send_task_notification task
+      last_state = task.sms_logs.last.warning_state
+      current_state = ((now_time - time.to_i)/60 > task.rate)
+
+      # 当告警状态变化时，发送提醒
+      if current_state == !last_state
+        send_task_notification task, current_state
       end
     end
   end

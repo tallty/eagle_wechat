@@ -13,6 +13,8 @@
 
 class Task < ActiveRecord::Base
 	belongs_to :customer
+  has_many :sms_logs, dependent: :destroy
+  
 	after_initialize :task_identifier
 	private
 
