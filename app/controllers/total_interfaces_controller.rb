@@ -5,7 +5,7 @@ class TotalInterfacesController < ApplicationController
   def fetch
     identifier = interface_total_params["identifier"]
     datas = MultiJson.load interface_total_params["data"]
-    
+    p datas
     total_interface = nil
     datas.each do |item|
       total_interface = TotalInterface.find_or_create_by datetime: Time.parse(item["datetime"]), identifier: identifier, name: item["interface_name"]
