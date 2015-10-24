@@ -8,6 +8,7 @@ class TotalInterfacesController < ApplicationController
     p datas
     total_interface = nil
     datas.each do |item|
+      p item
       total_interface = TotalInterface.find_or_create_by datetime: Time.parse(item["datetime"]), identifier: identifier, name: item["interface_name"]
       total_interface.count = item["interface_count"].to_i
       total_interface.save
