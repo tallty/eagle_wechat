@@ -9,6 +9,7 @@
 #  abbreviation :string(255)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  identifier   :string(255)
 #
 
 class Customer < ActiveRecord::Base
@@ -16,5 +17,15 @@ class Customer < ActiveRecord::Base
   has_many :members, dependent: :destroy
   has_many :interfaces, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :sms_logs, dependent: :destroy
   validates :name, presence: true
+
+  after_initialize :task_identifier
+  
+  private
+
+  def task_identifier
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    self.identifier ||= chars.sample(8).join
+  end 
 end

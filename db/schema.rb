@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024154909) do
-
-  create_table "cpus", force: :cascade do |t|
-    t.string   "model_info", limit: 255
-    t.string   "mhz",        limit: 255
-    t.string   "cache_size", limit: 255
-    t.integer  "machine_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
+ActiveRecord::Schema.define(version: 20151024161215) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -31,6 +20,7 @@ ActiveRecord::Schema.define(version: 20151024154909) do
     t.string   "abbreviation", limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "identifier",   limit: 255
   end
 
   add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
@@ -94,9 +84,11 @@ ActiveRecord::Schema.define(version: 20151024154909) do
     t.integer  "customer_id",      limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "cpu_type",         limit: 255
   end
 
   add_index "machines", ["customer_id"], name: "index_machines_on_customer_id", using: :btree
+  add_index "machines", ["identifier"], name: "index_machines_on_identifier", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -112,16 +104,6 @@ ActiveRecord::Schema.define(version: 20151024154909) do
 
   add_index "members", ["customer_id"], name: "index_members_on_customer_id", using: :btree
 
-  create_table "memory_infos", force: :cascade do |t|
-    t.integer  "swap_total", limit: 4
-    t.integer  "total",      limit: 4
-    t.integer  "machine_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "memory_infos", ["machine_id"], name: "index_memory_infos_on_machine_id", using: :btree
-
   create_table "qy_apps", force: :cascade do |t|
     t.string "qy_token",         limit: 255
     t.string "encoding_aes_key", limit: 255
@@ -133,6 +115,15 @@ ActiveRecord::Schema.define(version: 20151024154909) do
   add_index "qy_apps", ["encoding_aes_key"], name: "index_qy_apps_on_encoding_aes_key", using: :btree
   add_index "qy_apps", ["qy_secret_key"], name: "index_qy_apps_on_qy_secret_key", using: :btree
   add_index "qy_apps", ["qy_token"], name: "index_qy_apps_on_qy_token", using: :btree
+
+  create_table "sms_logs", force: :cascade do |t|
+    t.string   "content",     limit: 255
+    t.integer  "customer_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "sms_logs", ["customer_id"], name: "index_sms_logs_on_customer_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "identifier",  limit: 255
@@ -172,9 +163,11 @@ ActiveRecord::Schema.define(version: 20151024154909) do
     t.string   "status",                 limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "open_id",                limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "sms_logs", "customers"
 end

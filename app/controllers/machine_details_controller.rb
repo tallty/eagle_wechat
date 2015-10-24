@@ -9,5 +9,6 @@ class MachineDetailsController < ApplicationController
 		@cpus = MachineInfo.get_list("cpu", @machine.identifier)
 		@memorys = MachineInfo.get_list("memory", @machine.identifier)
 		@net_works = MachineInfo.get_list("net_work", @machine.identifier)
+		@file_systems =  MachineInfo.get_list("file_systems", @machine.identifier)
 	end
 end

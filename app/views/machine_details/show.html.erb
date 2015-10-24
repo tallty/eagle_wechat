@@ -5,8 +5,8 @@
 		</div>
 		<div class="tab-line clearfix">
 			<div class="col-xs-12">
-				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>NS11253017</div>
-				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>ThinkServer T2 4U 塔式</div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.identifier %></div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.cpu_type %></div>
 				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>内存 <%= @machine.machine_detail.memory_total %></div>
 				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>IP地址 <%= @machine.machine_detail.network_address%></div>
 				<div class="col-xs-12 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.machine_detail.cpu_name%></div>
@@ -25,8 +25,8 @@
 				<p><i class="fa fa-circle fa-icon"></i>频率：<%= @machine.machine_detail.mhz %></p>
 			</div>
 			<div class="col-xs-6 pie-text">
-				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used %></p>
-				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total %></p>
+				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used >> 20 %>M</p>
+				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total.delete("kB").to_i >> 10 %>M</p>
 			</div>
 		</div>
 
@@ -34,10 +34,7 @@
 			磁盘信息
 		</div>
 		<div class="tab-line clearfix">
-			<div class="col-xs-12">
-				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>已用：200G</div>
-				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>总量：500G</div>
-			</div>
+			<div class="col-xs-12"><div style="height:150px" class="disc"></div></div>
 		</div>
 
 		<div class="tab-title col-xs-12">
@@ -133,7 +130,7 @@
 						x:'60%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:100, itemStyle : labelBottom},
+						{name:'other', value:<%= 100.to_f - @machine.cpu_percent.delete("%").to_f %>, itemStyle : labelBottom},
 						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
 						]
 					},
@@ -145,11 +142,98 @@
 						x:'80%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:100, itemStyle : labelBottom},
+						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_f %>, itemStyle : labelBottom},
 						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f %>,itemStyle : labelTop}
 						]
 					}
 					]
+				};
+			// 为echarts对象加载数据 
+			myChart.setOption(option); 
+		});
+}
+);
+</script>
+
+<script type="text/javascript">
+	// 路径配置
+	require.config({
+		paths: {
+			echarts: '/assets/echarts'
+		}
+	});
+	
+	// 使用
+	require(
+		[
+		'echarts',
+		'echarts/chart/pie' // 使用环型图就加载bar模块，按需加载
+		],
+		function (ec) {
+			$(".disc").each(function(){
+				var myChart = ec.init($(this).get(0));
+				var labelTop = {
+					normal : {
+						label : {
+							show : true,
+							position : 'center',
+							formatter : '{b}',
+							textStyle: {
+								baseline : 'bottom'
+							}
+						},
+						labelLine : {
+							show : false
+						}
+					}
+				};
+				var labelFromatter = {
+					normal : {
+						label : {
+							formatter : function (params){
+								return 100 - params.value + '%'
+							},
+							textStyle: {
+								baseline : 'top'
+							}
+						}
+					},
+				}
+				var labelBottom = {
+					normal : {
+						color: '#ccc',
+						label : {
+							show : true,
+							position : 'center'
+						},
+						labelLine : {
+							show : false
+						}
+					},
+					emphasis: {
+						color: 'rgba(0,0,0,0)'
+					}
+				};
+				var radius = [40, 55];
+				option = {
+					legend: {
+						show: false,
+						x : 'center',
+						y : 'center',
+						data:['磁盘用量']
+					},
+					series : [{
+						type : 'pie',
+						center : ['50%', '50%'],
+						radius : radius,
+						y: '55%',   // for funnel
+						x:'60%', // for funnel
+						itemStyle : labelFromatter,
+						data : [
+						{name:'other', value:<%= 100 - eval(MachineInfo.get_info("file_systems", @machine.identifier))["percent_used"][-2].to_i %>, itemStyle : labelBottom},
+						{name:'磁盘用量', value:<%= eval(MachineInfo.get_info("file_systems", @machine.identifier))["percent_used"][-2].to_i %>,itemStyle : labelTop}
+						]
+					}]
 				};
 			// 为echarts对象加载数据 
 			myChart.setOption(option); 

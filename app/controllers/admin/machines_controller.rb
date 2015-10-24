@@ -73,7 +73,7 @@ module Admin
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def machine_params
-        params.require(:machine).permit(:name, :identifier, :explain, :customer_id)
+        params.require(:machine).permit(:name, :identifier, :explain, :customer_id, :cpu_type)
       end
   end
 end
