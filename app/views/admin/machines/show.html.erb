@@ -5,22 +5,37 @@
         <div class="ibox-title">
           <h5>服务器详情</h5>
         </div>
-        <div class="ibox-content">
-          <h3>CPU</h3> 
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;型号：<%= @machine.machine_detail.try(:cpu_name) %></p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;cpu数：<%= @machine.machine_detail.try(:cpu_real) %></p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;核数：<%= @machine.machine_detail.try(:cpu_total) %></p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;频率：<%= @machine.machine_detail.try(:mhz) %></p><br>
-
-          <h3>Memory</h3>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;内存：<%= @machine.machine_detail.try(:memory_total) %></p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;虚拟内存：<%= @machine.machine_detail.try(:memory_swap_total) %></p><br>
-
-          <h3>Network</h3>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;内网地址：<%= @machine.machine_detail.try(:network_address) %></p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;外网地址：<%= @machine.machine_detail.try(:network_external_address) %></p><br>
-
-          <%= link_to "返回", admin_customer_machines_path(@machine.customer_id), class: "btn btn-primary" %>
+        <div class="ibox-content clearfix">
+          <div class="col-md-3">
+            <h3><strong>基本信息</strong></h3>
+            <p>服务器名称：<%= @machine.name %></p>
+            <p>服务器说明：<%= @machine.explain %></p>
+            <p>服务器型号：<%= @machine.cpu_type %></p>
+            <br>
+          </div>
+          <div class="col-md-3">
+            <h3><strong>CPU</strong></h3> 
+            <p>型号：<%= @machine.machine_detail.try(:cpu_name) %></p>
+            <p>cpu数：<%= @machine.machine_detail.try(:cpu_real) %></p>
+            <p>核数：<%= @machine.machine_detail.try(:cpu_total) %></p>
+            <p>频率：<%= @machine.machine_detail.try(:mhz) %></p>
+            <br>
+          </div>
+          <div class="col-md-3">
+            <h3><strong>Memory</strong></h3>
+            <p>内存：<%= @machine.machine_detail.try(:memory_total) %></p>
+            <p>虚拟内存：<%= @machine.machine_detail.try(:memory_swap_total) %></p>
+            <br>
+          </div>
+          <div class="col-md-3">
+            <h3><strong>Network</strong></h3>
+            <p>内网地址：<%= @machine.machine_detail.try(:network_address) %></p>
+            <p>外网地址：<%= @machine.machine_detail.try(:network_external_address) %></p>
+            <br>
+          </div>
+          <div class="col-md-12">
+            <%= link_to "返回", admin_customer_machines_path(@machine.customer_id), class: "btn btn-primary" %>
+          </div>
         </div>
       </div>
     </div>

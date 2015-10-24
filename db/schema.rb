@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20151024154909) do
     t.integer  "customer_id",      limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "cpu_type",         limit: 255
   end
 
   add_index "machines", ["customer_id"], name: "index_machines_on_customer_id", using: :btree
