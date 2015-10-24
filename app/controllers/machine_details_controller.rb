@@ -1,7 +1,7 @@
 class MachineDetailsController < ApplicationController
 	def index
 		@customer =  Customer.first
-		@machines = [1,2]#@customer.machines.where(operating_status: 1)
+		@machines = @customer.machines.where(operating_status: 1)
 	end
 
 	def show
