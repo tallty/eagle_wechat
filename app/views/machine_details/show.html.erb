@@ -133,8 +133,8 @@
 						x:'60%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= 100 - @machine.cpu_percent.delete("%").to_f %>, itemStyle : labelBottom},
-						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100 - @machine.cpu_percent.delete("%").to_f.round(1)  %>, itemStyle : labelBottom},
+						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f .round(1) %>,itemStyle : labelTop}
 						]
 					},
 					{
@@ -145,8 +145,8 @@
 						x:'80%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_f %>, itemStyle : labelBottom},
-						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_f.round(1) %>, itemStyle : labelBottom},
+						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f.round(1) %>,itemStyle : labelTop}
 						]
 					}
 					]
