@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023030219) do
+ActiveRecord::Schema.define(version: 20151024150359) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 20151023030219) do
   add_index "qy_apps", ["qy_secret_key"], name: "index_qy_apps_on_qy_secret_key", using: :btree
   add_index "qy_apps", ["qy_token"], name: "index_qy_apps_on_qy_token", using: :btree
 
+  create_table "sms_logs", force: :cascade do |t|
+    t.string   "content",     limit: 255
+    t.integer  "customer_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "sms_logs", ["customer_id"], name: "index_sms_logs_on_customer_id", using: :btree
+
   create_table "tasks", force: :cascade do |t|
     t.string   "identifier",  limit: 255
     t.string   "name",        limit: 255
@@ -144,4 +153,5 @@ ActiveRecord::Schema.define(version: 20151023030219) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "sms_logs", "customers"
 end
