@@ -8,6 +8,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  warning_state :boolean
+#  task_id       :integer
 #
 
 class SmsLog < ActiveRecord::Base
@@ -17,7 +18,8 @@ class SmsLog < ActiveRecord::Base
     members = task.try(:customer).try(:members)
     sended_users = members.group(:openid).pluck(:openid)
 
-    text_message = "[上海气象局科科技服务中心]#{name}."
+    # 
+    text_message = "[上海气象局科科技服务中心]#{task.name}."
     task.customer.create(content: text_message)
     $group_client.message.send_text(sended_users, [], [], 1, text_message)
   end
@@ -31,7 +33,7 @@ class SmsLog < ActiveRecord::Base
 
       # 上一次上报的时间
       now_time = DateTime.now.to_i
-      if (now_time - time.to_i)/60 > task.rate
+      if ((now_time - time.to_i)/60 > task.rate )
         send_task_notification task
       end
     end
