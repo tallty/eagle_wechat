@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20151024150359) do
   end
 
   add_index "machines", ["customer_id"], name: "index_machines_on_customer_id", using: :btree
-  add_index "machines", ["identifier"], name: "index_machines_on_identifier", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -101,6 +100,16 @@ ActiveRecord::Schema.define(version: 20151024150359) do
   end
 
   add_index "members", ["customer_id"], name: "index_members_on_customer_id", using: :btree
+
+  create_table "memory_infos", force: :cascade do |t|
+    t.integer  "swap_total", limit: 4
+    t.integer  "total",      limit: 4
+    t.integer  "machine_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "memory_infos", ["machine_id"], name: "index_memory_infos_on_machine_id", using: :btree
 
   create_table "qy_apps", force: :cascade do |t|
     t.string "qy_token",         limit: 255
