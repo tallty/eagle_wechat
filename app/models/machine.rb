@@ -23,7 +23,7 @@ class Machine < ActiveRecord::Base
   #计算机器的cpu占比
   def cpu_percent
       cpu_used = eval(MachineInfo.get_info("cpu", identifier))["cpu_used"].to_f.round(1) 
-      "#{cpu_use}%"
+      "#{cpu_used}%"
   end
 
   #计算指定机器的内存占用比
