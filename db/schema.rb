@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024154909) do
-
-  create_table "cpus", force: :cascade do |t|
-    t.string   "model_info", limit: 255
-    t.string   "mhz",        limit: 255
-    t.string   "cache_size", limit: 255
-    t.integer  "machine_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
+ActiveRecord::Schema.define(version: 20151024171545) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -127,10 +116,11 @@ ActiveRecord::Schema.define(version: 20151024154909) do
   add_index "qy_apps", ["qy_token"], name: "index_qy_apps_on_qy_token", using: :btree
 
   create_table "sms_logs", force: :cascade do |t|
-    t.string   "content",     limit: 255
-    t.integer  "customer_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "content",       limit: 255
+    t.integer  "customer_id",   limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "warning_state"
   end
 
   add_index "sms_logs", ["customer_id"], name: "index_sms_logs_on_customer_id", using: :btree
