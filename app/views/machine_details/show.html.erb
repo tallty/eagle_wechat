@@ -25,7 +25,7 @@
 				<p><i class="fa fa-circle fa-icon"></i>频率：<%= @machine.machine_detail.mhz %></p>
 			</div>
 			<div class="col-xs-6 pie-text">
-				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used >> 20 %>G</p>
+				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used >> 30 %>G</p>
 				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total.delete("kB").to_i >> 20 %>G</p>
 			</div>
 		</div>
