@@ -18,7 +18,7 @@ class SmsLog < ActiveRecord::Base
 
     text_message = "[上海气象局科科技服务中心]#{name}."
     task.customer.create(content: text_message)
-    $group_client.message.send_text(sended_users, nil, nil, 1, text_message)
+    $group_client.message.send_text(sended_users, [], [], 1, text_message)
   end
 
   def self.check_task
