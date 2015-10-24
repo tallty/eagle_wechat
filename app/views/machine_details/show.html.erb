@@ -134,7 +134,7 @@
 						itemStyle : labelFromatter,
 						data : [
 						{name:'other', value:100, itemStyle : labelBottom},
-						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
+						{name:'CPU', value:5.5,itemStyle : labelTop}
 						]
 					},
 					{
@@ -146,7 +146,7 @@
 						itemStyle : labelFromatter,
 						data : [
 						{name:'other', value:100, itemStyle : labelBottom},
-						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f %>,itemStyle : labelTop}
+						{name:'内存', value:95.5,itemStyle : labelTop}
 						]
 					}
 					]
