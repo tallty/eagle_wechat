@@ -20,6 +20,21 @@ class Machine < ActiveRecord::Base
 
   after_initialize :generate_identifier
 
+  #计算机器的cpu占比
+  def cpu_percent
+      cpu_used = eval(MachineInfo.get_info("cpu", identifier))["cpu_used"].to_f.round(1) 
+      "#{cpu_used}%"
+  end
+
+  #计算指定机器的内存占用比
+  def memory_percent
+    memory_data = eval(MachineInfo.get_info("memory", identifier)) 
+    memory_free = memory_data["memory_free_bytes"].to_f
+    memory_total = memory_data["memory_total_bytes"].to_f
+    memory_used = (((memory_total - memory_free) / memory_total) * 100).round(1)
+    "#{memory_used}%"
+  end
+
   private
 
   def generate_identifier

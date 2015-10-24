@@ -18,16 +18,4 @@
 
 class MachineDetail < ActiveRecord::Base
   belongs_to :machine
-
-  def cpu_percent
-  	#top = eval(MachineInfo.get_info("cpu", identifier))["top"].to_f
-  end
-
-  def memory_percent
-  	memory_data = eval(MachineInfo.get_info("memory", identifier)) 
-  	memory_free_bytes = memory_data["memory_free_bytes"].to_f
-  	memory_total_bytes = memory_data["memory_total_bytes"].to_f
-  	memory_use = (((memory_total_bytes - memory_free_bytes) / memory_total_bytes) * 100).round(1)
-  	"#{memory_use}%"
-  end
 end
