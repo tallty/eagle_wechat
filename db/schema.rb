@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024154909) do
-
-  create_table "cpus", force: :cascade do |t|
-    t.string   "model_info", limit: 255
-    t.string   "mhz",        limit: 255
-    t.string   "cache_size", limit: 255
-    t.integer  "machine_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
+ActiveRecord::Schema.define(version: 20151024161215) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
