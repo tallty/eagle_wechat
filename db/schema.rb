@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023030219) do
+ActiveRecord::Schema.define(version: 20151024154909) do
 
   create_table "cpus", force: :cascade do |t|
     t.string   "model_info", limit: 255
@@ -142,6 +142,19 @@ ActiveRecord::Schema.define(version: 20151023030219) do
     t.datetime "updated_at",              null: false
     t.integer  "customer_id", limit: 4
   end
+
+  create_table "total_interfaces", force: :cascade do |t|
+    t.datetime "datetime"
+    t.string   "identifier", limit: 255
+    t.string   "name",       limit: 255
+    t.integer  "count",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "total_interfaces", ["datetime"], name: "index_total_interfaces_on_datetime", using: :btree
+  add_index "total_interfaces", ["identifier"], name: "index_total_interfaces_on_identifier", using: :btree
+  add_index "total_interfaces", ["name"], name: "index_total_interfaces_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

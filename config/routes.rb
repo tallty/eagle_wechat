@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :total_interfaces do
+    collection do
+      post :fetch
+    end
+  end
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords'
