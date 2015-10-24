@@ -1,17 +1,17 @@
 <div class="warp">
-  <div class="sef-container">
-    <div class="tab-title col-xs-12">
-      服务器信息
-    </div>
-    <div class="tab-line clearfix">
-      <div class="col-xs-12">
-        <div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>NS11253017</div>
-        <div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>ThinkServer T2 4U 塔式</div>
-        <div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.machine_detail.cpu_name%></div>
-        <div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>IP地址 <%= @machine.machine_detail.network_address%></div>
-        <div class="col-xs-12 server-x-text"><i class="fa fa-circle fa-icon"></i>内存 <%= @machine.machine_detail.memory_total %></div>
-      </div>
-    </div>
+	<div class="sef-container">
+		<div class="tab-title col-xs-12">
+			服务器信息
+		</div>
+		<div class="tab-line clearfix">
+			<div class="col-xs-12">
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>NS11253017</div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>ThinkServer T2 4U 塔式</div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>内存 <%= @machine.machine_detail.memory_total %></div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>IP地址 <%= @machine.machine_detail.network_address%></div>
+				<div class="col-xs-12 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.machine_detail.cpu_name%></div>
+			</div>
+		</div>
 
 		<div class="tab-title col-xs-12 text-center">
 			<div class="col-xs-6">CPU状态</div>
@@ -20,13 +20,26 @@
 		<div class="tab-line clearfix right2">
 			<div class="col-xs-12"><div style="height:150px" class="server-air"></div></div>
 			<div class="col-xs-6 pie-text">
-				<p><i class="fa fa-circle fa-icon"></i>CPU数：2</p>
-				<p><i class="fa fa-circle fa-icon"></i>核数：8</p>
-				<p><i class="fa fa-circle fa-icon"></i>频率：1291.031</p>
+				<p><i class="fa fa-circle fa-icon"></i>CPU数：<%= @machine.machine_detail.cpu_real %></p>
+				<p><i class="fa fa-circle fa-icon"></i>核数：<%= @machine.machine_detail.cpu_total %></p>
+				<p><i class="fa fa-circle fa-icon"></i>频率：<%= @machine.machine_detail.mhz %></p>
 			</div>
 			<div class="col-xs-6 pie-text">
-				<p><i class="fa fa-circle fa-icon"></i>已用：3145728kb</p>
-				<p><i class="fa fa-circle fa-icon"></i>总量：1048576kb</p>
+				<p><i class="fa fa-circle fa-icon"></i>已用：<%= @machine.memory_used %></p>
+				<p><i class="fa fa-circle fa-icon"></i>总量：<%= @machine.machine_detail.memory_total %></p>
+			</div>
+		</div>
+
+		<div class="tab-title col-xs-12">
+			磁盘信息
+		</div>
+		<div class="tab-line clearfix">
+			<div class="col-xs-12">
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>NS11253017</div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>ThinkServer T2 4U 塔式</div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>内存 <%= @machine.machine_detail.memory_total %></div>
+				<div class="col-xs-6 server-x-text"><i class="fa fa-circle fa-icon"></i>IP地址 <%= @machine.machine_detail.network_address%></div>
+				<div class="col-xs-12 server-x-text"><i class="fa fa-circle fa-icon"></i><%= @machine.machine_detail.cpu_name%></div>
 			</div>
 		</div>
 
@@ -57,7 +70,7 @@
 	require(
 		[
 		'echarts',
-		'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+		'echarts/chart/pie' // 使用环型图就加载bar模块，按需加载
 		],
 		function (ec) {
 			$(".server-air").each(function(){
@@ -119,28 +132,28 @@
 						type : 'pie',
 						center : ['25%', '50%'],
 						radius : radius,
-										y: '55%',   // for funnel
-										x:'60%', // for funnel
-										itemStyle : labelFromatter,
-										data : [
-										{name:'other', value:83, itemStyle : labelBottom},
-										{name:'CPU', value:17,itemStyle : labelTop}
-										]
-									},
-									{
-										type : 'pie',
-										center : ['75%', '50%'],
-										radius : radius,
-										y: '55%',   // for funnel
-										x:'80%', // for funnel
-										itemStyle : labelFromatter,
-										data : [
-										{name:'other', value:29, itemStyle : labelBottom},
-										{name:'内存', value:71,itemStyle : labelTop}
-										]
-									}
-									]
-								};
+						y: '55%',   // for funnel
+						x:'60%', // for funnel
+						itemStyle : labelFromatter,
+						data : [
+						{name:'other', value:100, itemStyle : labelBottom},
+						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
+						]
+					},
+					{
+						type : 'pie',
+						center : ['75%', '50%'],
+						radius : radius,
+						y: '55%',   // for funnel
+						x:'80%', // for funnel
+						itemStyle : labelFromatter,
+						data : [
+						{name:'other', value:100, itemStyle : labelBottom},
+						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f %>,itemStyle : labelTop}
+						]
+					}
+					]
+				};
 			// 为echarts对象加载数据 
 			myChart.setOption(option); 
 		});
@@ -161,7 +174,7 @@
 	require(
 		[
 		'echarts',
-		'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+		'echarts/chart/line' // 使用折线图就加载bar模块，按需加载
 		],
 		function (ec) {
 			$(".air-fw1").each(function(){
@@ -234,7 +247,7 @@
 			// 为echarts对象加载数据 
 			myChart.setOption(option); 
 		});
-}
+	}
 );
 </script>
 

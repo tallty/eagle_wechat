@@ -35,6 +35,13 @@ class Machine < ActiveRecord::Base
     "#{memory_used}%"
   end
 
+  #已用内存
+  def memory_used
+    memory_data = eval(MachineInfo.get_info("memory", identifier)) 
+    memory_used = memory_data["memory_total_bytes"].to_i - memory_data["memory_free_bytes"].to_i
+    "#{memory_used}kb"
+  end
+
   private
 
   def generate_identifier
