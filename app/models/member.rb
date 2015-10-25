@@ -18,7 +18,7 @@ class Member < ActiveRecord::Base
   belongs_to :customer
 
   def self.add_member_by_department_id department_id
-    users = $group_client.user.full_list(4, nil, 0).result["userlist"]
+    users = $group_client.user.full_list(department_id, nil, 0).result["userlist"]
 
     users.each do |user|
       customer = Customer.find_by(abbreviation: user["position"])
