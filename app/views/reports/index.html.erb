@@ -10,8 +10,7 @@
 			</div>
 		</div>
 		<div class="tab-line clearfix">
-		<% @reports.each_with_index do |index, r| %>
-			<%= report = MultiJson.load(r) %>
+		<% @reports.each_with_index do |index, report| %>
 			<%= link_to "#" do %>
 				<div class="col-xs-12 mes-line">
 					<div class="first-line">
