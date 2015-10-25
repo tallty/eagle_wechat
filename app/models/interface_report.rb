@@ -27,7 +27,8 @@ class InterfaceReport < ActiveRecord::Base
       sum_count: sum_count,
       first_times: first_times,
       first_count: first_count,
-      second_times: second_count,
+      second_times: second_times,
+      second_count: second_count,
       third_times: third_times,
       third_count: third_count
     }  
