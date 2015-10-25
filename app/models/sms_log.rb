@@ -42,7 +42,9 @@ class SmsLog < ActiveRecord::Base
 
   def self.send_task_notification task, current_state
     members = task.try(:customer).try(:members)
+    
     sended_users = members.group(:openid).pluck(:openid)
+    sended_users << "alex6756"
 
     if current_state
       # 告警内容
@@ -77,5 +79,5 @@ class SmsLog < ActiveRecord::Base
     TaskLog.create(start_time: start_time, end_time: end_time, task_identifier: task_hash["identifier"],
       exception: hash["process_result"]["exception"], file_name: file_name)   
   end
-  
+
 end
