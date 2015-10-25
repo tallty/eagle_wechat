@@ -130,8 +130,8 @@
 						x:'60%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= 100.to_f - @machine.cpu_percent.delete("%").to_f %>, itemStyle : labelBottom},
-						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_f %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100- @machine.cpu_percent.delete("%").to_i %>, itemStyle : labelBottom},
+						{name:'CPU', value:<%= @machine.cpu_percent.delete("%").to_i %>,itemStyle : labelTop}
 						]
 					},
 					{
