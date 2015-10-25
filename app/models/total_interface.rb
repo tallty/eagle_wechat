@@ -12,4 +12,8 @@
 #
 
 class TotalInterface < ActiveRecord::Base
+
+  def self.process
+    
+  end
 end
