@@ -33,7 +33,7 @@ class InterfaceReport < ActiveRecord::Base
       data.third_times = items[2].datetime
       data.third_count = items[2].count
       data.save
-      $redis.hset "interface_reports_cache", "#{now_date.strftime('%Y-%m-%d')}_#{data.name}", data.to_json
+      $redis.hset "interface_reports_cache_#{now_date.strftime('%Y-%m-%d')}", "#{data.name}", data.to_json
     end
   end
 end
