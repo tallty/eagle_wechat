@@ -12,6 +12,7 @@
 #
 
 class TotalInterface < ActiveRecord::Base
+  by_star_field :datetime
 
   def self.process
     
