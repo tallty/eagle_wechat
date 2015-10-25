@@ -15,7 +15,6 @@ class OauthsController < ApplicationController
   end
 
   def check
-  
   end
 
   private
