@@ -1,7 +1,7 @@
 class WeatherController < ApplicationController
 	def active
 		@customer = Customer.first
-    @tasks = @customer.tasks
+    @tasks = @customer.tasks if @customer
 	end
 
 	def history

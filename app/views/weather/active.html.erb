@@ -7,16 +7,18 @@
 			<div class="col-xs-3">时间</div>
 		</div>
 		<div class="tab-line text-center clearfix">
-		<% @tasks.each_with_index do |task, index| %>
-			<div class="col-xs-12 active-line">
-				<div class="col-xs-3"><%= task.name %></div>
-				<div class="col-xs-3">气象数据</div>
-				<div class="col-xs-3"><%= task_status task %></div>
-				<div class="col-xs-3"><%= task.updated_at.strftime("%Y-%m-%d")%></div>
-				<div class="col-xs-9 small-tab text-left"><%= truncate("我是描述我是描述我是描述我是描述我是描述我是描述", length: 20) %></div>
-				<div class="col-xs-3"><%= task.updated_at.strftime("%H:%M:%S")  %></div>
-			</div>
-			<hr class="line-hr">
+		<% if @tasks.present? %>
+			<% @tasks.each_with_index do |task, index| %>
+				<div class="col-xs-12 active-line">
+					<div class="col-xs-3"><%= task.name %></div>
+					<div class="col-xs-3">气象数据</div>
+					<div class="col-xs-3"><%= task_status task %></div>
+					<div class="col-xs-3"><%= task.updated_at.strftime("%Y-%m-%d")%></div>
+					<div class="col-xs-9 small-tab text-left"><%= truncate("描述信息", length: 20) %></div>
+					<div class="col-xs-3"><%= task.updated_at.strftime("%H:%M:%S")  %></div>
+				</div>
+				<hr class="line-hr">
+			<% end %>
 		<% end %>
 		</div>
 	</div>
