@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151025122229) do
 
   create_table "cpus", force: :cascade do |t|
@@ -24,9 +23,6 @@ ActiveRecord::Schema.define(version: 20151025122229) do
   end
 
   add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
-=======
-ActiveRecord::Schema.define(version: 20151025092731) do
->>>>>>> 7a54db687ff174b574fa1bfa51afaa71316ef0c2
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
