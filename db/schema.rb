@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151025122229) do
 
   create_table "cpus", force: :cascade do |t|
@@ -23,6 +24,9 @@ ActiveRecord::Schema.define(version: 20151025122229) do
   end
 
   add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
+=======
+ActiveRecord::Schema.define(version: 20151025092731) do
+>>>>>>> 7a54db687ff174b574fa1bfa51afaa71316ef0c2
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -165,6 +169,16 @@ ActiveRecord::Schema.define(version: 20151025122229) do
 
   add_index "sms_logs", ["customer_id"], name: "index_sms_logs_on_customer_id", using: :btree
   add_index "sms_logs", ["task_id"], name: "index_sms_logs_on_task_id", using: :btree
+
+  create_table "task_logs", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "task_identifier", limit: 255
+    t.string   "exception",       limit: 255
+    t.string   "file_name",       limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "identifier",  limit: 255

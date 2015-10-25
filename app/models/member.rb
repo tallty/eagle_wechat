@@ -16,4 +16,17 @@
 
 class Member < ActiveRecord::Base
   belongs_to :customer
+
+  def self.add_member_by_department_id department_id
+    users = $group_client.user.full_list(department_id, nil, 0).result["userlist"]
+
+    users.each do |user|
+      customer = Customer.find_by(abbreviation: user["position"])
+
+      Member.create(name: user["name"], phone: user["mobile"], openid: user["userid"], 
+        nick_name: user["nick_name"], headimg: user["avatar"], customer: customer)
+
+    end
+  end
+
 end
