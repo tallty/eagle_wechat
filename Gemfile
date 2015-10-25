@@ -39,7 +39,7 @@ gem "redis-namespace"
 gem 'qy_wechat'
 gem "qy_wechat_api", git: "https://github.com/lanrion/qy_wechat_api.git"
 gem 'annotate'
-
+gem 'by_star'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
