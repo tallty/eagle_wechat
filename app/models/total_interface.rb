@@ -14,7 +14,7 @@
 class TotalInterface < ActiveRecord::Base
   by_star_field :datetime
 
-  scope :day, -> (datetime) { TotalInterface.by_day(datetime).group(:name).sum(:count) }
+  scope :day, -> (datetime) { TotalInterface.by_day(datetime).group(:name) }
   
   def self.process
     

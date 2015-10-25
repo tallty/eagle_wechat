@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025122229) do
+ActiveRecord::Schema.define(version: 20151025131514) do
 
   create_table "cpus", force: :cascade do |t|
     t.string   "model_info", limit: 255
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20151025122229) do
     t.integer  "third_count",  limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "sum_count",    limit: 4
   end
 
   add_index "interface_reports", ["datetime"], name: "index_interface_reports_on_datetime", using: :btree
