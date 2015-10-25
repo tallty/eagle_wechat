@@ -49,7 +49,6 @@ Rails.application.routes.draw do
   #   resources :products
 
     #日报表
-    get 'welcome/index'    
 
     #index : 服务器(第三个菜单)，show：服务器详情（含诊断指向诊断结果）
     resources :machine_details, only: [:index, :show]
@@ -60,10 +59,12 @@ Rails.application.routes.draw do
          get 'history'    #历史告警
          get 'port'    #调用接口
          get 'meteorologic'    #气象数据
-         get 'statement'    #日报表中链接指向
          get 'result'    #诊断结果
        end
      end
+
+     #报表页
+     resources :reports, only: [:index, :show]
 
   # Example resource route with sub-resources:
   #   resources :products do

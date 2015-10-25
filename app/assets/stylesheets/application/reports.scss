@@ -41,7 +41,7 @@ a:link, a:visited, a:hover, a:active {
 			padding-left: 0;
 		}
 		.max-point {
-			padding-left: 20px;
+			padding-left: 15px;
 		}
  		.number {
 			color: #2B6BE4;
@@ -51,12 +51,14 @@ a:link, a:visited, a:hover, a:active {
 		}
 		.large-title {
 			font-size: 14px;
+			padding-left: 10px;
 		}
 	}
 .small-tab {
 	color: #777;
 	font-size: 11px;
 	line-height: 20px;
+	padding-left: 0px;
 }
 	.icon-twoline {
 		line-height: 60px;
@@ -67,4 +69,26 @@ a:link, a:visited, a:hover, a:active {
 		border: 1px dashed #B8B8B8;
 		margin: 0 5px;
 	}
+}
+
+// <!--statement页面样式（日报表）-->
+.air-fw2 {
+  padding-bottom: 10px;
+}
+.right3 {
+	padding: 20px 0;
+	.btn {
+		margin-top: 20px;
+	}
+}
+.state {
+  background-color: rgb(121, 120, 120);
+  div {
+    padding: 5px 0;
+    color: #fff; 
+  }
+}
+
+.tab {
+	font-size: 12px;
 }
