@@ -8,9 +8,11 @@ class TotalInterfacesController < ApplicationController
     
     total_interface = nil
     datas.each do |item|
-      name = Interface.where(identifier: item["interface_name"]).first.name
-      next if name.blank?
-      total_interface = TotalInterface.find_or_create_by datetime: Time.parse(item["datetime"]), identifier: identifier, name: item["interface_name"]
+      item_name = Interface.where(identifier: item["interface_name"]).first.name
+      if item_name.blank?
+        item_name = item["name"]
+      end
+      total_interface = TotalInterface.find_or_create_by datetime: Time.parse(item["datetime"]), identifier: identifier, name: item_name
       total_interface.count = item["interface_count"].to_i
       total_interface.save
     end
