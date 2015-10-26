@@ -16,7 +16,13 @@ class TotalInterface < ActiveRecord::Base
 
   scope :day, -> (datetime) { TotalInterface.by_day(datetime).group(:name) }
   
-  def self.process
-    
+  def self.fix_name
+    items = TotalInterface.all
+    items.each do |item|
+      name = Interface.where(identifier: item.name).first.name
+      next if name.blank?
+      item.name = name
+      item.save
+    end
   end
 end
