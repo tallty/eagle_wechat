@@ -19,8 +19,8 @@ class TotalInterface < ActiveRecord::Base
   def self.fix_name
     items = TotalInterface.all
     items.each do |item|
-      name = Interface.where(identifier: item.name).first.name
-      next if name.blank?
+      interface = Interface.where(identifier: item.name).first
+      next if interface.try(:name).blank?
       item.name = name
       item.save
     end
