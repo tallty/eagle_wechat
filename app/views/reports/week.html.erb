@@ -1,0 +1,89 @@
+<div class="warp">
+	<div class="sef-container clearfix">
+		<div class="tab-title col-xs-12">
+			<div class="col-xs-4"><span><span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span><span>前一周</span></span></div>
+			<div class="col-xs-4 text-center">10-19～10-25</div>
+			<div class="col-xs-4"><span class="pull-right"><span>后一周</span><span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span></div>
+		</div>
+		<div class="col-xs-12 tab-line right1">
+			<div style="height:220px" class="air-fw2"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var right1 = $(".right1").height();
+	// 路径配置
+	require.config({
+		paths: {
+			echarts: '/assets/echarts'
+		}
+	});
+	
+	// 使用
+	require(
+		[
+		'echarts',
+		'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+		],
+		function (ec) {
+			$(".air-fw2").each(function(){
+				var myChart = ec.init($(this).get(0));  
+					var option = {
+						tooltip : {
+							trigger: 'axis'
+						},
+						legend: {
+							data:['调用次数']
+						},
+						calculable : true,
+						grid : {
+							x: 40,
+							x2: 10,
+							y: 60,
+							y2: 30
+						},
+						xAxis : [
+						{
+							type : 'category',
+							data : [
+								<% @week_datas.keys.each do |key| %>
+								<%= key %>,
+								<% end %>
+							]
+						}
+						],
+						yAxis : [
+						{
+							type : 'value'
+						}
+						],
+						series : [
+						{
+							name:'调用次数',
+							type:'bar',
+							data:[
+								<% @week_datas.values.each do |value| %>
+								<%= value %>, 
+								<% end %>
+								],
+							markPoint : {
+								data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+								]
+							},
+							// markLine : {
+							// 	data : [
+							// 	{type : 'average', name: '平均值'}
+							// 	]
+							// }
+						}
+						]
+					};
+			// 为echarts对象加载数据 
+			myChart.setOption(option); 
+			});
+		}
+	);
+</script>
