@@ -42,12 +42,12 @@ class InterfaceReport < ActiveRecord::Base
       data = InterfaceReport.find_or_create_by datetime: now_date, identifier: identifier, name: item
       data.sum_count = TotalInterface.by_day(now_date).where(name: item).sum(:count)
       items = TotalInterface.by_day(now_date).where(name: item).order("count asc").first(3)
-      data.first_times = items[0].datetime
-      data.first_count = items[0].count
-      data.second_times = items[1].datetime
-      data.second_count = items[1].count
-      data.third_times = items[2].datetime
-      data.third_count = items[2].count
+      data.first_times = items[0].try(:datetime)
+      data.first_count = items[0].try(:count)
+      data.second_times = items[1].try(:datetime)
+      data.second_count = items[1].try(:count)
+      data.third_times = items[2].try(:datetime)
+      data.third_count = items[2].try(:count)
       data.save
       $redis.hset "interface_reports_cache_#{now_date.strftime('%Y-%m-%d')}", "#{data.name}", data.to_json
     end
