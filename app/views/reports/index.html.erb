@@ -26,9 +26,9 @@
 						<span class="number">5％</span> -->
 					</div>
 					<div class="col-xs-5 line number">
-						<span><%= report["first_times"].to_datetime.strftime("%H") %>点</span>
-						<span><%= report["second_times"].to_datetime.strftime("%H") %>点</span>
-						<span><%= report["third_times"].to_datetime.strftime("%H") %>点</span>
+						<span><%= report["first_times"].try(:to_datetime).try(:strftime("%H")) %>点</span>
+						<span><%= report["second_times"].try(:to_datetime).try(:strftime("%H")) %>点</span>
+						<span><%= report["third_times"].try(:to_datetime).try(:strftime("%H")) %>点</span>
 					</div>
 				</div>
 	<!-- 			<div class="col-xs-1 icon-twoline">
