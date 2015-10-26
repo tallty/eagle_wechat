@@ -5,8 +5,8 @@ class WeatherController < ApplicationController
 	end
 
 	def history
-		@customer = Customer.first
-		@tasks = @customer.tasks if @customer
+		# @customer = Customer.first
+		# @tasks = @customer.tasks if @customer
 	end
 
 	def port

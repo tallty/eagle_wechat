@@ -64,7 +64,12 @@ Rails.application.routes.draw do
      end
 
      #报表页
-     resources :reports, only: [:index, :show]
+     resources :reports, only: [:index, :show] do
+        collection do
+          get 'week'
+          get 'month'
+        end
+     end
 
   # Example resource route with sub-resources:
   #   resources :products do
