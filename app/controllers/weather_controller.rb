@@ -11,6 +11,7 @@ class WeatherController < ApplicationController
 
 		#历史报警取出全部的
     @tasks = @customer.tasks.where("rate > ?", 10) if @customer
+
 	end
 
 	def port
