@@ -12,7 +12,8 @@ class TotalInterfacesController < ApplicationController
       if item_name.blank?
         item_name = item["name"]
       end
-      total_interface = TotalInterface.find_or_create_by datetime: Time.parse(item["datetime"]), identifier: identifier, name: item_name
+      datetime = Time.parse(item["datetime"]) + 8.hour
+      total_interface = TotalInterface.find_or_create_by datetime: datetime, identifier: identifier, name: item_name
       total_interface.count = item["interface_count"].to_i
       total_interface.save
     end
