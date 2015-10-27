@@ -16,9 +16,10 @@
 class TaskLog < ActiveRecord::Base
 
   def self.process
-    list = $redis.hvals("task_log_cache").map { |e| MultiJson.load e }
-    list.each do |item|
+    list = $redis.hgetall("task_log_cache")
+    list.map do |e, i|
       # 入库
+      item = MultiJson.load(i)
       process_result = item["process_result"]
       log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f) + 8.hour)
       log.end_time = Time.at(process_result["end_time"].to_f) + 8.hour
@@ -26,6 +27,8 @@ class TaskLog < ActiveRecord::Base
       log.task_name = Task.where(identifier: log.task_identifier).first.name
       log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
+
+      $redis.hdel("task_log_cache", e)
     end
   end
 end
