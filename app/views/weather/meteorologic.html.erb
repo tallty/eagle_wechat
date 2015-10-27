@@ -13,7 +13,7 @@
 				<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
 				<div class="col-xs-3" style="line-height: 40px;"><%= task_log.end_time - task_log.start_time %>ms</div>
 				<div class="col-xs-3" style="line-height: 40px;">
-					<%= pre_time(index, task_log, @task_logs) %>ms前
+					<%= pre_time(task_log, @task_logs) %>ms前
 				</div>
 				<div class="col-xs-3" style="line-height: 40px;"><i class="fa fa-circle fa-red"></i>延迟</div>
 			</div>
