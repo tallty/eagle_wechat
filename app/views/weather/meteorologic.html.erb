@@ -7,12 +7,21 @@
 			<div class="col-xs-3">状态</div>
 		</div>
 		<div class="tab-line text-center clearfix">
+<<<<<<< HEAD
 		<% @task_logs.each_with_index do |task_log, index| %>
 			<%= link_to "#" do %>
 			<div class="col-xs-12 active-line">
 				<div class="col-xs-3"><%=  Task.find_by(identifier: task_log["identifier"]).try(:name) %></div>
 				<div class="col-xs-3" style="line-height: 40px;"><%= time_mini(task_log["process_result"]["start_time"], task_log["process_result"]["end_time"]) %>ms</div>
 				<div class="col-xs-3" style="line-height: 40px;"><%= (index == 0) ? 0 : (@task_logs[index]["process_result"]["start_time"].to_i -  @task_logs[index - 1 ]["process_result"]["end_time"].to_i)/1000 %>s前</div>
+=======
+		<% @tasks_logs.each_with_index do |task_log, index| %>
+			<%= link_to "#" do %>
+			<div class="col-xs-12 active-line">
+				<div class="col-xs-3"><%=  task_log["identifier"] %></div>
+				<div class="col-xs-3" style="line-height: 40px;"><%= time_mini(task_log["start_time"], task_log["end_time"]) %>min</div>
+				<div class="col-xs-3" style="line-height: 40px;"><%= (index == 0) ? 0 : (@tasks_logs[index]['start_time'].to_i -  @tasks_logs[index - 1 ]['end_time'].to_i)/6000 %>min前</div>
+>>>>>>> 7656fa29784d0963351dd9c8eac4cf83d006697a
 				<div class="col-xs-3" style="line-height: 40px;"><i class="fa fa-circle fa-red"></i>延迟</div>
 			</div>
 			<hr class="line-hr">
