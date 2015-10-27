@@ -10,7 +10,19 @@
 #  file_name       :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  task_name       :string(255)
+#  identifier      :string(255)
 #
 
 class TaskLog < ActiveRecord::Base
+
+  def self.process
+    list = $redis.hvals("task_log_cache").map { |e| MultiJson.load e }
+    list.each do |item|
+      # 入库
+      log = TaskLog.find_or_create_by identifier: item["identifier"], start_time: Time.at(item["start_time"])
+      log.end_time = Time.at(item["end_time"])
+      # log.
+    end
+  end
 end

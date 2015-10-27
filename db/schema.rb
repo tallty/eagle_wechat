@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025131514) do
+ActiveRecord::Schema.define(version: 20151027031938) do
+
+  create_table "cpus", force: :cascade do |t|
+    t.string   "model_info", limit: 255
+    t.string   "mhz",        limit: 255
+    t.string   "cache_size", limit: 255
+    t.integer  "machine_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "cpus", ["machine_id"], name: "index_cpus_on_machine_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -107,7 +118,6 @@ ActiveRecord::Schema.define(version: 20151025131514) do
   end
 
   add_index "machines", ["customer_id"], name: "index_machines_on_customer_id", using: :btree
-  add_index "machines", ["identifier"], name: "index_machines_on_identifier", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -122,6 +132,16 @@ ActiveRecord::Schema.define(version: 20151025131514) do
   end
 
   add_index "members", ["customer_id"], name: "index_members_on_customer_id", using: :btree
+
+  create_table "memory_infos", force: :cascade do |t|
+    t.integer  "swap_total", limit: 4
+    t.integer  "total",      limit: 4
+    t.integer  "machine_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "memory_infos", ["machine_id"], name: "index_memory_infos_on_machine_id", using: :btree
 
   create_table "qy_apps", force: :cascade do |t|
     t.string "qy_token",         limit: 255
@@ -155,7 +175,12 @@ ActiveRecord::Schema.define(version: 20151025131514) do
     t.string   "file_name",       limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "task_name",       limit: 255
+    t.string   "identifier",      limit: 255
   end
+
+  add_index "task_logs", ["identifier"], name: "index_task_logs_on_identifier", using: :btree
+  add_index "task_logs", ["start_time"], name: "index_task_logs_on_start_time", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "identifier",  limit: 255
