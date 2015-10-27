@@ -6,7 +6,7 @@ class TaskLogsController < ApplicationController
   def fetch
     process_file_list = MultiJson.load task_log_params["process_result"]["file_list"]
     if process_file_list.present?
-      $redis.hset "task_log_cache", "#{task_log_params[:identifier]}_#{Time.now.to_i}", task_log_params.to_json
+      $redis.hset "task_log_cache", "#{task_log_params[:task_identifier]}_#{Time.now.to_i}", task_log_params.to_json
     end
     render :text => 'ok'
   end
