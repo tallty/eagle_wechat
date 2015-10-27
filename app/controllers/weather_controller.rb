@@ -15,10 +15,6 @@ class WeatherController < ApplicationController
 	def meteorologic
 		t = $redis.hvals("task_log_cache")
 		@task_logs = t.map { |e| MultiJson.load(e) }
-		pp "1111233333333333333333333"
-		pp  @task_logs
-		pp "1111233333333333333333333"
-
 	end
 	
 	def result
