@@ -1,10 +1,10 @@
 class ReportsController < ApplicationController
 	def index
 		if params[:date].present?
-			selected = Time.at(params[:selected_day].to_i / 1000)
-			cache = $redis.hvals("interface_reports_cache_#{selected.strftime("%F")}")
+			@selected = Time.at(params[:selected_day].to_i / 1000).strftime("%F")
+			cache = $redis.hvals("interface_reports_cache_#{@selected}")
 	    @reports = cache.map { |e| MultiJson.load(e) }
-			#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{selected.strftime("%F")}")
+			#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{selected}")
 		else
 			#2015-10-24 接口的记录
 			cache = $redis.hvals("interface_reports_cache_#{(Time.now.to_date - 1).strftime("%F")}")

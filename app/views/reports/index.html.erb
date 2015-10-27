@@ -5,7 +5,7 @@
 				<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
 			</div>
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= (Time.now.to_date - 1).strftime("%F") %>" readonly id="select_day" class="select_date">
+				<input type="text" value="<%= params[:date].present? ? @selected : (Time.now.to_date - 1).strftime("%F") %>" readonly id="select_day" class="select_date">
 			</div>
 			<div class="col-xs-4">
 				<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
