@@ -12,33 +12,33 @@
 			</div>
 		</div>
 		<div class="tab-line clearfix">
-		<%# @reports.each_with_index do |report, index| %>
-			<%#= link_to "#" do %>
+		<% @reports.each_with_index do |report, index| %>
+			<%= link_to "#" do %>
 				<div class="col-xs-12 mes-line">
 					<div class="first-line">
-						<div class="col-xs-7 line large-title"><%#= index + 1 %>. <%#=  report["name"] %></div>
+						<div class="col-xs-7 line large-title"><%= index + 1 %>. <%=  report["name"] %></div>
 						<div class="col-xs-5 line small-tab">
 							<i class="fa fa-circle fa-red"></i>调用次数最高时刻
 						</div>
 					</div>
 					<div class="col-xs-7 line max-point">
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-						<span class="number"><%#= report["sum_count"] %></span>&nbsp;&nbsp;
+						<span class="number"><%= report["sum_count"] %></span>&nbsp;&nbsp;
 <!-- 						<span class="small-tab">百分比</span>
 						<span class="number">5％</span> -->
 					</div>
 					<div class="col-xs-5 line number">
-						<span><%#= report["first_times"].to_datetime.strftime("%H") if report["first_times"].present? %>点</span>
-						<span><%#= report["second_times"].to_datetime.strftime("%H") if report["second_times"].present? %>点</span>
-						<span><%#= report["third_times"].to_datetime.strftime("%H") if report["third_times"].present? %>点</span>
+						<span><%= report["first_times"].to_datetime.strftime("%H") if report["first_times"].present? %>点</span>
+						<span><%= report["second_times"].to_datetime.strftime("%H") if report["second_times"].present? %>点</span>
+						<span><%= report["third_times"].to_datetime.strftime("%H") if report["third_times"].present? %>点</span>
 					</div>
 				</div>
 	<!-- 			<div class="col-xs-1 icon-twoline">
 					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				</div> -->
-			<%# end %>
+			<% end %>
 			<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
-		<%# end %>
+		<% end %>
 
 		</div>
 	</div>
