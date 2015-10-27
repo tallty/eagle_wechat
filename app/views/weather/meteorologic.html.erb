@@ -10,7 +10,7 @@
 		<% @task_logs.each_with_index do |task_log, index| %>
 			<%= link_to "#" do %>
 			<div class="col-xs-12 active-line">
-				<div class="col-xs-3"><%=  task_log["identifier"] %></div>
+				<div class="col-xs-3"><%=  task_log["identifier"].name %></div>
 				<div class="col-xs-3" style="line-height: 40px;"><%= time_mini(task_log["start_time"], task_log["end_time"]) %>毫秒</div>
 				<div class="col-xs-3" style="line-height: 40px;"><%= (index == 0) ? 0 : (@task_logs[index]["start_time"].to_i -  @task_logs[index - 1 ]["end_time"].to_i) %>毫秒前</div>
 				<div class="col-xs-3" style="line-height: 40px;"><i class="fa fa-circle fa-red"></i>延迟</div>
