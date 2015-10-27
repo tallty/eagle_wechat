@@ -24,11 +24,16 @@ class TaskLog < ActiveRecord::Base
       log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f) + 8.hour)
       log.end_time = Time.at(process_result["end_time"].to_f) + 8.hour
       log.exception = process_result["exception"]
-      log.task_name = Task.where(identifier: log.task_identifier).first.name
+      task = Task.where(identifier: log.task_identifier).first
+      log.task_name = task.name
       log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
 
       $redis.hdel("task_log_cache", e)
+
+      if MultiJson.load(log.exception).present?
+        $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
+      end
     end
   end
 end
