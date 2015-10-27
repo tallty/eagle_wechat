@@ -13,7 +13,7 @@ class TaskLogsController < ApplicationController
 
   private
   def task_log_params
-    params.require(:task_log).permit(:identifier, process_result: [ 
+    params.require(:task_log).permit(:task_identifier, process_result: [ 
                                                       :start_time, :end_time, :exception, :file_list
                                                     ])
   end
