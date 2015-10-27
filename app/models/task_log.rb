@@ -7,11 +7,10 @@
 #  end_time        :datetime
 #  task_identifier :string(255)
 #  exception       :string(255)
-#  file_name       :string(255)
+#  file_name       :text(65535)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  task_name       :string(255)
-#  identifier      :string(255)
 #
 
 class TaskLog < ActiveRecord::Base
