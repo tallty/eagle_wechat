@@ -1,10 +1,17 @@
 class ReportsController < ApplicationController
 	def index
-		#2015-10-24 接口的记录
-		cache = $redis.hvals("interface_reports_cache_#{(Time.now.to_date - 1).strftime("%F")}")
-            @reports = cache.map { |e| MultiJson.load(e) }
-		#2015-10-24 接口调用总数
-		@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{(Time.now.to_date - 1).strftime("%F")}")
+		if params[:date].present?
+			@selected = Time.at(params[:date].to_i / 1000).strftime("%F")
+			cache = $redis.hvals("interface_reports_cache_#{@selected}")
+	    @reports = cache.map { |e| MultiJson.load(e) }
+			#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{selected}")
+		else
+			#2015-10-24 接口的记录
+			cache = $redis.hvals("interface_reports_cache_#{(Time.now.to_date - 1).strftime("%F")}")
+	    @reports = cache.map { |e| MultiJson.load(e) }
+			#2015-10-24 接口调用总数
+			#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{(Time.now.to_date - 1).strftime("%F")}")
+		end	
 	end
 
 	#周报表
@@ -21,7 +28,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@month_datas = {}
+		@month_datas = {"09-25" => 134}
 		(-30..-1).each do |i|
 			day = Time.now.to_date + i
 			r = $redis.hvals("interface_reports_cache_#{day.strftime("%F")}")

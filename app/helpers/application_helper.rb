@@ -9,5 +9,9 @@ module ApplicationHelper
       "info"
     end
   end
+
+  def time_mini(start_time, end_time)
+    (end_time.to_f - start_time.to_f).round(1)
+  end
   
 end
