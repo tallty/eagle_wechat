@@ -24,7 +24,7 @@ class TaskLog < ActiveRecord::Base
       log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: Time.at(process_result["start_time"].to_f)
       log.end_time = Time.at(process_result["end_time"].to_f)
       log.exception = process_result["exception"]
-      log.name = Task.where(identifier: log.task_identifier).first.name
+      log.task_name = Task.where(identifier: log.task_identifier).first.name
       log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
     end
