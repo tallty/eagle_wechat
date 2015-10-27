@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@month_datas = {}
+		@month_datas = {"09-25" => 134}
 		(-30..-1).each do |i|
 			day = Time.now.to_date + i
 			r = $redis.hvals("interface_reports_cache_#{day.strftime("%F")}")
