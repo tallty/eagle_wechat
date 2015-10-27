@@ -13,8 +13,7 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		t = $redis.hvals("task_log_cache")
-		@task_logs = t.map { |e| MultiJson.load(e) }
+		@task_logs = TaskLog.all.order("start_time DESC")
 	end
 	
 	def result

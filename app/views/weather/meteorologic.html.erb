@@ -10,8 +10,8 @@
 		<% @task_logs.each_with_index do |task_log, index| %>
 			<%= link_to "#" do %>
 			<div class="col-xs-12 active-line">
-				<div class="col-xs-3"><%=  Task.find_by(identifier: task_log["task_identifier"]).try(:name) %></div>
-				<div class="col-xs-3" style="line-height: 40px;"><%= time_mini(task_log["process_result"]["start_time"], task_log["process_result"]["end_time"]) %>ms</div>
+				<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
+				<div class="col-xs-3" style="line-height: 40px;"><%= task_log.end_time - task_log.start_time %>ms</div>
 				<div class="col-xs-3" style="line-height: 40px;">
 					<%= pre_time(index, task_log, @task_logs) %>ms前
 				</div>
