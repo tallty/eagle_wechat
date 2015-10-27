@@ -40,6 +40,7 @@ gem 'qy_wechat'
 gem "qy_wechat_api", git: "https://github.com/lanrion/qy_wechat_api.git"
 gem 'annotate'
 gem 'by_star'
+gem 'whenever'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
