@@ -1,7 +1,7 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12 server-tab">
-			<div class="col-xs-4 server-xs4">服务器IP</div>
+			<div class="col-xs-4 server-xs4">服务器名称</div>
 			<div class="col-xs-2">CPU</div>
 			<div class="col-xs-2">内存</div>
 			<div class="col-xs-2">网络</div>
@@ -11,7 +11,7 @@
 			<% @machines.each do |machine| %>
 				<%= link_to machine_detail_path(machine) do %>
 				<div class="col-xs-12 server-line active-line" style="line-height: 40px;">
-					<div class="col-xs-4"><%= machine.machine_detail.network_address %></div>
+					<div class="col-xs-4"><%= machine.name.try(:truncate, 9) %></div>
 					<div class="col-xs-2"><p>
 						<i class="fa fa-circle fa-red"></i><%= machine.cpu_percent %></p>
 					</div>
