@@ -16,8 +16,6 @@
 
 class TaskLog < ActiveRecord::Base
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   def self.process
     list = $redis.hvals("task_log_cache").map { |e| MultiJson.load e }
     list.each do |item|
@@ -27,8 +25,4 @@ class TaskLog < ActiveRecord::Base
       # log.
     end
   end
-=======
->>>>>>> 459b371d9e5f57bc0d14ecf23b0877b00a7526b0
-=======
->>>>>>> 7656fa29784d0963351dd9c8eac4cf83d006697a
 end
