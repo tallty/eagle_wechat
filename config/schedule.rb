@@ -16,4 +16,5 @@ end
 
 every 1.minutes do
   runner "TaskLog.process"
+  runner "TaskLog.verify"
 end
