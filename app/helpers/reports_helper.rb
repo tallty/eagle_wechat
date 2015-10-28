@@ -1,5 +1,18 @@
 module ReportsHelper
-	def week_day(day)
-		{ 0 => '周日',1 => '周一', 2 => '周二', 3 => '周三', 4 => '周四', 5 => '周五', 6 => '周六' }[day]
+
+	def last_month active_month
+		(active_month.beginning_of_month - 1).beginning_of_month.to_time.to_i * 1000
+	end
+
+	def next_month active_month
+		(active_month.end_of_month + 1).to_time.to_i * 1000
+	end
+
+	def last_week monday
+		(monday - 1).beginning_of_month.to_time.to_i * 1000
+	end
+
+	def next_week sunday
+		(sunday + 1).to_time.to_i * 1000
 	end
 end
