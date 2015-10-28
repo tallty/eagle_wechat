@@ -58,7 +58,7 @@ class InterfaceReport < ActiveRecord::Base
   #月报表
   def self.reports_between_date(begin_date, end_date)
     sum_count = {}
-    reports = nil 
+    reports = [] 
 
     (begin_date..end_date).each do |date|
       r = $redis.hvals("interface_reports_cache_#{date.strftime("%F")}")
