@@ -21,8 +21,8 @@ class TaskLog < ActiveRecord::Base
       # 入库
       item = MultiJson.load(i)
       process_result = item["process_result"]
-      log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f) + 8.hour)
-      log.end_time = Time.at(process_result["end_time"].to_f) + 8.hour
+      log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f))
+      log.end_time = Time.at(process_result["end_time"].to_f)
       log.exception = process_result["exception"]
       task = Task.where(identifier: log.task_identifier).first
       log.task_name = task.name
@@ -34,6 +34,14 @@ class TaskLog < ActiveRecord::Base
       if MultiJson.load(log.exception).present?
         $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
       end
+    end
+  end
+
+  def sef.verify
+    tasks = Task.where('rate > 0').pluck(:identifier)
+    tasks.each do |item|
+      log = TaskLog.where(task_identifier: item).last
+      
     end
   end
 end
