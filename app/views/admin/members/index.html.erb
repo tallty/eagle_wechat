@@ -24,7 +24,7 @@
             <% @members.each_with_index do |member, index| %>
               <tr>
                 <td><%= index + 1 %></td>
-                <td><%= image_tag member.headimg %></td>
+                <td><%= image_tag member.headimg, {width: 64, height: 64} %></td>
                 <td><%= member.name %></td>
                 <td><%= member.nick_name %></td>
                 <td><%= member.phone %></td>
