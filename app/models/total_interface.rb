@@ -12,6 +12,7 @@
 #
 
 class TotalInterface < ActiveRecord::Base
+  belongs_to :api_user
   by_star_field :datetime
 
   scope :day, -> (datetime) { TotalInterface.by_day(datetime).group(:name) }
