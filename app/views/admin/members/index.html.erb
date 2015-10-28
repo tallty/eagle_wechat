@@ -3,8 +3,8 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>用户详细信息</h5>
-            <%= link_to new_admin_member_path, remote: true, format: :js, class: "ibox-title-new member-new" do %>
+          <h5>[<%= @customer.name %>] 用户详细信息</h5>
+            <%= link_to new_admin_customer_member_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
               <i class="fa fa-plus fa-lg"></i>
             <% end %>
         </div>
