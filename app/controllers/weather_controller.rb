@@ -1,4 +1,6 @@
 class WeatherController < ApplicationController
+
+	before_action :save_session, only: [:active, :history]
 	def active
 		@customer = Customer.first
     		@tasks = @customer.tasks.where("rate >= ?", 60) if @customer
@@ -17,5 +19,10 @@ class WeatherController < ApplicationController
 	end
 	
 	def result
+	end
+
+	private
+	def save_session
+		session[:openid] = params[:openid]
 	end
 end

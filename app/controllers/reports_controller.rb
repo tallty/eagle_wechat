@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
+	before_action :save_session, only: [:index, :week, :month]
+
 	def index
-		session[:openid] = params[:openid]
 		if params[:date].present?
 			@selected = Time.at(params[:date].to_i / 1000).strftime("%F")
 			cache = $redis.hvals("interface_reports_cache_#{@selected}")
@@ -41,5 +42,10 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		
+	end
+
+	private
+	def save_session
+		session[:openid] = params[:openid]
 	end
 end
