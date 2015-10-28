@@ -25,7 +25,7 @@
               </a>
               <ul class="nav nav-third-level collapse">
                 <li class="<%= "active" if params[:controller] == "admin/members" && params[:customer_id] == "#{customer.id}" %>">
-                  <%= link_to "<span class='nav-label'>人员</span>".html_safe, admin_customer_member_path(customer) %>  
+                  <%= link_to "<span class='nav-label'>人员</span>".html_safe, admin_customer_members_path(customer) %>  
                 </li>
                 <li class="<%= "active" if params[:controller] == "admin/machines" && params[:customer_id] == "#{customer.id}" %>">
                   <%= link_to "<span class='nav-label'>服务器</span>".html_safe, admin_customer_machines_path(customer) %>
