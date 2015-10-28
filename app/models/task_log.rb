@@ -37,7 +37,7 @@ class TaskLog < ActiveRecord::Base
     end
   end
 
-  def sef.verify
+  def self.verify
     tasks = Task.where('rate > 0').pluck(:identifier)
     tasks.each do |item|
       log = TaskLog.where(task_identifier: item).last
