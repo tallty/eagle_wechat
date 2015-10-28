@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
 	def index
+		session[:openid] = params[:openid]
 		if params[:date].present?
 			@selected = Time.at(params[:date].to_i / 1000).strftime("%F")
 			cache = $redis.hvals("interface_reports_cache_#{@selected}")
