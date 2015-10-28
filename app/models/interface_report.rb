@@ -35,7 +35,7 @@ class InterfaceReport < ActiveRecord::Base
   end
 
   def self.process
-    now_date = Time.now.to_date# - 1.day
+    now_date = Time.now.to_date - 1.day
     list = TotalInterface.by_day(now_date).distinct(:name).pluck(:name)
     identifier = "X548EYTO"
     list.each do |item|
