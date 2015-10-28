@@ -12,6 +12,7 @@
 
 class ApiUser < ActiveRecord::Base
   belongs_to :customer
+  has_many :total_interfaces
 
   def fetch(url=nil)
     conn = Faraday.new(:url => "http://61.152.122.112:8080") do |faraday|

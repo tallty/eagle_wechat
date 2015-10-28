@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028144024) do
+ActiveRecord::Schema.define(version: 20151028151625) do
 
   create_table "api_users", force: :cascade do |t|
     t.string   "appid",       limit: 255
@@ -202,13 +202,15 @@ ActiveRecord::Schema.define(version: 20151028144024) do
 
   create_table "total_interfaces", force: :cascade do |t|
     t.datetime "datetime"
-    t.string   "identifier", limit: 255
-    t.string   "name",       limit: 255
-    t.integer  "count",      limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "identifier",  limit: 255
+    t.string   "name",        limit: 255
+    t.integer  "count",       limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "api_user_id", limit: 4
   end
 
+  add_index "total_interfaces", ["api_user_id"], name: "index_total_interfaces_on_api_user_id", using: :btree
   add_index "total_interfaces", ["datetime"], name: "index_total_interfaces_on_datetime", using: :btree
   add_index "total_interfaces", ["identifier"], name: "index_total_interfaces_on_identifier", using: :btree
   add_index "total_interfaces", ["name"], name: "index_total_interfaces_on_name", using: :btree
