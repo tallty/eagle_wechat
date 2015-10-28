@@ -18,11 +18,9 @@ module Admin
 
     # GET /machines/new
     def new
-      p params
       @customer = Customer.where(id: params[:customer_id]).first
       @machine = Machine.new
       @machine.customer = @customer
-      p @machine
       respond_with @machine
     end
 

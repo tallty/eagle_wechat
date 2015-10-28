@@ -28,8 +28,8 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :users
-    resources :members
     resources :customers do
+      resources :members 
       resources :machines
       resources :tasks
       resources :interfaces
