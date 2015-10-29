@@ -5,8 +5,8 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		@active_day = params[:date].blank? ? Time.now.to_date : Time.at(params[:date].to_i / 1000).to_date
-		#cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
-		@reports = [{"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"区县预警", "sum_count"=>1609, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>18, "second_times"=>"2015-10-26 10:00:00 UTC", "second_count"=>18, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>59}, {"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"云图", "sum_count"=>494, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>12, "second_times"=>"2015-10-26 04:00:00 UTC", "second_count"=>39, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>40}]
+		cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
+		@reports = cache.map{ |x| MultiJson.load(x) }
 		#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{@active_day}")
 	end
 
@@ -24,9 +24,8 @@ class ReportsController < ApplicationController
 
 	#周报表
 	def week
-		#@reports = InterfaceReport.reports_between_date(begin_date, end_date)
-
-		@reports = [{"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"区县预警", "sum_count"=>1609, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>18, "second_times"=>"2015-10-26 10:00:00 UTC", "second_count"=>18, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>59}, {"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"云图", "sum_count"=>494, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>12, "second_times"=>"2015-10-26 04:00:00 UTC", "second_count"=>39, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>40}]
+		@reports = InterfaceReport.reports_between_date(begin_date, end_date)
+		#@reports = [{"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"区县预警", "sum_count"=>1609, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>18, "second_times"=>"2015-10-26 10:00:00 UTC", "second_count"=>18, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>59}, {"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"云图", "sum_count"=>494, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>12, "second_times"=>"2015-10-26 04:00:00 UTC", "second_count"=>39, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>40}]
 	end
 
 	#周报表详情页
@@ -36,9 +35,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@reports = [{"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"区县预警", "sum_count"=>1609, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>18, "second_times"=>"2015-10-26 10:00:00 UTC", "second_count"=>18, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>59}, {"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"云图", "sum_count"=>494, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>12, "second_times"=>"2015-10-26 04:00:00 UTC", "second_count"=>39, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>40}]
-
-		#@reports = InterfaceReport.reports_between_date(begin_date, end_date)
+		@reports = InterfaceReport.reports_between_date(begin_date, end_date)
 	end
 
 	#月报表详情页
