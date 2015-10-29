@@ -2,7 +2,7 @@
 	<div class="sef-container clearfix">
 		<div class="tab-title col-xs-12">
 			<!-- 前一月 -->
-			<%= link_to month_show_reports_path(date: last_month(@active_month)) do %>
+			<%= link_to month_show_reports_path(date: last_month(@begin_month)) do %>
 				<div class="col-xs-4">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一月</span>
 				</div>
@@ -12,7 +12,7 @@
 				<input type="text" value="<%= @active_month.strftime("%Y-%m") %>" readonly id="selected_month_input" class="select_date">
 			</div>
 			<!-- 后一月 -->
-			<%= link_to month_show_reports_path(date: next_month(@active_month)) do %>
+			<%= link_to month_show_reports_path(date: next_month(@end_month)) do %>
 				<div class="col-xs-4">
 					<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>

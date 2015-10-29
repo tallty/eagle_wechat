@@ -58,7 +58,7 @@ class ReportsController < ApplicationController
 
 	#月选择功能
 	def select_month
-		begin_date = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).to_date
+		begin_date = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
 		end_date = begin_date.end_of_month.to_date
 		@begin_month = begin_date
 		@end_month = end_date
