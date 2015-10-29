@@ -20,7 +20,7 @@
 		<div class="tab-line clearfix">
 		<!-- 存在纪录 -->
 			<% @reports.each_with_index do |report, index| %>
-				<%= link_to report_path(index) do %>
+				<%= link_to report_path(index, name: report["name"]) do %>
 					<div class="col-xs-11 mes-line">
 						<div class="first-line">
 							<div class="col-xs-7 line large-title"><%= index + 1 %>. <%=  report["name"] %></div>
