@@ -1,15 +1,21 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<div class="col-xs-4 preview">
-				<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
-			</div>
+			<%= link_to reports_path(date: last_day(@active_day)) do %>
+				<div class="col-xs-4 preview">
+					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
+				</div>
+			<% end %>
+
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= params[:date].present? ? @selected : (Time.now.to_date - 1).strftime("%F") %>" readonly id="select_day" class="select_date">
+				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
 			</div>
-			<div class="col-xs-4 next">
-				<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
-			</div>
+
+			<%= link_to reports_path(date: next_day(@active_day)) do %>
+				<div class="col-xs-4 next">
+					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+				</div>
+			<% end %>
 		</div>
 		<div class="tab-line clearfix">
 		<!-- 存在纪录 -->
@@ -78,27 +84,5 @@
 		}).on('changeDate', function(ev){
 				location.href = "<% reports_path %>?date=" + ev.date.valueOf() ;
 			});
-
-		//前一天
-		$(".preview").click(function(){
-			var p = $(".select_date").val().replace(/-/g,"/");
-			var date = new Date(p);
-			var preview = date.getTime() - 86400000;
-			location.href = "<% reports_path %>?date=" + preview;
-		});
-
-		//后一天
-		$(".next").click(function(){
-			var today = new Date();
-			var n = $(".select_date").val().replace(/-/g,"/");
-			var date = new Date(n);
-			var next = date.getTime() + 86400000;
-			if((next + 86400000) > today.getTime()){
-				alert("已经是最新报表了");
-			}else{
-				location.href = "<% reports_path %>?date=" + next;
-			}
-		});
-
 	});
 </script>

@@ -20,7 +20,7 @@
 
 		</div>
 		<div class="tab-line clearfix">
-
+			<!-- 有记录 -->
 			<% @reports.each_with_index do |report, index| %>
 				<%= link_to report_path(index) do %>
 					<div class="col-xs-11 mes-line">
@@ -47,6 +47,12 @@
 					</div>
 				<% end %>
 				<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
+			<% end %>
+			<!-- 无纪录 -->
+			<% if @reports.empty? %>
+				<div class="col-xs-12 mes-line">
+					<h4 class="text-center">无纪录</h4>
+				</div>
 			<% end %>
 
 		</div>

@@ -55,7 +55,7 @@ class InterfaceReport < ActiveRecord::Base
     $redis.hset "interface_sum_cache", "#{identifier}_#{now_date.strftime('%Y-%m-%d')}", TotalInterface.by_day(now_date).sum(:count)
   end
 
-  #月报表
+  #时间段内的报表
   def self.reports_between_date(begin_date, end_date)
     sum_count = {}
     reports = [] 
