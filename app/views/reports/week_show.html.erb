@@ -1,26 +1,32 @@
 <div class="warp">
 	<div class="sef-container clearfix">
 		<div class="tab-title col-xs-12">
-			<%= link_to report_path(date: last_day(@active_day)) do %>
-				<div class="col-xs-4 preview">
-					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span>
-					<span>前一天</span>
+			<!-- 前一月 -->
+			<%= link_to week_show_reports_path(date: last_week(@monday)) do %>
+				<div class="col-xs-4">
+					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一周</span>
 				</div>
 			<% end %>
-
+			<!-- 选择日期 -->
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
+				<div class="col-xs-12 week-title">本周</div>
+				<div class="row" style="line-height: 15px;">
+					<div class="col-xs-6">
+						<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="monday_input" class="select_week">
+					</div>
+					<div class="col-xs-6">
+						<input type="text" value="<%= @sunday.strftime("%F") %>" readonly id="sunday_input" class="select_week">
+					</div>
+				</div>
 			</div>
-
-			<%= link_to report_path(date: next_day(@active_day)) do %>
-				<div class="col-xs-4 next">
-					<span class="pull-right">
-						<span>后一天</span>
-						<span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span>
-					</span>
+			<!-- 后一月 -->
+			<%= link_to week_show_reports_path(date: next_week(@sunday)) do %>
+				<div class="col-xs-4">
+					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
 			<% end %>
 		</div>
+
 		<div class="col-xs-12 mes-line text-center state">
 			<div class="col-xs-6">调用总次数</div>
 			<div class="col-xs-6">调用次数最多的客户</div>
@@ -57,7 +63,7 @@
 </div>
 
 <script>
-	s$(function(){
+	$(function(){
 		//中间日期选择
 		(function($){
 			$.fn.datetimepicker.dates['zh-CN'] = {
@@ -66,23 +72,38 @@
 				daysMin:  ["日", "一", "二", "三", "四", "五", "六", "日"],
 				months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
 				monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一", "十二"],
-				today: "最新",
+				today: "本周",
 				suffix: [],
 				meridiem: ["上午", "下午"]
 			};
 		}(jQuery));
 
-		$("#select_day").datetimepicker({
-			format: "yyyy-mm-dd",
+		//选择周一
+		$("#monday_input").datetimepicker({
+			format: "mm-dd",
 			minView: 2,
-			endDate: '<%= (Time.now.to_date - 1).strftime("%F") %>',
+			daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+			endDate: '<%= (Time.now.to_date).strftime("%F") %>',
 			todayBtn: true,
-			todayHighlight: true,
 			pickerPosition: 'bottom-right',
 			autoclose: true,
 			language: 'zh-CN'
 		}).on('changeDate', function(ev){
-				location.href = "<% reports_path %>?date=" + ev.date.valueOf() ;
+				location.href = "<% week_show_reports_path %>?date=" + ev.date.valueOf();
+			});
+
+		//选择周二
+		$("#sunday_input").datetimepicker({
+			format: "mm-dd",
+			minView: 2,
+			daysOfWeekDisabled: [1, 2, 3, 4, 5, 6],
+			endDate: '<%= (Time.now.to_date).strftime("%F") %>',
+			todayBtn: true,
+			pickerPosition: 'bottom-right',
+			autoclose: true,
+			language: 'zh-CN'
+		}).on('changeDate', function(ev){
+				location.href = "<% week_show_reports_path %>?date=" + ev.date.valueOf();
 			});
 	});
 </script>

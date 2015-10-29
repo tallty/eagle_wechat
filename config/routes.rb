@@ -67,7 +67,9 @@ Rails.application.routes.draw do
      resources :reports, only: [:index, :show] do
         collection do
           get 'week'
+          get 'week_show'
           get 'month'
+          get 'month_show'
         end
      end
 
