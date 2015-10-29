@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
 
 	#周报表
 	def week
-		@reports = InterfaceReport.reports_between_date(begin_date, end_date)
+		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
 		#@reports = [{"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"区县预警", "sum_count"=>1609, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>18, "second_times"=>"2015-10-26 10:00:00 UTC", "second_count"=>18, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>59}, {"datetime"=>"2015-10-26", "identifier"=>"X548EYTO", "name"=>"云图", "sum_count"=>494, "first_times"=>"2015-10-26 10:00:00 UTC", "first_count"=>12, "second_times"=>"2015-10-26 04:00:00 UTC", "second_count"=>39, "third_times"=>"2015-10-26 01:00:00 UTC", "third_count"=>40}]
 	end
 
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@reports = InterfaceReport.reports_between_date(begin_date, end_date)
+		@reports = InterfaceReport.reports_between_date(@begin_month, @end_month)
 	end
 
 	#月报表详情页
@@ -60,6 +60,7 @@ class ReportsController < ApplicationController
 	def select_month
 		begin_date = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).to_date
 		end_date = begin_date.end_of_month.to_date
-		@active_month = begin_date
+		@begin_month = begin_date
+		@end_month = end_date
 	end
 end
