@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
 		@active_day = params[:date].blank? ? Time.now.to_date : Time.at(params[:date].to_i / 1000).to_date
 		# @count_array = [count, ...]
 		@count_array = []
-		cache = Customer.first.api_users.joins("LEFT JOIN  `total_interfaces` ON `total_interfaces`.`api_user_id` = `api_users`.`id` and total_interfaces.name= #{params[:name]}").group("api_users.id").pluck("api_users.company", "sum(total_interfaces.count)")
+		cache = Customer.first.api_users.joins("LEFT JOIN  `total_interfaces` ON `total_interfaces`.`api_user_id` = `api_users`.`id` and total_interfaces.name= '#{params[:name]}'").group("api_users.id").pluck("api_users.company", "sum(total_interfaces.count)")
 		# @user_infos = [[name, count],...]
 		@user_infos = cache.each{ |x| x[1].nil? ? x[1] = 0 : x[1] }
 		@user_infos.each{ |x| @count_array.push(x[1])}
