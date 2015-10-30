@@ -76,4 +76,11 @@ class InterfaceReport < ActiveRecord::Base
     reports.each{ |r| r['sum_count'] = sum_count[r['name']]}
   end
 
+  def interface_delay( len )
+    chars = ("100".."200").to_a
+    newpass = ""
+    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+    return newpass
+  end
+
 end

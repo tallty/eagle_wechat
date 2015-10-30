@@ -12,6 +12,7 @@ class WeatherController < ApplicationController
 	end
 
 	def port
+		@interfaces = Interface.all.order("created_at DESC")
 	end
 
 	def meteorologic
