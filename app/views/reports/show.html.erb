@@ -40,7 +40,7 @@
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 						<span class="number"><%= user_info[1] %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number"><%= user_info[1].to_i * 100 / @buffer.sum.to_i %>％</span>
+						<span class="number"><%= @buffer.sum == 0 ? 0 : user_info[1].to_i * 100 / @buffer.sum.to_i %>％</span>
 					</div>
 					<div class="col-xs-5 line number">&nbsp;<span>7点</span><span>11点</span><span>15点</span></div>
 				</div>
