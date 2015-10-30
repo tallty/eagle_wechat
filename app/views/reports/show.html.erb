@@ -85,7 +85,7 @@
 			autoclose: true,
 			language: 'zh-CN'
 		}).on('changeDate', function(ev){
-				location.href = "<% reports_path %>?date=" + ev.date.valueOf() ;
+				location.href = "<%= reports_path %>/<%= params[:id] %>?name=<%= params[:name] %>&&date=" + ev.date.valueOf() ;
 			});
 	});
 </script>
