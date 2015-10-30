@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
 		Customer.first.api_users.each do |user|
 			@user_infos["#{user.company}"] = user.total_interfaces.day(@active_day).where(name: params[:name]).sum(:count)[params[:name]]
 		end
+		pp @user_infos, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 	end
 
 	#周报表
