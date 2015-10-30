@@ -19,7 +19,7 @@ class MachinesController < ApplicationController
     detail.cpu_real = info["cpu"]["real"].to_i
     detail.cpu_total = info["cpu"]["total"].to_i
     detail.mhz = info["cpu"]["mhz"]
-    
+
     detail.memory_swap_total = info["memory"]["swap_total"]
     detail.memory_total = info["memory"]["total"]
 
@@ -38,7 +38,7 @@ class MachinesController < ApplicationController
     $redis.lpush "#{real_hardware_params['identifier']}_file_systems", "#{real_hardware_params['info']['file_system']}"
     render :text => 'ok'
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_machine
@@ -47,7 +47,7 @@ class MachinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def base_hardware_params
-      params.require(:machine).permit(:identifier, :datetime, info: [ 
+      params.require(:machine).permit(:identifier, :datetime, info: [
                                                       cpu: [ :name, :mhz, :real, :total], 
                                                       memory: [:swap_total, :total ], 
                                                       net_work: [ :external_address, :network_address ] 
@@ -55,7 +55,7 @@ class MachinesController < ApplicationController
     end
 
     def real_hardware_params
-      params.require(:machine).permit(:identifier, :datetime, info: [ 
+      params.require(:machine).permit(:identifier, :datetime, info: [
                                                       cpu: [ :real, :top, :cpu_used, :date_time ], 
                                                       file_system: [:lost_file_system, :percent_used, :date_time],
                                                       memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes, :date_time ], 

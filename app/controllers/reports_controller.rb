@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
 	    @reports = cache.map { |e| MultiJson.load(e) }
 			#2015-10-24 接口调用总数
 			#@total_count = $redis.hget("interface_sum_cache", "X548EYTO_#{(Time.now.to_date - 1).strftime("%F")}")
-		end	
+		end
 	end
 
 	#周报表
@@ -41,7 +41,6 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		
 	end
 
 	private
