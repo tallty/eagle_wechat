@@ -16,10 +16,10 @@
 					<%= pre_time(task_log, @task_logs).to_s %>ms前
 				</div>
 				<div class="col-xs-3" style="line-height: 40px;">
-				<% if pre_time(task_log, @task_logs) < 300 %>
-					<i class="fa fa-circle fa-green"></i>正常
-				<% else %>
+				<% if pre_time(task_log, @task_logs) > 300 %>
 					<i class="fa fa-circle fa-red"></i>延迟
+				<% else %>
+					<i class="fa fa-circle fa-green"></i>正常
 					<% end %>
 				</div>
 			</div>
