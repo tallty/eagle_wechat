@@ -12,11 +12,12 @@ class WeatherController < ApplicationController
 	end
 
 	def port
-		@interfaces = Interface.all
+		@interfaces = Interface.all.order("created_at DESC")
+		
 	end
 
 	def meteorologic
-		@task_logs = TaskLog.all.order("start_time DESC")
+		@task_logs = TaskLog.all.order("start_time DESC")[0, 100]
 	end
 	
 	def result
@@ -26,4 +27,11 @@ class WeatherController < ApplicationController
 	def save_session
 		session[:openid] = params[:openid]
 	end
+
+	def delay( len )
+    chars = ("100".."200").to_a
+    newpass = ""
+    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+    return newpass
+  end
 end
