@@ -17,7 +17,6 @@ class WeatherController < ApplicationController
 
 	def port
 		@interfaces = Interface.all.order("created_at DESC")
-		
 	end
 
 	def meteorologic
@@ -33,11 +32,4 @@ class WeatherController < ApplicationController
 	def save_session
 		session[:openid] = params[:openid]
 	end
-
-	def delay( len )
-    chars = ("100".."200").to_a
-    newpass = ""
-    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
-    return newpass
-  end
 end
