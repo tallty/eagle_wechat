@@ -19,4 +19,5 @@ class Interface < ActiveRecord::Base
 		chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
 		self.identifier ||= chars.sample(8).join
 	end
+
 end
