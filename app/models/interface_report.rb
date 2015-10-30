@@ -52,7 +52,7 @@ class InterfaceReport < ActiveRecord::Base
       $redis.hset "interface_reports_cache_#{now_date.strftime('%Y-%m-%d')}", "#{data.name}", data.to_json
     end
 
-    $redis.hset "interface_sum_cache", "#{identifier}_#{now_date.strftime('%Y-%m-%d')}", TotalInterface.by_day(now_date).sum(:count)
+     $redis.hset "interface_sum_cache", "#{identifier}_#{now_date.strftime('%Y-%m-%d')}", TotalInterface.by_day(now_date).sum(:count)
   end
 
   #时间段内的报表
