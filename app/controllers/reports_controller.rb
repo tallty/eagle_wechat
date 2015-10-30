@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		@active_day = params[:date].blank? ? Time.now.to_date : Time.at(params[:date].to_i / 1000).to_date
+		@active_day = params[:date].blank? ? Time.now.to_date : params[:date].to_date
 		# {user_name => count, ...}
 		@user_infos = {}
 		Customer.first.api_users.each do |user|
