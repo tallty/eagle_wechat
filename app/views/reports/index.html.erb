@@ -1,7 +1,7 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<%= link_to reports_path(date: last_day(@active_day)) do %>
+			<%= link_to reports_path(date: last_day(@active_day), name: params[:name]) do %>
 				<div class="col-xs-4 preview">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
 				</div>
@@ -11,7 +11,7 @@
 				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
 			</div>
 
-			<%= link_to reports_path(date: next_day(@active_day)) do %>
+			<%= link_to reports_path(date: next_day(@active_day), name: params[:name]) do %>
 				<div class="col-xs-4 next">
 					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
