@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
 	def show
 		@active_day = params[:date].blank? ? Time.now.to_date : Time.at(params[:date].to_i / 1000).to_date
 		# {user_name => count, ...}
-		@user_infos = []
+		@user_infos = {}
 		Customer.first.api_users.each do |user|
 			@user_infos["#{user.company}"] = user.total_interfaces.day(@active_day).where(name: params[:name]).sum(:count)[params[:name]]
 		end
