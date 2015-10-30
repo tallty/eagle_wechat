@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 	#周报表
 	def week
 		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
-	ends
+	end
 
 	#周报表详情页
 	def week_show
