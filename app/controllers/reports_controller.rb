@@ -7,20 +7,23 @@ class ReportsController < ApplicationController
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
 		cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
 		@interface_infos = cache.map{ |x| MultiJson.load(x) }
+		#TotalInterface.by_day(Date.today - 1).group(:name).sum(:count)
 	end
 
 	#日报表详细页
 	def show
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
-		# {user_name => count, ...}
-		@user_infos = {}
-		Customer.first.api_users.each do |user|
-			@user_infos["#{user.company}"] = user.total_interfaces.day(@active_day).where(name: params[:name]).sum(:count)[params[:name]]
-		end
-		@buffer = []
-		@user_infos.each{ |key, value| value.nil? ? @user_infos[key] = 0 : @buffer.push(value) }
-		@max_user = nil
-		@user_infos.each{ |key, value| value == @buffer.max ? @max_user = key : value}
+
+		@user_infos ＝ TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
+		
+		# @user_infos = {}
+		# Customer.first.api_users.each do |user|
+		# 	@user_infos["#{user.company}"] = user.total_interfaces.day(@active_day).where(name: params[:name]).sum(:count)[params[:name]]
+		# end
+		# @buffer = []
+		# @user_infos.each{ |key, value| value.nil? ? @user_infos[key] = 0 : @buffer.push(value) }
+		# @max_user = nil
+		# @user_infos.each{ |key, value| value == @buffer.max ? @max_user = key : value}
 	end
 
 	#周报表

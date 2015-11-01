@@ -72,7 +72,6 @@ class InterfaceReport < ActiveRecord::Base
         reports.push(x) if reports.select{ |r| r['name'] == x['name']}.blank?
       end
     end
-
     reports.each{ |r| r['sum_count'] = sum_count[r['name']]}
   end
 
