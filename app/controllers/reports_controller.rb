@@ -13,17 +13,7 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
-
 		@user_infos = TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
-		
-		# @user_infos = {}
-		# Customer.first.api_users.each do |user|
-		# 	@user_infos["#{user.company}"] = user.total_interfaces.day(@active_day).where(name: params[:name]).sum(:count)[params[:name]]
-		# end
-		# @buffer = []
-		# @user_infos.each{ |key, value| value.nil? ? @user_infos[key] = 0 : @buffer.push(value) }
-		# @max_user = nil
-		# @user_infos.each{ |key, value| value == @buffer.max ? @max_user = key : value}
 	end
 
 	#周报表
@@ -33,7 +23,7 @@ class ReportsController < ApplicationController
 
 	#周报表详情页
 	def week_show
-
+		@user_infos = TotalInterface.between_times(@monday, @sunday).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
 	end
 
 	#月报表
@@ -43,7 +33,7 @@ class ReportsController < ApplicationController
 
 	#月报表详情页
 	def month_show
-
+		@user_infos = TotalInterface.between_times(@begin_month, @end_month).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
 	end
 
 	private
