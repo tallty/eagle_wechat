@@ -12,10 +12,10 @@
 				<div class="col-xs-12 week-title">本周</div>
 				<div class="row" style="line-height: 15px;">
 					<div class="col-xs-6">
-						<input type="text" value="<%= @monday.strftime("%y-%m-%d") %>" readonly id="monday_input" class="select_week">
+						<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="monday_input" class="select_week">
 					</div>
 					<div class="col-xs-6">
-						<input type="text" value="<%= @sunday.strftime("%y-%m-%d") %>" readonly id="sunday_input" class="select_week">
+						<input type="text" value="<%= @sunday.strftime("%F") %>" readonly id="sunday_input" class="select_week">
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 			format: "mm-dd",
 			minView: 2,
 			daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
-			endDate: '<%= (Time.now.to_date).strftime("%F") %>',
+			endDate: '<%= Date.today.strftime("%F") %>',
 			todayBtn: true,
 			pickerPosition: 'bottom-right',
 			autoclose: true,
@@ -102,7 +102,7 @@
 			format: "mm-dd",
 			minView: 2,
 			daysOfWeekDisabled: [1, 2, 3, 4, 5, 6],
-			endDate: '<%= (Time.now.to_date).strftime("%F") %>',
+			endDate: '<%= Date.today.strftime("%F") %>',
 			todayBtn: true,
 			pickerPosition: 'bottom-right',
 			autoclose: true,
