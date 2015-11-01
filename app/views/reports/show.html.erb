@@ -28,19 +28,19 @@
 			<div class="col-xs-6"><%= @user_infos.keys.first %></div>
 		</div>
 		<div class="tab-line clearfix">
-			<% @user_infos.each_with_index do |key, value, index| %>
+			<% @user_infos.each_with_index do |user_info, index| %>
 				<div class="col-xs-12 mes-line">
 					<div class="first-line">
-						<div class="col-xs-7 line large-title"><%= index + 1 %>、<%= key %></div>
+						<div class="col-xs-7 line large-title"><%= index + 1 %>、<%= user_info.first %></div>
 						<div class="col-xs-5 line p-l-0 small-tab">
 							<i class="fa fa-circle fa-red"></i>调用次数最高的时间点
 						</div>
 					</div>
 					<div class="col-xs-7 line max-point">
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-						<span class="number"><%= value %></span>&nbsp;&nbsp;
+						<span class="number"><%= user_info.second %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : value * 100 / @user_infos.values.sum %>％</span>
+						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : user_info.second * 100 / @user_infos.values.sum %>％</span>
 					</div>
 					<div class="col-xs-5 line number">&nbsp;<span>7点</span><span>11点</span><span>15点</span></div>
 				</div>
