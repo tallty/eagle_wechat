@@ -9,7 +9,7 @@ module ReportsHelper
 	end
 
 	def last_month begin_month
-		(active_month - 1).beginning_of_month.to_time.to_i * 1000
+		(begin_month - 1).beginning_of_month.to_time.to_i * 1000
 	end
 
 	def next_month end_month
