@@ -22,7 +22,7 @@
 		<div class="tab-line clearfix">
 			<!-- 有记录 -->
 			<% @reports.each_with_index do |report, index| %>
-				<%= link_to month_show_reports_path(name: report["name"], date: @active_month.to_time.to_i * 1000) do %>
+				<%= link_to month_show_reports_path(name: report["name"], date: @begin_month.to_time.to_i * 1000) do %>
 					<div class="col-xs-11 mes-line">
 						<div class="first-line">
 							<div class="col-xs-7 line large-title"><%= index + 1 %>. <%=  report["name"] %></div>
