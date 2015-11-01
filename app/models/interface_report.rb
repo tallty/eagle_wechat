@@ -59,16 +59,12 @@ class InterfaceReport < ActiveRecord::Base
   def self.reports_between_date(begin_date, end_date)
     sum_count = {}
     reports = [] 
-
     (begin_date..end_date).each do |date|
       r = $redis.hvals("interface_reports_cache_#{date.strftime("%F")}")
       cache = r.map { |e| MultiJson.load(e) }
-
       reports = cache if cache.present? && reports.blank?
-
       cache.each do |x|
         sum_count[x['name']].blank? ? sum_count[x['name']] = x['sum_count'] : sum_count[x['name']] += x['sum_count']
-
         reports.push(x) if reports.select{ |r| r['name'] == x['name']}.blank?
       end
     end
