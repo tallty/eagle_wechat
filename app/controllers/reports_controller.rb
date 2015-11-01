@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
 	#周报表
 	def week
 		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
-		@total_count = nil
+		@total_count = 0
 		@reports.each{ |x| @total_count += x["sum_count"] }
 	end
 
