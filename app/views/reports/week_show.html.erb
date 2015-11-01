@@ -9,13 +9,13 @@
 			<% end %>
 			<!-- 选择日期 -->
 			<div class="col-xs-4 text-center">
-				<div class="col-xs-12 week-title">本周</div>
+				<div class="col-xs-12 week-title"><%= @monday == Date.today.beginning_of_week ? "本周" : "其他周" %></div>
 				<div class="row" style="line-height: 15px;">
 					<div class="col-xs-6">
-						<input type="text" value="<%= @monday.strftime("%y-%m-%d") %>" readonly id="monday_input" class="select_week">
+						<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="monday_input" class="select_week">
 					</div>
 					<div class="col-xs-6">
-						<input type="text" value="<%= @sunday.strftime("%y-%m-%d") %>" readonly id="sunday_input" class="select_week">
+						<input type="text" value="<%= @sunday.strftime("%F") %>" readonly id="sunday_input" class="select_week">
 					</div>
 				</div>
 			</div>
