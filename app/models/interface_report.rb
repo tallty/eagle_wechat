@@ -72,7 +72,7 @@ class InterfaceReport < ActiveRecord::Base
   end
 
   #计算总调用次数
-  def self.total_count reports
+  def self.total_count(reports)
     count = 0
     reports.each{ |x| count += x["sum_count"] }
     return count
