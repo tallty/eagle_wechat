@@ -24,23 +24,23 @@
 		<div class="col-xs-12 mes-line text-center state">
 			<div class="col-xs-6">调用总次数</div>
 			<div class="col-xs-6">调用次数最多的客户</div>
-			<div class="col-xs-6"><%= @buffer.sum %></div>
-			<div class="col-xs-6"><%= @max_user %></div>
+			<div class="col-xs-6"><%= @user_infos.values.sum %></div>
+			<div class="col-xs-6"><%= @user_infos.keys.first %></div>
 		</div>
 		<div class="tab-line clearfix">
-			<% @user_infos.each_with_index do |user_info, index| %>
+			<% @user_infos.each_with_index do |key, value, index| %>
 				<div class="col-xs-12 mes-line">
 					<div class="first-line">
-						<div class="col-xs-7 line large-title"><%= index + 1 %>、<%= user_info[0] %></div>
+						<div class="col-xs-7 line large-title"><%= index + 1 %>、<%= key %></div>
 						<div class="col-xs-5 line p-l-0 small-tab">
 							<i class="fa fa-circle fa-red"></i>调用次数最高的时间点
 						</div>
 					</div>
 					<div class="col-xs-7 line max-point">
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-						<span class="number"><%= user_info[1] %></span>&nbsp;&nbsp;
+						<span class="number"><%= value %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number"><%= @buffer.sum == 0 ? 0 : user_info[1].to_i * 100 / @buffer.sum.to_i %>％</span>
+						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : value * 100 / @user_infos.values.sum @ %>％</span>
 					</div>
 					<div class="col-xs-5 line number">&nbsp;<span>7点</span><span>11点</span><span>15点</span></div>
 				</div>
