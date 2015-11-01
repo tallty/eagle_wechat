@@ -17,7 +17,7 @@ module ReportsHelper
 	end
 
 	def last_week monday
-		(monday - 1).beginning_of_month.to_time.to_i * 1000
+		(monday - 1).beginning_of_week.to_time.to_i * 1000
 	end
 
 	def next_week sunday
