@@ -46,7 +46,7 @@
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 						<span class="number"><%= user_info.second %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : user_info.second.to_f * 100 / @reports.values.sum %>％</span>
+						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : user_info.second.to_f * 100 / @user_infos.values.sum %>％</span>
 					</div>
 					<div class="col-xs-5 line number">&nbsp;<span>26号</span><span>28号</span><span>30号</span></div>
 				</div>
