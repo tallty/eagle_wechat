@@ -19,8 +19,7 @@ class ReportsController < ApplicationController
 
 	#周报表
 	def week
-		#@reports = InterfaceReport.reports_between_date(@monday, @sunday)
-		@reports = [{"datetime"=>"2015-10-29", "identifier"=>"X548EYTO", "name"=>"全市预警", "sum_count"=>328, "first_times"=>"2015-10-29 07:00:00 +0800", "first_count"=>1, "second_times"=>nil, "second_count"=>nil, "third_times"=>nil, "third_count"=>nil}, {"datetime"=>"2015-10-29", "identifier"=>"X548EYTO", "name"=>"区县主站实况", "sum_count"=>791, "first_times"=>"2015-10-29 07:00:00 +0800", "first_count"=>10, "second_times"=>nil, "second_count"=>nil, "third_times"=>nil, "third_count"=>nil}]
+		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
 		@total_count = 0
 		@reports.each{ |x| @total_count += x["sum_count"] }
 	end
