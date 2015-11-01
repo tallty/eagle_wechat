@@ -52,6 +52,12 @@
 				</div>
 				<hr class="line-hr">
 			<% end %>
+
+			<% if @user_infos.blank? %>
+				<div class="col-xs-12 mes-line">
+					<h4 class="text-center">无纪录</h4>
+				</div>
+			<% end %>
 		</div>
 		<div class="tab-title col-xs-12">
 			全市预警信息查询 调用次数时间分布

@@ -32,6 +32,8 @@ class ReportsController < ApplicationController
 	#月报表
 	def month
 		@reports = InterfaceReport.reports_between_date(@begin_month, @end_month)
+		@total_count = 0
+		@reports.each{ |x| @total_count += x["sum_count"] }
 	end
 
 	#月报表详情页
