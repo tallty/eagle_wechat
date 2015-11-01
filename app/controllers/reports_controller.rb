@@ -7,6 +7,8 @@ class ReportsController < ApplicationController
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
 		cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
 		@interface_infos = cache.map{ |x| MultiJson.load(x) }
+		@total_count = 0
+		@interface_infos.each{ |x| @total_count += x["sum_count"] }
 	end
 
 	#日报表详细页
