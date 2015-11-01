@@ -41,8 +41,8 @@
 						<div class="col-xs-7 line max-point">
 							<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 							<span class="number"><%= report["sum_count"] %></span>&nbsp;&nbsp;
-							<!--<span class="small-tab">百分比</span>
-							<span class="number">5％</span> -->
+							<span class="small-tab">百分比</span>
+							<span class="number"><%= @total_count.nil? ? 0 : report["sum_count"] * 100 / @total_count %>％</span> 
 						</div>
 						<div class="col-xs-5 line number">
 							<span><%= report["first_times"].to_datetime.strftime("%H") if report["first_times"].present? %>点</span>

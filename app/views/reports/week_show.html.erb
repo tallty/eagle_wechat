@@ -30,8 +30,8 @@
 		<div class="col-xs-12 mes-line text-center state">
 			<div class="col-xs-6">调用总次数</div>
 			<div class="col-xs-6">调用次数最多的客户</div>
-			<div class="col-xs-6">95</div>
-			<div class="col-xs-6">小太阳</div>
+			<div class="col-xs-6"><%= @user_infos.values.sum %></div>
+			<div class="col-xs-6"><%= @user_infos.keys.first %></div>
 		</div>
 		<div class="tab-line clearfix">
 			<% @user_infos.each_with_index do |user_info, index| %>
@@ -39,16 +39,16 @@
 					<div class="first-line">
 						<div class="col-xs-7 line large-title"><%= index + 1 %>、<%= user_info.first %></div>
 						<div class="col-xs-5 line p-l-0 small-tab">
-							<i class="fa fa-circle fa-red"></i>调用次数最高的时间点
+							<i class="fa fa-circle fa-red"></i>调用次数最高的日期
 						</div>
 					</div>
 					<div class="col-xs-7 line max-point">
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 						<span class="number"><%= user_info.second %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number">5％</span>
+						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : user_info.second.to_f * 100 / @reports.values.sum %>％</span>
 					</div>
-					<div class="col-xs-5 line number">&nbsp;<span>7点</span><span>11点</span><span>15点</span></div>
+					<div class="col-xs-5 line number">&nbsp;<span>26号</span><span>28号</span><span>30号</span></div>
 				</div>
 				<hr class="line-hr">
 			<% end %>
