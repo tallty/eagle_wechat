@@ -14,7 +14,7 @@ class ReportsController < ApplicationController
 	def show
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
 
-		@user_infos ＝ TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
+		@user_infos = TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name]).group(:company).order(:count).sum(:count)
 		
 		# @user_infos = {}
 		# Customer.first.api_users.each do |user|
