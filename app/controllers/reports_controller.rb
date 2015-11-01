@@ -7,8 +7,7 @@ class ReportsController < ApplicationController
 		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
 		cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
 		@interface_infos = cache.map{ |x| MultiJson.load(x) }
-		@total_count = 0
-		@interface_infos.each{ |x| @total_count += x["sum_count"] }
+		@total_count = InterfaceReport.total_count(@interface_infos)
 	end
 
 	#日报表详细页
@@ -20,8 +19,7 @@ class ReportsController < ApplicationController
 	#周报表
 	def week
 		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
-		@total_count = 0
-		@reports.each{ |x| @total_count += x["sum_count"] }
+		@total_count = InterfaceReport.total_count(@reports)
 	end
 
 	#周报表详情页
@@ -32,8 +30,7 @@ class ReportsController < ApplicationController
 	#月报表
 	def month
 		@reports = InterfaceReport.reports_between_date(@begin_month, @end_month)
-		@total_count = 0
-		@reports.each{ |x| @total_count += x["sum_count"] }
+		@total_count = InterfaceReport.total_count(@reports)
 	end
 
 	#月报表详情页
