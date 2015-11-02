@@ -42,7 +42,11 @@
 						<span class="small-tab">百分比</span>
 						<span class="number"><%= @user_infos.values.sum == 0 ? 0 : user_info.second * 100 / @user_infos.values.sum %>％</span>
 					</div>
-					<div class="col-xs-5 line number">&nbsp;<span>7点</span><span>11点</span><span>15点</span></div>
+					<div class="col-xs-5 line number">&nbsp;
+						<% top3(@reports, user_info.first).each do |top| %>
+							<span><%= "#{top.third.strftime("%H")}点"%></span>
+						<% end %>
+					</div>
 				</div>
 				<hr class="line-hr">
 			<% end %>
