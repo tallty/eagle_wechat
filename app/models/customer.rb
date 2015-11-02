@@ -19,6 +19,7 @@ class Customer < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :sms_logs, dependent: :destroy
   has_many :api_users, dependent: :destroy
+  has_many :total_interfaces, through: :api_users
   
   validates :name, presence: true
 

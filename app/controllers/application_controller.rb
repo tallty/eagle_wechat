@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
 
   def current_customer
-  	#Customer.where(openid: session[:openid])
+  	Customer.first
   end 
 end
