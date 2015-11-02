@@ -30,9 +30,9 @@
 						</div>
 						<div class="col-xs-7 line max-point">
 							<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-							<span class="number"><%= day_report.total_count %></span>&nbsp;&nbsp;
+							<span class="number"><%= day_report.sum_count %></span>&nbsp;&nbsp;
 							<span class="small-tab">百分比</span>
-							<span class="number"><%#= @total_count == 0 ? 0 : (day_report["sum_count"].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
+							<span class="number"><%= (day_report.sum_count.to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 						</div>
 						<div class="col-xs-5 line number">
 							<% day_report.tops.each do |top| %>

@@ -32,13 +32,13 @@
 						</div>
 						<div class="col-xs-7 line max-point">
 							<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-							<span class="number"><%= month_report.total_count %></span>&nbsp;&nbsp;
+							<span class="number"><%= month_report.sum_count %></span>&nbsp;&nbsp;
 							<span class="small-tab">百分比</span>
-							<span class="number"><%#= @total_count == 0 ? 0 : (report["sum_count"].to_f * 1000 / @total_count).to_i / 10.0 %>％</span> 
+							<span class="number"><%= (month_report.sum_count.to_f * 1000 / @total_count).to_i / 10.0 %>％</span> 
 						</div>
 						<div class="col-xs-5 line number">
 							<% month_report.tops.each do |top| %>
-								<span><%= "#{top.strftime("%H")}点" %></span>
+								<span><%= "#{top.strftime("%H")}号" %></span>
 							<% end %>
 						</div>
 					</div>
@@ -49,7 +49,7 @@
 				<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
 			<% end %>
 			<!-- 无纪录 -->
-			<% if @reports.blank? %>
+			<% if @month_reports.blank? %>
 				<div class="col-xs-12 mes-line">
 					<h4 class="text-center">无纪录</h4>
 				</div>

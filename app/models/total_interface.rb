@@ -22,7 +22,7 @@ class TotalInterface < ActiveRecord::Base
   scope :day, -> (date) { by_day(date).group(:name) }
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week).group(:name) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month).group(:name) }
-  scope :select_fields, -> { select("total_interfaces.name, sum(total_interfaces.count) as total_count, GROUP_CONCAT(total_interfaces.id) as ids") }
+  scope :select_fields, -> { select("total_interfaces.name, sum(total_interfaces.count) as sum_count, GROUP_CONCAT(total_interfaces.id) as ids") }
 
   def self.fix_name
     items = TotalInterface.all
@@ -56,6 +56,15 @@ class TotalInterface < ActiveRecord::Base
       total_interface.tops = TotalInterface.where(id: total_interface.ids.split(",")).limit(3).pluck(:datetime)
     end
     total_interfaces
+  end
+
+  #计算所有借口调用总数
+  def self.total_count total_interfaces
+    total_count = 0
+    total_interfaces.each do |total_interface|
+      total_count += total_interfaces.sum_count
+    end
+    return total_count
   end
 
 end
