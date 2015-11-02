@@ -45,17 +45,13 @@ class ReportsController < ApplicationController
 
 	#周日期区间
 	def select_week
-		begin_date = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
-		end_date = begin_date.end_of_week.to_date
-		@monday = begin_date
-		@sunday = end_date
+		@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
+		@sunday = @monday.end_of_week.to_date
 	end
 
 	#月日期区间
 	def select_month
-		begin_date = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
-		end_date = begin_date.end_of_month.to_date
-		@begin_month = begin_date
-		@end_month = end_date
+		@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
+		@end_month = @begin_month.end_of_month.to_date
 	end
 end
