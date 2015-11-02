@@ -35,9 +35,9 @@
 							<span class="number"><%= @total_count == 0 ? 0 : (interface_info["sum_count"].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 						</div>
 						<div class="col-xs-5 line number">
-							<span><%= interface_info["first_times"].to_datetime.strftime("%H") if interface_info["first_times"].present? %>点</span>
-							<span><%= interface_info["second_times"].to_datetime.strftime("%H") if interface_info["second_times"].present? %>点</span>
-							<span><%= interface_info["third_times"].to_datetime.strftime("%H") if interface_info["third_times"].present? %>点</span>
+							<span><%= "#{interface_info["first_times"].to_datetime.strftime("%H")}点" if interface_info["first_times"].present? %></span>
+							<span><%= "#{interface_info["second_times"].to_datetime.strftime("%H")}点" if interface_info["second_times"].present? %></span>
+							<span><%= "#{interface_info["third_times"].to_datetime.strftime("%H")}点" if interface_info["third_times"].present? %></span>
 						</div>
 					</div>
 					<div class="col-xs-1 icon-twoline">
