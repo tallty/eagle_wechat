@@ -19,7 +19,9 @@ class TotalInterface < ActiveRecord::Base
 
   default_scope { order(count: :DESC) }
 
-  scope :day, -> (datetime) { by_day(datetime).group(:name) }
+  scope :day, -> (date) { by_day(date).group(:name) }
+  scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week).group(:name) }
+  scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month).group(:name) }
   scope :select_fields, -> { select("total_interfaces.name, sum(total_interfaces.count) as total_count, GROUP_CONCAT(total_interfaces.id) as ids") }
 
   def self.fix_name
@@ -34,8 +36,24 @@ class TotalInterface < ActiveRecord::Base
 
   def self.day_infos(current_customer, date)
     total_interfaces = current_customer.total_interfaces.select_fields.day(date)
-    total_interfaces.each do |tl|
-      tl.tops = TotalInterface.where(id: tl.ids.split(",")).limit(3).pluck(:datetime)
+    total_interfaces.each do |total_interface|
+      total_interface.tops = TotalInterface.where(id: total_interface.ids.split(",")).limit(3).pluck(:datetime)
+    end
+    total_interfaces
+  end
+
+  def self.week_infos(current_customer, date)
+    total_interfaces = current_customer.total_interfaces.select_fields.week(date)
+    total_interfaces.each do |total_interface|
+      total_interface.tops = TotalInterface.where(id: total_interface.ids.split(",")).limit(3).pluck(:datetime)
+    end
+    total_interfaces
+  end
+
+  def self.month_infos(current_customer, date)
+    total_interfaces = current_customer.total_interfaces.select_fields.month(date)
+    total_interfaces.each do |total_interface|
+      total_interface.tops = TotalInterface.where(id: total_interface.ids.split(",")).limit(3).pluck(:datetime)
     end
     total_interfaces
   end

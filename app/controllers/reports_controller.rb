@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
-		@interface_infos = TotalInterface.day_infos(current_customer, @active_day)
+		@day_reports = TotalInterface.day_infos(current_customer, @active_day)
 	end
 
 	#日报表详细页
@@ -17,8 +17,7 @@ class ReportsController < ApplicationController
 
 	#周报表
 	def week
-		@reports = InterfaceReport.reports_between_date(@monday, @sunday)
-		@total_count = InterfaceReport.total_count(@reports)
+		@week_reports = TotalInterface.week_infos(current_customer, @monday)
 	end
 
 	#周报表详情页
@@ -28,8 +27,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@reports = InterfaceReport.reports_between_date(@begin_month, @end_month)
-		@total_count = InterfaceReport.total_count(@reports)
+		@month_reports = TotalInterface.month_infos(current_customer, @begin_month)
 	end
 
 	#月报表详情页

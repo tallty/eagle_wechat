@@ -29,11 +29,11 @@
 		</div>
 		<div class="tab-line clearfix">
 			<!-- 有记录 -->
-			<% @reports.each_with_index do |report, index| %>
-				<%= link_to week_show_reports_path(name: report["name"], date: @sunday.to_time.to_i * 1000) do %>
+			<% @week_reports.each_with_index do |week_report, index| %>
+				<%= link_to week_show_reports_path(name: week_report.name, date: @sunday.to_time.to_i * 1000) do %>
 					<div class="col-xs-11 mes-line">
 						<div class="first-line">
-							<div class="col-xs-7 line large-title"><%= index + 1 %>. <%=  report["name"] %></div>
+							<div class="col-xs-7 line large-title"><%= index + 1 %>. <%=  week_report.name %></div>
 							<div class="col-xs-5 line small-tab">
 								<i class="fa fa-circle fa-red"></i>调用次数最高时刻
 							</div>
