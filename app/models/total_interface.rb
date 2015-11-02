@@ -15,8 +15,13 @@ class TotalInterface < ActiveRecord::Base
   belongs_to :api_user
   by_star_field :datetime
 
-  scope :day, -> (datetime) { TotalInterface.by_day(datetime).group(:name) }
-  
+  attr_accessor :tops
+
+  default_scope { order(count: :DESC) }
+
+  scope :day, -> (datetime) { by_day(datetime).group(:name) }
+  scope :select_fields, -> { select("total_interfaces.name, sum(total_interfaces.count) as total_count, GROUP_CONCAT(total_interfaces.id) as ids") }
+
   def self.fix_name
     items = TotalInterface.all
     items.each do |item|
@@ -26,4 +31,13 @@ class TotalInterface < ActiveRecord::Base
       item.save
     end
   end
+
+  def day_infos(current_customer, date)
+    total_interfaces = current_customer.total_interfaces.select_fields.day(date)
+    total_interfaces.each do |tl|
+      tl.tops = TotalInterface.where(id: tl.ids.split(",")).limit(3).pluck(:datetime)
+    end
+    total_interfaces
+  end
+
 end

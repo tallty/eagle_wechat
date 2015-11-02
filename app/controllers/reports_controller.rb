@@ -4,11 +4,8 @@ class ReportsController < ApplicationController
 	before_action :select_month, only: [:month, :month_show]
 	#日报表
 	def index
-		# @active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
-		# cache = $redis.hvals("interface_reports_cache_#{@active_day.strftime("%F")}")
-		# @interface_infos = cache.map{ |x| MultiJson.load(x) }
-		# @total_count = InterfaceReport.total_count(@interface_infos)
-		current_customer.total_interfaces.day(Date.today)
+		@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
+		@interface_infos = TotalInterface.day_infos(current_customer, @active_day)
 	end
 
 	#日报表详细页
