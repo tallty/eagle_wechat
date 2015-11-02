@@ -32,7 +32,7 @@ class TotalInterface < ActiveRecord::Base
     end
   end
 
-  def day_infos(current_customer, date)
+  def self.day_infos(current_customer, date)
     total_interfaces = current_customer.total_interfaces.select_fields.day(date)
     total_interfaces.each do |tl|
       tl.tops = TotalInterface.where(id: tl.ids.split(",")).limit(3).pluck(:datetime)
