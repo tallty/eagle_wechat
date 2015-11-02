@@ -25,7 +25,7 @@ module ReportsHelper
 	end
 
 	#统计指定客户的top3 [["客户名称", count, datetime], ...]
-	def top3(reports company)
+	def top3(reports, company)
 		reports.order(count: :desc).pluck(:company, :count, :datetime).select{ |x| x.first == "#{company}" }.to(2)
 	end
 end
