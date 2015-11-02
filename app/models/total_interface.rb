@@ -62,7 +62,7 @@ class TotalInterface < ActiveRecord::Base
   def self.total_count total_interfaces
     total_count = 0
     total_interfaces.each do |total_interface|
-      total_count += total_interfaces.sum_count
+      total_count += total_interface.sum_count
     end
     return total_count
   end
