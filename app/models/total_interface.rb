@@ -46,76 +46,24 @@ class TotalInterface < ActiveRecord::Base
       # 调用信息存入hash
       infos[interface.name] = interface.infos(total_interfaces)
     end
-
+    # 按照sum_count降序排列每条记录
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end
 
-  # 周报表
-  def self.week_infos(current_customer, date)
+  # 周报表或月报表
+  def self.week_or_month_infos(current_customer, date, tag)
     infos = {}
     # 查询当前客户对应周的所有的调用信息
-    total_interfaces = current_customer.total_interfaces.week(date)
-
-    # 循环客户所有的接口
-    current_customer.interfaces.each do |interface|
-      interface_infos = total_interfaces.select{ |total_interface| total_interface.name == interface.name }
-
-      # 日期及对应的count
-      day_count = {}
-      interface_infos.each do |interface_info|
-        if day_count[interface_info.datetime.strftime("%F")].present?
-          day_count[interface_info.datetime.strftime("%F")] += interface_info.count
-        else
-          day_count[interface_info.datetime.strftime("%F")] = interface_info.count
-        end
-      end
-
-      # 对应周的top3
-      tops = day_count.sort{ |a,b| b[1] <=> a[1] }.to(2).collect{ |x| x[0] }
-
-      # 当前接口对应周 按调用日期排序后调用结果(用于图表)
-      every_count = day_count.sort{ |a,b| a[0] <=> b[0] }.to_h
-      
-      # 当前接口对应周 调用总次数
-      sum_count = every_count.values.sum
-
-      # 调用信息存入hash
-      infos[interface.name] = {sum_count: sum_count, every_count: every_count, tops: tops}
+    if tag == 1
+      total_interfaces = current_customer.total_interfaces.week(date)
+    else
+      total_interfaces = current_customer.total_interfaces.month(date)
     end
-    infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
-  end
-
-  # 月报表
-  def self.month_infos(current_customer, date)
-    infos = {}
-    # 查询当前客户对应月份的所有的调用信息
-    total_interfaces = current_customer.total_interfaces.month(date)
 
     # 循环客户所有的接口
     current_customer.interfaces.each do |interface|
-      interface_infos = total_interfaces.select{ |total_interface| total_interface.name == interface.name }
-
-      # 日期及对应的count
-      day_count = {}
-      interface_infos.each do |interface_info|
-        if day_count[interface_info.datetime.strftime("%F")].present?
-          day_count[interface_info.datetime.strftime("%F")] += interface_info.count
-        else
-          day_count[interface_info.datetime.strftime("%F")] = interface_info.count
-        end
-      end
-
-      # 对应月份的top3
-      tops = day_count.sort{ |a,b| b[1] <=> a[1] }.to(2).collect{ |x| x[0] }
-
-      # 当前接口对应月份 按调用日期排序后调用结果(用于图表)
-      every_count = day_count.sort{ |a,b| a[0] <=> b[0] }.to_h
-      
-      # 当前接口对应月份 调用总次数
-      sum_count = every_count.values.sum
-
       # 调用信息存入hash
-      infos[interface.name] = {sum_count: sum_count, every_count: every_count, tops: tops}
+      infos[interface.name] = interface.day_infos(total_interfaces)
     end
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end

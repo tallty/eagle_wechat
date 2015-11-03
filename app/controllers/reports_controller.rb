@@ -34,7 +34,7 @@ class ReportsController < ApplicationController
 
 	#周报表
 	def week
-		@week_reports = TotalInterface.week_infos(current_customer, @monday)
+		@week_reports = TotalInterface.week_or_month_infos(current_customer, @monday, 1)
 		@total_count = TotalInterface.total_count(@week_reports)
 	end
 
@@ -45,7 +45,7 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-		@month_reports = TotalInterface.month_infos(current_customer, @begin_month)
+		@month_reports = TotalInterface.week_or_month_infos(current_customer, @begin_month, 2)
 		@total_count = TotalInterface.total_count(@month_reports)
 	end
 
