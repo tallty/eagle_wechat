@@ -140,44 +140,44 @@
 							name : 'number',
 						}
 					],
-					    series : [
-					        {
-					            name:'',
-					            type:'line',
-					            stack: '总量',
-					            symbol: 'none',
-					            itemStyle: {
-					                normal: {
-					                    areaStyle: {
-					                        // 区域图，纵向渐变填充
-					                        color : (function (){
-					                            var zrColor = require('zrender/tool/color');
-					                            return zrColor.getLinearGradient(
-					                                0, 200, 0, 400,
-					                                [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
-					                            )
-					                        })()
-					                    }
-					                }
-					            },
-					            <%= every_count = @interface_info[:every_count].collect{} %>
-					            data:[
-												<% (0..23).each do |time| %>
-													<%= @interface_info[:every_count].values[time] %>,
-												<% end %>
-					            ],
-					            markLine : {
-					                data : [
-					                    {type : 'average', name : '警戒线'}
-					                ]
-					            },
-					            splitNumber : {
-					            	data : [
-					                    {max : '100', min: '0'}
-					                ]
-					            }
-					        },
-					    ]
+			    series : [
+			        {
+		            name:'',
+		            type:'line',
+		            stack: '总量',
+		            symbol: 'none',
+		            itemStyle: {
+		                normal: {
+		                    areaStyle: {
+		                        // 区域图，纵向渐变填充
+		                        color : (function (){
+		                            var zrColor = require('zrender/tool/color');
+		                            return zrColor.getLinearGradient(
+		                                0, 200, 0, 400,
+		                                [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
+		                            )
+		                        })()
+		                    }
+		                }
+		            },
+		            <%= every_count = @interface_info[:every_count].collect{} %>
+		            data:[
+									<% (0..23).each do |time| %>
+										<%= @interface_info[1][:every_count].values[time] %>,
+									<% end %>
+		            ],
+		            markLine : {
+		                data : [
+		                    {type : 'average', name : '警戒线'}
+		                ]
+		            },
+		            splitNumber : {
+		            	data : [
+		                    {max : '100', min: '0'}
+		                ]
+		            }
+			        },
+				    ]
 					};
 			// 为echarts对象加载数据 
 			myChart.setOption(option); 
