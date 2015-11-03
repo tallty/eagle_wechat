@@ -28,4 +28,11 @@ module ReportsHelper
 	def top3(reports, company)
 		reports.order(count: :desc).pluck(:company, :count, :datetime).select{ |x| x.first == "#{company}" }.to(2)
 	end
+
+	# 整理every_count的格式为: hour => count
+	def hour_count interface_info
+		hour_count = {}
+		interface_info[:every_count].each {|key,value| hour_count[key.strftime("%H").to_i] = value}
+		return hour_count
+	end
 end

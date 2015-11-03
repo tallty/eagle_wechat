@@ -160,10 +160,9 @@
 		                    }
 		                }
 		            },
-		            <%= every_count = @interface_info[:every_count].collect{} %>
 		            data:[
 									<% (0..23).each do |time| %>
-										<%= @interface_info[1][:every_count].values[time] %>,
+										<%= if hour_count(@interface_info)[time].nil? ? 0 : hour_count(@interface_info)[time] %>,
 									<% end %>
 		            ],
 		            markLine : {
@@ -173,7 +172,7 @@
 		            },
 		            splitNumber : {
 		            	data : [
-		                    {max : '100', min: '0'}
+		                   {max : '100', min: '0'}
 		                ]
 		            }
 			        },
