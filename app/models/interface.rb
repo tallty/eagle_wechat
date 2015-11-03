@@ -20,7 +20,8 @@ class Interface < ActiveRecord::Base
 		self.identifier ||= chars.sample(8).join
 	end
 
-	def infos(total_interfaces)
+	# 日报表中，当天按小时整理信息
+	def by_hour_infos(total_interfaces)
 		interface_infos = total_interfaces.select{ |total_interface| total_interface.name == name }
     # 获取top3的时间   
     tops = interface_infos.to(2).collect{|info| info.datetime }
@@ -32,7 +33,8 @@ class Interface < ActiveRecord::Base
     {sum_count: sum_count, every_count: every_count, tops: tops}
 	end
 
-	def day_infos(total_interfaces)
+	# 周报表、月报表中，按天整理信息
+	def by_day_infos(total_interfaces)
 		interface_infos = total_interfaces.select{ |total_interface| total_interface.name == name }
     # 日期及对应的count
     day_count = {}
