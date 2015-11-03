@@ -11,11 +11,11 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		# @active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
+		@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
 		# @reports = TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name])
 		# @user_infos = @reports.group(:company).order(:count).sum(:count)
 
-		total_interfaces = current_customer.total_interfaces.day(date)
+		total_interfaces = current_customer.total_interfaces.day(@active_day)
 		interface = Interface.where(name: params[:name]).first
 		# 选中接口的调用信息，取 :every_count 用于显示图表
 		@interface_info = interface.infos(total_interfaces)
