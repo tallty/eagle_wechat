@@ -20,7 +20,6 @@ class ReportsController < ApplicationController
 	def week
 		@week_reports = TotalInterface.week_infos(current_customer, @monday)
 		@total_count = TotalInterface.total_count(@week_reports)
-		#current_customer.total_interfaces.select("total_interfaces.name, sum(total_interfaces.count) as sum_count, GROUP_CONCAT(total_interfaces.id) as ids").by_day(Date.today)
 	end
 
 	#周报表详情页
