@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
 		# 循环显示所有调用选中接口的客户的调用信息
 		@api_user_infos = {}
 		current_customer.api_users.each do |api_user|
-			total_interfaces = api_user.total_interfaces.day(date)
+			total_interfaces = api_user.total_interfaces.day(@active_day)
 			@api_user_infos[api_user] = interface.infos(total_interfaces)
 		end
 		@total_count = TotalInterface.total_count(@api_user_infos)
