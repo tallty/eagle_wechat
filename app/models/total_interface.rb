@@ -43,17 +43,10 @@ class TotalInterface < ActiveRecord::Base
 
     # 循环客户所有的接口
     current_customer.interfaces.each do |interface|
-      interface_infos = total_interfaces.select{ |total_interface| total_interface.name == interface.name }
-      # 获取top3的时间   
-      tops = interface_infos.to(2).collect{|info| info.datetime }
-      # 当天当前接口按调用时间排序后调用结果(用于图表)
-      every_count = interface_infos.sort{ |x, y| x.datetime <=> y.datetime }.collect{|interface_info| [interface_info.datetime, interface_info.count]}.to_h
-      # 当天当前接口调用总次数
-      sum_count = every_count.values.sum
-
       # 调用信息存入hash
-      infos[interface.name] = {sum_count: sum_count, every_count: every_count, tops: tops}
+      infos[interface.name] = interface.infos(total_interfaces)
     end
+
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end
 
@@ -130,8 +123,8 @@ class TotalInterface < ActiveRecord::Base
   #计算报表中所有接口调用总数
   def self.total_count total_interfaces
     total_count = 0
-    total_interfaces.each do |total_interface|
-      total_count += total_interface[1][:sum_count]
+    total_interfaces.each do |key, value|
+      total_count += value[:sum_count]
     end
     return total_count
   end
