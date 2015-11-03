@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		@active_day = params[:date].blank? ? (Time.now.to_date - 1) : Time.at(params[:date].to_i / 1000).to_date
+		@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
 		@reports = TotalInterface.by_day(@active_day).includes(:api_user).where(name: params[:name])
 		@user_infos = @reports.group(:company).order(:count).sum(:count)
 	end
@@ -20,6 +20,7 @@ class ReportsController < ApplicationController
 	def week
 		@week_reports = TotalInterface.week_infos(current_customer, @monday)
 		@total_count = TotalInterface.total_count(@week_reports)
+		#current_customer.total_interfaces.select("total_interfaces.name, sum(total_interfaces.count) as sum_count, GROUP_CONCAT(total_interfaces.id) as ids").by_day(Date.today)
 	end
 
 	#周报表详情页
