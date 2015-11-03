@@ -20,7 +20,7 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		@task_logs = TaskLog.all.order("start_time DESC")[0, 100]
+		@task_logs = TaskLog.all.order("start_time DESC").limit(100)
 	end
 
 	def result
