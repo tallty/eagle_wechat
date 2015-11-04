@@ -119,7 +119,7 @@
 					},
 					calculable : true,
 					grid : {
-						x: 60,
+						x: 50,
 						x2: 5,
 						y: 30,
 						y2: 30
@@ -164,7 +164,7 @@
 		            <% every_count = chart_count(@interface_info, "month") %>
 		            data:[
 		               <% (@begin_month..@end_month).each do |month_day| %>
-		               	<%= every_count[month_day.strftime("%d")] %>,
+		               	<%= every_count[month_day.strftime("%d")] || 0 %>,
 		               <% end %>
 		            ],
 		            splitNumber : {

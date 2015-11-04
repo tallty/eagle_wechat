@@ -142,7 +142,7 @@
 					},
 					calculable : true,
 					grid : {
-						x: 60,
+						x: 50,
 						x2: 5,
 						y: 30,
 						y2: 30
@@ -183,7 +183,7 @@
 		            <% every_count = chart_count(@interface_info, "week") %>
 		            data:[
 		            	<% (@monday..@sunday).each do |week_day| %>
-		            		<%= every_count[week_day.strftime("%w")] %>,
+		            		<%= every_count[week_day.strftime("%w")] || 0 %>,
 		            	<% end %>
 		            ],
 		            splitNumber : {
