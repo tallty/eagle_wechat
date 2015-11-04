@@ -41,7 +41,7 @@
 						<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 						<span class="number"><%= value[:sum_count] %></span>&nbsp;&nbsp;
 						<span class="small-tab">百分比</span>
-						<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
+						<span class="number"><%= (value[:sum_count].to_f * 1000 / params[:sum_count].to_i).to_i / 10.0 %>％</span>
 					</div>
 					<div class="col-xs-5 line number">&nbsp;
 						<% value[:tops].each do |top| %>
