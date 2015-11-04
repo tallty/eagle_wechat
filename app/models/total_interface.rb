@@ -62,7 +62,7 @@ class TotalInterface < ActiveRecord::Base
   end
 
   # 调用指定借口的客户信息
-  def api_user_infos(current_customer, params_name, date)
+  def self.api_user_infos(current_customer, params_name, date)
     total_interfaces = current_customer.total_interfaces.day(date)
     interface = Interface.where(name: params_name).first
     # 选中接口的调用信息，取 :every_count 用于显示图表
