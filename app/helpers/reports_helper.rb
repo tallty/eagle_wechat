@@ -24,18 +24,6 @@ module ReportsHelper
 		(sunday + 1).to_time.to_i * 1000
 	end
 
-	#统计指定客户的top3 [["客户名称", count, datetime], ...]
-	def top3(reports, company)
-		reports.order(count: :desc).pluck(:company, :count, :datetime).select{ |x| x.first == "#{company}" }.to(2)
-	end
-
-	# 整理every_count的格式为: hour => count
-	def hour_count interface_info
-		hour_count = {}
-		interface_info[:every_count].each {|key,value| hour_count[key.strftime("%H").to_i] = value}
-		return hour_count
-	end
-
 	# 根据接口调用信息获取图表所需数据
 	# 返回值：count ＝ { datetime => count }
 	def chart_count(interface_info, tag)

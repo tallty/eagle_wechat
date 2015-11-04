@@ -35,21 +35,6 @@ class TotalInterface < ActiveRecord::Base
     end
   end
 
-  # 日报表
-  # def self.day_infos(current_customer, date)
-  #   infos = {}
-  #   # 查询当前客户当天所有的调用信息
-  #   total_interfaces = current_customer.total_interfaces.day(date)
-
-  #   # 循环客户所有的接口
-  #   current_customer.interfaces.each do |interface|
-  #     # 调用信息存入hash
-  #     infos[interface.name] = interface.by_hour_infos(total_interfaces)
-  #   end
-  #   # 按照sum_count降序排列每条记录
-  #   infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
-  # end
-
   # 接口报表(日、周、月)
   def self.reports(current_customer, date, tag)
     # 判断并查询当前用户指定时间的所有接口调用纪录(数据库记录)
@@ -66,15 +51,19 @@ class TotalInterface < ActiveRecord::Base
     infos = {}
     if tag == 0
       current_customer.interfaces.each do |interface|
-        # 按接口把调用信息存入hash
-        infos[interface.name] = interface.by_hour_infos(total_interfaces)
+        info = interface.by_hour_infos(total_interfaces)
+        unless info[:sum_count] == 0
+          infos[interface.name] = info
+        end
       end
     else
       current_customer.interfaces.each do |interface|
-        infos[interface.name] = interface.by_day_infos(total_interfaces)
+        info = interface.by_day_infos(total_interfaces)
+        unless info[:sum_count] == 0
+          infos[interface.name] = info
+        end
       end
     end
-
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end
 

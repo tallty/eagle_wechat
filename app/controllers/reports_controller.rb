@@ -33,7 +33,10 @@ class ReportsController < ApplicationController
 		@api_user_infos = {}
 		current_customer.api_users.each do |api_user|
 			total_interfaces = api_user.total_interfaces.day(@active_day)
-			@api_user_infos[api_user.company] = interface.by_hour_infos(total_interfaces)
+			api_user_info = interface.by_hour_infos(total_interfaces)
+			unless api_user_info[:sum_count] == 0
+				@api_user_infos[api_user.company] = api_user_info
+			end
 		end
 		# 循环显示所有调用选中接口的客户的调用信息
 		@api_user_infos = @api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
@@ -54,7 +57,10 @@ class ReportsController < ApplicationController
 		@api_user_infos = {}
 		current_customer.api_users.each do |api_user|
 			total_interfaces = api_user.total_interfaces.week(@monday)
-			@api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
+			api_user_info = interface.by_day_infos(total_interfaces)
+			unless api_user_info[:sum_count] == 0
+				@api_user_infos[api_user.company] = api_user_info
+			end
 		end
 		# 循环显示所有调用选中接口的客户的调用信息
 		@api_user_infos = @api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
@@ -75,7 +81,10 @@ class ReportsController < ApplicationController
 		@api_user_infos = {}
 		current_customer.api_users.each do |api_user|
 			total_interfaces = api_user.total_interfaces.month(@begin_month)
-			@api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
+			api_user_info = interface.by_day_infos(total_interfaces)
+			unless api_user_info[:sum_count] == 0
+				@api_user_infos[api_user.company] = api_user_info
+			end
 		end
 		# 循环显示所有调用选中接口的客户的调用信息
 		@api_user_infos = @api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
