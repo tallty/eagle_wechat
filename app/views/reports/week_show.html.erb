@@ -175,7 +175,12 @@
 					                    }
 					                }
 					            },
-					            data:[20, 22, 25, 28, 32, 36, 38],
+					            <% every_count = chart_count(@interface_info, "week") %>
+					            data:[
+					            	<% (@monday..@sunday).each do |week_day| %>
+					            		<%= every_count[week_day.strftime("%w")] %>,
+					            	<% end %>
+					            ],
 					            markLine : {
 					                data : [
 					                    {type : 'average', name : '警戒线'}

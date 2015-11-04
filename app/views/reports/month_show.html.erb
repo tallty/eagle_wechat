@@ -156,10 +156,11 @@
 					                    }
 					                }
 					            },
+					            <% every_count = chart_count(@interface_info, "month") %>
 					            data:[
-					                20, 22, 25, 28, 32, 36, 38, 44, 46, 47, 48, 49, 52, 60, 67, 75, 68, 65, 60, 51, 48,  
-					                {value:40, symbol:'droplet',symbolSize:2},
-					                44, 50, 63, 56, 45, 67, 78, 66, 88, 67
+					               <% (@begin_month..@end_month).each do |month_day| %>
+					               	<%= every_count[month_day.strftime("%d")] %>,
+					               <% end %>
 					            ],
 					            markLine : {
 					                data : [
