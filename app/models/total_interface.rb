@@ -61,6 +61,28 @@ class TotalInterface < ActiveRecord::Base
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end
 
+  # 调用指定借口的客户信息
+  def api_user_infos(current_customer, params_name, date)
+    total_interfaces = current_customer.total_interfaces.day(date)
+    interface = Interface.where(name: params_name).first
+    # 选中接口的调用信息，取 :every_count 用于显示图表
+    interface_info = interface.by_hour_infos(total_interfaces)
+
+    api_user_infos = {}
+    current_customer.api_users.each do |api_user|
+      total_interfaces = api_user.total_interfaces.day(date)
+      api_user_info = interface.by_hour_infos(total_interfaces)
+      unless api_user_info[:sum_count] == 0
+        api_user_infos[api_user.company] = api_user_info
+      end
+    end
+    # 循环显示所有调用选中接口的客户的调用信息
+    api_user_infos = api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
+
+    # 返回hash：{:interface => interface_info, :api_user => api_user_infos}
+    return {:interface => interface_info, :api_users => api_user_infos}
+  end
+
   #计算报表中所有接口调用总数
   def self.total_count total_interfaces
     total_count = 0

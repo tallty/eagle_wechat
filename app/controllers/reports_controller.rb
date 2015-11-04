@@ -25,22 +25,10 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		total_interfaces = current_customer.total_interfaces.day(@active_day)
-		interface = Interface.where(name: params[:name]).first
-		# 选中接口的调用信息，取 :every_count 用于显示图表
-		@interface_info = interface.by_hour_infos(total_interfaces)
-
-		@api_user_infos = {}
-		current_customer.api_users.each do |api_user|
-			total_interfaces = api_user.total_interfaces.day(@active_day)
-			api_user_info = interface.by_hour_infos(total_interfaces)
-			unless api_user_info[:sum_count] == 0
-				@api_user_infos[api_user.company] = api_user_info
-			end
-		end
-		# 循环显示所有调用选中接口的客户的调用信息
-		@api_user_infos = @api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
-
+		# 借口的图表数据
+		@interface_info = TotalInterface.api_user_infos(current_customer, params[:name], @active_day)[:interface]
+		# 调用已选借口的所有客户信息
+		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @active_day)[:api_users]
 		# 调用总数
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
