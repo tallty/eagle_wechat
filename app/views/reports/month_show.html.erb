@@ -49,6 +49,11 @@
 				</div>
 				<hr class="line-hr">
 			<% end %>
+
+			<!-- 无纪录 -->
+			<%= if @api_user_infos.blank? %>
+				<div class="col-xs-11 mes-line"><h4 class="text-center">无纪录</h4></div>
+			<% end %>
 		</div>
 		<div class="tab-title col-xs-12">
 			全市预警信息查询 调用次数时间分布
@@ -114,8 +119,8 @@
 					},
 					calculable : true,
 					grid : {
-						x: 30,
-						x2: 28,
+						x: 60,
+						x2: 5,
 						y: 30,
 						y2: 30
 					},
@@ -136,44 +141,39 @@
 							name : 'number',
 						}
 					],
-					    series : [
-					        {
-					            name:'',
-					            type:'line',
-					            stack: '总量',
-					            symbol: 'none',
-					            itemStyle: {
-					                normal: {
-					                    areaStyle: {
-					                        // 区域图，纵向渐变填充
-					                        color : (function (){
-					                            var zrColor = require('zrender/tool/color');
-					                            return zrColor.getLinearGradient(
-					                                0, 200, 0, 400,
-					                                [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
-					                            )
-					                        })()
-					                    }
-					                }
-					            },
-					            <% every_count = chart_count(@interface_info, "month") %>
-					            data:[
-					               <% (@begin_month..@end_month).each do |month_day| %>
-					               	<%= every_count[month_day.strftime("%d")] %>,
-					               <% end %>
-					            ],
-					            markLine : {
-					                data : [
-					                    {type : 'average', name : '警戒线'}
-					                ]
-					            },
-					            splitNumber : {
-					            	data : [
-					                    {max : '100', min: '0'}
-					                ]
-					            }
-					        },
-					    ]
+				    series : [
+			        {
+		            name:'',
+		            type:'line',
+		            stack: '总量',
+		            symbol: 'none',
+		            itemStyle: {
+	                normal: {
+                    areaStyle: {
+                        // 区域图，纵向渐变填充
+                        color : (function (){
+                            var zrColor = require('zrender/tool/color');
+                            return zrColor.getLinearGradient(
+                                0, 200, 0, 400,
+                                [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
+                            )
+                        })()
+                    }
+	                }
+		            },
+		            <% every_count = chart_count(@interface_info, "month") %>
+		            data:[
+		               <% (@begin_month..@end_month).each do |month_day| %>
+		               	<%= every_count[month_day.strftime("%d")] %>,
+		               <% end %>
+		            ],
+		            splitNumber : {
+		            	data : [
+		                    {max : '100', min: '0'}
+		                ]
+		            }
+			        },
+				    ]
 					};
 			// 为echarts对象加载数据 
 			myChart.setOption(option); 
