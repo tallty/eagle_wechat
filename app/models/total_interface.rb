@@ -79,12 +79,10 @@ class TotalInterface < ActiveRecord::Base
     end
     # 循环显示所有调用选中接口的客户的调用信息
     api_user_infos = api_user_infos.sort{ |x,y| y[1][:sum_count] <=> x[1][:sum_count] }.to_h
-    # 返回hash：{:interface => interface_info, :api_user => api_user_infos}
-    return {:interface => interface_info, :api_users => api_user_infos}
   end
 
   # 选择借口的图表数据
-  def self.interface_info(current_customer, interface_name, date, method )
+  def self.interface_info(current_customer, interface_name, date, method)
     total_interfaces = current_customer.total_interfaces.send(method, date)
     interface = Interface.where(name: interface_name).first
     # 选中接口的调用信息，取 :every_count 用于显示图表
