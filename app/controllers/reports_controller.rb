@@ -7,21 +7,19 @@ class ReportsController < ApplicationController
 
 	#日报表
 	def index
-		@day_reports = TotalInterface.reports(current_customer, @active_day, 0)
-		require 'pp'
-		pp @day_reports, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+		@day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		@total_count = TotalInterface.total_count(@day_reports)
 	end
 
 	#周报表
 	def week
-		@week_reports = TotalInterface.reports(current_customer, @monday, 1)
+		@week_reports = TotalInterface.reports(current_customer, @monday, :week)
 		@total_count = TotalInterface.total_count(@week_reports)
 	end
 
 	#月报表
 	def month
-		@month_reports = TotalInterface.reports(current_customer, @begin_month, 2)
+		@month_reports = TotalInterface.reports(current_customer, @begin_month, :month)
 		@total_count = TotalInterface.total_count(@month_reports)
 	end
 

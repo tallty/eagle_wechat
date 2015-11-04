@@ -2,10 +2,8 @@ class WeatherController < ApplicationController
 
 	before_action :save_session, only: [:active, :history]
 	def active
-		@customer = Customer.first
-
 		#活跃报警取出当天的
-    @tasks = @customer.tasks.where("rate >= ? AND updated_at > ? AND updated_at < ?", 10, Date.today.beginning_of_day, Date.today.end_of_day) if @customer
+    @tasks = current_customer.tasks.where("rate >= ? AND updated_at > ? AND updated_at < ?", 10, Date.today.beginning_of_day, Date.today.end_of_day)
 	end
 
 	def history
@@ -20,7 +18,7 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		@task_logs = TaskLog.all.order("start_time DESC").limit(100)
+		@task_logs = TaskLog.all.group(:task_name).order("start_time DESC").limit(100)
 	end
 
 	def result

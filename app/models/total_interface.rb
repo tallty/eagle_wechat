@@ -36,15 +36,9 @@ class TotalInterface < ActiveRecord::Base
   end
 
   # 接口报表(日、周、月)
-  def self.reports(current_customer, date, tag)
-    # 判断并查询当前用户指定时间的所有接口调用纪录(数据库记录)
-    if tag == 0
-      total_interfaces = current_customer.total_interfaces.day(date)
-    elsif tag == 1
-      total_interfaces = current_customer.total_interfaces.week(date)
-    else
-      total_interfaces = current_customer.total_interfaces.month(date)
-    end
+  def self.reports(current_customer, date, method)
+    # 查询当前用户指定时间的所有接口调用纪录(数据库记录)
+    total_interfaces = current_customer.total_interfaces.send(method, date)
 
     # 获取当前用户所有接口的统计后的信息:
     # infos = {"interface.name" => {:sum_count => count, :every_count => {datetime => count}, :tops => [date1, date2, date3]}, ...}
