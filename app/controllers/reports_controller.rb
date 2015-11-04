@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		@day_reports = TotalInterface.reports(current_customer, @active_day, 0)
+		require 'pp'
 		pp @day_reports, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 		@total_count = TotalInterface.total_count(@day_reports)
 	end
