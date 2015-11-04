@@ -43,7 +43,7 @@ class TotalInterface < ActiveRecord::Base
     # 获取当前用户所有接口的统计后的信息:
     # infos = {"interface.name" => {:sum_count => count, :every_count => {datetime => count}, :tops => [date1, date2, date3]}, ...}
     infos = {}
-    if tag == :day
+    if method == :day
       current_customer.interfaces.each do |interface|
         info = interface.by_hour_infos(total_interfaces)
         unless info[:sum_count] == 0
