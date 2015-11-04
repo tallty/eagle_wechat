@@ -67,7 +67,7 @@ class TotalInterface < ActiveRecord::Base
     api_user_infos = {}
 
     current_customer.api_users.each do |api_user|
-      total_interfaces = api_user.total_interfaces.send(:method, date)
+      total_interfaces = api_user.total_interfaces.send(method, date)
       if method == :day
         api_user_info = interface.by_hour_infos(total_interfaces)
       else
@@ -85,7 +85,7 @@ class TotalInterface < ActiveRecord::Base
 
   # 选择借口的图表数据
   def self.interface_info(current_customer, interface_name, date, method )
-    total_interfaces = current_customer.total_interfaces.send(:method, date)
+    total_interfaces = current_customer.total_interfaces.send(method, date)
     interface = Interface.where(name: interface_name).first
     # 选中接口的调用信息，取 :every_count 用于显示图表
     if method == :day
