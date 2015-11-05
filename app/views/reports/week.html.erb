@@ -33,8 +33,8 @@
 			<% end %>
 		</div>
 		<div class="tab-line clearfix">
-			<% if @week_reports == 0 %>
-				<div class="col-xs-11 mes-line"><h4 class="text-center"><br>无纪录</h4></div>
+			<% if @total_count == 0 %>
+				<div class="col-xs-11 mes-line"><h4 class="text-center">无纪录</h4></div>
 			<% else %>
 				<% index = 0 %>
 				<% @week_reports.each do |key, value| %>
