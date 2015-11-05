@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 		@day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		@total_count = TotalInterface.total_count(@day_reports)
 		require 'pp'
-		pp @day_reports, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+		pp @day_reports, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++", @total_count
 	end
 
 	#周报表
