@@ -23,7 +23,7 @@
 			<!-- 有记录 -->
 			<% index = 0 %>
 			<% @month_reports.each do |key, value| %>
-				<%= link_to month_show_reports_path(name: key, sum_count: @total_count, date: @begin_month.to_time.to_i * 1000) do %>
+				<%= link_to month_show_reports_path(name: key, date: @begin_month.to_time.to_i * 1000) do %>
 					<div class="col-xs-11 mes-line">
 						<div class="first-line">
 							<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= key %></div>
