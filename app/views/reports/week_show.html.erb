@@ -51,7 +51,7 @@
 					</div>
 					<div class="col-xs-5 line number">&nbsp;
 						<% value[:tops].each do |top| %>
-							<span><%= "#{top.to_date.strftime("%d")}号"%></span>
+							<span><%= week_day(top.to_date.strftime("%w")) %></span>
 						<% end %>
 					</div>
 				</div>

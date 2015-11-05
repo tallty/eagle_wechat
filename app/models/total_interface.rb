@@ -44,24 +44,18 @@ class TotalInterface < ActiveRecord::Base
     # infos = {"interface.name" => {:sum_count => count, :every_count => {datetime => count}, :tops => [date1, date2, date3]}, ...}
     infos = {}
     if method == :day
-      current_customer.interfaces.each do |interface|
-        info = interface.by_hour_infos(total_interfaces)
-        unless info[:sum_count] == 0
-          infos[interface.name] = info
-        end
+      current_customer.interfaces.each do |interface|  
+        infos[interface.name] = interface.by_hour_infos(total_interfaces)
       end
     else
       current_customer.interfaces.each do |interface|
-        info = interface.by_day_infos(total_interfaces)
-        unless info[:sum_count] == 0
-          infos[interface.name] = info
-        end
+        infos[interface.name] = interface.by_day_infos(total_interfaces)
       end
     end
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
   end
 
-  # 调用指定借口的客户信息
+  # 调用指定借口的客户调用信息
   def self.api_user_infos(current_customer, interface_name, date, method)
     interface = Interface.where(name: interface_name).first
     api_user_infos = {}
@@ -69,12 +63,9 @@ class TotalInterface < ActiveRecord::Base
     current_customer.api_users.each do |api_user|
       total_interfaces = api_user.total_interfaces.send(method, date)
       if method == :day
-        api_user_info = interface.by_hour_infos(total_interfaces)
+        api_user_infos[api_user.company] = interface.by_hour_infos(total_interfaces)
       else
-        api_user_info = interface.by_day_infos(total_interfaces)
-      end
-      unless api_user_info[:sum_count] == 0
-        api_user_infos[api_user.company] = api_user_info
+        api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
       end
     end
     # 循环显示所有调用选中接口的客户的调用信息
