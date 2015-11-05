@@ -15,15 +15,10 @@ class TotalInterface < ActiveRecord::Base
   belongs_to :api_user
   by_star_field :datetime
 
-  attr_accessor :tops
-  attr_accessor :counts
-
   default_scope { order(count: :DESC) }
-
   scope :day, -> (date) { by_day(date) }
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
-  scope :select_fields, -> { select("total_interfaces.name, sum(total_interfaces.count) as sum_count") }
 
   def self.fix_name
     items = TotalInterface.all
