@@ -121,9 +121,6 @@
 			$(".air-fw2").each(function(){
 				var myChart = ec.init($(this).get(0));   
 				var option = {
-					legend: {
-			      data:['调用次数']
-			    },
 					tooltip : {
 						trigger: 'axis',
 					},
@@ -153,7 +150,7 @@
 					],
 				    series : [
 			        {
-		            name:'',
+		            name:'调用次数',
 		            type:'line',
 		            stack: '总量',
 		            symbol: 'none',
@@ -167,7 +164,7 @@
                                 0, 200, 0, 400,
                                 [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
                             )
-                        })()
+                        })
                     }
 	                }
 		            },
