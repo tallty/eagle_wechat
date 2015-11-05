@@ -1,3 +1,6 @@
+<% content_for :title do %>
+	接口调用信息
+<% end %>
 <div class="warp">
 	<div class="sef-container clearfix">
 		<div class="tab-title col-xs-12">
@@ -60,7 +63,7 @@
 			<% end %>
 		</div>
 		<div class="tab-title col-xs-12">
-			全市预警信息查询 调用次数时间分布
+			<%= params[:name] %> 调用次数时间分布
 		</div>
 			<div class="col-xs-12 tab-line right1">
 				<div style="height:220px" class="air-fw2"></div>
@@ -118,12 +121,15 @@
 			$(".air-fw2").each(function(){
 				var myChart = ec.init($(this).get(0));   
 				var option = {
+					legend: {
+			      data:['调用次数']
+			    },
 					tooltip : {
 						trigger: 'axis',
 					},
 					calculable : true,
 					grid : {
-						x: 50,
+						x: 45,
 						x2: 5,
 						y: 30,
 						y2: 30
@@ -142,7 +148,7 @@
 					yAxis : [
 						{
 							type : 'value',
-							name : 'number',
+							name : '次数',
 						}
 					],
 				    series : [
