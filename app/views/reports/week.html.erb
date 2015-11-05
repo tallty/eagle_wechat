@@ -1,7 +1,7 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<!-- 前一月 -->
+			<!-- 前一周 -->
 			<%= link_to week_reports_path(date: last_week(@monday)) do %>
 				<div class="col-xs-4">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一周</span>
@@ -19,13 +19,18 @@
 					</div>
 				</div>
 			</div>
-			<!-- 后一月 -->
-			<%= link_to week_reports_path(date: next_week(@sunday)) do %>
-				<div class="col-xs-4">
+			<!-- 后一周 -->
+			<% if Time.at(next_week(@sunday) / 1000) >= Date.today %>
+				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
+			<% else %>
+				<%= link_to week_reports_path(date: next_week(@sunday)) do %>
+					<div class="col-xs-4">
+						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+					</div>
+				<% end %>
 			<% end %>
-
 		</div>
 		<div class="tab-line clearfix">
 			<!-- 有记录 -->

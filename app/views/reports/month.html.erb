@@ -12,12 +12,17 @@
 				<input type="text" value="<%= @begin_month.strftime("%Y-%m") %>" readonly id="selected_month_input" class="select_date">
 			</div>
 			<!-- 后一月 -->
-			<%= link_to month_reports_path(date: next_month(@end_month)) do %>
-				<div class="col-xs-4">
+			<% if Time.at(next_month(@end_month) / 1000) >= Date.today %>
+				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
-				</div>
+				</div>				
+			<% else %>
+				<%= link_to month_reports_path(date: next_month(@end_month)) do %>
+					<div class="col-xs-4">
+						<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+					</div>
+				<% end %>				
 			<% end %>
-
 		</div>
 		<div class="tab-line clearfix">
 			<!-- 有记录 -->
