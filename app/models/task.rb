@@ -27,7 +27,7 @@ class Task < ActiveRecord::Base
   def relieve_task
     task = Task.nomal.where("name = ? AND updated_at > ?", self.name, self.updated_at).first
     if task.nil?
-      Task.new
+      false
     else
       task
     end

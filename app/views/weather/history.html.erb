@@ -24,7 +24,7 @@
 							</div>
 							<div class="col-xs-6 small-tab text-left">
 							<i class="fa fa-circle fa-green"></i>
-								<%= task.relieve_task.updated_at.strftime("%y-%m-%d %H:%M") %>
+								<%= task.relieve_task.present? ? task.relieve_task.updated_at.strftime("%y-%m-%d %H:%M") : nil %>
 							</div>
 						</div>
 					</div>
