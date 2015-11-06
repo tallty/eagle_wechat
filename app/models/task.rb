@@ -16,8 +16,21 @@ class Task < ActiveRecord::Base
   has_many :sms_logs, dependent: :destroy
 	after_initialize :task_identifier
 
+  scope :warn, -> { where("rate >= ?", 10) }
+  scope :nomal, -> { where("rate <= ?", 10) }
+
   def task_dec
     self.name.to_s + "任务采集时间：" + self.rate.to_s + "min"
+  end
+
+  # 找到告警解除记录
+  def relieve_task
+    task = Task.nomal.where("name = ? AND updated_at > ?", self.name, self.updated_at).first
+    if task.nil?
+      Task.new
+    else
+      task
+    end
   end
 
 	private

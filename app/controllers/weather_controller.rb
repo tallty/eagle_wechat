@@ -10,7 +10,7 @@ class WeatherController < ApplicationController
 		@customer = Customer.first
 
 		#历史报警取出全部的
-    @tasks = @customer.tasks.where("rate >= ?", 10) if @customer
+    @tasks = @customer.tasks.where("rate > ?", 10) if @customer
 	end
 
 	def port
