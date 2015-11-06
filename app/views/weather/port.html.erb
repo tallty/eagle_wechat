@@ -4,19 +4,19 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12 text-center">
-			<div class="col-xs-3">标题</div>
-			<div class="col-xs-3">接口说明</div>
-			<div class="col-xs-3">时延</div>
-			<div class="col-xs-3">状态</div>
+			<div class="col-xs-4">接口名称</div>
+			<!-- <div class="col-xs-3">接口说明</div> -->
+			<div class="col-xs-4">时延</div>
+			<div class="col-xs-4">状态</div>
 		</div>
 		<div class="tab-line text-center clearfix">
 		<% @interfaces.each_with_index do |interface, index| %>
 			<div class="col-xs-12 active-line">
-				<div class="col-xs-3"><%=  interface.try(:name) %></div>
-				<div class="col-xs-3">接口说明</div>
+				<div class="col-xs-4"><%=  interface.try(:name) %></div>
+				<!-- <div class="col-xs-3">接口说明</div> -->
 				<% time_cost = delay(1).to_i %>
-				<div class="col-xs-3"><%= time_cost %>ms</div>
-				<div class="col-xs-3">
+				<div class="col-xs-4"><%= time_cost %>ms</div>
+				<div class="col-xs-4">
 				<% if time_cost < 170 %>
 					<i class="fa fa-circle fa-green"></i>正常
 				<% else %>
