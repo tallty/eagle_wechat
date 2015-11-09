@@ -14,11 +14,11 @@ class WeatherController < ApplicationController
 	end
 
 	def port
-		@interfaces = Interface.order(created_at: :DESC).group(:name)
+		@interfaces = Interface.all
 	end
 
 	def meteorologic
-		@task_logs = TaskLog.all.order("start_time DESC").limit(100)
+		@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 	end
 
 	def result
