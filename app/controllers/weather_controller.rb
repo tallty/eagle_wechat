@@ -14,7 +14,7 @@ class WeatherController < ApplicationController
 	end
 
 	def port
-		@interfaces = Interface.all
+		@interfaces = Interface.order(created_at: :DESC).group(:name)
 	end
 
 	def meteorologic

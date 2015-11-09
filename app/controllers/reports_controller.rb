@@ -34,9 +34,7 @@ class ReportsController < ApplicationController
 
 	#周报表详情页
 	def week_show
-		# 借口的图表数据
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @monday, :week)
-		# 调用已选借口的所有客户信息
 		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
@@ -45,30 +43,29 @@ class ReportsController < ApplicationController
 	def month_show
 	# 借口的图表数据
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @begin_month, :month)
-		# 调用已选借口的所有客户信息
 		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @begin_month, :month)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
 	private
-	def save_session
-		session[:openid] = params[:openid]
-	end
+		def save_session
+			session[:openid] = params[:openid]
+		end
 
-	# 已选日期	
-	def select_day
-		@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
-	end
+		# 已选日期	
+		def select_day
+			@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
+		end
 
-	# 已选周日期区间
-	def select_week
-		@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
-		@sunday = @monday.end_of_week.to_date
-	end
+		# 已选周日期区间
+		def select_week
+			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
+			@sunday = @monday.end_of_week.to_date
+		end
 
-	# 已选月日期区间
-	def select_month
-		@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
-		@end_month = @begin_month.end_of_month.to_date
-	end
+		# 已选月日期区间
+		def select_month
+			@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
+			@end_month = @begin_month.end_of_month.to_date
+		end
 end
