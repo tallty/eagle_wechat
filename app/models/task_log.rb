@@ -41,10 +41,15 @@ class TaskLog < ActiveRecord::Base
     tasks = Task.where('rate > 0').pluck(:identifier, :rate)
     tasks.each do |item|
       log = TaskLog.where(task_identifier: item[0]).last
-      time_out = (Time.now - log.start_time) / 60
-      if time_out - item[-1] > 2
-        $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
+      begin
+        time_out = (Time.now - log.start_time) / 60 
+        if time_out - item[-1] > 2
+          $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
+        end  
+      rescue Exception => e
+        next
       end
+      
     end
   end
 end
