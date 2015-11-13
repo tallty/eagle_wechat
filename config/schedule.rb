@@ -14,6 +14,10 @@ every 1.day, :at => '1:45' do
   runner 'InterfaceReport.process'
 end
 
+every 1.day, :at => '8:00' do
+  runner 'SendReport.send_report'
+end
+
 every 1.minutes do
   runner "TaskLog.process"
   runner "TaskLog.verify"

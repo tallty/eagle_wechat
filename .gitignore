@@ -12,7 +12,6 @@
 !/log/.keep
 /config/initializers/qy_wechat_config.rb
 /tmp
-public/assets/
 public/uploads/
 current
 last_version
