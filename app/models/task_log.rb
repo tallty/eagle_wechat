@@ -26,7 +26,7 @@ class TaskLog < ActiveRecord::Base
       log.exception = process_result["exception"]
       task = Task.where(identifier: log.task_identifier).first
       log.task_name = task.name
-      log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
+      # log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
 
       $redis.hdel("task_log_cache", e)
