@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028151625) do
+ActiveRecord::Schema.define(version: 20151115125812) do
 
   create_table "api_users", force: :cascade do |t|
-    t.string   "appid",       limit: 255
-    t.string   "company",     limit: 255
-    t.integer  "customer_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "appid",        limit: 255
+    t.string   "company",      limit: 255
+    t.integer  "customer_id",  limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "interface_id", limit: 4
   end
 
   add_index "api_users", ["customer_id"], name: "index_api_users_on_customer_id", using: :btree

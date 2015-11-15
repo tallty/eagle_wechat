@@ -28,14 +28,14 @@ class ReportsController < ApplicationController
 		# 借口的图表数据
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 		# 调用已选借口的所有客户信息
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @active_day, :day)
+		@api_user_infos = TotalInterface.api_user_infos(params[:name], @active_day, :day)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
 	#周报表详情页
 	def week_show
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @monday, :week)
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @monday, :week)
+		@api_user_infos = TotalInterface.api_user_infos(params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
 	def month_show
 	# 借口的图表数据
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @begin_month, :month)
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @begin_month, :month)
+		@api_user_infos = TotalInterface.api_user_infos(params[:name], @begin_month, :month)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
