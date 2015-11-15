@@ -12,7 +12,7 @@
 
 class Interface < ActiveRecord::Base
 	belongs_to :customer
-	has_many :api_users
+	#has_many :api_users
 
 	after_initialize :generate_identifier
 
