@@ -30,8 +30,8 @@ class TaskLog < ActiveRecord::Base
       log.save
 
       $redis.hdel("task_log_cache", e)
-
-      if MultiJson.load(log.exception).present?
+      exception = MultiJson.load(log.exception) rescue ""
+      if exception.present?
         $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
       end
     end
