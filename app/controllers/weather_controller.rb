@@ -21,9 +21,13 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
+		#@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 		@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
-		@last_log = TaskLog.order(end_time: :DESC).last
-		@task_round = Task.find(@task_logs.task_name).order(start_time: :DESC)
+
+		@last_log = @task_logs.order(end_time: :DESC).first
+
+		# take_log_identifier = @task_logs.pluck(:task_identifier)
+		# @task_round = Task.where({identifier: take_log_identifier}).order(updated_at: :DESC)
 	end
 
 	def result
