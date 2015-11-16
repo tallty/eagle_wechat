@@ -8,7 +8,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12">
-            <%= form_for([:admin, :interface, @api_user], remote: true, format: :js) do |f| %>
+            <%= form_for([:admin, @interface, @interface.api_users.build], remote: true, format: :js) do |f| %>
 
               <div class="input-group" style="width: 100%;">
                 <% if @interface_api_users.present? %>
