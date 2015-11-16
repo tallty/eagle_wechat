@@ -34,7 +34,9 @@ Rails.application.routes.draw do
       resources :tasks
       resources :interfaces
     end
-    
+    resources :interfaces do
+      resources :api_users, only: [:index, :new, :create, :destroy]
+    end
   end
 
   resources :oauths, only: [:index]

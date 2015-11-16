@@ -1,0 +1,50 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>[<%= @interface.name %>] 调用客户列表</h5>
+            <%= link_to "#", remote: true, format: :js, class: "ibox-title-new member-new" do %>
+              <i class="fa fa-plus fa-lg"></i>
+            <% end %>
+        </div>
+        <div class="ibox-content"> 
+          <table class="footable table table-stripped text-center toggle-arrow-tiny" data-page-size="2">
+            <thead>
+              <tr>
+                <th class="text-center" data-toggle="true">No.</th>
+                <th class="text-center">使用客户</th>
+                <th class="text-center">appid</th>
+                <th class="text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody data-no-turbolink>
+            <% @api_users.each_with_index do |api_user, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= api_user.company %></td>
+                <td><%= api_user.appid %></td>
+                <td>
+                  <%= link_to "#", class: 'btn btn-xs btn-default' do %>
+                    <span class="glyphicon glyphicon-edit"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="text-center" colspan="6">
+                  <ul class="pagination"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          <br>
+          <%= link_to "返回", admin_customer_interfaces_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
