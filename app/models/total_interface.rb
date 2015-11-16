@@ -51,16 +51,39 @@ class TotalInterface < ActiveRecord::Base
   end
 
   # 调用指定借口的客户调用信息
-  def self.api_user_infos(interface_name, date, method)
-    interface = Interface.where(name: interface_name).first
+  def self.api_user_infos(current_customer, interface_name, date, method)
     api_user_infos = {}
 
-    interface.api_users.each do |api_user|
-      total_interfaces = api_user.total_interfaces.send(method, date)
-      if method == :day
-        api_user_infos[api_user.company] = interface.by_hour_infos(total_interfaces)
+    interface = Interface.where(name: interface_name).first
+
+    #interface.api_users.each do |api_user|
+    allow_api_users = interface.api_users.pluck(:id)
+
+    current_customer.api_users.each do |api_user|
+      if allow_api_users.include?(api_user.id)
+        # 用户指定date内所有的调用接口记录
+        total_interfaces = api_user.total_interfaces.send(method, date)
+        if method == :day
+          api_user_infos[api_user.company] = interface.by_hour_infos(total_interfaces)
+          #api_user_infos[api_user.company][:allow] = 1
+        else
+          api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
+          #api_user_infos[api_user.company][:allow] = 1
+        end
       else
-        api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
+        # 用户指定date内所有的调用接口记录
+        total_interfaces = api_user.total_interfaces.send(method, date)
+        if method == :day
+          api_user_info = interface.by_hour_infos(total_interfaces)
+          #api_user_infos[api_user.company][:allow] = 1
+        else
+          api_user_info = interface.by_day_infos(total_interfaces)
+          #api_user_infos[api_user.company][:allow] = 1
+        end
+
+        unless api_user_info[:sum_count] == 0
+          api_user_infos[api_user.company] = api_user_info
+        end      
       end
     end
     # 循环显示所有调用选中接口的客户的调用信息

@@ -19,6 +19,7 @@ module Admin
 		end
 
 		def destroy
+			
 		end
 
 		private
