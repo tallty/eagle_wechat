@@ -3,7 +3,7 @@
 <% end %>
 <div class="warp">
 	<% @task_logs.each_with_index do |task_log, index| %>
-		<% if get_task_rate(task_log).any? %>
+		<% if get_task_rate(task_log).present? %>
 			<div class="sef-container">
 				<div class="tab-title col-xs-12 text-center">
 					<div class="col-xs-3">数据名称</div>
