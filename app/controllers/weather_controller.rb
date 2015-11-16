@@ -23,10 +23,12 @@ class WeatherController < ApplicationController
 	def meteorologic
 		#@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 		@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
-
+		@tasks = Task.where("tasks.rate is NOT NULL")
+ 
+    @task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 		@last_log = TaskLog.order(end_time: :DESC).first
 
-		
+
 		# take_log_identifier = @task_logs.pluck(:task_identifier)
 		# @task_round = Task.where({identifier: take_log_identifier}).order(updated_at: :DESC)
 	end
