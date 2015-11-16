@@ -30,6 +30,6 @@ module ApplicationHelper
   end
 
   def get_task_time task_log
-    log_time = TaskLog.order(end_time: :DESC).where({task_identifier: task_log.task_identifier}).first.created_time
+    log_time = TaskLog.order(end_time: :DESC).where({task_identifier: task_log.task_identifier}).first.created_at
   end
 end
