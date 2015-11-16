@@ -14,7 +14,7 @@
 				<%= link_to "#" do %>
 				<div class="col-xs-12 active-line">
 					<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
-					<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) ? get_task_rate(task_log)min : 0 %></div>
+					<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) ? get_task_rate(task_log) : 0 %></div>
 					<div class="col-xs-3" style="line-height: 40px;">
 						<%= get_task_time %>
 					</div>
