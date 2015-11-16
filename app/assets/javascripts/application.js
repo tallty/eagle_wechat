@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require ./echarts/echarts
-//= require_tree ./echarts/chart
+//= require ./echarts/chart/pie
+//= require ./echarts/chart/line
 //= require_tree ./application/.
 //= require turbolinks
