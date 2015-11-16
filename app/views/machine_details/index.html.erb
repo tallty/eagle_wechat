@@ -16,13 +16,13 @@
 				<div class="col-xs-12 server-line active-line" style="line-height: 40px;">
 					<div class="col-xs-3"><%= machine.name.try(:truncate, 9) %></div>
 					<div class="col-xs-2"><p>
-						<i class="iconfont fa-red">&#x33;</i><%= machine.cpu_percent %></p>
+						<i class="fa fa-circle fa-red"></i><%= machine.cpu_percent %></p>
 					</div>
 					<div class="col-xs-2">
-						<p><i class="iconfont fa-green">&#x33;</i><%= machine.memory_percent %></p>
+						<p><i class="fa fa-circle fa-green"></i><%= machine.memory_percent %></p>
 					</div>
-					<div class="col-xs-2"><i class="iconfont fa-green">&#x33;</i>正常</div>
-					<div class="col-xs-2"><i class="iconfont fa-green">&#x33;</i>20ms</div>
+					<div class="col-xs-2"><i class="fa fa-circle fa-green"></i>正常</div>
+					<div class="col-xs-2"><i class="fa fa-circle fa-green"></i>20ms</div>
 					<div class="col-xs-1"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></div>
 				</div>
 				<% end %>

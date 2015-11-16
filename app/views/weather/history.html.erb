@@ -19,12 +19,12 @@
 						<div class="col-xs-4"><%= "#{task.rate.to_s}min" %></div>
 						<div class="col-xs-12">
 							<div class="col-xs-6 small-tab text-left" style="padding-left: 15px;">
-								<i class="iconfont fa-red">&#x33;</i>
+								<i class="fa fa-circle fa-red"></i>
 								<%= task.updated_at.strftime("%y-%m-%d %H:%M") %>
 							</div>
 							<div class="col-xs-6 small-tab text-left">
 								<% if task.relieve_task.present? %>
-									<i class="iconfont fa-green">&#x33;</i>
+									<i class="fa fa-circle fa-green"></i>
 									<%= task.relieve_task.updated_at.strftime("%y-%m-%d %H:%M") %>
 								<% end %>
 							</div>
