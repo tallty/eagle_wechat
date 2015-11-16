@@ -11,11 +11,11 @@
 		</div>
 		<div class="tab-line text-center clearfix">
 			<% @task_logs.each_with_index do |task_log, index| %>
-			  <% if get_task_rate(task_log).present? && task_log.task_name.present? %>
+			  <% if get_task_rate(task_log) %>
 					<%= link_to "#" do %>
 						<div class="col-xs-12 active-line">
 							<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
-							<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) ? get_task_rate(task_log) : 0 %>min</div>
+							<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) %>min</div>
 							<div class="col-xs-3">
 								<%= get_task_time(task_log).strftime('%Y-%m-%d %H:%M:%S') %>
 							</div>
@@ -31,11 +31,11 @@
 						</div>
 						<hr class="line-hr">
 					<% end %>
-				<% elsif !get_task_rate(task_log).present? || !task_log.try(:task_name).present?%>
+				<% elsif %>
 				  <%= link_to "#" do %>
 						<div class="col-xs-12 active-line">
 							<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
-							<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) ? get_task_rate(task_log) : 0 %>min</div>
+							<div class="col-xs-3" style="line-height: 40px;">0min</div>
 							<div class="col-xs-3">
 								<%= get_task_time(task_log).strftime('%Y-%m-%d %H:%M:%S') %>
 							</div>
