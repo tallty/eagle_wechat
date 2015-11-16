@@ -1,14 +1,16 @@
 module Admin
 	class ApiUsersController < BaseController
+		before_action :set_interface, only: [:index, :new]
 		respond_to :html, :js
 
 		def index
-			@interface = Interface.find(params[:interface_id])
 			@api_users = @interface.api_users
 		end
 
 		def new
-			
+			@api_users = current_customer.api_users
+			@api_user = InterfacesApiUser.new
+			respond_with @api_user
 		end
 
 		def create
@@ -17,6 +19,11 @@ module Admin
 
 		def destroy
 			
+		end
+
+		private
+		def set_interface
+			@interface = Interface.find(params[:interface_id])
 		end
 	end
 end

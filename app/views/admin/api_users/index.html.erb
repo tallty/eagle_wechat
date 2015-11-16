@@ -4,7 +4,7 @@
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>[<%= @interface.name %>] 调用客户列表</h5>
-            <%= link_to "#", remote: true, format: :js, class: "ibox-title-new member-new" do %>
+            <%= link_to new_admin_interface_api_user_path(interface_id: @interface.id, interface_name: @interface.name), remote: true, format: :js, class: "ibox-title-new member-new" do %>
               <i class="fa fa-plus fa-lg"></i>
             <% end %>
         </div>
@@ -47,4 +47,4 @@
     </div>
   </div>
 </div>
-  
+<div id="interface_api_users"></div>
