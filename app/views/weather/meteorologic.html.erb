@@ -14,9 +14,9 @@
 				<%= link_to "#" do %>
 				<div class="col-xs-12 active-line">
 					<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
-					<div class="col-xs-3" style="line-height: 40px;"><%= task_log.end_time - task_log.start_time %>s</div>
+					<div class="col-xs-3" style="line-height: 40px;"><%= @task_round.rate %>s</div>
 					<div class="col-xs-3" style="line-height: 40px;">
-						<%= last_get.to_s %>min前
+						<%= @last_log.end_time.to_s %>
 					</div>
 					<div class="col-xs-3" style="line-height: 40px;">
 					<% if pre_time(task_log, @task_logs) > 6 %>
