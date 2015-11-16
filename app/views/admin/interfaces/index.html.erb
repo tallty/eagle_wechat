@@ -25,7 +25,7 @@
                 <td><%= interface.name %></td>
                 <td><%= interface.identifier %></td>
                 <td>
-                  <%= link_to admin_interface_api_users(interface_id: interface.id) do %>
+                  <%= link_to admin_interface_api_users_path(interface_id: interface.id) do %>
                     <span class="glyphicon glyphicon-user"></span>
                   <% end %>
                   <%= link_to edit_admin_customer_interface_path(customer_id: params[:customer_id], id: interface.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
