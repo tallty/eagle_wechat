@@ -22,7 +22,6 @@ module ApplicationHelper
     return newpass
   end
 
-
   def get_task_rate task_log
     rate = Task.find_by(identifier: task_log.task_identifier)
     if rate.present?
@@ -31,6 +30,6 @@ module ApplicationHelper
   end
 
   def get_task_time task_log
-    log_time = TaskLog.order(end_time: :DESC).where({task_identifier: task_log.task_identifier}).first.start_time
+    log_time = TaskLog.order(end_time: :DESC).where({task_identifier: task_log.task_identifier}).first.created_time
   end
 end
