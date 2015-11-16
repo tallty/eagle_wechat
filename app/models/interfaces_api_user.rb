@@ -7,7 +7,7 @@ class InterfacesApiUser < ActiveRecord::Base
     InterfacesApiUser.transaction do
       unless create_api_users.empty?
         create_api_users.each do |api_user_id|
-          InterfacesApiUser.create(interface_id: interface_id.to_i, api_user_id: api_user_id)
+          InterfacesApiUser.find_or_create_by(interface_id: interface_id.to_i, api_user_id: api_user_id)
         end
       end
     end
