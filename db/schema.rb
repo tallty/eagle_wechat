@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115125812) do
+ActiveRecord::Schema.define(version: 20151116015819) do
 
   create_table "api_users", force: :cascade do |t|
-    t.string   "appid",        limit: 255
-    t.string   "company",      limit: 255
-    t.integer  "customer_id",  limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "interface_id", limit: 4
+    t.string   "appid",       limit: 255
+    t.string   "company",     limit: 255
+    t.integer  "customer_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "api_users", ["customer_id"], name: "index_api_users_on_customer_id", using: :btree
@@ -89,6 +88,16 @@ ActiveRecord::Schema.define(version: 20151115125812) do
     t.datetime "updated_at",              null: false
     t.integer  "customer_id", limit: 4
   end
+
+  create_table "interfaces_api_users", force: :cascade do |t|
+    t.integer  "interface_id", limit: 4
+    t.integer  "api_user_id",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "interfaces_api_users", ["api_user_id"], name: "index_interfaces_api_users_on_api_user_id", using: :btree
+  add_index "interfaces_api_users", ["interface_id"], name: "index_interfaces_api_users_on_interface_id", using: :btree
 
   create_table "machine_details", force: :cascade do |t|
     t.string   "cpu_name",                 limit: 255
@@ -218,6 +227,8 @@ ActiveRecord::Schema.define(version: 20151115125812) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "interfaces_api_users", "api_users"
+  add_foreign_key "interfaces_api_users", "interfaces"
   add_foreign_key "sms_logs", "customers"
   add_foreign_key "sms_logs", "tasks"
 end
