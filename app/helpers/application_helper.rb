@@ -23,10 +23,7 @@ module ApplicationHelper
   end
 
   def get_task_rate task_log
-    rate = Task.find_by(identifier: task_log.task_identifier)
-    if rate.present?
-      rate.try(:rate)
-    end
+    Task.find_by(identifier: task_log.task_identifier).rate
   end
 
   def get_task_time task_log

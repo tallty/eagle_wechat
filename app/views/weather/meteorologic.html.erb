@@ -11,7 +11,7 @@
 		</div>
 		<div class="tab-line text-center clearfix">
 			<% @task_logs.each_with_index do |task_log, index| %>
-			  <% if get_task_rate(task_log).present? && task_log.try(:task_name).present? %>
+			  <% if get_task_rate(task_log).present? && task_log.task_name.present? %>
 					<%= link_to "#" do %>
 						<div class="col-xs-12 active-line">
 							<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
