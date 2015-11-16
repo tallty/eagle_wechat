@@ -19,19 +19,8 @@ class ReportsController < ApplicationController
 
 	#月报表
 	def month
-<<<<<<< HEAD
 		@month_reports = TotalInterface.reports(current_customer, @begin_month, :month)
 		@total_count = TotalInterface.total_count(@month_reports)
-=======
-		@month_datas = {}
-		(-30..-1).each do |i|
-			day = Time.now.to_date + i
-			r = $redis.hvals("interface_reports_cache_#{day.strftime("%F")}")
-			cache = r.map { |e| MultiJson.load(e) }
-			value = cache.collect{|x| x["sum_count"]}.max
-			@month_datas[day.strftime("%m-%d")] = value
-		end
->>>>>>> week report
 	end
 
 	#日报表详细页
