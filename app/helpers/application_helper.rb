@@ -16,7 +16,7 @@ module ApplicationHelper
   #   pre_tl.present? ?  ((current_task_log.start_time - pre_tl.start_time) / 60).round(1) : 0
   # end
   def last_get
-    last_g = task_logs.all.order('end_time DESC').last
+    last_g = TaskLog.all.order('end_time DESC').last
     last_time = time.now - last_g.end_time
   end
 
