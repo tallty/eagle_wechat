@@ -15,7 +15,7 @@ module Admin
 
 		def create
 			InterfacesApiUser.save_interface_api_users(params[:interface_id], params[:interface_api_users])
-			return redirect_to action: "index", interface_id: params[:interface_id], customer_id: [:customer_id]
+			return redirect_to admin_interface_api_users_path(interface_id: params[:interface_id], customer_id: params[:customer])
 		end
 
 		def destroy
