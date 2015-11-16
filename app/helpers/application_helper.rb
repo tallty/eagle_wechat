@@ -11,9 +11,13 @@ module ApplicationHelper
   end
 
 
-  def pre_time(current_task_log, task_logs)
-    pre_tl = task_logs.select{ |tl| tl.start_time < current_task_log.start_time && tl.task_identifier == current_task_log.task_identifier }.first
-    pre_tl.present? ?  ((current_task_log.start_time - pre_tl.start_time) / 60).round(1) : 0
+  # def pre_time(current_task_log, task_logs)
+  #   pre_tl = task_logs.select{ |tl| tl.start_time < current_task_log.start_time && tl.task_identifier == current_task_log.task_identifier }.first
+  #   pre_tl.present? ?  ((current_task_log.start_time - pre_tl.start_time) / 60).round(1) : 0
+  # end
+  def last_get
+    last_g = task_logs.all.order('end_time DESC').last
+    last_time = time.now - last_g.end_time
   end
 
   def delay( len )

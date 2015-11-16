@@ -16,7 +16,7 @@
 					<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
 					<div class="col-xs-3" style="line-height: 40px;"><%= task_log.end_time - task_log.start_time %>s</div>
 					<div class="col-xs-3" style="line-height: 40px;">
-						<%= pre_time(task_log, @task_logs).to_s %>min前
+						<%= last_get.to_s %>min前
 					</div>
 					<div class="col-xs-3" style="line-height: 40px;">
 					<% if pre_time(task_log, @task_logs) > 6 %>
