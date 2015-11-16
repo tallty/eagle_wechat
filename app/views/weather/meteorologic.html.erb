@@ -3,7 +3,7 @@
 <% end %>
 <div class="warp">
 	<% @task_logs.each_with_index do |task_log, index| %>
-		<%= if get_task_rate(task_log).present? %>
+		<% if get_task_rate(task_log).any? %>
 			<div class="sef-container">
 				<div class="tab-title col-xs-12 text-center">
 					<div class="col-xs-3">数据名称</div>
@@ -17,10 +17,10 @@
 						<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
 						<div class="col-xs-3" style="line-height: 40px;"><%= get_task_rate(task_log) %></div>
 						<div class="col-xs-3" style="line-height: 40px;">
-							<%= get_task_time(task_log).strftime('%Y-%m-%d %H:%M:%S') %>
+							<%= get_task_time(task_log).end_time.strftime('%Y-%m-%d %H:%M:%S') %>
 						</div>
 						<div class="col-xs-3" style="line-height: 40px;">
-						<% if Time.now - get_task_time(task_log) > get_task_rate(task_log) %>
+						<% if Time.now - get_task_time(task_log).end_time > get_task_rate(task_log) %>
 							<i class="fa fa-circle fa-red"></i>故障
 						<% else %>
 							<i class="fa fa-circle fa-green"></i>正常
@@ -43,7 +43,7 @@
 					<div class="col-xs-12 active-line">
 						<div class="col-xs-3"><%=  task_log.try(:task_name) %></div>
 						<div class="col-xs-3" style="line-height: 40px;">
-							<%= get_task_time(task_log).strftime('%Y-%m-%d %H:%M:%S') %>
+							<%= get_task_time(task_log).end_time.strftime('%Y-%m-%d %H:%M:%S') %>
 						</div>
 						<div class="col-xs-3" style="line-height: 40px;">
 							<i class="fa fa-circle fa-green"></i>正常
