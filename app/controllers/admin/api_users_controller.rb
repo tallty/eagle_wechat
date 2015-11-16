@@ -4,7 +4,7 @@ module Admin
 
 		def index
 			@interface = Interface.find(params[:interface_id])
-			@api_users = interface.api_users
+			@api_users = @interface.api_users
 		end
 
 		def new
