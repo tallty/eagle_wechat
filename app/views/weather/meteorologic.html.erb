@@ -20,7 +20,7 @@
 					</div>
 					<div class="col-xs-3" style="line-height: 40px;">
 					<% if get_task_rate(task_log).present? %>
-						<% if time.now - get_task_time(task_log) > get_task_rate(task_log) %>
+						<% if Time.now - get_task_time(task_log) > get_task_rate(task_log) %>
 							<i class="fa fa-circle fa-red"></i>故障
 						<% else %>
 							<i class="fa fa-circle fa-green"></i>正常
