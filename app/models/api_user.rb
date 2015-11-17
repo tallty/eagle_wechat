@@ -14,7 +14,7 @@ class ApiUser < ActiveRecord::Base
   belongs_to :customer
   has_many :total_interfaces
   
-  has_many :interfaces_api_users
+  has_many :interfaces_api_users, dependent: :destroy
   has_many :interfaces, through: :interfaces_api_users
 
   def fetch(url=nil)

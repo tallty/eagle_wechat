@@ -13,7 +13,7 @@
 class Interface < ActiveRecord::Base
 	belongs_to :customer
 
-	has_many :interfaces_api_users
+	has_many :interfaces_api_users, dependent: :destroy
 	has_many :api_users, through: :interfaces_api_users
 
 	after_initialize :generate_identifier

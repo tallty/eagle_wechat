@@ -25,8 +25,8 @@
                 <td><%= api_user.company %></td>
                 <td><%= api_user.appid %></td>
                 <td>
-                  <%= link_to "#", class: 'btn btn-xs btn-default' do %>
-                    <span class="glyphicon glyphicon-edit"></span>
+                  <%= link_to admin_interface_api_user_path(interface_id: @interface.id, id: api_user.id, customer_id: params[:customer_id]), data: { confirm: "确定删除该用户吗？" }, method: :delete, class: "btn btn-xs btn-danger" do %>
+                    <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
               </tr>
