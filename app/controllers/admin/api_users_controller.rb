@@ -19,7 +19,7 @@ module Admin
 		end
 
 		def destroy
-			api_user = InterfacesApiUser.where(interface_id: params[:interface_id], api_user_id: params[:id])
+			api_user = InterfacesApiUser.where(interface_id: params[:interface_id], api_user_id: params[:id]).first
 			api_user.destroy
 			return redirect_to admin_interface_api_users_path(interface_id: params[:interface_id], customer_id: params[:customer_id])
 		end
