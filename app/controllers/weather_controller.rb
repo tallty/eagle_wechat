@@ -21,13 +21,12 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
-		@tasks = Task.where("tasks.rate is NOT NULL")
- 		@last_log = TaskLog.order(end_time: :DESC).first
+		# @task_logs = TaskLog.order(start_time: :DESC).group(:task_name) #优化
+		# @tasks = Task.where("tasks.rate is NOT NULL")
+ 	# 	@last_log = TaskLog.order(end_time: :DESC).first #优化
 
-
-		# take_log_identifier = @task_logs.pluck(:task_identifier)
-		# @task_round = Task.where({identifier: take_log_identifier}).order(updated_at: :DESC)
+ 		# todo
+ 		@tasks = current_customer.tasks.where("tasks.rate is NOT NULL")
 	end
 
 	def result
