@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-xs-3" style="line-height: 40px;">
 					<% if get_task_rate(task_log).present? %>
-						<% if (Time.now - task.find_task_log.created_at) / 60) > task.rate %>
+						<% if (Time.now - task.find_task_log.created_at) / 60 > task.rate %>
 							<i class="fa fa-circle fa-red"></i>延迟
 						<% else %>
 							<i class="fa fa-circle fa-green"></i>正常
