@@ -33,6 +33,11 @@ class Task < ActiveRecord::Base
     end
   end
 
+  # 找到task对应的最新的task_log
+  def find_task_log
+    TaskLog.where(task_identifier: identifier).last
+  end
+
 	private
 
   def task_identifier

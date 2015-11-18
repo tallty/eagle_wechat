@@ -15,6 +15,7 @@
                 <th class="text-center" data-toggle="true">No.</th>
                 <th class="text-center">名称</th>
                 <th class="text-center">识别码</th>
+                <th class="text-center">地址</th>
                 <th class="text-center">操作</th>
               </tr>
             </thead>
@@ -24,7 +25,11 @@
                 <td><%= index + 1 %></td>
                 <td><%= interface.name %></td>
                 <td><%= interface.identifier %></td>
+                <td><%= interface.address %></td>
                 <td>
+                  <%= link_to admin_interface_api_users_path(interface_id: interface.id, customer_id: params[:customer_id]), class: 'btn btn-xs btn-primary' do %>
+                    <span class="glyphicon glyphicon-user"></span>
+                  <% end %>
                   <%= link_to edit_admin_customer_interface_path(customer_id: params[:customer_id], id: interface.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
                   <% end %>

@@ -41,7 +41,13 @@
 				<% @api_user_infos.each do |key, value| %>
 					<div class="col-xs-12 mes-line">
 						<div class="first-line">
-							<div class="col-xs-7 line large-title"><%= index += 1 %>、<%= key %></div>
+							<div class="col-xs-7 line large-title"><%= index += 1 %>、
+								<% if value[:allow] == 1 %>
+									<%= key %>
+								<% else %>
+									<span style="color: red;"><%= key %></span>
+								<% end %>
+							</div>
 							<div class="col-xs-5 line p-l-0 small-tab">
 								<i class="fa fa-circle fa-red"></i>调用次数最高的时间点
 							</div>
