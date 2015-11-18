@@ -32,7 +32,6 @@ class MachinesController < ApplicationController
   end
 
   def real_hardware_info
-    real_hardware_params['info']['cpu'][:server_time] = Time.now
     $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
     $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
     $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
