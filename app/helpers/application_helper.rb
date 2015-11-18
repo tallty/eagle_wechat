@@ -18,14 +18,14 @@ module ApplicationHelper
   def delay( len )
     chars = ("100".."200").to_a
     newpass = ""
-    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+    1.upto(len) { |i| newpass << chars[rand(chars.size - 1)] }
     return newpass
   end
 
   def get_task_rate task_log
-    rate = Task.find_by(identifier: task_log.task_identifier)
-    if rate.present?
-      rate.try(:rate)
+    task = Task.find_by(identifier: task_log.task_identifier)
+    if task.present?
+      task.try(:rate)
     end
   end
 

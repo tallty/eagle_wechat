@@ -21,7 +21,6 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		#@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 		@task_logs = TaskLog.order(start_time: :DESC).group(:task_name)
 		@tasks = Task.where("tasks.rate is NOT NULL")
  		@last_log = TaskLog.order(end_time: :DESC).first
