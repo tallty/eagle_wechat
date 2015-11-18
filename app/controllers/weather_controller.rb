@@ -10,8 +10,10 @@ class WeatherController < ApplicationController
 
 		@tasks = {}
 		current_customer.machines.each do |machine|
-			last_time = eval($redis.lindex('#{machine.identifier}_cpu', 1))["date_time"].to_time
-
+			last_time = $redis.hget("machine_last_update_time", "#{machine.identifier}").to_time
+			if (Time.now - last_time) > 60
+				@task["#{machine.name}"] = ["气象数据", "#{last_time + 60}"]
+			end
 		end
 	end
 
