@@ -55,7 +55,7 @@ module Admin
 			end
 
 			def interface_params
-				params.require(:interface).permit(:name, :identifier)
+				params.require(:interface).permit(:name, :identifier, :address)
 			end
 	end
 end

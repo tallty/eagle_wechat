@@ -11,9 +11,6 @@ class WeatherController < ApplicationController
 
 		#历史报警取出全部的
     @tasks = @customer.tasks.where("rate > ?", 10) if @customer
-
-		# @customer = Customer.first
-		# @tasks = @customer.tasks if @customer
 	end
 
 	def port
@@ -21,11 +18,6 @@ class WeatherController < ApplicationController
 	end
 
 	def meteorologic
-		# @task_logs = TaskLog.order(start_time: :DESC).group(:task_name) #优化
-		# @tasks = Task.where("tasks.rate is NOT NULL")
- 	# 	@last_log = TaskLog.order(end_time: :DESC).first #优化
-
- 		# todo
  		@tasks = current_customer.tasks.where("tasks.rate is NOT NULL")
 	end
 

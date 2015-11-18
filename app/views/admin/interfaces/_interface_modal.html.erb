@@ -14,7 +14,15 @@
 									<%= f.text_field :name, class: 'form-control', placeholder: '接口名称'%>
 								</div>
 								<% if interface.errors[:name].any? %>
-								<dd class="error text-danger"><%= interface.errors[:name][0] %></dd>
+									<dd class="error text-danger"><%= interface.errors[:name][0] %></dd>
+								<% end %>
+							</div>
+							<div class="form-group">
+								<div class="input-group input-padding" style="width: 100%;">
+									<%= f.text_field :address, class: 'form-control', placeholder: '接口地址'%>
+								</div>
+								<% if interface.errors[:address].any? %>
+									<dd class="error text-danger"><%= interface.errors[:address][0] %></dd>
 								<% end %>
 							</div>
 							<div class="form-group">
@@ -22,7 +30,7 @@
 									<%= f.text_field :identifier, class: 'form-control', disabled: 'disabled', placeholder: '接口标识符'%>
 								</div>
 								<% if interface.errors[:identifier].any? %>
-								<dd class="error text-danger"><%= interface.errors[:identifier][0] %></dd>
+									<dd class="error text-danger"><%= interface.errors[:identifier][0] %></dd>
 								<% end %>
 							</div>
 							<div class="text-center"><button class="btn sub-btn btn-primary" type="submit"><strong>提交</strong></button></div>

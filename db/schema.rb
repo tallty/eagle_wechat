@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116015819) do
+ActiveRecord::Schema.define(version: 20151118054037) do
 
   create_table "api_users", force: :cascade do |t|
     t.string   "appid",       limit: 255
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20151116015819) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "customer_id", limit: 4
+    t.string   "address",     limit: 255
   end
 
   create_table "interfaces_api_users", force: :cascade do |t|

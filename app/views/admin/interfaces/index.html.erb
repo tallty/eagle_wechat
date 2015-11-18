@@ -16,6 +16,7 @@
                 <th class="text-center">名称</th>
                 <th class="text-center">识别码</th>
                 <th class="text-center">操作</th>
+                <th class="text-center">地址</th>
               </tr>
             </thead>
             <tbody data-no-turbolink>
@@ -24,6 +25,7 @@
                 <td><%= index + 1 %></td>
                 <td><%= interface.name %></td>
                 <td><%= interface.identifier %></td>
+                <td><%= interface.address %></td>
                 <td>
                   <%= link_to admin_interface_api_users_path(interface_id: interface.id, customer_id: params[:customer_id]), class: 'btn btn-xs btn-primary' do %>
                     <span class="glyphicon glyphicon-user"></span>

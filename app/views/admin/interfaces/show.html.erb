@@ -8,6 +8,7 @@
 				<div class="ibox-content"> 
 					<p>接口名称：<%= @interface.try(:name) %></p>
 					<p>接口标识符：<%= @interface.try(:identifier) %></p>
+					<p>接口地址：<%= @interface.try(:address) %></p>
 					<br>
 					<%= link_to "返回", admin_customer_interfaces_path, class: "btn btn-primary" %>
 				</div>
