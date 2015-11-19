@@ -18,7 +18,7 @@
 						<div class="col-xs-4"><%= value[1].strftime("%Y-%m-%d")%></div>
 						<div class="col-xs-12">
 							<div class="col-xs-8 small-tab text-left" style="padding-left: 15px;"><%= "描述" %></div>
-							<div class="col-xs-4"><%= value[1].strftime("%H:%M:%S")  %></div>
+							<div class="col-xs-4"><%= value[1].to_time.strftime("%H:%M:%S")  %></div>
 						</div>
 					</div>
 					<hr class="line-hr">
