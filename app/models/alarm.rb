@@ -22,11 +22,24 @@ class Alarm < ActiveRecord::Base
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
     last_times.map do |e, v| 
-      if now_time - 1.minutes > Time.parse(v)
+      last_time = Time.parse(v) + 1.minutes
+      if now_time > last_time
         # 从告警表判断此告警信息已经存在: 
         #   如果不存在,存入数据库并推送消息
         #   如果存在,判断推送消息记录表是否已经成功推送过此条消息
         #     如果推送过,结束.否则推送消息并写入推送消息日志表
+        machine = Machine.where(:identifier).first
+        params = { identifier: e, 
+                    title: machine.name, 
+                    category: "系统数据", 
+                    alarmed_at: last_time, 
+                    rindex: length }
+        alarm = Alarm.where(identifier: e, alarmed_at: last_time)
+        if alarm.present?
+          
+        else
+          alarm = Alarm.create(params)
+        end
       end
     end
   end

@@ -9,6 +9,9 @@
 set :job_template, "/usr/bin/timeout 1800 /bin/bash -l -c ':job'"
 
 # Learn more: http://github.com/javan/whenever
+every 1.minutes do
+  Alarm.new.process
+end
 
 every 1.day, :at => '1:45' do
   runner 'InterfaceReport.process'
