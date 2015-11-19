@@ -7,12 +7,10 @@ class WeatherController < ApplicationController
 		# > 1min：服务器故障，产生告警
 		# < 1min：服务器正常，不显示信息
 		@machines_status = {}
-
-		@tasks = {}
 		current_customer.machines.each do |machine|
 			last_time = $redis.hget("machine_last_update_time", "#{machine.identifier}").to_time
 			if (Time.now - last_time) > 60
-				@task["#{machine.name}"] = ["气象数据", "#{last_time + 60}"]
+				@machines_status["#{machine.name}"] = ["气象数据", "#{last_time + 60}"]
 			end
 		end
 	end
