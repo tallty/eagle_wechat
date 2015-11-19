@@ -8,4 +8,9 @@ module WeatherHelper
       content_tag(:i, "次要", class: ["fa", "fa-circle", "fa-green"])
     end
   end
+
+  # 计算告警发生距现在的时长（min）
+  def alarmed_time_to_now(alarm)
+  	((Time.now - alarm.alarmed_at.to_time) / 60).to_i
+  end
 end

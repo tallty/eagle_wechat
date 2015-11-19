@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118054037) do
+ActiveRecord::Schema.define(version: 20151119055706) do
+
+  create_table "alarms", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "category",   limit: 255
+    t.datetime "alarmed_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "api_users", force: :cascade do |t|
     t.string   "appid",       limit: 255

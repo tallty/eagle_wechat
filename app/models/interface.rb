@@ -8,6 +8,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :integer
+#  address     :string(255)
 #
 
 class Interface < ActiveRecord::Base

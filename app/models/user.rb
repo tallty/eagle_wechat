@@ -13,10 +13,12 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  name                   :string(255)
+#  phone                  :string(255)
+#  status                 :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  name                   :string(255)      default(""), not null
-#  phone                  :string(255)      default(""), not null
+#  open_id                :string(255)
 #
 
 class User < ActiveRecord::Base

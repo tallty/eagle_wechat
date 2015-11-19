@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: interfaces_api_users
+#
+#  id           :integer          not null, primary key
+#  interface_id :integer
+#  api_user_id  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class InterfacesApiUser < ActiveRecord::Base
 	belongs_to :interface
 	belongs_to :api_user
