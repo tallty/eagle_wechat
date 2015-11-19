@@ -44,11 +44,16 @@ class Machine < ActiveRecord::Base
 
   # 判断服务器是否正常
   def nomal?
-    index = Alarm.where(identifier: identifier).last.rindex
-    if $redis.lindex("#{identifier}_cpu", -(index + 1)).nil?
-      false
-    else
+    alarm_info = Alarm.where(identifier: identifier).last
+
+    if alarm_info.nil?
       true
+    else
+      if $redis.lindex("#{identifier}_cpu", -(alarm_info.rindex + 1)).present?
+        true
+      else
+        false
+      end
     end
   end
 
