@@ -20,7 +20,7 @@ class Alarm < ActiveRecord::Base
 			if (Time.now - last_time) > 60
 				cache["#{machine.name}"] = ["系统数据", "#{last_time + 60}"]
 				params = { title: "#{machine.name}", category: "系统数据", alarmed_at: "#{last_time + 60}" }
-				Alarm.create!(params)
+				Alarm.find_or_create_by!(params)
 			end
 		end
 		return cache
