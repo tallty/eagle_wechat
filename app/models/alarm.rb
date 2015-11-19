@@ -11,6 +11,25 @@
 #
 
 class Alarm < ActiveRecord::Base
+  after_create :send_message
+
+  def send_message
+    $group_client.message.send_news("alex6756", "", "", 1, "服务器[#{self.title}]告警:超时未收到数据.")
+  end
+
+  # 1分钟轮循任务,判断是否需要告警
+  def process
+    last_times = $redis.hgetall("machine_last_update_time")
+    now_time = Time.now
+    last_times.map do |e, v| 
+      if now_time - 1.minutes > Time.parse(v)
+        # 从告警表判断此告警信息已经存在: 
+        #   如果不存在,存入数据库并推送消息
+        #   如果存在,判断推送消息记录表是否已经成功推送过此条消息
+        #     如果推送过,结束.否则推送消息并写入推送消息日志表
+      end
+    end
+  end
 
 	# 判断是否需要告警，并返回告警记录
 	def self.avtive_alarms(current_customer)
