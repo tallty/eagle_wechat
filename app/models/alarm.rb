@@ -34,4 +34,14 @@ class Alarm < ActiveRecord::Base
 		return cache
 	end
 
+	# 告警解除时间
+  def warn_over_time
+  	cache = $redis.lindex("#{identifier}_cpu", -(rindex + 1))
+  	if cache.nil?
+  		return nil
+  	else
+  		return eval(cache)["date_time"].to_time.strftime("%y-%m-%d %H:%M")
+  	end
+  end
+
 end

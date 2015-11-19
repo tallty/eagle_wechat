@@ -10,8 +10,13 @@ class WeatherController < ApplicationController
 
 	# 历史告警
 	def history
-		#历史报警取出全部的
-    @alarms = Alarm.all
+		#历史告警取出已解除的告警
+    @history_alarms = []
+    Alarm.all.each do |alarm|
+    	if alarm.warn_over_time.present?
+    		history.push(alarm)
+    	end
+    end
 	end
 
 	# 调用接口
