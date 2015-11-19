@@ -11,6 +11,16 @@ module WeatherHelper
 
   # 计算告警发生距现在的时长（min）
   def alarmed_time_to_now(alarm)
-  	((Time.now - alarm.alarmed_at.to_time) / 60).to_i
+  	"#{((Time.now - alarm.alarmed_at.to_time) / 60).to_i}" min
+  end
+
+  # 找到服务器告警发生后的最新记录
+  def warn_over_time(alarm)
+  	cache = $redis.lindex("#{alarm.identifier}_cpu", -(alarm.rindex + 1))
+  	if cache.nil?
+  		nil
+  	else
+  		eval(cache)["date_time"].to_time.strftime("%y-%m-%d %H:%M")
+  	end
   end
 end
