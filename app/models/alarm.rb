@@ -19,7 +19,7 @@ class Alarm < ActiveRecord::Base
 			last_time = $redis.hget("machine_last_update_time", "#{machine.identifier}").to_time
 			if (Time.now - last_time) > 60
 				cache["#{machine.name}"] = ["系统数据", "#{last_time + 60}"]
-				params = { title: "#{machine.name}", catagory: "系统数据", alarmed_at: "#{last_time + 60}" }
+				params = { title: "#{machine.name}", category: "系统数据", alarmed_at: "#{last_time + 60}" }
 				Alarm.create!(params)
 			end
 		end
