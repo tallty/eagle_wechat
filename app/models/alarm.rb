@@ -23,6 +23,7 @@ class Alarm < ActiveRecord::Base
 				Alarm.create!(params)
 			end
 		end
+		return cache
 	end
 
 end
