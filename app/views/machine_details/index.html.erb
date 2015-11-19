@@ -3,7 +3,7 @@
 <% end %>
 <div class="warp">
 	<div class="sef-container">
-		<div class="tab-title col-xs-12 server-tab">
+		<div class="tab-title col-xs-12 server-tab text-center">
 			<div class="col-xs-4 server-xs4">服务器名称</div>
 			<div class="col-xs-3">CPU</div>
 			<div class="col-xs-3">内存</div>
@@ -21,7 +21,11 @@
 						<p><i class="fa fa-circle fa-green"></i><%= machine.memory_percent %></p>
 					</div>
 					<div class="col-xs-2">
-						<i class="fa fa-circle fa-green"></i>正常
+						<% if machine.nomal? %>
+							<i class="fa fa-circle fa-green"></i>正常
+						<% else %>
+							<i class="fa fa-circle fa-red"></i>故障
+						<% end %>
 					</div>
 					<div class="col-xs-1"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></div>
 				</div>

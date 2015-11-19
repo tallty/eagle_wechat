@@ -42,6 +42,16 @@ class Machine < ActiveRecord::Base
     memory_used = memory_data["memory_total_bytes"].to_i - memory_data["memory_free_bytes"].to_i
   end
 
+  # 判断服务器是否正常
+  def nomal?
+    index = Alarm.where(identifier: identifier).last.rindex
+    if $redis.lindex("#{identifier}_cpu", -(index + 1)).nil?
+      false
+    else
+      true
+    end
+  end
+
   private
 
   def generate_identifier
