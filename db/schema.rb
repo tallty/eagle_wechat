@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119083139) do
+ActiveRecord::Schema.define(version: 20151120023606) do
 
   create_table "alarms", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -165,6 +165,14 @@ ActiveRecord::Schema.define(version: 20151119083139) do
   add_index "qy_apps", ["encoding_aes_key"], name: "index_qy_apps_on_encoding_aes_key", using: :btree
   add_index "qy_apps", ["qy_secret_key"], name: "index_qy_apps_on_qy_secret_key", using: :btree
   add_index "qy_apps", ["qy_token"], name: "index_qy_apps_on_qy_token", using: :btree
+
+  create_table "send_logs", force: :cascade do |t|
+    t.integer  "alarm_id",    limit: 4
+    t.string   "accept_user", limit: 255
+    t.string   "info",        limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "sms_logs", force: :cascade do |t|
     t.string   "content",       limit: 255
