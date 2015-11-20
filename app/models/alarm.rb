@@ -28,7 +28,8 @@ class Alarm < ActiveRecord::Base
         #   如果不存在,存入数据库并推送消息
         #   如果存在,判断推送消息记录表是否已经成功推送过此条消息
         #     如果推送过,结束.否则推送消息并写入推送消息日志表
-        machine = Machine.where(:identifier).first
+        machine = Machine.where(identifier: e).first
+        length = length = $redis.llen("#{e}_cpu").to_i
         params = { identifier: e, 
                     title: machine.name, 
                     category: "系统数据", 
