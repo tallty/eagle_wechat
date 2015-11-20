@@ -36,11 +36,13 @@ class Alarm < ActiveRecord::Base
         machine = Machine.where(identifier: e).first
         # 服务器故障时的采集信息列表长度
         length = length = $redis.llen("#{e}_cpu").to_i
-        params = { identifier: e, 
-                    title: machine.name, 
-                    category: "系统数据", 
-                    alarmed_at: last_time,  
-                    rindex: length }
+        params = { 
+          identifier: e, 
+          title: machine.name, 
+          category: "系统数据", 
+          alarmed_at: last_time,  
+          rindex: length
+        }
         alarm = Alarm.where(identifier: e, alarmed_at: last_time)
         # 判断是否存在此告警
         if alarm.present?

@@ -16,6 +16,36 @@ class Task < ActiveRecord::Base
   has_many :sms_logs, dependent: :destroy
 	after_initialize :task_identifier
 
+  def process
+    now_time = Time.now
+    tasks = Task.where("tasks.rate is NOT NULL")
+    tasks.each do |task|
+      log = task.find_task_log
+      time_out = (now_time - log.created_at) / 60
+      last_time = log.created_at + task.rate.minutes
+      if log.present? && time_out > task.rate
+        params = { 
+          identifier: task.identifier, 
+          title: task.name, 
+          category: "气象数据", 
+          alarmed_at: last_time,  
+          rindex: log.id
+        }
+        alarm = Alarm.where(identifier: "#{task.identifier}", alarmed_at: last_time)
+        if alarm.present?
+          # 判断是否推送此消息
+          unless alarm.send_log.present?
+            send_log = alarm.create_send_log(accept_user: "alex6756", info: "气象数据[#{alarm.title}]告警:超时未收到数据.")
+            alarm.send_message
+          end
+        else
+          Alarm.create(params)
+          send_log = alarm.create_send_log(accept_user: "alex6756", info: "气象数据[#{alarm.title}]告警:超时未收到数据.")
+        end
+      end
+    end
+  end
+
   # 找到task对应的最新的task_log
   def find_task_log
     TaskLog.where(task_identifier: identifier).last
