@@ -16,7 +16,7 @@ class Task < ActiveRecord::Base
   has_many :sms_logs, dependent: :destroy
 	after_initialize :task_identifier
 
-  def process
+  def self.process
     now_time = Time.now
     tasks = Task.where("tasks.rate is NOT NULL")
     tasks.each do |task|
@@ -28,7 +28,7 @@ class Task < ActiveRecord::Base
           identifier: task.identifier, 
           title: task.name, 
           category: "气象数据", 
-          alarmed_at: last_time,  
+          alarmed_at: last_time, 
           rindex: log.id
         }
         alarm = Alarm.where(identifier: "#{task.identifier}", alarmed_at: last_time)
