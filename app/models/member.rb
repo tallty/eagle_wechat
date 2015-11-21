@@ -21,10 +21,14 @@ class Member < ActiveRecord::Base
     users = $group_client.user.full_list(department_id, nil, 0).result["userlist"]
 
     users.each do |user|
-      customer = Customer.find_by(abbreviation: user["position"])
-
-      Member.create(name: user["name"], phone: user["mobile"], openid: user["userid"], 
-        nick_name: user["nick_name"], headimg: user["avatar"], customer: customer)
+      customer = Customer.where(abbreviation: user["position"]).first
+      member = Member.find_or_create_by phone: user['mobile']
+      member.name      = user['name']
+      member.openid    = user['userid']
+      member.nick_name = user['nick_name']
+      member.headimg   = user['avatar']
+      member.customer  = user['customer']
+      customer.save
 
     end
   end
