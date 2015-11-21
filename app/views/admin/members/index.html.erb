@@ -4,9 +4,7 @@
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>[<%= @customer.name %>] 用户详细信息</h5>
-            <%= link_to new_admin_customer_member_path(@customer), remote: true, format: :js, class: "ibox-title-new member-new" do %>
-              <i class="fa fa-plus fa-lg"></i>
-            <% end %>
+            
         </div>
         <div class="ibox-content"> 
           <table class="footable table table-stripped text-center toggle-arrow-tiny" data-page-size="2">
