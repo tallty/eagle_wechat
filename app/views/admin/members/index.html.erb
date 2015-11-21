@@ -15,7 +15,7 @@
                 <th class="text-center" data-toggle="true">No.</th>
                 <th class="text-center">头像</th>
                 <th class="text-center">姓名</th>
-                <th class="text-center">昵称</th>
+                <th class="text-center">openid</th>
                 <th class="text-center">电话</th>
                 <th class="text-center">操作</th>
               </tr>
@@ -26,7 +26,7 @@
                 <td><%= index + 1 %></td>
                 <td><%= image_tag member.headimg, {width: 46, height: 46} %></td>
                 <td><%= member.name %></td>
-                <td><%= member.nick_name %></td>
+                <td><%= member.openid %></td>
                 <td><%= member.phone %></td>
                 <td>
                   <%= link_to edit_admin_customer_member_path(id: member.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>

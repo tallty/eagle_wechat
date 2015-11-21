@@ -25,7 +25,7 @@ class Member < ActiveRecord::Base
       member = Member.find_or_create_by phone: user['mobile']
       member.name      = user['name']
       member.openid    = user['userid']
-      member.nick_name = user['nick_name']
+      # member.nick_name = user['nick_name']
       member.headimg   = user['avatar']
       member.customer  = user['customer']
       member.save
