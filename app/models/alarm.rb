@@ -13,12 +13,12 @@
 #
 
 class Alarm < ActiveRecord::Base
-  has_one :send_log
+  has_many :send_log
 
   after_create :send_message
 
   def send_message
-    $group_client.message.send_news("alex6756", "", "", 1, "服务器[#{self.title}]告警:超时未收到数据.")
+    $group_client.message.send_text("alex6756", "", "", 1, "服务器[#{self.title}]告警:超时未收到数据.")
   end
 
   # 1分钟轮循任务,判断是否需要告警
@@ -58,6 +58,8 @@ class Alarm < ActiveRecord::Base
       end
     end
   end
+
+
 
 	# 判断是否需要告警，并返回告警记录
 	def self.avtive_alarms(current_customer)
