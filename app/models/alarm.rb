@@ -13,7 +13,7 @@
 #
 
 class Alarm < ActiveRecord::Base
-  has_many :send_log
+  has_many :send_logs
 
   after_create :send_message
 
@@ -47,7 +47,7 @@ class Alarm < ActiveRecord::Base
         # 判断是否存在此告警
         if alarm.present?
           # 判断是否推送此消息
-          unless alarm.send_log.present?
+          unless alarm.send_logs.present?
             alarm.create_send_log(accept_user: "alex6756", info: "服务器[#{alarm.title}]告警:超时未收到数据.")
             alarm.send_message
           end
