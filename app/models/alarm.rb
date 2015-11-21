@@ -43,11 +43,10 @@ class Alarm < ActiveRecord::Base
           alarmed_at: last_time,  
           rindex: length
         }
-        alarm = Alarm.where(identifier: e, alarmed_at: last_time)
+        alarm = Alarm.where(identifier: e, alarmed_at: last_time).first
         # 判断是否存在此告警
         if alarm.present?
           # 判断是否推送此消息
-          p alarm.to_json
           unless alarm.send_log.present?
             alarm.send_log.find_or_create_by(accept_user: "alex6756", info: "服务器[#{alarm.title}]告警:超时未收到数据.")
             alarm.send_message
