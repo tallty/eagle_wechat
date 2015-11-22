@@ -3,7 +3,7 @@ class WeatherController < ApplicationController
 	before_action :save_session, only: [:active, :history]
 
 	def active
-		# 服务器上报信息：2次/s
+		# 服务器上报信息：2次/m
 		# 活跃报警：检测当前客户的所有服务器，判断当前时间与其最新上报时间的差值是否大于1min
 		@machines_status = Alarm.avtive_alarms(current_customer)
 	end

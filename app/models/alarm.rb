@@ -68,10 +68,10 @@ class Alarm < ActiveRecord::Base
       # 找到服务器最新的告警
       #   如果存在告警，判断告警是否解除
       #     解除：不存入cache；未解除：存入cache
-      alarm = Alarm.where(identifier: "#{machine.identifier}").last
+      alarm = Alarm.where(identifier: machine.identifier).last
       if alarm.present?
         if alarm.warn_over_time.nil?
-          cache["#{machine.name}"] = ["#{alarm.category}", "#{alarm.try(:last_time)}"]
+          cache["#{machine.name}"] = ["#{alarm.category}", "#{alarm.alarmed_at}"]
         end
       end
     end
