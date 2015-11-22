@@ -13,6 +13,10 @@ every 1.minutes do
   runner 'Alarm.new.process'
 end
 
+every 5.minutes do
+  runner 'Interface.new.process'
+end
+
 every 1.day, :at => '1:45' do
   runner 'InterfaceReport.process'
 end

@@ -42,8 +42,10 @@ class Interface < ActiveRecord::Base
 
 	def test_interface interface
 		# response = @conn.get "#{@target_url}#{interface_address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
-		response = @conn.get "#{@target_url}#{interface.address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
-		
+		response = @conn.get do |req|
+			req.url "#{@target_url}#{interface.address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
+			req.headers['Accept'] = 'application/json'
+		end
 		if response.status == 200
 			runtime = (response.env.response_headers['x-runtime'].to_f * 1000).round(2)
 			$redis.hset "interface_run_status_cache", interface.identifier, runtime
@@ -113,7 +115,4 @@ class Interface < ActiveRecord::Base
 		{sum_count: sum_count, every_count: every_count, tops: tops}
 	end
 
-	def get_data
-		
-	end
 end
