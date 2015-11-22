@@ -49,8 +49,15 @@ class Interface < ActiveRecord::Base
 			$redis.hset "interface_run_status_cache", interface.identifier, runtime
 		else
 			# 接口报警
-			p response
-			$group_client.message.send_text("alex6756", "", "", 1, "接口[#{interface.name}]告警: 接口调用异常!!!")
+			params = {
+				identifier: interface.identifier,
+				title: interface.name,
+				category: '接口测试',
+				alarmed_at: Time.now,
+				content: "接口[#{interface.name}]告警: 接口调用异常!!!"
+			}
+			alarm = Alarm.create(params)
+			alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
 		end
 		nil
 	end

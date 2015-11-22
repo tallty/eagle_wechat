@@ -18,7 +18,7 @@ class Alarm < ActiveRecord::Base
   after_create :send_message
 
   def send_message
-    $group_client.message.send_text("alex6756", "", "", 1, "服务器[#{self.title}]告警:超时未收到数据.")
+    $group_client.message.send_text("alex6756", "", "", 1, self.content)
   end
 
   # 1分钟轮循任务,判断是否需要告警
@@ -41,19 +41,20 @@ class Alarm < ActiveRecord::Base
           title: machine.name, 
           category: "系统数据", 
           alarmed_at: last_time,  
-          rindex: length
+          rindex: length,
+          content: "服务器[#{machine.name}]告警:超时未收到数据!!!"
         }
         alarm = Alarm.where(identifier: e, alarmed_at: last_time).first
         # 判断是否存在此告警
         if alarm.present?
           # 判断是否推送此消息
           unless alarm.send_log.present?
-            alarm.send_log.find_or_create_by(accept_user: "alex6756", info: "服务器[#{alarm.title}]告警:超时未收到数据.")
+            alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
             alarm.send_message
           end
         else
           alarm = Alarm.create(params)
-          send_log = alarm.send_log.find_or_create_by(accept_user: "alex6756", info: "服务器[#{alarm.title}]告警:超时未收到数据.")
+          send_log = alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
         end
       end
     end
