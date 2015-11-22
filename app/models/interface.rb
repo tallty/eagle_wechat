@@ -10,7 +10,7 @@
 #  customer_id :integer
 #  address     :string(255)
 #
-
+require 'thread/pool'
 class Interface < ActiveRecord::Base
 	belongs_to :customer
 
