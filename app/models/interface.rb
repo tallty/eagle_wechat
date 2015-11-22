@@ -44,10 +44,11 @@ class Interface < ActiveRecord::Base
 		response = @conn.get "#{@target_url}#{interface.address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
 		
 		if response.status == 200
-			runtime = response.env.response_headers['x-runtime'].to_f * 1000
+			runtime = (response.env.response_headers['x-runtime'].to_f * 1000).round(2)
 			$redis.hset "interface_run_status_cache", interface.identifier, runtime
 		else
 			# 接口报警
+			$group_client.message.send_text("alex6756", "", "", 1, "接口[#{interface.name}]告警: 接口调用异常!!!")
 		end
 		nil
 	end
