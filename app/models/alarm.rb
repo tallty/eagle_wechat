@@ -71,7 +71,7 @@ class Alarm < ActiveRecord::Base
       alarm = Alarm.where(identifier: "#{machine.identifier}").last
       if alarm.present?
         if alarm.warn_over_time.nil?
-          cache["#{machine.name}"] = ["#{alarm.category}", "#{alarm.last_time}"]
+          cache["#{machine.name}"] = ["#{alarm.category}", "#{alarm.try(:last_time)}"]
         end
       end
     end
