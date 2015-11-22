@@ -34,6 +34,7 @@ class Interface < ActiveRecord::Base
 		interfaces = Interface.where("address is not null")
 		pool = Thread.pool(5)
 		interfaces.each do |interface|
+			next if interface.address.blank?
 			pool.process { test_interface(interface) }
 		end
     pool.shutdown
