@@ -8,7 +8,8 @@ class TotalInterfacesController < ApplicationController
     
     total_interface = nil
     datas.each do |item|
-      item_name = Interface.where(identifier: item["interface_name"]).first.try(:name)
+      # item_name = Interface.where(identifier: item["interface_name"]).first.try(:name)
+      item_name = Interface.get_interface_name item['interface_name']
       api_user = ApiUser.where(appid: item["appid"]).first
       if item_name.blank?
         item_name = item["name"]
