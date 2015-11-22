@@ -19,6 +19,30 @@ class Interface < ActiveRecord::Base
 
 	after_initialize :generate_identifier
 
+	def init_faraday
+		@target_url = "http://61.152.122.112:8080"
+		@conn = Faraday.new(:url => @target_url) do |faraday|
+      faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
+    end
+	end
+
+	def process
+		init_faraday
+
+		interfaces = Interface.where("address is not null")
+		pool = Thread.pool(5)
+		interfaces.each do |interface|
+			pool.process { test_interface(interface) }
+		end
+    pool.shutdown
+	end
+
+	def test_interface interface
+		response = @conn.get "#{@target_url}#{interface.address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
+		p response
+	end
+
 	def generate_identifier
 		chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
 		self.identifier ||= chars.sample(8).join
@@ -70,4 +94,7 @@ class Interface < ActiveRecord::Base
 		{sum_count: sum_count, every_count: every_count, tops: tops}
 	end
 
+	def get_data
+		
+	end
 end
