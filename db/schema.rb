@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120023606) do
+ActiveRecord::Schema.define(version: 20151122152552) do
 
   create_table "alarms", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151120023606) do
     t.datetime "updated_at",             null: false
     t.integer  "rindex",     limit: 4
     t.string   "identifier", limit: 255
+    t.string   "content",    limit: 255
   end
 
   create_table "api_users", force: :cascade do |t|
