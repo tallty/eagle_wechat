@@ -24,6 +24,17 @@ class Interface < ActiveRecord::Base
 		self.identifier ||= chars.sample(8).join
 	end
 
+	def write_interface_to_cache
+		$redis.del "interfaces_cache"
+		Interface.all.each do |e|
+			$redis.hset "interfaces_cache", e.identifier, e.name
+		end
+	end
+
+	def self.get_interface_name identifier
+		$redis.hget "interfaces_cache", identifier
+	end
+
 	# 日报表中，当天按小时整理信息
 	def by_hour_infos(total_interfaces)
 		interface_infos = total_interfaces.select{ |total_interface| total_interface.name == name }
