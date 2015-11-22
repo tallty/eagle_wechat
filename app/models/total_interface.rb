@@ -65,11 +65,10 @@ class TotalInterface < ActiveRecord::Base
       if allow_api_users.include?(api_user.id)
         if method == :day
           api_user_infos[api_user.company] = interface.by_hour_infos(total_interfaces)
-          api_user_infos[api_user.company][:allow] = 1
         else
           api_user_infos[api_user.company] = interface.by_day_infos(total_interfaces)
-          api_user_infos[api_user.company][:allow] = 1
         end
+        api_user_infos[api_user.company][:allow] = 1
       else
         if method == :day
           api_user_info = interface.by_hour_infos(total_interfaces)

@@ -37,7 +37,7 @@ class InterfaceReport < ActiveRecord::Base
   def self.process
     now_date = Time.now.to_date - 1.day
     list = TotalInterface.by_day(now_date).distinct(:name).pluck(:name)
-    identifier = "X548EYTO"
+    identifier = "2xs76oQJ"
     list.each do |item|
       data = InterfaceReport.find_or_create_by datetime: now_date, identifier: identifier, name: item
       data.sum_count = TotalInterface.by_day(now_date).where(name: item).sum(:count)
