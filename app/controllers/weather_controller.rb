@@ -1,6 +1,6 @@
 class WeatherController < ApplicationController
 
-	before_action :save_session, only: [:active, :history]
+	before_action :save_session, only: [:active, :history, :port, :meteorologic]
 
 	def active
 		# 服务器上报信息：2次/m
