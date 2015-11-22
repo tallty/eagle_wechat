@@ -23,6 +23,7 @@ class Interface < ActiveRecord::Base
 		@target_url = "http://61.152.122.112:8080"
 		@conn = Faraday.new(:url => @target_url) do |faraday|
       faraday.request :url_encoded
+      # faraday.response :logger
       faraday.adapter Faraday.default_adapter
     end
 	end
@@ -39,8 +40,16 @@ class Interface < ActiveRecord::Base
 	end
 
 	def test_interface interface
+		# response = @conn.get "#{@target_url}#{interface_address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
 		response = @conn.get "#{@target_url}#{interface.address}&appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"
-		p response
+		
+		if response.status == 200
+			runtime = response.env.response_headers['x-runtime'].to_f * 1000
+			$redis.hset "interface_run_status_cache", interface.identifier, runtime
+		else
+			# 接口报警
+		end
+		nil
 	end
 
 	def generate_identifier
