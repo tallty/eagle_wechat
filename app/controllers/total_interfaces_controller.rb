@@ -7,6 +7,7 @@ class TotalInterfacesController < ApplicationController
     datas = MultiJson.load interface_total_params["data"]
     
     total_interface = nil
+    p "----------------------------------------------------------------------------------"
     datas.each do |item|
       # item_name = Interface.where(identifier: item["interface_name"]).first.try(:name)
       item_name = Interface.get_interface_name item['interface_name']
@@ -19,7 +20,9 @@ class TotalInterfacesController < ApplicationController
       total_interface.count = item["interface_count"].to_i
       total_interface.api_user = api_user
       total_interface.save
+      p total_interface.to_json
     end
+    p "----------------------------------------------------------------------------------"
     total_interface = nil
     render :text => 'ok'
   end
