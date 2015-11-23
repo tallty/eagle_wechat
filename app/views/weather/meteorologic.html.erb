@@ -14,7 +14,7 @@
 				<% task_log = task.find_task_log %>
 				<% if task_log.present? %>
 					<div class="col-xs-12 active-line">
-						<div class="col-xs-3"><%=  task.name %></div>
+						<div class="col-xs-3" style="line-height: 40px;"><%=  task.name %></div>
 						<div class="col-xs-3" style="line-height: 40px;"><%= task.rate %>min</div>
 						<div class="col-xs-3">
 							<%= task_log.created_at.strftime('%Y-%m-%d %H:%M:%S') %>

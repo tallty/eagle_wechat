@@ -13,9 +13,12 @@
 			<% if @machines_status.present? %>
 				<% @machines_status.each do |key, value| %>
 	 				<div class="col-xs-12 active-line">
-						<div class="col-xs-4"><%= key %></div>
-						<div class="col-xs-3"><%= value[0] %></div>
-						<div class="col-xs-5"><%= value[1].to_time.strftime("%Y-%m-%d %H:%M:%S")%></div>
+						<div class="col-xs-4 one-line"><%= key %></div>
+						<div class="col-xs-3 one-line"><%= value[0] %></div>
+						<div class="col-xs-5">
+							<%= value[1].to_time.strftime("%Y-%m-%d")%><br>
+							<%= value[1].to_time.strftime("%H:%M:%S")%>
+						</div>
 					</div>
 					<hr class="line-hr">
 				<% end %>
