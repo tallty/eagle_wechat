@@ -10,7 +10,7 @@ module WeatherHelper
   end
 
   # 计算告警发生距现在的时长（min）
-  def alarmed_time_to_now(alarm)
-  	return "#{((Time.now - alarm.alarmed_at.to_time) / 60).to_i} min"
+  def alarmed_time_to_now(alarm, warn_over_time)
+  	return "#{((warn_over_time.to_time - alarm.alarmed_at.to_time) / 60).to_i} min"
   end
 end
