@@ -3,7 +3,7 @@
 <% end %>
 <div class="warp">
 	<div class="sef-container">
-		<div class="tab-title col-xs-12 text-center">
+		<div class="tab-title clearfix text-center">
 			<div class="col-xs-3">数据名称</div>
 			<div class="col-xs-3">上报周期</div>
 			<div class="col-xs-3">上次采集</div>
@@ -14,7 +14,7 @@
 				<% task_log = task.find_task_log %>
 				<% if task_log.present? %>
 					<div class="col-xs-12 active-line">
-						<div class="col-xs-3"><%=  task.name %></div>
+						<div class="col-xs-3" style="padding-top: 10px;"><%=  task.name %></div>
 						<div class="col-xs-3" style="line-height: 40px;"><%= task.rate %>min</div>
 						<div class="col-xs-3">
 							<%= task_log.created_at.strftime('%Y-%m-%d %H:%M:%S') %>

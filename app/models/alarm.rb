@@ -39,7 +39,7 @@ class Alarm < ActiveRecord::Base
         params = { 
           identifier: e, 
           title: machine.name, 
-          category: "系统数据", 
+          category: "服务器", 
           alarmed_at: last_time,  
           rindex: length,
           content: "服务器[#{machine.name}]告警:超时未收到数据!!!"
@@ -81,7 +81,12 @@ class Alarm < ActiveRecord::Base
 
 	# 告警解除时间
   def warn_over_time
+    # 服务器采集信息列表
   	cache = $redis.lindex("#{identifier}_cpu", -(rindex + 1))
+    # 接口信息列表 TODO
+
+    # 气象数据信息列表 TODO
+
   	if cache.nil?
   		return nil
   	else

@@ -3,25 +3,24 @@
 <% end %>
 <div class="warp">
 	<div class="sef-container">
-		<div class="tab-title col-xs-12 text-center">
-			<div class="col-xs-4">接口名称</div>
+		<div class="tab-title clearfix text-center">
+			<div class="col-xs-6">接口名称</div>
 			<!-- <div class="col-xs-3">接口说明</div> -->
-			<div class="col-xs-4">时延</div>
-			<div class="col-xs-4">状态</div>
+			<div class="col-xs-3">时延</div>
+			<div class="col-xs-3">状态</div>
 		</div>
 		<div class="tab-line text-center clearfix">
 		<% @interfaces.each_with_index do |interface, index| %>
 			<div class="col-xs-12 active-line">
-				<div class="col-xs-4"><%=  interface.try(:name) %></div>
-				<!-- <div class="col-xs-3">接口说明</div> -->
+				<div class="col-xs-6" style="padding-top: 10px;"><%=  interface.try(:name) %></div>
 				<% time_cost = delay(1).to_i %>
-				<div class="col-xs-4"><%= time_cost %>ms</div>
-				<div class="col-xs-4">
-				<% if time_cost < 300 %>
-					<i class="fa fa-circle fa-green"></i>正常
-				<% else %>
-					<i class="fa fa-circle fa-red"></i>故障
-				<% end %>
+				<div class="col-xs-3 one-line"><%= time_cost %>ms</div>
+				<div class="col-xs-3 one-line">
+					<% if time_cost < 300 %>
+						<i class="fa fa-circle fa-green"></i>正常
+					<% else %>
+						<i class="fa fa-circle fa-red"></i>故障
+					<% end %>
 				</div>
 			</div>
 			<hr class="line-hr">
