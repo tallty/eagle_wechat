@@ -49,8 +49,6 @@ class Interface < ActiveRecord::Base
 		if response.status == 200
 			runtime = (response.env.response_headers['x-runtime'].to_f * 1000).round(2)
 			$redis.hset "interface_run_status_cache", interface.identifier, runtime
-			$redis.lpush "#{interface.identifier}_status", [runtime, Time.now]
-			length = $redis.llen("#{interface.identifier}_status").to_i
 		else
 			# 接口报警
 			params = {
@@ -58,7 +56,7 @@ class Interface < ActiveRecord::Base
 				title: interface.name,
 				category: '接口测试',
 				alarmed_at: Time.now,
-				rindex: length,
+				rindex: interface.id,
 				content: "接口[#{interface.name}]告警: 接口调用异常!!!"
 			}
 			alarm = Alarm.create(params)
