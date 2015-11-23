@@ -85,7 +85,7 @@
 					normal : {
 						label : {
 							formatter : function (params){
-								return 100 - params.value + '%'
+								return 100 - params.value.round(1) + '%'
 							},
 							textStyle: {
 								baseline : 'top'
@@ -238,10 +238,3 @@
 }
 );
 </script>
-
-
-
-
-
-
-
