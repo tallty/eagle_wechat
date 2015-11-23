@@ -1,7 +1,7 @@
 class MachineDetailsController < ApplicationController
 	before_action :save_session, only: [:index, :show]
 	def index
-		#@machines = current_customer.machines.where(operating_status: 1)
+		@machines = current_customer.machines.where(operating_status: 1)
 	end
 
 	def show
