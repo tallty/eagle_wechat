@@ -85,7 +85,7 @@
 					normal : {
 						label : {
 							formatter : function (params){
-								return 100 - params.value.toFixed(1) + '%'
+								return 100 - params.value + '%'
 							},
 							textStyle: {
 								baseline : 'top'
@@ -139,8 +139,8 @@
 						x:'80%', // for funnel
 						itemStyle : labelFromatter,
 						data : [
-						{name:'other', value:<%= (100 - @machine.memory_percent.delete("%").to_f).round(1) %>, itemStyle : labelBottom},
-						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_f.round(1) %>,itemStyle : labelTop}
+						{name:'other', value:<%= 100 - @machine.memory_percent.delete("%").to_i %>, itemStyle : labelBottom},
+						{name:'内存', value:<%= @machine.memory_percent.delete("%").to_i %>,itemStyle : labelTop}
 						]
 					}
 					]
