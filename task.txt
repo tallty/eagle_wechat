@@ -1,0 +1,13 @@
+mhMWgEYt,上海自动站数据,10
+CMb9cTqI,上海自动站数据(稳定),5
+CunVGoQD,QPF数据,6
+5W98PDK1,全市预警,
+b17tNgdP,区县预警,
+XJMINhsQ,空气质量预报,
+LXNROiBy,社区预警,
+BNOaHexF,短时预报,
+T3jOwDEM,500M格点实况,10
+GiDd5rsP,世界城市预报,1440
+1JWdwzMk,台风,
+xqAOj250,实时交通数据,2
+91J3ykLO,动态客流数据,30
