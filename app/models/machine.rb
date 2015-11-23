@@ -23,23 +23,37 @@ class Machine < ActiveRecord::Base
 
   #计算机器的cpu占比
   def cpu_percent
-      cpu_used = eval(MachineInfo.get_info("cpu", identifier))["cpu_used"].to_i
-      "#{cpu_used}%"
+    cache = MachineInfo.get_info("cpu", identifier)
+    if cache.nil?
+      nil
+    else
+      return "#{eval(cache)["cpu_used"].to_i}%"
+    end
   end
 
   #计算指定机器的内存占用比
   def memory_percent
-    memory_data = eval(MachineInfo.get_info("memory", identifier)) 
-    memory_free = memory_data["memory_free_bytes"].to_f
-    memory_total = memory_data["memory_total_bytes"].to_f
-    memory_used = (((memory_total - memory_free) / memory_total) * 100).round(1)
-    "#{memory_used}%"
+    cache = MachineInfo.get_info("memory", identifier)
+    if cache.nil?
+      nil
+    else
+      memory_data = eval(cache) 
+      memory_free = memory_data["memory_free_bytes"].to_f
+      memory_total = memory_data["memory_total_bytes"].to_f
+      memory_used = (((memory_total - memory_free) / memory_total) * 100).round(1)
+      "#{memory_used}%"
+    end
   end
 
   #已用内存
   def memory_used
-    memory_data = eval(MachineInfo.get_info("memory", identifier)) 
-    memory_used = memory_data["memory_total_bytes"].to_i - memory_data["memory_free_bytes"].to_i
+    cache = MachineInfo.get_info("memory", identifier)
+    if cache.nil?
+      nil
+    else
+      memory_data = eval(cache) 
+      return memory_data["memory_total_bytes"].to_i - memory_data["memory_free_bytes"].to_i
+    end
   end
 
   # 判断服务器是否正常
