@@ -12,7 +12,7 @@ class WeatherController < ApplicationController
 	def history
 		#历史告警取出已解除的告警
     @history_alarms = []
-    Alarm.all.each do |alarm|
+    Alarm.order(created_at: :DESC).each do |alarm|
     	if alarm.warn_over_time.present?
     		@history_alarms.push(alarm)
     	end
