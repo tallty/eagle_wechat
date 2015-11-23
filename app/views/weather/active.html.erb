@@ -6,9 +6,9 @@
 		<div class="tab-title clearfix text-center">
 			<div class="col-xs-4">标题</div>
 			<div class="col-xs-3">模块</div>
-			<!-- <div class="col-xs-3">级别</div> -->
 			<div class="col-xs-5">告警时间</div>
 		</div>
+		<div class="tab-line text-center clearfix">
 		<div class="tab-line text-center clearfix">
 			<% if @machines_status.present? %>
 				<% @machines_status.each do |key, value| %>
@@ -27,6 +27,7 @@
 					<h4>无活跃告警</h4>
 				</div>
 			<% end %>
+		</div>
 		</div>
 	</div>
 </div>
