@@ -49,7 +49,9 @@ class TotalInterface < ActiveRecord::Base
       end
     end
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
-    p infos
+    logger.info "-----------------------------------------------"
+    logger.info infos
+    logger.info "-----------------------------------------------"
     return infos
   end
 
