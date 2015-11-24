@@ -101,11 +101,12 @@ class TotalInterface < ActiveRecord::Base
 
   #计算报表中所有接口调用总数
   def self.total_count total_interfaces
-    total_count = 0
-    total_interfaces.each do |key, value|
-      total_count += value[:sum_count]
-    end
-    return total_count
+    total_interfaces.inject(0) {|sum, value| sum + value[1][:sum_count]}
+    # total_count = 0
+    # total_interfaces.each do |key, value|
+    #   total_count += value[:sum_count]
+    # end
+    # return total_count
   end
 
 end
