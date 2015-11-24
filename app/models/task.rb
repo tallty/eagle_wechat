@@ -21,6 +21,7 @@ class Task < ActiveRecord::Base
     tasks = Task.where("tasks.rate is NOT NULL")
     tasks.each do |task|
       log = task.find_task_log
+      next if log.blank?
       time_out = (now_time - log.created_at) / 60
       last_time = log.created_at + task.rate.minutes
       if log.present? && time_out > task.rate
