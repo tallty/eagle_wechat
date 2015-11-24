@@ -16,7 +16,7 @@ class TotalInterface < ActiveRecord::Base
   belongs_to :api_user
   by_star_field :datetime
 
-  default_scope { order(count: :DESC) }
+  # default_scope { order(count: :DESC) }
   scope :day, -> (date) { by_day(date) }
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
@@ -49,9 +49,6 @@ class TotalInterface < ActiveRecord::Base
       end
     end
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
-    logger.info "-----------------------------------------------"
-    logger.info infos
-    logger.info "-----------------------------------------------"
     return infos
   end
 
