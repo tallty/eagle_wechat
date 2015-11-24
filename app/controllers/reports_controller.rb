@@ -8,7 +8,8 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		@day_reports = TotalInterface.reports(current_customer, @active_day, :day)
-		@total_count = TotalInterface.total_count(@day_reports)
+		@total_count = TotalInterface.day(@active_day).sum(:count)
+		# @total_count = TotalInterface.total_count(@day_reports)
 	end
 
 	#周报表
