@@ -33,16 +33,16 @@ class Task < ActiveRecord::Base
           rindex: log.id,
           content: "气象数据[#{task.name}]告警:超时未收到数据!!!"
         }
-        alarm = Alarm.where(identifier: "#{task.identifier}", alarmed_at: last_time)
+        alarm = Alarm.where(identifier: "#{task.identifier}", alarmed_at: last_time).first
         if alarm.present?
           # 判断是否推送此消息
           unless alarm.send_log.present?
-            send_log = alarm.create_send_log(accept_user: "alex6756", info: alarm.content)
+            alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
             alarm.send_message
           end
         else
           alarm = Alarm.create(params)
-          send_log = alarm.create_send_log(accept_user: "alex6756", info: alarm.content)
+          alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
         end
       end
     end
