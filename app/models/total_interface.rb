@@ -49,6 +49,8 @@ class TotalInterface < ActiveRecord::Base
       end
     end
     infos = infos.sort{|x, y| y[1][:sum_count] <=> x[1][:sum_count]}.to_h
+    p infos
+    return infos
   end
 
   # 调用指定借口的客户调用信息
