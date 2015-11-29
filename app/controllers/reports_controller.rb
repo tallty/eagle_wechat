@@ -51,10 +51,10 @@ class ReportsController < ApplicationController
 		def save_session
 			code = params[:code]
 			result = $group_client.oauth.get_user_info(code, "1")
-
-			session[:openid] = params[:openid]
-
-			$redis.set "url_params", "#{result.result['UserId']}"
+			openid = result.result["UserId"]
+			session[:openid] = openid
+			@member = Member.where(openid: openid).first
+			@customer = @member.customer || Customer.first
 		end
 
 		# 已选日期	
