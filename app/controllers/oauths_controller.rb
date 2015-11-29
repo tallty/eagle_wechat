@@ -1,12 +1,13 @@
 class OauthsController < ApplicationController
-  before_action :store_reurl, only: [:index]
+  # before_action :store_reurl, only: [:index]
 
   respond_to :html
   
   def index
     openid = session[:openid]
+    $reids.set("openid_cache", openid)
     if openid.present?
-      redirect_to session[:target_url]
+      redirect_to params[:target_url]
     else
       url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}", "STATE#wechat_redirect")
       uri = URI.encode(url)
