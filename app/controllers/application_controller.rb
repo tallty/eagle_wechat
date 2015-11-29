@@ -12,8 +12,12 @@ class ApplicationController < ActionController::Base
       customer = Customer.first
     else
       member = Member.where(openid: openid).first
-      customer = member.customer or Customer.first
+      customer = member.customer
     end
-    return customer
+    if customer.present?
+      return customer
+    else
+      return Customer.first
+    end
   end 
 end
