@@ -51,6 +51,7 @@ class ReportsController < ApplicationController
 		def save_session
 			code = params[:code]
 			result = $group_client.oauth.get_user_info(code, "1")
+			$redis.set("result_cache", result)
 			openid = result.result["UserId"]
 			$redis.set("openid_cache", openid)
 			session[:openid] = openid
