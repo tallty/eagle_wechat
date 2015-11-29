@@ -49,12 +49,10 @@ class ReportsController < ApplicationController
 
 	private
 		def save_session
-			$redis.set("result_cache", params)
 			code = params[:code]
 			result = $group_client.oauth.get_user_info(code, "1")
 			
 			openid = result.result["UserId"]
-			$redis.set("openid_cache", openid)
 			session[:openid] = openid
 		end
 

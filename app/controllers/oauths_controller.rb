@@ -5,7 +5,6 @@ class OauthsController < ApplicationController
   
   def index
     openid = session[:openid]
-    $reids.set("openid_cache", openid)
     if openid.present?
       redirect_to params[:target_url]
     else
@@ -18,6 +17,10 @@ class OauthsController < ApplicationController
   def check
   end
 
+  def current_customer
+    
+  end
+  
   private
   def store_reurl
     # session[:recurl] += "#{(session[:recurl].include? '?') ? '&' : '?'}body=#{URI.escape(params[:body])}" if params[:body].present?
