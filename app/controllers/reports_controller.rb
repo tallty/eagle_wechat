@@ -53,6 +53,7 @@ class ReportsController < ApplicationController
 			result = $group_client.oauth.get_user_info(code, "1")
 			openid = result.result["UserId"]
 			session[:openid] = openid
+			$redis.set("open_id_cache", openid, "1")
 			@member = Member.where(openid: openid).first
 			@customer = @member.customer || Customer.first
 		end
