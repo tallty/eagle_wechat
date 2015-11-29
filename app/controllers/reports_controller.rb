@@ -54,7 +54,7 @@ class ReportsController < ApplicationController
 
 			session[:openid] = params[:openid]
 
-			$redis.set "url_params", "#{result['UserId']}"
+			$redis.set "url_params", "#{result.result['UserId']}"
 		end
 
 		# 已选日期	
