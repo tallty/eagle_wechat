@@ -50,7 +50,8 @@ class ReportsController < ApplicationController
 	private
 		def save_session
 			session[:openid] = params[:openid]
-			$redis.hset "open_id_cache", "#{params[:openid]}", 1
+
+			$redis.set "url_params", "#{params}"
 		end
 
 		# 已选日期	
