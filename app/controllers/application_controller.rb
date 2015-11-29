@@ -5,19 +5,19 @@ class ApplicationController < ActionController::Base
   before_action :current_customer
 
   def current_customer
-    # Customer.first
-    openid = session[:openid]
-    customer = nil
-    if openid.blank?
-      customer = Customer.first
-    else
-      member = Member.where(openid: openid).first
-      customer = member.try(:customer) || Customer.first
-    end
-    if customer.present?
-      return customer
-    else
-      return Customer.first
-    end
+    Customer.first
+    # openid = session[:openid]
+    # customer = nil
+    # if openid.blank?
+    #   customer = Customer.first
+    # else
+    #   member = Member.where(openid: openid).first
+    #   customer = member.try(:customer) || Customer.first
+    # end
+    # if customer.present?
+    #   return customer
+    # else
+    #   return Customer.first
+    # end
   end 
 end
