@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
 
 
   def current_customer
-  	Customer.first
+  	# Customer.first
+    openid = session[:openid]
+    @member = Member.where(openid: openid).first
+    @customer = @member.customer || Customer.first
   end 
 end
