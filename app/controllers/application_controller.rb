@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       customer = Customer.first
     else
       member = Member.where(openid: openid).first
-      customer = member.customer
+      customer = member.try(:customer) || Customer.first
     end
     if customer.present?
       return customer
