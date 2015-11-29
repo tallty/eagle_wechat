@@ -6,7 +6,8 @@ class OauthsController < ApplicationController
   def index
     # openid = session[:openid]
     # if openid.present?
-      redirect_to params[:target_url]
+    target_url = "/params[:target_url]"
+    redirect_to target_url
     # else
     #   url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}", "STATE#wechat_redirect")
     #   uri = URI.encode(url)
