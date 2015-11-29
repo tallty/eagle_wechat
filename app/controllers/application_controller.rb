@@ -4,11 +4,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_customer
 
-
   def current_customer
-  	# Customer.first
+    # Customer.first
     openid = session[:openid]
-    @member = Member.where(openid: openid).first
-    @customer = @member.customer || Customer.first
+    customer = nil
+    if openid.blank?
+      customer = Customer.first
+    else
+      member = Member.where(openid: openid).first
+      customer = member.customer or Customer.first
+    end
+    return customer
   end 
 end
