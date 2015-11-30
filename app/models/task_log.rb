@@ -22,11 +22,7 @@ class TaskLog < ActiveRecord::Base
       item = MultiJson.load(i)
       process_result = item["process_result"]
       
-      if item["task_identifier"].blank?
-        $redis.hset "task_log_error_identifier", e, 1
-        $redis.hdel "task_log_cache", e
-        next
-      end
+      next if item["task_identifier"].blank?
 
       log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f))
       log.end_time = Time.at(process_result["end_time"].to_f)
