@@ -25,7 +25,10 @@ class TaskLog < ActiveRecord::Base
       log.end_time = Time.at(process_result["end_time"].to_f)
       log.exception = process_result["exception"]
       task = Task.where(identifier: log.task_identifier).first
-      next if task.blank?
+      if task.blank?
+        $redis.hset "task_log_error_identifier", e, 1
+        next
+      end
       log.task_name = task.name
       # log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
