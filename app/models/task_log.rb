@@ -34,7 +34,7 @@ class TaskLog < ActiveRecord::Base
       log.end_time        = end_time
       log.exception       = process_result["exception"]
       log.task_name       = Task.get_task_name item['task_identifier']
-      log.file_name       = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
+      log.file_name       = MultiJson.load(process_result["file_list"]).join(";")
       log.save
 
       $redis.hdel("task_log_cache", e)
