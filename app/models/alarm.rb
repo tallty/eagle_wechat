@@ -27,7 +27,7 @@ class Alarm < ActiveRecord::Base
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
     last_times.map do |e, v| 
-      last_time = Time.parse(v) + 1.minutes
+      last_time = Time.parse(v) + 3.minutes
       # 判断服务器是否正常
       if now_time > last_time
         # 从告警表判断此告警信息已经存在: 
