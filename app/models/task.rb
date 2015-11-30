@@ -16,6 +16,18 @@ class Task < ActiveRecord::Base
   has_many :sms_logs, dependent: :destroy
 	after_initialize :task_identifier
 
+  def write_task_info_to_cache
+    tasks = Task.all
+    tasks.each do |task|
+      $redis.hset "tasks_info_cache", task.identifier, task.name
+    end
+    tasks = nil
+  end
+
+  def self.get_task_name identifier
+    $redis.hget "tasks_info_cache", identifier  
+  end
+
   def self.process
     now_time = Time.now
     tasks = Task.where("tasks.rate is NOT NULL")
