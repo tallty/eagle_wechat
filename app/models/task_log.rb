@@ -21,14 +21,18 @@ class TaskLog < ActiveRecord::Base
       # 入库
       item = MultiJson.load(i)
       process_result = item["process_result"]
+      
+      if item["task_identifier"].blank?
+        $redis.hset "task_log_error_identifier", e, 1
+        $redis.hdel "task_log_cache", e
+        next
+      end
+
       log = TaskLog.find_or_create_by task_identifier: item["task_identifier"], start_time: (Time.at(process_result["start_time"].to_f))
       log.end_time = Time.at(process_result["end_time"].to_f)
       log.exception = process_result["exception"]
       task = Task.where(identifier: log.task_identifier).first
-      if task.blank?
-        $redis.hset "task_log_error_identifier", e, 1
-        next
-      end
+      
       log.task_name = task.name
       # log.file_name = MultiJson.load(process_result["file_list"]).map { |e| e.pop }.join(";")
       log.save
