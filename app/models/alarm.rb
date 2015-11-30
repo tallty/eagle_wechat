@@ -18,7 +18,8 @@ class Alarm < ActiveRecord::Base
   after_create :send_message
 
   def send_message
-    $group_client.message.send_text("alex6756", "", "", 1, self.content)
+    $group_client.message.send_text("alex6756", "", "", 1, self.content)X
+    $group_client.message.send_text("bianandbian", "", "", 1, self.content)X
   end
 
   # 1分钟轮循任务,判断是否需要告警
@@ -54,7 +55,7 @@ class Alarm < ActiveRecord::Base
           end
         else
           alarm = Alarm.create(params)
-          send_log = alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
+          alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
         end
       end
     end
