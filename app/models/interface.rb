@@ -90,7 +90,8 @@ class Interface < ActiveRecord::Base
 		# every_count = interface_infos.sort{ |x, y| x.datetime <=> y.datetime }.collect{|interface_info| [interface_info.datetime, interface_info.count]}.to_h
 		sort_count = interface_infos.sort{|x, y| x.datetime <=> y.datetime }
 		count = []
-		sort_count.group_by {|item| item.datetime }.each {|key, value| count << [key, value.inject(0) { |result, element| result + element.count }]}
+		group_list = sort_count.group_by {|item| item.datetime }
+		group_list.each {|key, value| count << [key, value.inject(0) { |result, element| result + element.count }]}
 
 		# 当天当前接口调用总次数
 		sum_count = count.to_h.values.sum
