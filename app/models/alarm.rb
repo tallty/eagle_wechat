@@ -61,7 +61,21 @@ class Alarm < ActiveRecord::Base
     end
   end
 
-
+  # 数据采集任务告警
+  def build_task_alarm(params={})
+    identifier = params[:identifier] || params['identifier']
+    alarmed_at = params[:alarmed_at] || params['alarmed_at']
+    alarm = Alarm.where(identifier: identifier, alarmed_at: alarmed_at).first
+    if alarm.present?
+      unless alarm.send_log.present?
+        alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
+        alarm.send_message
+      end
+    else
+      alarm = Alarm.create(params)
+      alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
+    end
+  end
 
 	# 判断是否需要告警，并返回告警记录
 	def self.avtive_alarms(current_customer)

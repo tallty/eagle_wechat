@@ -27,6 +27,4 @@ end
 
 every 1.minutes do
   runner "TaskLog.process"
-  runner "Task.process"
-  runner "TaskLog.verify"
 end

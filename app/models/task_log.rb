@@ -40,27 +40,22 @@ class TaskLog < ActiveRecord::Base
       log.file_name       = MultiJson.load(process_result["file_list"]).join(";")
       log.save
 
+      $redis.hset("alarm_task_cache", log.task_identifier, start_time)
+      
       $redis.hdel("task_log_cache", e)
+      params = {identifier: e, title: machine.name, category: '气象数据', alarmed_at: last_time, rindex: log.id}
+      # 数据处理异常,告警
       exception = MultiJson.load(log.exception) rescue ""
       if exception.present?
-        $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
-      end
-    end
-  end
-
-  def self.verify
-    tasks = Task.where('rate > 0').pluck(:identifier, :rate)
-    tasks.each do |item|
-      log = TaskLog.where(task_identifier: item[0]).last
-      begin
-        time_out = (Time.now - log.start_time) / 60 
-        if time_out - item[-1] > 2
-          $redis.hset("alarm_task_cache", log.task_identifier, log.start_time.strftime("%Y%m%d%H%M%S"))
-        end  
-      rescue Exception => e
+        params['content'] = "数据[#{log.task_name}]告警:数据解析异常, 需要马上解决."
+        Alarm.new.build_task_alarm(params)
         next
       end
+
+      # 数据超时未解析到新数据,告警
       
     end
   end
+
+
 end
