@@ -27,6 +27,8 @@ class WeatherController < ApplicationController
 	# 气象数据
 	def meteorologic
  		@tasks = current_customer.tasks.where("tasks.rate is NOT NULL")
+ 		@process_time = $redis.hgetall("alarm_task_cache")
+ 		@now_time = Time.now
 	end
 
 	# 诊断结果
