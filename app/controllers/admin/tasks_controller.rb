@@ -55,7 +55,7 @@ module Admin
 			end
 			# Never trust parameters from the scary internet, only allow the white list through.
 			def task_params
-				params.require(:task).permit(:identifier, :name, :rate)
+				params.require(:task).permit(:identifier, :name, :rate, :alarm_threshold)
 			end
 	end
 end

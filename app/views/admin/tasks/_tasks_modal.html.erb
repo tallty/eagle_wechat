@@ -33,6 +33,14 @@
                 <dd class="error text-danger"><%= task.errors[:rate][0] %></dd>
               <% end %>
             </div>
+            <div class="form-group">
+              <div class="input-group input-padding" style="width: 100%;">
+                <%= f.number_field :alarm_threshold, class: 'form-control', placeholder: '告警阀值'%>
+              </div>
+              <% if task.errors[:rate].any? %>
+                <dd class="error text-danger"><%= task.errors[:rate][0] %></dd>
+              <% end %>
+            </div>
             <div class="text-center"><button class="btn sub-btn btn-primary" type="submit"><strong>提交</strong></button></div>
             <% end %>
           </div>

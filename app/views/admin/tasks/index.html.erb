@@ -16,6 +16,7 @@
                 <th class="text-center">名称</th>
                 <th class="text-center">识别码</th>
                 <th class="text-center">运行频率</th>
+                <th class="text-center">告警阀值</th>
                 <th class="text-center">操作</th>
               </tr>
             </thead>
@@ -26,6 +27,7 @@
                 <td><%= task.name %></td>
                 <td><%= task.identifier %></td>
                 <td><%= task.rate %></td>
+                <td><%= task.alarm_threshold %></td>
                 <td>
                   <%= link_to edit_admin_customer_task_path(id:task.id), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
                     <span class="glyphicon glyphicon-edit"></span>
