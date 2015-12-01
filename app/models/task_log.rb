@@ -17,6 +17,7 @@ class TaskLog < ActiveRecord::Base
 
   def self.process
     list = $redis.hgetall("task_log_cache")
+    now_time = Time.now
     list.map do |e, i|
       # 入库
       item = MultiJson.load(i)
@@ -53,7 +54,11 @@ class TaskLog < ActiveRecord::Base
       end
 
       # 数据超时未解析到新数据,告警
-      
+      alarm_threshold = Task.where(identifier: log.task_identifier).first.try(:alarm_threshold)
+      if alarm_threshold.present? and (end_time + alarm_threshold.minutes) < now_time
+        params['content'] = "数据[#{log.task_name}]告警:超时未解析到新数据."
+        Alarm.new.build_task_alarm(params)
+      end
     end
   end
 
