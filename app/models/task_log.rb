@@ -82,7 +82,6 @@ class TaskLog < ActiveRecord::Base
     if exception.present?
       alarm_params['content'] = "数据[#{log.task_name}]告警:数据解析异常, 需要马上解决."
       Alarm.new.build_task_alarm(alarm_params)
-      next
     end
   end
 end
