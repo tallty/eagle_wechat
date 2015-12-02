@@ -76,11 +76,11 @@ class TaskLog < ActiveRecord::Base
   end
 
   def verify_task
-    alarm_params = {identifier: task_identifier, title: machine.name, category: '气象数据', alarmed_at: last_time, rindex: log.id}
+    alarm_params = {identifier: task_identifier, title: task_name, category: '气象数据', alarmed_at: Time.now, rindex: id}
     # 数据处理异常,告警
-    exception = MultiJson.load(log.exception) rescue ""
+    exception = MultiJson.load(exception) rescue ""
     if exception.present?
-      alarm_params['content'] = "数据[#{log.task_name}]告警:数据解析异常, 需要马上解决."
+      alarm_params['content'] = "数据[#{task_name}]告警:数据解析异常, 需要马上解决."
       Alarm.new.build_task_alarm(alarm_params)
     end
   end
