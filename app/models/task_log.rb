@@ -57,10 +57,10 @@ class TaskLog < ActiveRecord::Base
     tasks = Task.where('alarm_threshold is not null')
     now_time = Time.now
     tasks.each do |task|
-      end_time_str = $redis.hget("alarm_task_cache")
+      end_time_str = $redis.hget("alarm_task_cache", task.identifier)
       end_time = Time.parse end_time_str
       if (end_time + task.alarm_threshold.minutes) < now_time
-        params = {identifier: task.identifier, :alarmed_at: Time.now}
+        params = {identifier: task.identifier}
         params['content'] = "数据[#{task.task_name}]告警:超时未解析到新数据."
         Alarm.new.build_task_alarm(params)
       end

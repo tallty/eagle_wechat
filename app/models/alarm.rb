@@ -26,22 +26,22 @@ class Alarm < ActiveRecord::Base
   def process
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
-    last_times.map do |e, v| 
+    last_times.map do |e, v|
       last_time = Time.parse(v) + 3.minutes
       # 判断服务器是否正常
       if now_time > last_time
-        # 从告警表判断此告警信息已经存在: 
+        # 从告警表判断此告警信息已经存在:
         #   如果不存在,存入数据库并推送消息
         #   如果存在,判断推送消息记录表是否已经成功推送过此条消息
         #     如果推送过,结束.否则推送消息并写入推送消息日志表
         machine = Machine.where(identifier: e).first
         # 服务器故障时的采集信息列表长度
         length = length = $redis.llen("#{e}_cpu").to_i
-        params = { 
-          identifier: e, 
-          title: machine.name, 
-          category: "服务器", 
-          alarmed_at: last_time,  
+        params = {
+          identifier: e,
+          title: machine.name,
+          category: "服务器",
+          alarmed_at: last_time,
           rindex: length,
           content: "服务器[#{machine.name}]告警:超时未收到数据!!!"
         }
@@ -64,14 +64,16 @@ class Alarm < ActiveRecord::Base
   # 数据采集任务告警
   def build_task_alarm(params={})
     identifier = params[:identifier] || params['identifier']
-    alarmed_at = params[:alarmed_at] || params['alarmed_at']
-    alarm = Alarm.where(identifier: identifier, alarmed_at: alarmed_at).first
+    now_time = Time.now - 1.minutes
+    alarm = Alarm.where("identifier = ? and alarmed_at > ?", identifier, now_time).first
+    # alarm = Alarm.where(identifier: identifier, alarmed_at: alarmed_at).first
     if alarm.present?
       unless alarm.send_log.present?
         alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
         alarm.send_message
       end
     else
+      params['alarmed_at'] = now_time
       alarm = Alarm.create(params)
       alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
     end
