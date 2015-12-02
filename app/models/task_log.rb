@@ -58,6 +58,7 @@ class TaskLog < ActiveRecord::Base
     now_time = Time.now
     tasks.each do |task|
       end_time_str = $redis.hget("alarm_task_cache", task.identifier)
+      next if end_time_str.blank?
       end_time = Time.parse end_time_str
       if (end_time + task.alarm_threshold.minutes) < now_time
         params = {identifier: task.identifier}
