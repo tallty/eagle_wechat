@@ -18,7 +18,7 @@ class TaskLog < ActiveRecord::Base
 
   def process
     analysis_fetch_data
-    # verify_fetch_data
+    verify_fetch_data
   end
 
   # 解析接收到的数据,如果数据有异常,报警
