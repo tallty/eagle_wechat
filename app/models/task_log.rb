@@ -40,7 +40,7 @@ class TaskLog < ActiveRecord::Base
         start_time: Time.at(process_result['start_time'].to_f),
         end_time: Time.at(process_result['end_time'].to_f),
         exception: process_result['exception'],
-        task_name: Task.get_task_name item['task_identifier'],
+        task_name: Task.get_task_name(item['task_identifier']),
         file_name: MultiJson.load(process_result['file_list']).join(';')
       }
       log = TaskLog.new.build_task_log(log_params)
