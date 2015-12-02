@@ -26,5 +26,5 @@ every 1.day, :at => '8:00' do
 end
 
 every 1.minutes do
-  runner "TaskLog.process"
+  runner "TaskLog.new.process"
 end
