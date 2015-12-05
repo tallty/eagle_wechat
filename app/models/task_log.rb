@@ -61,7 +61,7 @@ class TaskLog < ActiveRecord::Base
       next if end_time_str.blank?
       end_time = Time.parse end_time_str
       if (end_time + task.alarm_threshold.minutes) < now_time
-        params = {identifier: task.identifier}
+        params = {identifier: task.identifier, title: '', category: '气象数据'}
         params['content'] = "数据[#{task.name}]告警:超时未解析到新数据."
         Alarm.new.build_task_alarm(params)
       end

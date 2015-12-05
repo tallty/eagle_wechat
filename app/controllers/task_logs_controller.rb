@@ -8,12 +8,13 @@ class TaskLogsController < ApplicationController
     if process_file_list.present?
       $redis.hset "task_log_cache", "#{task_log_params[:task_identifier]}_#{Time.now.to_i}", task_log_params.to_json
     end
+    AnalyzeTask.publish("task", "get task log.")
     render :text => 'ok'
   end
 
   private
   def task_log_params
-    params.require(:task_log).permit(:task_identifier, process_result: [ 
+    params.require(:task_log).permit(:task_identifier, process_result: [
                                                       :start_time, :end_time, :exception, :file_list
                                                     ])
   end
