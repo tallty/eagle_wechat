@@ -10,7 +10,7 @@ namespace :rabbitmq do
   desc 'Setup routing'
   task :setup do
     require 'bunny'
-    conn = Bunny.new
+    conn = Bunny.new(:automatically_recover => false)
     conn.start
 
     ch = conn.create_channel
