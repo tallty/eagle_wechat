@@ -1,14 +1,10 @@
 source 'https://ruby.taobao.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'#, '4.2.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.18'
-
-# gem 'sqlite3'
 # Use SCSS for stylesheets
-
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -43,6 +39,9 @@ gem 'annotate'
 gem 'by_star'
 gem 'whenever'
 gem 'thread'
+
+gem 'bunny'
+gem 'sneakers'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -56,4 +55,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
