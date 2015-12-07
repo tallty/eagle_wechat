@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+	skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
+
 	before_action :current_customer
 	# before_action :save_session, only: [:index, :week, :month]
 	before_action :select_day, only: [:index, :show]
@@ -49,29 +51,13 @@ class ReportsController < ApplicationController
 
 	private
 		def current_customer
-			# Customer.first
 			code = params[:code]
-			logger.warn '-----------------code in params start------------------------'
-			logger.warn code
-			logger.warn '-----------------code in params over------------------------'
 			result = $group_client.oauth.get_user_info(code, "1")
-			logger.warn '--------------result---------------------'
 			openid = result.result["UserId"]
-			logger.warn "openid is: #{openid} <<<<<<<<<<<<<"
+			member = Member.where(openid: openid).first
 			session[:openid] = openid
-			# openid = session[:openid]
-			# customer = nil
-			# if openid.blank?
-			#   customer = Customer.first
-			# else
-			#   member = Member.where(openid: openid).first
-			#   customer = member.try(:customer) || Customer.first
-			# end
-			# if customer.present?
-			#   return customer
-			# else
-			#   return Customer.first
-			# end
+			customer = member.customer
+			return Customer.first if customer.blank?
 		end
 
 		# 已选日期
