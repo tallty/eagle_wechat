@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
   before_action :current_customer
 
   def current_customer
-    Customer.first
+    # Customer.first
+    code = params[:code]
+		logger.warn '-----------------------------------------'
+		logger.warn code
+		logger.warn '-----------------------------------------'
+		result = $group_client.oauth.get_user_info(code, "1")
+
+		openid = result.result["UserId"]
+		session[:openid] = openid
     # openid = session[:openid]
     # customer = nil
     # if openid.blank?
@@ -19,5 +27,5 @@ class ApplicationController < ActionController::Base
     # else
     #   return Customer.first
     # end
-  end 
+  end
 end

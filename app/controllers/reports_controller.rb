@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
 
-	before_action :save_session, only: [:index, :week, :month]
+	# before_action :save_session, only: [:index, :week, :month]
 	before_action :select_day, only: [:index, :show]
 	before_action :select_week, only: [:week, :week_show]
 	before_action :select_month, only: [:month, :month_show]
@@ -48,16 +48,16 @@ class ReportsController < ApplicationController
 	end
 
 	private
-		def save_session
-			code = params[:code]
-			p '-----------------------------------------'
-			p code
-			p '-----------------------------------------'
-			result = $group_client.oauth.get_user_info(code, "1")
-
-			openid = result.result["UserId"]
-			session[:openid] = openid
-		end
+		# def save_session
+		# 	code = params[:code]
+		# 	p '-----------------------------------------'
+		# 	p code
+		# 	p '-----------------------------------------'
+		# 	result = $group_client.oauth.get_user_info(code, "1")
+		#
+		# 	openid = result.result["UserId"]
+		# 	session[:openid] = openid
+		# end
 
 		# 已选日期
 		def select_day
