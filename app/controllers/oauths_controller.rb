@@ -4,9 +4,9 @@ class OauthsController < ApplicationController
   respond_to :html
 
   def index
-    p '-------------------openid in oauths controller----------------------'
+    logger.warn '-------------------openid in oauths controller----------------------'
     openid = session[:openid]
-    p "openid param is: #{openid}"
+    logger.warn "openid param is: #{openid}"
 
     if openid.present?
       target_url = "\/#{params[:target_url]}"
