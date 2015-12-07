@@ -1,6 +1,7 @@
 class WeatherController < ApplicationController
+	skip_before_filter :verify_authenticity_token, :only => [:active, :history, :port, :meteorologic]
 
-	before_action :save_session, only: [:active, :history, :port, :meteorologic]
+	before_action :current_customer
 
 	def active
 		# 服务器上报信息：2次/m
@@ -36,7 +37,16 @@ class WeatherController < ApplicationController
 	end
 
 	private
-	def save_session
-		session[:openid] = params[:openid]
+	def current_customer
+		code = params[:code]
+		result = $group_client.oauth.get_user_info(code, "1")
+		openid = result.result["UserId"]
+		member = Member.where(openid: openid).first
+		if member.present?
+			session[:openid] = openid
+			customer = member.customer
+		else
+			Customer.first
+		end
 	end
 end
