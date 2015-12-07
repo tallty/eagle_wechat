@@ -7,12 +7,13 @@ class ApplicationController < ActionController::Base
   def current_customer
     # Customer.first
     code = params[:code]
-		logger.warn '-----------------------------------------'
+		logger.warn '-----------------code in params start------------------------'
 		logger.warn code
-		logger.warn '-----------------------------------------'
+		logger.warn '-----------------code in params over------------------------'
 		result = $group_client.oauth.get_user_info(code, "1")
-
+    logger.warn '--------------result---------------------'
 		openid = result.result["UserId"]
+    logger.warn "openid is: #{openid} <<<<<<<<<<<<<"
 		session[:openid] = openid
     # openid = session[:openid]
     # customer = nil
