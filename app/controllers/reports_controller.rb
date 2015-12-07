@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-
+	before_action :current_customer
 	# before_action :save_session, only: [:index, :week, :month]
 	before_action :select_day, only: [:index, :show]
 	before_action :select_week, only: [:week, :week_show]
@@ -48,16 +48,31 @@ class ReportsController < ApplicationController
 	end
 
 	private
-		# def save_session
-		# 	code = params[:code]
-		# 	p '-----------------------------------------'
-		# 	p code
-		# 	p '-----------------------------------------'
-		# 	result = $group_client.oauth.get_user_info(code, "1")
-		#
-		# 	openid = result.result["UserId"]
-		# 	session[:openid] = openid
-		# end
+		def current_customer
+			# Customer.first
+			code = params[:code]
+			logger.warn '-----------------code in params start------------------------'
+			logger.warn code
+			logger.warn '-----------------code in params over------------------------'
+			result = $group_client.oauth.get_user_info(code, "1")
+			logger.warn '--------------result---------------------'
+			openid = result.result["UserId"]
+			logger.warn "openid is: #{openid} <<<<<<<<<<<<<"
+			session[:openid] = openid
+			# openid = session[:openid]
+			# customer = nil
+			# if openid.blank?
+			#   customer = Customer.first
+			# else
+			#   member = Member.where(openid: openid).first
+			#   customer = member.try(:customer) || Customer.first
+			# end
+			# if customer.present?
+			#   return customer
+			# else
+			#   return Customer.first
+			# end
+		end
 
 		# 已选日期
 		def select_day
