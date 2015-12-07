@@ -6,12 +6,14 @@ class OauthsController < ApplicationController
   def index
     logger.warn '-------------------openid in oauths controller----------------------'
     openid = session[:openid]
+    logger.warn "params is: #{params}"
     logger.warn "openid param is: #{openid}"
 
     if openid.present?
       target_url = "\/#{params[:target_url]}"
       redirect_to target_url
     else
+      logger.warn "$group_client.oauth"
       url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}", "STATE#wechat_redirect")
       uri = URI.encode(url)
       redirect_to uri
