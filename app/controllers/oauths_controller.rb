@@ -1,6 +1,6 @@
 class OauthsController < ApplicationController
   # before_action :store_reurl, only: [:index]
-
+  skip_before_filter :verify_authenticity_token, :only => [:index]
   respond_to :html
 
   def index
