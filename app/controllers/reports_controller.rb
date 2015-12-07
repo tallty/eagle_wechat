@@ -55,9 +55,12 @@ class ReportsController < ApplicationController
 			result = $group_client.oauth.get_user_info(code, "1")
 			openid = result.result["UserId"]
 			member = Member.where(openid: openid).first
-			session[:openid] = openid
-			customer = member.customer
-			return Customer.first if customer.blank?
+			if member.present?
+				session[:openid] = openid
+				customer = member.customer
+			else
+				Customer.first
+			end
 		end
 
 		# 已选日期
