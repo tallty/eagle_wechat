@@ -10,6 +10,7 @@ QyWechat::QyWechatController.class_eval do
     # text消息
     def response_text_message(options={})
       # generate_text_message("Your Message: #{@keyword}")
+      generate_text_message("")
     end
 
     # image消息

@@ -27,7 +27,7 @@ class Member < ActiveRecord::Base
       member.openid    = user['userid']
       # member.nick_name = user['nick_name']
       member.headimg   = user['avatar']
-      member.customer  = user['customer']
+      member.customer  = customer
       member.save
 
     end
