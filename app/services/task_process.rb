@@ -3,7 +3,7 @@ class TaskProcess
   def self.push(raw_post)
     item = MultiJson.load raw_post
     process_result = item["process_result"]
-    next if item["task_identifier"].blank?
+    return if item["task_identifier"].blank?
 
     log_params = {
       task_identifier: item['task_identifier'],
