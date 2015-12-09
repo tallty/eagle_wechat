@@ -17,13 +17,13 @@
 			<% if Time.at(next_day(@active_day) / 1000) >= Date.today %>
 				<div class="col-xs-4 next text-muted">
 					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
-				</div>				
+				</div>
 			<% else %>
 				<%= link_to reports_path(date: next_day(@active_day)) do %>
 					<div class="col-xs-4 next">
 						<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
-				<% end %>				
+				<% end %>
 			<% end %>
 		</div>
 		<div class="tab-line clearfix">
@@ -60,7 +60,12 @@
 					<% end %>
 					<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
 				<% end %>
+
 			<% end %>
+			<ul class="">
+				<li class="col-xs-6">接口报表</li>
+				<li class="col-xs-6 line">用户报表</li>
+			</ul>
 		</div>
 	</div>
 </div>

@@ -88,12 +88,30 @@ a:link, a:visited, a:hover, a:active {
   background-color: rgb(121, 120, 120);
   div {
     padding: 5px 0;
-    color: #fff; 
+    color: #fff;
   }
 }
 
 .tab {
 	font-size: 12px;
+}
+
+ul{
+	width: 100%;
+	margin-top: 20px;
+	padding: 0px;
+	float: left;
+	position: relative;
+	list-style: none;
+	text-align: center;
+	background-color: #000;
+}
+li{
+	height: 52px;
+	line-height: 52px;
+	color: #fff;
+	cursor: pointer;
+	border-left: 2px solid #d3d3d3;
 }
 
 //选择日期样式
