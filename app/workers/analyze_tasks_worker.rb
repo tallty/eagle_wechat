@@ -4,8 +4,6 @@ class AnalyzeTasksWorker
   from_queue 'analyze_task', env: nil
 
   def work(raw_post)
-    Rails.logger.warn "----------------------------------"
-    Rails.logger.warn raw_post
     TaskProcess.push(raw_post)
     ack!  # we need to let queue know that message was received
   end
