@@ -2,8 +2,8 @@ class TaskProcess
 
   def self.push(raw_post)
     item = MultiJson.load raw_post
-    logger.warn "<<<<<<<<<<<<>>>>>>>>>>>>>>>>"
-    logger.warn item
+    Rails.logger.warn "<<<<<<<<<<<<>>>>>>>>>>>>>>>>"
+    Rails.logger.warn item
     process_result = item["process_result"]
     return if item["task_identifier"].blank?
 
