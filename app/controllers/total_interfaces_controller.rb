@@ -3,9 +3,10 @@ class TotalInterfacesController < ApplicationController
   respond_to :json
 
   def fetch
+    AnalyzeTask.publish("interface", interface_total_params)
     identifier = interface_total_params["identifier"]
     datas = MultiJson.load interface_total_params["data"]
-    
+
     total_interface = nil
     datas.each do |item|
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
