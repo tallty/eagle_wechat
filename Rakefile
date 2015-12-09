@@ -15,11 +15,15 @@ namespace :rabbitmq do
 
     ch = conn.create_channel
 
-    x = ch.fanout('message.task')
+    ch.fanout('message.task')
+    ch.fanout('message.interface')
+
     # get or create queue (note the durable setting)
-    queue = ch.queue('worker.task', durable: true)
+    queue_task = ch.queue('worker.task', durable: true)
+    queue_interface = ch.queue('worker.interface', durable: true)
 
     queue.bind('message.task')
+    queue.bind('message.interface')
     conn.close
   end
 end
