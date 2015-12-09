@@ -4,7 +4,7 @@ class TotalInterfacesController < ApplicationController
   respond_to :json
 
   def fetch
-    AnalyzeTask.publish("interface", interface_total_params.to_h)
+    AnalyzeTask.publish("interface", "interface data fetch")
     identifier = interface_total_params["identifier"]
     datas = MultiJson.load interface_total_params["data"]
 
