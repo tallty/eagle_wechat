@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20151202143522) do
     t.integer  "rindex",     limit: 4
     t.string   "identifier", limit: 255
     t.string   "content",    limit: 255
+    t.datetime "end_time"
   end
 
   create_table "api_users", force: :cascade do |t|

@@ -65,6 +65,8 @@ class ReportsController < ApplicationController
 
 		# 已选日期
 		def select_day
+			p '---------------select day-------------------'
+			p params[:date]
 			@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
 		end
 
