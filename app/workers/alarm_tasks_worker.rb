@@ -1,7 +1,7 @@
-class TasksWorker
+class AlarmTasksWorker
   include Sneakers::Worker
 
-  from_queue 'worker.task', env: nil
+  from_queue 'alarm_task', env: nil
 
   def work(raw_post)
     RecentTasks.push(raw_post)
