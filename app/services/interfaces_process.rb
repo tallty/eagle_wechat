@@ -9,7 +9,6 @@ class InterfacesProcess
     today = Time.now.strftime('%Y-%m-%d')
     data.each do |item|
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
-      item_name = Interface.where(identifier: item["interface_name"]).first.try(:name)
       item_name = Interface.get_interface_name item['interface_name']
       api_user = ApiUser.where(appid: item["appid"]).first
       if item_name.blank?
