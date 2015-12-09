@@ -1,4 +1,4 @@
-class PostsWorker
+class TasksWorker
   include Sneakers::Worker
 
   from_queue 'worker.task', env: nil
