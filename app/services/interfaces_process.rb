@@ -16,6 +16,7 @@ class InterfacesProcess
       end
       datetime = Time.parse(item["datetime"])# + 8.hour
       total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user: api_user)
+      Rails.logger.warn total_interface.to_json
       if total_interface.blank?
         total_interface = TotalInterface.new
         total_interface.datetime   = datetime
@@ -25,7 +26,7 @@ class InterfacesProcess
       end
       total_interface.count = item["interface_count"].to_i
       total_interface.save
-      Rails.logger.warn total_interface.to_json
+
       $redis.zadd "interface_top_#{total_interface.identifier}_#{today}", total_interface.count, total_interface.to_json
     end
     total_interface = nil
