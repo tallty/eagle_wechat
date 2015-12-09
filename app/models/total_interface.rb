@@ -21,6 +21,14 @@ class TotalInterface < ActiveRecord::Base
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
 
+  def as_json(options=nil)
+    {
+      datetime: datetime.strftime("%Y-%m-%d %H:%M"),
+      identifier: identifier,
+      name: name,
+      count: count
+    }
+  end
   def self.fix_name
     items = TotalInterface.all
     items.each do |item|
@@ -40,7 +48,7 @@ class TotalInterface < ActiveRecord::Base
     # infos = {"interface.name" => {:sum_count => count, :every_count => {datetime => count}, :tops => [date1, date2, date3]}, ...}
     infos = {}
     if method == :day
-      current_customer.interfaces.each do |interface|  
+      current_customer.interfaces.each do |interface|
         infos[interface.name] = interface.by_hour_infos(total_interfaces)
       end
     else
@@ -80,7 +88,7 @@ class TotalInterface < ActiveRecord::Base
         unless api_user_info[:sum_count] == 0
           api_user_infos[api_user.company] = api_user_info
           api_user_infos[api_user.company][:allow] = 0
-        end      
+        end
       end
     end
     # 循环显示所有调用选中接口的客户的调用信息
