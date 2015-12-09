@@ -17,43 +17,6 @@ class TaskLog < ActiveRecord::Base
   after_create :verify_task
 
   def process
-    analysis_fetch_data
-    verify_fetch_data
-  end
-
-  # 解析接收到的数据,如果数据有异常,报警
-  def analysis_fetch_data
-    list = $redis.hgetall("task_log_cache")
-    now_time = Time.now
-    list.map do |e, i|
-      # 入库
-      item = MultiJson.load(i)
-      process_result = item["process_result"]
-
-      if item["task_identifier"].blank?
-        $redis.hdel "task_log_cache", e
-        next
-      end
-
-      log_params = {
-        task_identifier: item['task_identifier'],
-        start_time: Time.at(process_result['start_time'].to_f),
-        end_time: Time.at(process_result['end_time'].to_f),
-        exception: process_result['exception'],
-        task_name: Task.get_task_name(item['task_identifier']),
-        file_name: MultiJson.load(process_result['file_list']).join(';')
-      }
-      log = TaskLog.new.build_task_log(log_params)
-      $redis.multi do
-        $redis.hset("alarm_task_cache", log.task_identifier, log.start_time)
-
-        $redis.hdel("task_log_cache", e)
-      end
-    end
-  end
-
-  # 数据超时未解析到新数据,告警
-  def verify_fetch_data
     tasks = Task.where('alarm_threshold is not null')
     now_time = Time.now
     tasks.each do |task|
