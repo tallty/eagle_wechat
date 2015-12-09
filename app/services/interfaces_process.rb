@@ -1,13 +1,12 @@
 class InterfacesProcess
 
   def self.push(raw_post)
-    Rails.logger.warn raw_post
-
     params_hash = MultiJson.load raw_post
     identifier = params_hash["identifier"]
     data = MultiJson.load params_hash["data"]
 
     total_interface = nil
+    today = Time.now.strftime('%Y-%m-%d')
     data.each do |item|
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
       item_name = Interface.where(identifier: item["interface_name"]).first.try(:name)
@@ -27,6 +26,8 @@ class InterfacesProcess
       end
       total_interface.count = item["interface_count"].to_i
       total_interface.save
+
+      $redis.zadd "interface_top_#{total_interface.identifier}_#{today}", total_interface.count, total_interface.to_json
     end
     total_interface = nil
   end
