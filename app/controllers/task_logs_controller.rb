@@ -1,6 +1,6 @@
 class TaskLogsController < ApplicationController
   protect_from_forgery :except => :index
-  skip_before_filter :verify_authenticity_token,:only => [:base_hardware_info, :real_hardware_info]
+  skip_before_filter :verify_authenticity_token,:only => [:fetch]
   respond_to :json
 
   def fetch

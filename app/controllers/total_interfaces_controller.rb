@@ -1,9 +1,10 @@
 class TotalInterfacesController < ApplicationController
   protect_from_forgery :except => :index
+  skip_before_filter :verify_authenticity_token,:only => [:fetch]
   respond_to :json
 
   def fetch
-    AnalyzeTask.publish("interface", interface_total_params)
+    AnalyzeTask.publish("interface", interface_total_params.to_h)
     identifier = interface_total_params["identifier"]
     datas = MultiJson.load interface_total_params["data"]
 
