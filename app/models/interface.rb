@@ -121,4 +121,10 @@ class Interface < ActiveRecord::Base
 		{sum_count: sum_count, every_count: every_count, tops: tops}
 	end
 
+	def fix_data_by_day(day)
+		TotalInterface.day(day).each do |item|
+			interface = Interface.where(name: item.name).first
+			$redis.zadd "interface_top_#{interface.identifier}_#{day}", item.count, item.to_json
+		end
+	end
 end
