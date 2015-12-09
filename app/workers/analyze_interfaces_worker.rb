@@ -1,4 +1,4 @@
-class InterfacesWorker
+class AnalyzeInterfacesWorker
   include Sneakers::Worker
 
   from_queue 'analyze_interface', env: nil
