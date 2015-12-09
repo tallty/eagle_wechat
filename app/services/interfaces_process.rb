@@ -15,7 +15,7 @@ class InterfacesProcess
         item_name = item["name"]
       end
       datetime = Time.parse(item["datetime"])# + 8.hour
-      total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user: api_user)
+      total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user: api_user).first
       Rails.logger.warn total_interface.to_json
       if total_interface.blank?
         total_interface = TotalInterface.new
