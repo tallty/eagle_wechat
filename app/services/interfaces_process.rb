@@ -27,7 +27,7 @@ class InterfacesProcess
       total_interface.count = item["interface_count"].to_i
       total_interface.save
 
-      $redis.zadd "interface_top_#{total_interface.identifier}_#{today}", total_interface.count, total_interface.to_json
+      $redis.zadd "interface_top_#{item['interface_name']}_#{today}", total_interface.count, total_interface.to_json
     end
     total_interface = nil
   end
