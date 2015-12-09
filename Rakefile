@@ -13,19 +13,27 @@ namespace :rabbitmq do
     conn = Bunny.new(:automatically_recover => false)
     conn.start
 
-    ch_task = conn.create_channel
+    # publish/subscribe
+    ch = conn.create_channel
+    x = ch.fanout('message.task')
+    ch.queue('analyze_task', :auto_delete => true).bind(x).subscribe do |delivery_info, metadata, payload|
+      Rails.logger.warn "#{payload} => analyze_task"
+    end
 
-    ch_task.fanout('message.task')
+    ch.queue('alarm_task', :auto_delete => true).bind(x).subscribe do |delivery_info, metadata, payload|
+      Rails.logger.warn "#{payload} => alarm_task"
+    end
 
-    ch_interface = conn.create_channel
-    ch_interface.fanout('message.interface')
-
+    # ch_task = conn.create_channel
+    # ch_task.fanout('message.task')
     # get or create queue (note the durable setting)
-    queue_task = ch_task.queue('worker.task', durable: true)
-    queue_interface = ch_interface.queue('worker.interface', durable: true)
-
-    queue_task.bind('message.task')
-    queue_interface.bind('message.interface')
+    # queue_task = ch_task.queue('worker.task', durable: true)
+    # queue_task.bind('message.task')
+    #
+    # ch_interface = conn.create_channel
+    # ch_interface.fanout('message.interface')
+    # queue_interface = ch_interface.queue('worker.interface', durable: true)
+    # queue_interface.bind('message.interface')
     conn.close
   end
 end
