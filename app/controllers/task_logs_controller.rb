@@ -4,7 +4,11 @@ class TaskLogsController < ApplicationController
   respond_to :json
 
   def fetch
-    process_file_list = MultiJson.load task_log_params["process_result"]["file_list"]
+    begin
+      process_file_list = MultiJson.load task_log_params["process_result"]["file_list"]
+    rescue Exception => e
+      logger.warn task_log_params["process_result"]["file_list"]
+    end
     if process_file_list.present?
       $redis.hset "task_log_cache", "#{task_log_params[:task_identifier]}_#{Time.now.to_i}", task_log_params.to_json
     end
