@@ -32,6 +32,7 @@ class MachinesController < ApplicationController
   end
 
   def real_hardware_info
+    AnalyzeTask.publish("machine_info", "get machine log.")
     $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
     $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
     $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
@@ -49,17 +50,17 @@ class MachinesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def base_hardware_params
       params.require(:machine).permit(:identifier, :datetime, info: [
-                                                      cpu: [ :name, :mhz, :real, :total], 
-                                                      memory: [:swap_total, :total ], 
-                                                      net_work: [ :external_address, :network_address ] 
+                                                      cpu: [ :name, :mhz, :real, :total],
+                                                      memory: [:swap_total, :total ],
+                                                      net_work: [ :external_address, :network_address ]
                                                     ])
     end
 
     def real_hardware_params
       params.require(:machine).permit(:identifier, :datetime, info: [
-                                                      cpu: [ :real, :top, :cpu_used, :date_time ], 
+                                                      cpu: [ :real, :top, :cpu_used, :date_time ],
                                                       file_system: [:lost_file_system, :percent_used, :date_time],
-                                                      memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes, :date_time ], 
+                                                      memory: [:memory_total_bytes, :total, :memory_free_bytes, :memory_inactive_bytes, :memory_wired_bytes, :date_time ],
                                                       net_work: [:rx, :tx, :date_time],
                                                       load_average: [:date_time, :load_fifteen_minutes, :load_five_minutes, :load_one_minute]
                                                     ])
