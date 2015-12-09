@@ -16,11 +16,11 @@ namespace :rabbitmq do
     # publish/subscribe
     ch = conn.create_channel
     x = ch.fanout('message.task')
-    ch.queue('analyze_task', :auto_delete => true, durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
+    ch.queue('analyze_task', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
       Rails.logger.warn "#{payload} => analyze_task"
     end
 
-    ch.queue('alarm_task', :auto_delete => true, durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
+    ch.queue('alarm_task', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
       Rails.logger.warn "#{payload} => alarm_task"
     end
 
