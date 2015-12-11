@@ -1,14 +1,14 @@
 .warp {
-	background-color: #F0F0F2;
+	background-color: #f2f0f0;
 	height: 100%;
 }
 .sef-container {
 	padding: 15px 10px;
 }
-a:link, a:visited, a:hover, a:active {
-	text-decoration: none;
-	color: #000;
-}
+// a:link, a:visited, a:hover, a:active {
+// 	text-decoration: none;
+// 	color: #000;
+// }
 .tab-title {
 	background-color: #000;
 	color: #fff;
@@ -104,7 +104,7 @@ ul{
 	position: relative;
 	list-style: none;
 	text-align: center;
-	background-color: #000;
+	background-color: #292929;
 }
 li{
 	height: 52px;
@@ -113,7 +113,22 @@ li{
 	cursor: pointer;
 	border-left: 2px solid #d3d3d3;
 }
-
+.report-img{
+	height: 260px;
+	width: 100%;
+	text-align: center;
+	padding-top: 97px;
+	overflow: hidden;
+}
+.list{
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+	overflow: hidden;
+	.btn-block{
+		margin-top: 15px;
+	}
+}
 //选择日期样式
 .select_date{
 	background-color: transparent;
@@ -134,4 +149,8 @@ li{
 	height: 18px;
 	line-height: 22px;
 	font-size: 16px;
+}
+.btn-mysterious{
+	color: #cbcbcb;
+	background-color: #181818;
 }

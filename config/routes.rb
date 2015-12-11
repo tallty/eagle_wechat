@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       post :real_hardware_info
     end
   end
-  
+
   resources :task_logs do
     collection do
       post :fetch
@@ -25,11 +25,11 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     passwords: 'users/passwords'
   }
-  
+
   namespace :admin do
     resources :users
     resources :customers do
-      resources :members 
+      resources :members
       resources :machines
       resources :tasks
       resources :interfaces
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   end
 
   resources :oauths, only: [:index]
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -67,12 +67,15 @@ Rails.application.routes.draw do
 
      #报表页
      resources :reports, only: [:index, :show] do
-        collection do
-          get 'week'
-          get 'week_show'
-          get 'month'
-          get 'month_show'
-        end
+       member do
+         get :daily
+       end
+       collection do
+        get 'week'
+        get 'week_show'
+        get 'month'
+        get 'month_show'
+      end
      end
 
   # Example resource route with sub-resources:
