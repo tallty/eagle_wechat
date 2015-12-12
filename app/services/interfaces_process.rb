@@ -33,6 +33,10 @@ class InterfacesProcess
 
       $redis.zadd "interface_top_#{item['interface_name']}_#{today}", total_interface.count, total_interface.to_json
     end
+
+    # 计算接口调用总数
+    TotalInterface.new.write_sum_to_cache
+
     total_interface = nil
   end
 end
