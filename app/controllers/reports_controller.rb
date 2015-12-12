@@ -41,11 +41,12 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
-		# 借口的图表数据
+		# 接口的图表数据
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 		# 调用已选借口的所有客户信息
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @active_day, :day)
-		@total_count = TotalInterface.total_count(@api_user_infos)
+		data = $redis.hget("interface_sort_#{@customer.identifier}_#{@active_day.strftime('%Y-%m-%d')}", params[:name])
+		data_hash = MultiJson.load(data)
+		@total_count = data_hash["all_count"]
 	end
 
 	#周报表详情页
