@@ -42,7 +42,7 @@ class TotalInterface < ActiveRecord::Base
     customers.each do |customer|
       data = TotalInterface.by_day(process_day).group(:name).sum(:count)
       data.map do |k, v|
-        $redis.zadd "interface_sort_#{customer.identifier}_#{day_format}", v, "#{k}_#{v}"
+        $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", "#{v}"
       end
       data = nil
     end
