@@ -23,6 +23,7 @@ class TotalInterface < ActiveRecord::Base
 
   scope :transfers_sum, -> (date) {by_day(date).group(:identifier).sum(:count)}
 
+  # 最新接口调用总数写入redis
   def write_sum_to_cache
     today = Time.now.to_date
     list = TotalInterface.transfers_sum(today)
@@ -31,6 +32,20 @@ class TotalInterface < ActiveRecord::Base
       $redis.hset "interface_sum_cache", "#{today_format}_#{k}", v
     end
     list = nil
+  end
+
+  # 统计各接口最新调用数
+  def analyz_interface(day=nil)
+    process_day = day || Time.now.to_date
+    customers = Customer.all
+    day_format = process_day.strftime("%Y-%m-%d")
+    customers.each do |customer|
+      data = TotalInterface.by_day(process_day).group(:name).sum(:count)
+      data.map do |k, v|
+        $redis.zadd "interface_sort_#{customer.identifier}_#{day_format}", v, "#{k}_#{v}"
+      end
+      data = nil
+    end
   end
 
   def as_json(options=nil)
