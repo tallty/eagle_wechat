@@ -35,9 +35,9 @@
 		</div>
 		<div class="col-xs-12 mes-line text-center state">
 			<div class="col-xs-6">调用总次数</div>
-			<div class="col-xs-6">调用次数最多的客户</div>
+			<!-- <div class="col-xs-6">调用次数最多的客户</div> -->
 			<div class="col-xs-6"><%= @total_count %></div>
-			<div class="col-xs-6"><%= @api_user_infos.keys.first unless @total_count == 0 %></div>
+			
 		</div>
 		<div class="tab-line clearfix">
 			<% if @total_count == 0 %>
