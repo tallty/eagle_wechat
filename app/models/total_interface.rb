@@ -24,8 +24,8 @@ class TotalInterface < ActiveRecord::Base
   scope :transfers_sum, -> (date) {by_day(date).group(:identifier).sum(:count)}
 
   # 最新接口调用总数写入redis
-  def write_sum_to_cache
-    today = Time.now.to_date
+  def write_sum_to_cache(day=nil)
+    today = day || Time.now.to_date
     list = TotalInterface.transfers_sum(today)
     today_format = today.strftime("%Y-%m-%d")
     list.map do |k, v|
