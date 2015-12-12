@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
 		@day_format = @active_day.strftime('%Y-%m-%d')
 		# @day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		# @total_count = TotalInterface.total_count(@day_reports)
-		data = $redis.hgetall("interface_sort_#{current_customer.identifier}_#{@day_format}")
+		data = $redis.hvals("interface_sort_#{current_customer.identifier}_#{@day_format}")
 		@flag = true
 		if data.present?
 			@flag = false
