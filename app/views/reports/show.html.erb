@@ -15,7 +15,7 @@
 				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
 			</div>
 
-			<% if Time.at(next_day(@active_day) / 1000) >= Date.today %>
+			<% if next_day(@active_day) >= Date.today %>
 				<div class="col-xs-4 next text-muted">
 					<span class="pull-right">
 						<span>后一天</span>
