@@ -25,7 +25,7 @@ class InterfacesProcess
         total_interface.name       = item_name
         total_interface.api_user   = api_user
       end
-      if total_interface.count < item['interface_count'].to_i
+      if total_interface.try(:count).blank? or total_interface.count < item['interface_count'].to_i
         total_interface.count = item["interface_count"].to_i
       end
 
