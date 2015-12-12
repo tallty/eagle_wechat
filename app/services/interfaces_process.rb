@@ -3,6 +3,7 @@ class InterfacesProcess
   def self.push(raw_post)
     params_hash = MultiJson.load raw_post
     identifier = params_hash["identifier"]
+
     data = MultiJson.load params_hash["data"]
 
     total_interface = nil
