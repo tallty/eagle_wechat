@@ -2,6 +2,7 @@ class InterfacesProcess
 
   def self.push(raw_post)
     params_hash = MultiJson.load raw_post
+
     identifier = params_hash["identifier"]
 
     data = MultiJson.load params_hash["data"]
@@ -11,6 +12,7 @@ class InterfacesProcess
     data.each do |item|
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
       item_name = Interface.get_interface_name item['interface_name']
+      $redis.hset "interface_tempe_cache", item_name, item.to_json
       api_user = ApiUser.where(appid: item["appid"]).first
       if item_name.blank?
         item_name = item["name"]
