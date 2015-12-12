@@ -23,9 +23,9 @@ class TotalInterface < ActiveRecord::Base
 
   scope :transfers_sum, -> (date) {by_day(date).group(:identifier).sum(:count)}
 
-  def set_transfer_sum
+  def write_sum_to_cache
     today = Time.now.to_date
-    list = TotalInterface.transfer_sum(today)
+    list = TotalInterface.transfers_sum(today)
     today_format = today.strftime("%Y-%m-%d")
     list.each do |item|
       $redis.hset "interface_sum_cache", "#{today_format}_#{item.keys[0]}", item.values[0]
