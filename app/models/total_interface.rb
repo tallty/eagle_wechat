@@ -47,6 +47,7 @@ class TotalInterface < ActiveRecord::Base
         times = times.sort{|x, y| y[1] <=> x[1]}.first(3)
         times.each {|t| sort_times << t[0].strftime("%H")}
         param = {
+          name: k,
           all_count: v,
           times: sort_times
         }
