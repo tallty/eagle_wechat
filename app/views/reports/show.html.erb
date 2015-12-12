@@ -4,7 +4,7 @@
 <div class="warp">
 	<div class="sef-container clearfix">
 		<div class="tab-title col-xs-12">
-			<%= link_to report_path(params[:id], date: last_day(@active_day), name: params[:name]) do %>
+			<%= link_to report_path(params[:id], date: last_day(@active_day).strftime("%Y-%m-%d"), name: params[:name]) do %>
 				<div class="col-xs-4 preview">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span>
 					<span>前一天</span>
@@ -23,7 +23,7 @@
 					</span>
 				</div>
 			<% else %>
-				<%= link_to report_path(params[:id], date: next_day(@active_day), name: params[:name]) do %>
+				<%= link_to report_path(params[:id], date: next_day(@active_day).strftime("%Y-%m-%d"), name: params[:name]) do %>
 					<div class="col-xs-4 next">
 						<span class="pull-right">
 							<span>后一天</span>
