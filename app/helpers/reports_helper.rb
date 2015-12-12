@@ -1,12 +1,12 @@
 module ReportsHelper
 	# 前一天
 	def last_day active_day
-		(active_day - 1).to_time.to_i * 1000
+		active_day - 1.day
 	end
 
 	# 后一天
 	def next_day active_day
-		(active_day + 1).to_time.to_i * 1000
+		active_day + 1.day
 	end
 
 	# 前一月

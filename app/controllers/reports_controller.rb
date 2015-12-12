@@ -42,7 +42,6 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		# 借口的图表数据
-		logger.warn params
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 		# 调用已选借口的所有客户信息
 		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @active_day, :day)
@@ -81,18 +80,18 @@ class ReportsController < ApplicationController
 
 		# 已选日期
 		def select_day
-			@active_day = params[:date].blank? ? Date.today : Time.at(params[:date].to_i / 1000).to_date
+			@active_day = params[:date].blank? ? Date.today : Time.parse(params[:date])
 		end
 
 		# 已选周日期区间
 		def select_week
-			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
+			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.parse(params[:date]).beginning_of_week.to_date
 			@sunday = @monday.end_of_week.to_date
 		end
 
 		# 已选月日期区间
 		def select_month
-			@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
+			@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.parse(params[:date]).beginning_of_month.to_date
 			@end_month = @begin_month.end_of_month.to_date
 		end
 end
