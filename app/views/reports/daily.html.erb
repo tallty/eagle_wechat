@@ -34,7 +34,7 @@
 			<% else %>
 				<% index = 0 %>
 				<% @sort_list.each do |item| %>
-					<%= link_to report_path(current_customer.id, name: item['name'], date: @date_format) do %>
+					<%= link_to report_path(@customer.id, name: item['name'], date: @date_format) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="first-line">
 								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= item['name'] %></div>

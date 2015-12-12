@@ -66,7 +66,7 @@ class ReportsController < ApplicationController
 
 	private
 		def current_customer
-			Customer.where(id: params[:id]).first
+			@customer = Customer.where(id: params[:id]).first
 			# code = params[:code]
 			# result = $group_client.oauth.get_user_info(code, "1")
 			# openid = result.result["UserId"]
