@@ -27,8 +27,8 @@ class TotalInterface < ActiveRecord::Base
     today = Time.now.to_date
     list = TotalInterface.transfers_sum(today)
     today_format = today.strftime("%Y-%m-%d")
-    list.each do |item|
-      $redis.hset "interface_sum_cache", "#{today_format}_#{item.keys[0]}", item.values[0]
+    list.map do |k, v|
+      $redis.hset "interface_sum_cache", "#{today_format}_#{k}", v
     end
     list = nil
   end
