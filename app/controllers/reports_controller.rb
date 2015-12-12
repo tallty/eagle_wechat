@@ -15,7 +15,8 @@ class ReportsController < ApplicationController
 	def daily
 		@day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		# @total_count = TotalInterface.total_count(@day_reports)
-		@total_count = $redis.hget("interface_sum_cache", "#{@active_day.strftime('%Y-%m-%d')}_#{current_customer.identifier}")
+		count = $redis.hget("interface_sum_cache", "#{@active_day.strftime('%Y-%m-%d')}_#{current_customer.identifier}")
+		@total_count = count.to_i
 	end
 
 	#周报表
