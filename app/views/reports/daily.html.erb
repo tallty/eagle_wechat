@@ -33,24 +33,24 @@
 			<!-- 存在纪录 -->
 			<% else %>
 				<% index = 0 %>
-				<% @day_reports.each do |key, value| %>
-					<%= link_to report_path(index, name: key, date: @active_day.to_time.to_i * 1000) do %>
+				<% @sort_list.each do |item| %>
+					<%= link_to report_path(index, name: item['name'], date: @date_format) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="first-line">
-								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= key %></div>
+								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= item['name'] %></div>
 								<div class="col-xs-5 line small-tab">
 									<i class="fa fa-circle fa-red"></i></i>调用次数最高时刻
 								</div>
 							</div>
 							<div class="col-xs-7 line max-point">
 								<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-								<span class="number"><%= value[:sum_count] %></span>&nbsp;&nbsp;
+								<span class="number"><%= item[:all_count] %></span>&nbsp;&nbsp;
 								<span class="small-tab">百分比</span>
-								<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
+								<span class="number"><%= (item[:all_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 							</div>
 							<div class="col-xs-5 line number">
-								<% value[:tops].each do |top| %>
-									<span><%= "#{top.strftime("%H")}点" %></span>
+								<% item[:times].each do |time| %>
+									<span><%= "#{time}点" %></span>
 								<% end %>
 							</div>
 						</div>
