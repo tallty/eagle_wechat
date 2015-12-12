@@ -12,7 +12,7 @@ class InterfacesProcess
     data.each do |item|
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
       item_name = Interface.get_interface_name item['interface_name']
-      $redis.hset "interface_tempe_cache", item_name, item.to_json
+      $redis.hset "interface_tempe_cache_#{item_name}", item['datetime'], item.to_json
       api_user = ApiUser.where(appid: item["appid"]).first
       if item_name.blank?
         item_name = item["name"]
