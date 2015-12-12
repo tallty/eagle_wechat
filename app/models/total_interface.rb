@@ -21,6 +21,18 @@ class TotalInterface < ActiveRecord::Base
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
 
+  scope :transfers_sum, -> (date) {by_day(date).group(:identifier).sum(:count)}
+
+  def set_transfer_sum
+    today = Time.now.to_date
+    list = TotalInterface.transfer_sum(today)
+    today_format = today.strftime("%Y-%m-%d")
+    list.each do |item|
+      $redis.hset "interface_sum_cache", "#{today_format}_#{item.keys[0]}", item.values[0]
+    end
+    list = nil
+  end
+
   def as_json(options=nil)
     {
       datetime: datetime.strftime("%Y-%m-%d %H:%M"),
