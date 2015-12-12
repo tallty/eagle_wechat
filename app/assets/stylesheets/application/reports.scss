@@ -5,10 +5,7 @@
 .sef-container {
 	padding: 15px 10px;
 }
-// a:link, a:visited, a:hover, a:active {
-// 	text-decoration: none;
-// 	color: #000;
-// }
+
 .tab-title {
 	background-color: #000;
 	color: #fff;
@@ -71,6 +68,10 @@
 	.line-hr {
 		border: 1px dashed #B8B8B8;
 		margin: 0 5px;
+	}
+	a:link, a:visited, a:hover, a:active {
+		text-decoration: none;
+		color: #000;
 	}
 }
 
