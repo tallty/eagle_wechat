@@ -44,12 +44,12 @@
 							</div>
 							<div class="col-xs-7 line max-point">
 								<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-								<span class="number"><%= item[:all_count] %></span>&nbsp;&nbsp;
+								<span class="number"><%= item['all_count'] %></span>&nbsp;&nbsp;
 								<span class="small-tab">百分比</span>
-								<span class="number"><%= (item[:all_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
+								<span class="number"><%= (item['all_count'].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 							</div>
 							<div class="col-xs-5 line number">
-								<% item[:times].each do |time| %>
+								<% item['times'].each do |time| %>
 									<span><%= "#{time}点" %></span>
 								<% end %>
 							</div>
