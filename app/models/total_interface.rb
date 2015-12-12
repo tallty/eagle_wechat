@@ -50,7 +50,7 @@ class TotalInterface < ActiveRecord::Base
           all_count: v,
           times: sort_times
         }
-        $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", "#{param}"
+        $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", param.to_json
         sort_times.clear
       end
       data = nil
