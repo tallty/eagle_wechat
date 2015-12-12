@@ -4,6 +4,7 @@
 <div class="warp">
 	<div class="sef-container clearfix">
 		<div class="tab-title col-xs-12">
+			<%= params %>
 			<%= link_to report_path(params[:id], date: last_day(@active_day), name: params[:name]) do %>
 				<div class="col-xs-4 preview">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span>
@@ -21,7 +22,7 @@
 						<span>后一天</span>
 						<span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span>
 					</span>
-				</div>				
+				</div>
 			<% else %>
 				<%= link_to report_path(params[:id], date: next_day(@active_day), name: params[:name]) do %>
 					<div class="col-xs-4 next">
@@ -30,7 +31,7 @@
 							<span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span>
 						</span>
 					</div>
-				<% end %>				
+				<% end %>
 			<% end %>
 		</div>
 		<div class="col-xs-12 mes-line text-center state">
@@ -122,7 +123,7 @@
 			echarts: '/assets/echarts'
 		}
 	});
-	
+
 	// 使用
 	require(
 		[
@@ -131,7 +132,7 @@
 		],
 		function (ec) {
 			$(".air-fw2").each(function(){
-				var myChart = ec.init($(this).get(0));   
+				var myChart = ec.init($(this).get(0));
 				var option = {
 					tooltip : {
 						trigger: 'axis',
@@ -190,8 +191,8 @@
 			        },
 				    ]
 					};
-			// 为echarts对象加载数据 
-			myChart.setOption(option); 
+			// 为echarts对象加载数据
+			myChart.setOption(option);
 			});
 		}
 	);
