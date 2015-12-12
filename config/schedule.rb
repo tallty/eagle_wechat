@@ -18,7 +18,7 @@ every 5.minutes do
 end
 
 every 1.day, :at => '1:45' do
-  runner 'InterfaceReport.process'
+  # runner 'InterfaceReport.process'
 end
 
 every 1.day, :at => '8:00' do
