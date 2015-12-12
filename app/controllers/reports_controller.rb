@@ -42,6 +42,7 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		# 借口的图表数据
+		logger.warn params
 		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 		# 调用已选借口的所有客户信息
 		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @active_day, :day)
