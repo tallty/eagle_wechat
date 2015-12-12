@@ -39,10 +39,19 @@ class TotalInterface < ActiveRecord::Base
     process_day = day || Time.now.to_date
     customers = Customer.all
     day_format = process_day.strftime("%Y-%m-%d")
+    sort_times = []
     customers.each do |customer|
       data = TotalInterface.by_day(process_day).group(:name).sum(:count)
       data.map do |k, v|
-        $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", "#{v}"
+        times = TotalInterface.by_day(Time.now.to_date - 1.day).where(name: '雨量站历史查询').group(:datetime).sum(:count)
+        times = times.sort{|x, y| y[1] <=> x[1]}.first(3)
+        times.each {|t| sort_times << t[0].strftime("%H")}
+        param = {
+          all_count: v,
+          times: sort_times
+        }
+        $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", "#{param}"
+        sort_times.clear
       end
       data = nil
     end
