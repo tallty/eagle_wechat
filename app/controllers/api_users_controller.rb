@@ -12,7 +12,7 @@ class ApiUsersController < ApplicationController
       user['count'] = @count[user['id']]
     end
     @api_users.sort { |a, b| b['count'] <=> a['count'] }
-    p @api_users
+    logger.warn @api_users
   end
 
   def daily
