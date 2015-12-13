@@ -45,7 +45,7 @@
 				<% @interface_info["tops"].each do |info| %>
 					<div class="first-line">
 						<div class="col-xs-7 line large-title"><%= index += 1 %>、
-							<i class="fa fa-circle fa-red"></i>调用次数最高的时间点: <%= info[0].strftime("%H") %> 点
+							<i class="fa fa-circle fa-red"></i>时间点: <%= info[0].strftime("%H") %> 点
 						</div>
 						<div class="col-xs-5 line p-l-0 small-tab">
 							<i class="fa fa-circle fa-red"></i>调用次数 <%= info[1] %>
