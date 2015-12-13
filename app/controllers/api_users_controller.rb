@@ -6,7 +6,7 @@ class ApiUsersController < ApplicationController
 
   def index
     @day_format = @active_day.strftime("%Y-%m-%d")
-    @api_users = current_customer.api_users.as_json
+    @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
     count = TotalInterface.user_analyz(@active_day)
     @api_users.each do |user|
       user[:count] = count[user[:id]] || 0
