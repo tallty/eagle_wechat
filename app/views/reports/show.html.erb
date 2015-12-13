@@ -167,9 +167,10 @@
 			// 为echarts对象加载数据
 			myChart.setOption(option);
 			});
-
+		}
+		function (ec){
 			$(".air-pie").each(function(){
-				var myChart = ec.init($(this).get(0));
+				var myChart2 = ec.init($(this).get(0));
 				var option = {
 					tooltip : { trigger: 'axis' },
 					calculable : true,
@@ -188,7 +189,7 @@
 			    ]
 				};
 			// 为echarts对象加载数据
-			myChart.setOption(option);
+			myChart2.setOption(option);
 			});
 		}
 	);
