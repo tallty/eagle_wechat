@@ -7,6 +7,6 @@
 	</div>
 	<div class="list">
 		<%= link_to "接口列表", "reports/#{@customer.id}/daily", :class => "btn btn-mysterious btn-lg btn-block" %>
-		<%= link_to "用户列表", "#", :class => "btn btn-mysterious btn-lg btn-block" %>
+		<%= link_to "用户列表", "/customers/#{@customer.id}/api_users", :class => "btn btn-mysterious btn-lg btn-block" %>
 	</div>
 </div>

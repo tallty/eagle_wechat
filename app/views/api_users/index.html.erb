@@ -1,0 +1,86 @@
+<% content_for :title do %>
+	客户列表
+<% end %>
+<div class="warp">
+	<div class="sef-container">
+		<div class="tab-title col-xs-12">
+			<%= link_to customer_api_users_path(date: last_day(@active_day).strftime("%Y-%m-%d")) do %>
+				<div class="col-xs-4 preview">
+					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
+				</div>
+			<% end %>
+			<div class="col-xs-4 text-center">
+				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
+			</div>
+			<% if next_day(@active_day) >= Date.today %>
+				<div class="col-xs-4 next text-muted">
+					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+				</div>
+			<% else %>
+				<%= link_to customer_api_users_path(date: next_day(@active_day).strftime("%Y-%m-%d")) do %>
+					<div class="col-xs-4 next">
+						<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="tab-line clearfix">
+			<!-- 无纪录 -->
+			<% if @flag %>
+				<div class="col-xs-12 mes-line"><h4 class="text-center">无纪录</h4></div>
+			<!-- 存在纪录 -->
+			<% else %>
+				<% @api_users.each_with_index do |item, index| %>
+					<%= link_to daily_api_user_path(item, date: @day_format) do %>
+						<div class="col-xs-11 mes-line">
+							<div class="first-line">
+								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= item['company'] %></div>
+								<!-- <div class="col-xs-5 line small-tab">
+									<i class="fa fa-circle fa-red"></i></i>调用次数最高时刻
+								</div> -->
+                <span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
+								<span class="number"><%= item['all_count'] %></span>&nbsp;&nbsp;
+								<span class="small-tab">百分比</span>
+							</div>
+						</div>
+						<div class="col-xs-1 icon-twoline">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						</div>
+					<% end %>
+					<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function(){
+		//中间日期选择
+		(function($){
+			$.fn.datetimepicker.dates['zh-CN'] = {
+				days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+				daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+				daysMin:  ["日", "一", "二", "三", "四", "五", "六", "日"],
+				months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一", "十二"],
+				today: "最新",
+				suffix: [],
+				meridiem: ["上午", "下午"]
+			};
+		}(jQuery));
+
+		$("#select_day").datetimepicker({
+			format: "yyyy-mm-dd",
+			minView: 2,
+			endDate: '<%= Time.now.to_date.strftime("%F") %>',
+			todayBtn: true,
+			todayHighlight: true,
+			pickerPosition: 'bottom-right',
+			autoclose: true,
+			language: 'zh-CN'
+		}).on('changeDate', function(ev){
+				location.href = "<% reports_path %>?date=" + ev.date.valueOf() ;
+			});
+	});
+</script>
