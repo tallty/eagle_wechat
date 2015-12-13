@@ -39,11 +39,11 @@ module ReportsHelper
 	def chart_count(interface_info, tag)
 		count = {}
 		if tag == "hour"
-			interface_info[:every_count].each {|key,value| count[key.strftime("%H").to_i] = value}
+			interface_info['every_count'].each {|key,value| count[key.strftime("%H").to_i] = value}
 		elsif tag == "week"
-			interface_info[:every_count].each {|key,value| count[key.to_date.strftime("%w")] = value}
+			interface_info['every_count'].each {|key,value| count[key.to_date.strftime("%w")] = value}
 		elsif tag == "month"
-			interface_info[:every_count].each {|key,value| count[key.to_date.strftime("%d")] = value}
+			interface_info['every_count'].each {|key,value| count[key.to_date.strftime("%d")] = value}
 		end
 		return count
 	end
