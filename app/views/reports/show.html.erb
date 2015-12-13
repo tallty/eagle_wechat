@@ -194,7 +194,7 @@
 		          name:'调用次数', type:'pie', stack: '总量', radius: '55%',
 							center: ['65%', '50%'],
 	            data: [
-								<%= @rotate.each do |r| %>
+								<% @rotate.each do |r| %>
 									{name: <%= r[:name] %>, value: <%= r[:value]%>},
 								<% end %>
 							]
