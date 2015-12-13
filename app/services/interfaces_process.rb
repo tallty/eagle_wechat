@@ -13,6 +13,7 @@ class InterfacesProcess
       next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
       item_name = Interface.get_interface_name item['interface_name']
       api_user = ApiUser.where(appid: item["appid"]).first
+      next if api_user.blank?
       if item_name.blank?
         item_name = item["name"]
       end
@@ -30,7 +31,7 @@ class InterfacesProcess
       end
 
       total_interface.save
-      
+
     end
 
     processor = TotalInterface.new

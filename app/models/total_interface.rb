@@ -21,7 +21,7 @@ class TotalInterface < ActiveRecord::Base
   scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
 
-  scope :transfers_sum, -> (date) {by_day(date).group(:identifier).sum(:count)}
+  scope :transfers_sum, -> (date) {by_day(date).where('api_user_id is not null').group(:identifier).sum(:count)}
 
   # 最新接口调用总数写入redis
   def write_sum_to_cache(day=nil)
