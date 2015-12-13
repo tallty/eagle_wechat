@@ -59,13 +59,13 @@
 			<%= params[:name] %> 调用次数时间分布
 		</div>
 		<div class="col-xs-12 tab-line right1">
-			<div style="height:220px" class="air-fw2"></div>
+			<div style="height:220px" class="air-line"></div>
 		</div>
 		<div class="tab-title col-xs-12">
 			<%= params[:name] %> 用户调用比例
 		</div>
 		<div class="col-xs-12 tab-line right1">
-			<div style="height:220px" class="air-fw2"></div>
+			<div style="height:220px" class="air-pie"></div>
 		</div>
 	</div>
 </div>
@@ -114,41 +114,78 @@
 	require(
 		[
 		'echarts',
-		'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+		'echarts/chart/line', // 使用柱状图就加载bar模块，按需加载
+		'echarts/chart/pie'
 		],
 		function (ec) {
-			$(".air-fw2").each(function(){
+			$(".air-line").each(function(){
 				var myChart = ec.init($(this).get(0));
 				var option = {
-					tooltip : {
-						trigger: 'axis',
-					},
+					tooltip : { trigger: 'axis' },
 					calculable : true,
-					grid : {
-						x: 45,
-						x2: 5,
-						y: 30,
-						y2: 30
-					},
+					grid : { x: 45, x2: 5, y: 30, y2: 30 },
 					xAxis : [
 						{
-							type : 'category',
-							boundaryGap : false,
+							type : 'category', boundaryGap : false,
 							data : ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23']
 						}
 					],
 					yAxis : [
-						{
-							type : 'value',
-							name : '次数',
-						}
+						{ type : 'value', name : '次数'}
 					],
 			    series : [
 			        {
-		            name:'调用次数',
-		            type:'line',
-		            stack: '总量',
-		            symbol: 'none',
+		            name:'调用次数', type:'line', stack: '总量', symbol: 'none',
+		            itemStyle: {
+	                normal: {
+                    areaStyle: {
+                      // 区域图，纵向渐变填充
+                      color : (function (){
+                          var zrColor = require('zrender/tool/color');
+                          return zrColor.getLinearGradient(
+                              0, 200, 0, 400,
+                              [[0, 'rgba(255,0,0,0.8)'],[0.5, 'rgba(64, 220, 87, 1)']]
+                          )
+                      })()
+                    }
+	                }
+		            },
+		            <% every_count = chart_count(@interface_info, "hour") %>
+		            data:[
+									<% (0..23).each do |time| %>
+										<%= every_count[time] || 0 %>,
+									<% end %>
+		            ],
+		            splitNumber : {
+		            	data : [
+		                   {max : '100', min: '0'}
+		                ]
+		            }
+			        },
+				    ]
+					};
+			// 为echarts对象加载数据
+			myChart.setOption(option);
+			});
+
+			$(".air-pie").each(function(){
+				var myChart = ec.init($(this).get(0));
+				var option = {
+					tooltip : { trigger: 'axis' },
+					calculable : true,
+					grid : { x: 45, x2: 5, y: 30, y2: 30 },
+					xAxis : [
+						{
+							type : 'category', boundaryGap : false,
+							data : ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23']
+						}
+					],
+					yAxis : [
+						{ type : 'value', name : '次数'}
+					],
+			    series : [
+			        {
+		            name:'调用次数', type:'pie', stack: '总量', symbol: 'none',
 		            itemStyle: {
 	                normal: {
                     areaStyle: {
