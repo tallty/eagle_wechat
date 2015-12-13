@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
 		@total_count = data_hash["all_count"]
 
 		@user_api = TotalInterface.user_analyz_to_api(params[:name], @active_day)
-		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :name)
+		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :company)
 	end
 
 	#周报表详情页
