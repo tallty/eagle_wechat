@@ -57,7 +57,7 @@ class ReportsController < ApplicationController
 		user_api = TotalInterface.user_analyz_to_api(params[:name], @active_day)
 		@rotate = []
 		user_api.each do |u|
-			@rotate << {value: u[1], name: ApiUser.where(id: u[0]).first.company}.to_json
+			@rotate << {value: u[1], name: ApiUser.where(id: u[0]).first.company}
 		end
 		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :company)
 	end
