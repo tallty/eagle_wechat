@@ -195,7 +195,7 @@
 							center: ['65%', '50%'],
 	            data: [
 								<% @rotate.each do |r| %>
-									{name: <%= r[:name] %>, value: <%= r[:value]%>},
+									{name: '<%= r[:name] %>', value: <%= r[:value]%>},
 								<% end %>
 							]
 	          }
