@@ -9,7 +9,7 @@ class ApiUsersController < ApplicationController
     @api_users = current_customer.api_users.as_json
     count = TotalInterface.user_analyz(@active_day)
     @api_users.each do |user|
-      user[:count] = count[user[:id]]
+      user[:count] = count[user[:id]] || 0
     end
     @api_users.sort_by { |u| u.try(:count) }
   end
