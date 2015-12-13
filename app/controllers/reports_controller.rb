@@ -42,8 +42,13 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		# 接口的图表数据
-		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
+		list = TotalInterface.by_day(@active_day).where(name: params[:name]).group(:datetime).sum(:count)
+		# @interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 		logger.warn @interface_info
+		sort = list.map { |x, y| y[1] <=> x[1] }
+		@interface_info = {}
+		@interface_info["every_count"] = list
+		@interface_info["tops"] = sort.first(3)
 		# 调用已选借口的所有客户信息
 		data = $redis.hget("interface_sort_#{@customer.identifier}_#{@active_day.strftime('%Y-%m-%d')}", params[:name])
 		data_hash = MultiJson.load(data)
