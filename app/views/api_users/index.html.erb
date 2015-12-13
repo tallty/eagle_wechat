@@ -33,12 +33,14 @@
 				<% @api_users.each_with_index do |item, index| %>
 					<%= link_to daily_api_user_path(item[:id], date: @day_format) do %>
 						<div class="col-xs-11 mes-line">
-							<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= item[:company] %></div>
-							<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-							<span class="number"><%= item[:count] %></span>&nbsp;&nbsp;
-							<span class="small-tab">百分比</span>
+							<div class="col-xs-6 line large-title"><%= index += 1 %>. <%= item[:company] %></div>
+              <div class="col-xs-6 line">
+                <span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
+  							<span class="number"><%= item[:count] %></span>&nbsp;&nbsp;
+  							<span class="small-tab">百分比</span>
+              </div>
 						</div>
-						<div class="col-xs-1 icon-twoline">
+						<div class="col-xs-1 icon-threeline">
 							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						</div>
 					<% end %>
