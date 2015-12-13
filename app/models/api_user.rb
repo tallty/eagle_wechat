@@ -13,9 +13,17 @@
 class ApiUser < ActiveRecord::Base
   belongs_to :customer
   has_many :total_interfaces
-  
+
   has_many :interfaces_api_users, dependent: :destroy
   has_many :interfaces, through: :interfaces_api_users
+
+  def as_json(options=nil)
+    {
+      id: id,
+      appid: appid,
+      company: company
+    }
+  end
 
   def fetch(url=nil)
     conn = Faraday.new(:url => "http://61.152.122.112:8080") do |faraday|
