@@ -35,39 +35,20 @@
 		</div>
 		<div class="col-xs-12 mes-line text-center state">
 			<div class="col-xs-6">调用总次数</div>
-			<div class="col-xs-6">调用次数最多的时间</div>
 			<div class="col-xs-6"><%= @total_count %></div>
-			<div class="col-xs-6"><%= @api_user_infos.keys.first unless @total_count == 0 %></div>
 		</div>
 		<div class="tab-line clearfix">
 			<% if @total_count == 0 %>
 				<div class="col-xs-12 mes-line"><h4 class="text-center">无纪录</h4></div>
 			<% else %>
 				<% index = 0 %>
-				<% @api_user_infos.each do |key, value| %>
-					<div class="col-xs-12 mes-line">
-						<div class="first-line">
-							<div class="col-xs-7 line large-title"><%= index += 1 %>、
-								<% if value[:allow] == 1 %>
-									<%= key %>
-								<% else %>
-									<span style="color: red;"><%= key %></span>
-								<% end %>
-							</div>
-							<div class="col-xs-5 line p-l-0 small-tab">
-								<i class="fa fa-circle fa-red"></i>调用次数最高的时间点
-							</div>
+				<% @interface_info["tops"].each do |info| %>
+					<div class="first-line">
+						<div class="col-xs-7 line large-title"><%= index += 1 %>、
+							<i class="fa fa-circle fa-red"></i>调用次数最高的时间点: <%= info[0] %>
 						</div>
-						<div class="col-xs-7 line max-point">
-							<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
-							<span class="number"><%= value[:sum_count] %></span>&nbsp;&nbsp;
-							<span class="small-tab">百分比</span>
-							<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
-						</div>
-						<div class="col-xs-5 line number">&nbsp;
-							<% value[:tops].each do |top| %>
-								<span><%= "#{top.strftime("%H")}点"%></span>
-							<% end %>
+						<div class="col-xs-5 line p-l-0 small-tab">
+							<i class="fa fa-circle fa-red"></i>调用次数 <%= info[1] %>
 						</div>
 					</div>
 					<hr class="line-hr">
