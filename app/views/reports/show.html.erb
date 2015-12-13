@@ -187,13 +187,10 @@
 	            },
 	            <% every_count = chart_count(@interface_info, "hour") %>
 	            data:[
-								// <% (0..23).each do |time| %>
-								// 	<%= every_count[time] || 0 %>,
-								// <% end %>
 								{value: 33, name: 'a'},
 								{value: 21, name: 'b'},
 								{value: 43, name: 'c'},
-								{value: 11, name: 'd'},
+								{value: 11, name: 'd'}
 	            ]
 		        },
 			    ]
