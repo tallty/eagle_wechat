@@ -183,18 +183,17 @@
 					series : [
 			      {
 		          name:'调用次数', type:'pie', stack: '总量', radius: '55%',
-							center: ['50%', '60%']
-	            },
-	            <% every_count = chart_count(@interface_info, "hour") %>
+							center: ['50%', '60%'],
 	            data:[
 								{value: 33, name: 'a'},
 								{value: 21, name: 'b'},
 								{value: 43, name: 'c'},
 								{value: 11, name: 'd'}
 	            ]
-		        },
-			    ]
-				};
+	          }
+					]
+		    }
+			};
 			// 为echarts对象加载数据
 			myChart2.setOption(option);
 			});
