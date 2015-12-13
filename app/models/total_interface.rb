@@ -45,7 +45,7 @@ class TotalInterface < ActiveRecord::Base
       data.map do |k, v|
         times = TotalInterface.by_day(Time.now.to_date - 1.day).where(name: k).group(:datetime).sum(:count)
         times = times.sort{|x, y| y[1] <=> x[1]}.first(3)
-        times.each {|t| sort_times << t[0]}
+        times.each {|t| sort_times << t[0].strftime("%H")}
         param = {
           name: k,
           all_count: v,
