@@ -23,7 +23,7 @@ class TotalInterface < ActiveRecord::Base
 
   scope :transfers_sum, -> (date) {by_day(date).where('api_user_id is not null').group(:identifier).sum(:count)}
   scope :user_analyz, -> (date) {by_day(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
-
+  scope :user_analyz_to_api, -> (interface, date) {by_day(date).where('name = ? and api_user_id is not null', interface).group(:api_user_id).sum(:count)}
   # 最新接口调用总数写入redis
   def write_sum_to_cache(day=nil)
     today = day || Time.now.to_date
