@@ -53,6 +53,9 @@ class ReportsController < ApplicationController
 		data = $redis.hget("interface_sort_#{@customer.identifier}_#{@active_day.strftime('%Y-%m-%d')}", params[:name])
 		data_hash = MultiJson.load(data) rescue {}
 		@total_count = data_hash["all_count"]
+
+		@user_api = TotalInterface.user_analyz_to_api(params[:name], @active_day)
+		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :name)
 	end
 
 	#周报表详情页

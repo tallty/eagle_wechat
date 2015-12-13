@@ -179,11 +179,16 @@
 				var myChart2 = ec.init($(this).get(0));
 				var option = {
 					tooltip : { trigger: 'axis' },
+					legend: {
+						orient: 'vertical',
+						x: 'left',
+						data: <% @users.each {|u| <%= u[1] %> }%>
+					},
 					calculable : true,
 					series : [
 			      {
 		          name:'调用次数', type:'pie', stack: '总量', radius: '55%',
-							center: ['75%', '50%'],
+							center: ['65%', '50%'],
 	            data:[
 								{value: 33, name: 'a'},
 								{value: 21, name: 'b'},
