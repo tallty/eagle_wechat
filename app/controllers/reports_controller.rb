@@ -51,9 +51,13 @@ class ReportsController < ApplicationController
 	end
 
 	def week_index
-
+		render :template => 'index'
 	end
-	
+
+	def month_index
+		render :template => 'index'
+	end
+
 	#周报表
 	def week
 		@week_reports = TotalInterface.reports(current_customer, @monday, :week)
