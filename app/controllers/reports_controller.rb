@@ -27,18 +27,6 @@ class ReportsController < ApplicationController
 		end
 	end
 
-	#周报表
-	def week
-		@week_reports = TotalInterface.reports(current_customer, @monday, :week)
-		@total_count = TotalInterface.total_count(@week_reports)
-	end
-
-	#月报表
-	def month
-		@month_reports = TotalInterface.reports(current_customer, @begin_month, :month)
-		@total_count = TotalInterface.total_count(@month_reports)
-	end
-
 	#日报表详细页
 	def show
 		# 接口的图表数据
@@ -60,6 +48,22 @@ class ReportsController < ApplicationController
 			@rotate << {value: u[1], name: ApiUser.where(id: u[0]).first.try(:company) || '未知'}
 		end
 		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :company)
+	end
+
+	def week_index
+
+	end
+	
+	#周报表
+	def week
+		@week_reports = TotalInterface.reports(current_customer, @monday, :week)
+		@total_count = TotalInterface.total_count(@week_reports)
+	end
+
+	#月报表
+	def month
+		@month_reports = TotalInterface.reports(current_customer, @begin_month, :month)
+		@total_count = TotalInterface.total_count(@month_reports)
 	end
 
 	#周报表详情页
