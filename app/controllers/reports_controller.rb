@@ -58,7 +58,7 @@ class ReportsController < ApplicationController
 
 	def month_index
 		@customer = Customer.first
-		render :template => 'reports/index'
+		render :template => 'reports/index', :locals => {:title => "月报表", :route => "month"}
 	end
 
 	#周报表
