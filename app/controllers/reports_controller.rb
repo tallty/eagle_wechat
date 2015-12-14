@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		@customer = Customer.first
+		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily"}
 	end
 
 	def daily
@@ -52,7 +53,7 @@ class ReportsController < ApplicationController
 
 	def week_index
 		@customer = Customer.first
-		render :template => 'reports/index'
+		render :template => 'reports/index', :locals => {:title => "周报表", :route => "week"}
 	end
 
 	def month_index
