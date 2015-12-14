@@ -11,7 +11,7 @@ class ApiUsersController < ApplicationController
     @api_users.each do |user|
       user[:count] = count[user[:id]] || 0
     end
-    @api_users.sort! { |x, y| y[:count] <=> x[:count]) }
+    @api_users.sort! { |x, y| y[:count] <=> x[:count] }
   end
 
   def daily
