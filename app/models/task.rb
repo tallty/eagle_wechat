@@ -25,7 +25,11 @@ class Task < ActiveRecord::Base
   end
 
   def self.get_task_name identifier
-    $redis.hget "tasks_info_cache", identifier  
+    task_name = $redis.hget "tasks_info_cache", identifier
+		if task_name.blank?
+			$redis.lpush "error_info_cache", {info: "get task name error", identifier: identifier}.to_json
+		end
+		task_name || ""
   end
 
   def self.process
@@ -37,11 +41,11 @@ class Task < ActiveRecord::Base
       time_out = (now_time - log.created_at) / 60
       last_time = log.created_at + task.rate.minutes
       if log.present? && time_out > task.rate
-        params = { 
-          identifier: task.identifier, 
-          title: task.name, 
-          category: "气象数据", 
-          alarmed_at: last_time, 
+        params = {
+          identifier: task.identifier,
+          title: task.name,
+          category: "气象数据",
+          alarmed_at: last_time,
           rindex: log.id,
           content: "气象数据[#{task.name}]告警:超时未收到数据!!!"
         }
