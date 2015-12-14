@@ -8,7 +8,7 @@ module Admin
 		end
 
 		def new
-			# @api_users = current_customer.api_users
+			@api_users = current_customer.api_users
 			@api_user = InterfacesApiUser.new
 			respond_with @api_user
 		end

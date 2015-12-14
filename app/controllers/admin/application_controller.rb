@@ -6,7 +6,10 @@ module Admin
     skip_before_filter :verify_authenticity_token
     before_filter :authenticate_user!
     layout 'admin/home'
-    
+
+    def current_customer
+      Customer.where(id: params[:customer_id]).first
+    end
   end
 
 end
