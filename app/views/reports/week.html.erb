@@ -5,7 +5,7 @@
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
 			<!-- 前一周 -->
-			<%= link_to week_reports_path(date: last_week(@monday)) do %>
+			<%= link_to week_report_path(date: last_week(@monday)) do %>
 				<div class="col-xs-4">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一周</span>
 				</div>
@@ -28,7 +28,7 @@
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
 			<% else %>
-				<%= link_to week_reports_path(date: next_week(@sunday)) do %>
+				<%= link_to week_report_path(date: next_week(@sunday)) do %>
 					<div class="col-xs-4">
 						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
@@ -53,7 +53,7 @@
 								<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 								<span class="number"><%= value[:sum_count] %></span>&nbsp;&nbsp;
 								<span class="small-tab">百分比</span>
-								<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span> 
+								<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 							</div>
 							<div class="col-xs-5 line number">
 								<% value[:tops].each do |top| %>
