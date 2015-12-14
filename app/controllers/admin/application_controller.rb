@@ -7,10 +7,7 @@ module Admin
     before_filter :authenticate_user!
     layout 'admin/home'
 
-    def current_customer
-      logger.warn params
-      Customer.where(id: params[:customer_id]).first
-    end
+    
   end
 
 end
