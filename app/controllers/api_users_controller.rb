@@ -2,7 +2,7 @@ class ApiUsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:daily, :week, :month]
 
 	before_action :current_customer
-  before_action :select_day, only: [:index, :show]
+  before_action :select_day, only: [:index, :daily]
 
   def index
     @day_format = @active_day.strftime("%Y-%m-%d")
@@ -15,6 +15,11 @@ class ApiUsersController < ApplicationController
   end
 
   def daily
+    @api_user = ApiUser.where(id: params[:id]).first
+    @interfaces = @api_user.interfaces
+  end
+
+  def show
 
   end
 

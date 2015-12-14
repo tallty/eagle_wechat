@@ -65,7 +65,7 @@ Rails.application.routes.draw do
    end
 
    resources :customers do
-     resources :api_users, only: [:index], shallow: true do
+     resources :api_users, only: [:index, :show], shallow: true do
        member do
          get :daily
        end
