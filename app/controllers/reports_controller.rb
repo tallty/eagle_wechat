@@ -51,10 +51,12 @@ class ReportsController < ApplicationController
 	end
 
 	def week_index
+		@customer = Customer.first
 		render :template => 'reports/index'
 	end
 
 	def month_index
+		@customer = Customer.first
 		render :template => 'reports/index'
 	end
 
