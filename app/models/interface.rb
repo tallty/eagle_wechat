@@ -28,6 +28,13 @@ class Interface < ActiveRecord::Base
     end
 	end
 
+	def as_json(options=nil)
+		{
+			id: id,
+			name: name
+		}
+	end
+
 	def process
 		init_faraday
 
