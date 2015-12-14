@@ -18,13 +18,13 @@
 			<% if Time.at(next_month(@end_month) / 1000) >= Date.today %>
 				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
-				</div>				
+				</div>
 			<% else %>
 				<%= link_to month_reports_path(date: next_month(@end_month)) do %>
 					<div class="col-xs-4">
 						<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
-				<% end %>				
+				<% end %>
 			<% end %>
 		</div>
 		<div class="tab-line clearfix">
@@ -46,7 +46,7 @@
 								<span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数</span>
 								<span class="number"><%= value[:sum_count] %></span>&nbsp;&nbsp;
 								<span class="small-tab">百分比</span>
-								<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span> 
+								<span class="number"><%= (value[:sum_count].to_f * 1000 / @total_count).to_i / 10.0 %>％</span>
 							</div>
 							<div class="col-xs-5 line number">
 								<% value[:tops].each do |top| %>
@@ -91,7 +91,7 @@
 			autoclose: true,
 			language: 'zh-CN'
 		}).on('changeDate', function(ev){
-				location.href = "<% month_reports_path %>?date=" + ev.date.valueOf();
+				location.href = "<% month_report_path %>?date=" + ev.date.valueOf();
 			});
 	});
 </script>
