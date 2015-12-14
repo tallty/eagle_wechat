@@ -51,11 +51,11 @@ class ReportsController < ApplicationController
 	end
 
 	def week_index
-		render :template => 'index'
+		render :template => 'reports/index'
 	end
 
 	def month_index
-		render :template => 'index'
+		render :template => 'reports/index'
 	end
 
 	#周报表
