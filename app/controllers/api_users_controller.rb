@@ -18,7 +18,7 @@ class ApiUsersController < ApplicationController
     @api_user = ApiUser.where(id: params[:id]).first
     @interfaces = @api_user.interfaces.as_json
     data = TotalInterface.user_interface_count(@api_user, @active_day)
-    @interfaces.each { |e| e[:count] = data[e[:name]] }
+    @interfaces.each { |e| e[:count] = data[e[:name]] || 0 }
     @interfaces.sort! {|x, y| y[:count] <=> x[:count]}
   end
 
