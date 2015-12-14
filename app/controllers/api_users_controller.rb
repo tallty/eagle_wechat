@@ -17,7 +17,7 @@ class ApiUsersController < ApplicationController
   def daily
     @api_user = ApiUser.where(id: params[:id]).first
     @interfaces = @api_user.interfaces
-    @data = TotalInterface.user_interface_count
+    @data = TotalInterface.user_interface_count(@api_user, @active_day)
   end
 
   def show
