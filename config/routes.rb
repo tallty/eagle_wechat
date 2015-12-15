@@ -68,9 +68,12 @@ Rails.application.routes.draw do
     end
    end
 
-   resources :customers do
-     resources :api_users, only: [:index, :show], shallow: true do
-       member do
+   resources :customers, shallow: true do
+     resources :api_users, only: [:index, :show] do
+       collection do
+         get :daily_index
+         get :week_index
+         get :month_index
          get :daily
        end
      end
