@@ -14,7 +14,7 @@ class TaskProcess
       end_time: Time.at(process_result['end_time'].to_f),
       exception: process_result['exception'],
       task_name: Task.get_task_name(item['task_identifier']),
-      file_name: MultiJson.load(process_result['file_list']).join(';')
+      file_name: MultiJson.load(process_result['file_list']).join(';') rescue ""
     }
     log = TaskLog.new.build_task_log(log_params)
     $redis.hset("alarm_task_cache", log.task_identifier, log.start_time)
