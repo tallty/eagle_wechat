@@ -2,6 +2,7 @@ class TaskProcess
 
   # 解析接收到的数据,如果数据有异常,报警
   def self.push(raw_post)
+    Rails.logger.warn raw_post
     item = MultiJson.load raw_post
 
     process_result = item["process_result"]
