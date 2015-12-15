@@ -22,11 +22,19 @@ class TotalInterface < ActiveRecord::Base
   scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
 
   scope :transfers_sum, -> (date) {by_day(date).where('api_user_id is not null').group(:identifier).sum(:count)}
-  scope :user_analyz, -> (date) {by_day(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
+
+  scope :user_analyz_daily, -> (date) {by_day(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
+  scope :user_analyz_week, -> (date) {by_week(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
+  scope :user_analyz_month, -> (date) {by_month(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
+
   scope :user_analyz_to_api, -> (interface, date) {by_day(date).where(name: interface).group(:api_user_id).sum(:count)}
 
   scope :user_interface_count, -> (user, date) {by_day(date).where(api_user_id: user.id).group(:name).sum(:count)}
-  
+
+  def analy_api_user_data(date, type)
+
+  end
+
   # 最新接口调用总数写入redis
   def write_sum_to_cache(day=nil)
     today = day || Time.now.to_date
