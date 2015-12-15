@@ -8,6 +8,7 @@ class TaskLogsController < ApplicationController
     begin
       process_file_list = MultiJson.load task_log_params["process_result"]["file_list"]
     rescue Exception => e
+      logger.warn task_log_params
       logger.warn task_log_params["process_result"]["file_list"]
     end
     if process_file_list.present?
