@@ -5,6 +5,7 @@ class OauthsController < ApplicationController
 
   def index
     openid = session[:openid]
+    Rails.logger.warn "openid is: #{openid}"
     if openid.present?
       target_url = "\/#{params[:target_url]}"
       redirect_to target_url
