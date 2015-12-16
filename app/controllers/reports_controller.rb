@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 	skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
-	# before_action :current_customer
+	before_action :current_customer
 	# before_action :save_session, only: [:index, :week, :month]
 	before_action :select_day, only: [:daily, :show]
 	before_action :select_week, only: [:week, :week_show]
@@ -50,7 +50,7 @@ class ReportsController < ApplicationController
 		user_api.each do |u|
 			@rotate << {value: u[1], name: ApiUser.where(id: u[0]).first.try(:company) || '未知'}
 		end
-		@users = current_customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :company)
+		@users = @customer.interfaces.where(name: params[:name]).first.api_users.pluck(:id, :company)
 	end
 
 	def week_index
@@ -94,22 +94,20 @@ class ReportsController < ApplicationController
 		def current_customer
 			openid = session[:openid]
 			if openid.blank?
-				Rails.logger.warn "params is: #{params}"
 				code = params[:code]
-				Rails.logger.warn "code param: #{code}"
 				result = $group_client.oauth.get_user_info(code, "1")
 				openid = result.result["UserId"]
 			end
 
 			member = Member.where(openid: openid).first
-			customer = nil
+			@customer = nil
 			if member.present?
 				session[:openid] = openid
-				customer = member.customer
+				@customer = member.customer
 			else
-				customer = Customer.first
+				@customer = Customer.first
 			end
-			return customer
+			return @customer
 		end
 
 		# 已选日期
