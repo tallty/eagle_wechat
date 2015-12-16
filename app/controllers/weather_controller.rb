@@ -6,7 +6,7 @@ class WeatherController < ApplicationController
 	def active
 		# 服务器上报信息：2次/m
 		# 活跃报警：检测当前客户的所有服务器，判断当前时间与其最新上报时间的差值是否大于1min
-		@machines_status = Alarm.avtive_alarms(current_customer)
+		@machines_status = Alarm.avtive_alarms(@customer)
 	end
 
 	# 历史告警
@@ -22,12 +22,12 @@ class WeatherController < ApplicationController
 
 	# 调用接口
 	def port
-		@interfaces = current_customer.interfaces
+		@interfaces = @customer.interfaces
 	end
 
 	# 气象数据
 	def meteorologic
- 		@tasks = current_customer.tasks.where("tasks.rate is NOT NULL")
+ 		@tasks = @customer.tasks.where("tasks.rate is NOT NULL")
  		@process_time = $redis.hgetall("alarm_task_cache")
  		@now_time = Time.now
 	end
@@ -38,15 +38,21 @@ class WeatherController < ApplicationController
 
 	private
 	def current_customer
-		code = params[:code]
-		result = $group_client.oauth.get_user_info(code, "1")
-		openid = result.result["UserId"]
+		openid = session[:openid]
+		if openid.blank?
+			code = params[:code]
+			result = $group_client.oauth.get_user_info(code, "1")
+			openid = result.result["UserId"]
+		end
+
 		member = Member.where(openid: openid).first
+		@customer = nil
 		if member.present?
 			session[:openid] = openid
-			customer = member.customer
+			@customer = member.customer
 		else
-			Customer.first
+			@customer = Customer.first
 		end
+		return @customer
 	end
 end
