@@ -6,7 +6,7 @@ module Admin
     # GET /members.json
     def index
       @customer = Customer.where(id: params[:customer_id]).first
-      @members = Member.all
+      @members = @customer.members
     end
 
     # GET /members/1
