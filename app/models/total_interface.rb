@@ -49,10 +49,10 @@ class TotalInterface < ActiveRecord::Base
   # 统计各接口最新调用数
   def analyz_interface(day=nil)
     process_day = day || Time.now.to_date
-    customers = Customer.all
+    # customers = Customer.all
     day_format = process_day.strftime("%Y-%m-%d")
     sort_times = []
-    customers.each do |customer|
+    # customers.each do |customer|
       data = TotalInterface.by_day(process_day).group(:name).sum(:count)
       data.map do |k, v|
         times = TotalInterface.by_day(process_day).where(name: k).group(:datetime).sum(:count)
@@ -63,11 +63,12 @@ class TotalInterface < ActiveRecord::Base
           all_count: v,
           times: sort_times
         }
+        customer = Interface.where(name: k).first
         $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", param.to_json
         sort_times.clear
       end
       data = nil
-    end
+    # end
   end
 
   def as_json(options=nil)
