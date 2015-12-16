@@ -90,6 +90,7 @@ class ReportsController < ApplicationController
 
 	private
 		def current_customer
+			Rails.logger.warn "params is: #{params}"
 			# @customer = Customer.where(id: params[:id]).first
 			code = params[:code]
 			Rails.logger.warn "code param: #{code}"
