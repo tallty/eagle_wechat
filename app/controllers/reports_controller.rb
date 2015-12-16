@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 	skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
-	before_action :current_customer
+	# before_action :current_customer
 	# before_action :save_session, only: [:index, :week, :month]
 	before_action :select_day, only: [:daily, :show]
 	before_action :select_week, only: [:week, :week_show]
@@ -9,7 +9,8 @@ class ReportsController < ApplicationController
 
 	#日报表
 	def index
-		@customer = Customer.first
+		@customer = current_customer
+		Rails.logger.warn "customer in index controller: #{@customer}"
 		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily"}
 	end
 
@@ -100,12 +101,14 @@ class ReportsController < ApplicationController
 			end
 
 			member = Member.where(openid: openid).first
+			customer = nil
 			if member.present?
 				session[:openid] = openid
 				customer = member.customer
 			else
-				Customer.first
+				customer = Customer.first
 			end
+			return customer
 		end
 
 		# 已选日期
