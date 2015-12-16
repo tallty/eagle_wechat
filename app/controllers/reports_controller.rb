@@ -76,7 +76,6 @@ class ReportsController < ApplicationController
 
 	#周报表详情页
 	def week_show
-		Rails.logger.warn "@monday is #{@monday}, @sunday is #{@sunday}"
 		@interface_info = TotalInterface.interface_info(@customer, params[:name], @monday, :week)
 		@api_user_infos = TotalInterface.api_user_infos(@customer, params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
@@ -117,14 +116,13 @@ class ReportsController < ApplicationController
 
 		# 已选周日期区间
 		def select_week
-			Rails.logger.warn "select_week's params is: #{params}"
-			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i).beginning_of_week.to_date
+			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i / 1000).beginning_of_week.to_date
 			@sunday = @monday.end_of_week.to_date
 		end
 
 		# 已选月日期区间
 		def select_month
-			@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i).beginning_of_month.to_date
+			@begin_month = params[:date].blank? ? Time.now.beginning_of_month.to_date : Time.at(params[:date].to_i / 1000).beginning_of_month.to_date
 			@end_month = @begin_month.end_of_month.to_date
 		end
 end
