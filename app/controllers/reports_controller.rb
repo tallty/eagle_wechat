@@ -9,14 +9,13 @@ class ReportsController < ApplicationController
 
 	#日报表
 	def index
-		@customer = current_customer
-		Rails.logger.warn "customer in index controller: #{@customer.to_json}"
+		# @customer = current_customer
 		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily"}
 	end
 
 	def daily
 		@day_format = @active_day.strftime('%Y-%m-%d')
-		@customer = Customer.where(id: params[:id]).first
+		# @customer = Customer.where(id: params[:id]).first
 		# @day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		# @total_count = TotalInterface.total_count(@day_reports)
 		data = $redis.hvals("interface_sort_#{@customer.identifier}_#{@day_format}")
@@ -54,39 +53,39 @@ class ReportsController < ApplicationController
 	end
 
 	def week_index
-		@customer = Customer.first
+		# @customer = Customer.first
 		render :template => 'reports/index', :locals => {:title => "周报表", :route => "week"}
 	end
 
 	def month_index
-		@customer = Customer.first
+		# @customer = Customer.first
 		render :template => 'reports/index', :locals => {:title => "月报表", :route => "month"}
 	end
 
 	#周报表
 	def week
-		@week_reports = TotalInterface.reports(current_customer, @monday, :week)
+		@week_reports = TotalInterface.reports(@customer, @monday, :week)
 		@total_count = TotalInterface.total_count(@week_reports)
 	end
 
 	#月报表
 	def month
-		@month_reports = TotalInterface.reports(current_customer, @begin_month, :month)
+		@month_reports = TotalInterface.reports(@customer, @begin_month, :month)
 		@total_count = TotalInterface.total_count(@month_reports)
 	end
 
 	#周报表详情页
 	def week_show
-		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @monday, :week)
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @monday, :week)
+		@interface_info = TotalInterface.interface_info(@customer, params[:name], @monday, :week)
+		@api_user_infos = TotalInterface.api_user_infos(@customer, params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
 	#月报表详情页
 	def month_show
 	# 借口的图表数据
-		@interface_info = TotalInterface.interface_info(current_customer, params[:name], @begin_month, :month)
-		@api_user_infos = TotalInterface.api_user_infos(current_customer, params[:name], @begin_month, :month)
+		@interface_info = TotalInterface.interface_info(@customer, params[:name], @begin_month, :month)
+		@api_user_infos = TotalInterface.api_user_infos(@customer, params[:name], @begin_month, :month)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
 
