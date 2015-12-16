@@ -41,7 +41,7 @@ class ApiUsersController < ApplicationController
 
   def daily
     logger.warn params
-    @api_user = ApiUser.where(id: params[:id]).first
+    @api_user = ApiUser.where(id: params[:user_id]).first
     @interfaces = @api_user.interfaces.as_json
     data = TotalInterface.user_interface_count(@api_user, @active_day)
     @interfaces.each {|e| e[:count] = data[e[:name]] || 0}
