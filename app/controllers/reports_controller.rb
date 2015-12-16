@@ -90,17 +90,18 @@ class ReportsController < ApplicationController
 
 	private
 		def current_customer
-			@customer = Customer.where(id: params[:id]).first
-			# code = params[:code]
-			# result = $group_client.oauth.get_user_info(code, "1")
-			# openid = result.result["UserId"]
-			# member = Member.where(openid: openid).first
-			# if member.present?
-			# 	session[:openid] = openid
-			# 	customer = member.customer
-			# else
-			# 	Customer.first
-			# end
+			# @customer = Customer.where(id: params[:id]).first
+			code = params[:code]
+			Rails.logger.warn "code param: #{code}"
+			result = $group_client.oauth.get_user_info(code, "1")
+			openid = result.result["UserId"]
+			member = Member.where(openid: openid).first
+			if member.present?
+				session[:openid] = openid
+				customer = member.customer
+			else
+				Customer.first
+			end
 		end
 
 		# 已选日期
