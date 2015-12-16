@@ -117,6 +117,7 @@ class ReportsController < ApplicationController
 
 		# 已选周日期区间
 		def select_week
+			Rails.logger.warn "select_week's params is: #{params}"
 			@monday = params[:date].blank? ? Time.now.beginning_of_week.to_date : Time.at(params[:date].to_i).beginning_of_week.to_date
 			@sunday = @monday.end_of_week.to_date
 		end
