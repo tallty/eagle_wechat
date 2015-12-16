@@ -8,13 +8,14 @@
               <i class="fa fa-plus fa-lg"></i>
             <% end %>
         </div>
-        <div class="ibox-content"> 
+        <div class="ibox-content">
           <table class="footable table table-stripped text-center toggle-arrow-tiny" data-page-size="2">
             <thead>
               <tr>
                 <th class="text-center" data-toggle="true">No.</th>
                 <th class="text-center">客户名称</th>
                 <th class="text-center">地址</th>
+                <th class="text-center">标识</th>
                 <th class="text-center">说明</th>
                 <th class="text-center">操作</th>
               </tr>
@@ -25,6 +26,7 @@
                 <td><%= index + 1 %></td>
                 <td><%= customer.name %></td>
                 <td><%= customer.addr %></td>
+                <td><%= customer.identifier %></td>
                 <td><%= customer.explain %></td>
                 <td>
                   <%= link_to edit_admin_customer_path(customer), class: 'btn btn-xs btn-default', remote: true, format: :js do %>
@@ -39,7 +41,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <td class="text-center" colspan="5">
+                <td class="text-center" colspan="6">
                   <ul class="pagination"></ul>
                 </td>
               </tr>
@@ -51,4 +53,3 @@
   </div>
 </div>
 <div id="customerModalContent"></div>
-  
