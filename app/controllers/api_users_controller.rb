@@ -2,7 +2,7 @@ class ApiUsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
 	before_action :current_customer
-  before_action :select_day, only: [:index, :daily_index, :week_index, :month_index]
+  before_action :select_day, only: [:index, :daily, :daily_index, :week_index, :month_index]
 
   def index
     route = params[:route] || "daily"
