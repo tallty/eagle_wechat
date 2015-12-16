@@ -16,16 +16,16 @@ class ReportsController < ApplicationController
 
 	def daily
 		@day_format = @active_day.strftime('%Y-%m-%d')
-		customer = Customer.where(id: params[:id]).first
+		@customer = Customer.where(id: params[:id]).first
 		# @day_reports = TotalInterface.reports(current_customer, @active_day, :day)
 		# @total_count = TotalInterface.total_count(@day_reports)
-		data = $redis.hvals("interface_sort_#{customer.identifier}_#{@day_format}")
+		data = $redis.hvals("interface_sort_#{@customer.identifier}_#{@day_format}")
 		@flag = true
 		if data.present?
 			@flag = false
 			list = data.map { |e| MultiJson.load(e) }
 			@sort_list = list.sort {|x, y| y['all_count'] <=> x['all_count']}
-			count = $redis.hget("interface_sum_cache", "#{@day_format}_#{customer.identifier}")
+			count = $redis.hget("interface_sum_cache", "#{@day_format}_#{@customer.identifier}")
 			@total_count = count.to_i
 		end
 	end
