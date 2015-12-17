@@ -1,11 +1,15 @@
 class AlarmsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
-	before_action :current_customer
+	before_action :current_customer, :only => [:index]
 
   def index
     page = params[:page] || params['page'] || 1
     @alarms = @customer.alarms.where("end_time is not null").paginate(:page => page, :per_page => 10)
+  end
+
+  def show
+    @alarm = Alarm.where(id: params[:id]).first
   end
 
   private
