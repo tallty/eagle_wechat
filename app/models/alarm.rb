@@ -19,11 +19,13 @@ class Alarm < ActiveRecord::Base
 
   after_create :send_message
 
-  scope :get_alarm, -> { where("end_time is not null")}
-
   def send_message
     $group_client.message.send_text("alex6756", "", "", 1, self.content)
     $group_client.message.send_text("bianandbian", "", "", 1, self.content)
+  end
+
+  def get_alarms customer
+    customer.alarms.where("end_time is not null")
   end
 
   # 1分钟轮循任务,判断是否需要告警

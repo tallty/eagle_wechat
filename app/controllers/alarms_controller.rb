@@ -5,7 +5,8 @@ class AlarmsController < ApplicationController
 
   def index
     page = params[:page] || params['page'] || 1
-    @alarms = @customer.alarms.where("end_time is not null").paginate(:page => page, :per_page => 10)
+
+    @alarms = Alarm.new.get_alarms(@customer).paginate(:page => page, :per_page => 10)
   end
 
   def show
