@@ -4,19 +4,13 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-      告警详细信息
+      <%= @alarm.title %>
 		</div>
 		<div class="tab-line clearfix">
-      <div class="col-xs-2">
-        告警标题:
-      </div>
-      <div class="col-xs-10">
-        <%= @alarm.title %>
-      </div>
-      <div class="col-xs-2">
+      <div class="col-xs-3">
         所属模块:
       </div>
-      <div class="col-xs-10">
+      <div class="col-xs-9">
         <%= @alarm.category %>
       </div>
       <div class="col-xs-12">
@@ -36,10 +30,10 @@
       <div class="col-xs-12">
         处理信息:<%= @alarm.info %>
       </div>
-      <div class="col-xs-2">
+      <div class="col-xs-3">
         处理者:
       </div>
-      <div class="col-xs-10">
+      <div class="col-xs-9">
         <%= @alarm.user.name %>
       </div>
 		</div>
