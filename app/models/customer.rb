@@ -20,15 +20,16 @@ class Customer < ActiveRecord::Base
   has_many :sms_logs, dependent: :destroy
   has_many :api_users, dependent: :destroy
   has_many :total_interfaces, through: :api_users
+  has_many :alarms
   
   validates :name, presence: true
 
   after_initialize :task_identifier
-  
+
   private
 
   def task_identifier
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
     self.identifier ||= chars.sample(8).join
-  end 
+  end
 end
