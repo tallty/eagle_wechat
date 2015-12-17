@@ -52,18 +52,18 @@ class TotalInterface < ActiveRecord::Base
     # customers = Customer.all
     day_format = process_day.strftime("%Y-%m-%d")
     sort_times = []
-    data = TotalInterface.by_day(process_day).group(:name).sum(:count)
+    data = TotalInterface.by_day(process_day).group(:name, :identifier).sum(:count)
     data.map do |k, v|
-      times = TotalInterface.by_day(process_day).where(name: k).group(:datetime).sum(:count)
+      times = TotalInterface.by_day(process_day).where(name: k[0], identifier: k[1]).group(:datetime).sum(:count)
       times = times.sort{|x, y| y[1] <=> x[1]}.first(3)
       times.each {|t| sort_times << t[0].strftime("%H")}
       param = {
-        name: k,
+        name: k[0],
         all_count: v,
         times: sort_times
       }
-      customer = Interface.where(name: k).first.customer
-      $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", param.to_json
+      customer = Customer.where(identifier: k).first
+      $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k[1]}", param.to_json
       sort_times.clear
     end
     data = nil
