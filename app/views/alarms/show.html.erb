@@ -7,38 +7,46 @@
       <%= @alarm.title %>
 		</div>
 		<div class="tab-line clearfix">
-      <div class="col-xs-3">
-        所属模块:
+      <div class="group-line">
+        <div class="col-xs-3">
+          所属模块:
+        </div>
+        <div class="col-xs-9">
+          <%= @alarm.category %>
+        </div>
       </div>
-      <div class="col-xs-9">
-        <%= @alarm.category %>
+      <div class="group-line">
+        <div class="col-xs-3">
+          告警时间:
+        </div>
+        <div class="col-xs-9">
+          <%= @alarm.alarmed_at.strftime("%Y-%m-%d %H:%M") %>
+        </div>
       </div>
-
-      <div class="col-xs-3">
-        告警时间:
+      <div class="group-line">
+        <div class="col-xs-3">
+          解除时间:
+        </div>
+        <div class="col-xs-9">
+          <%= @alarm.end_time.strftime("%Y-%m-%d %H:%M") %>
+        </div>
       </div>
-      <div class="col-xs-9">
-        <%= @alarm.alarmed_at.strftime("%Y-%m-%d %H:%M") %>
-      </div>
-      <div class="col-xs-3">
-        解除时间:
-      </div>
-      <div class="col-xs-9">
-        <%= @alarm.end_time.strftime("%Y-%m-%d %H:%M") %>
-      </div>
-
-      <div class="col-xs-3">
-        处理信息:
-      </div>
-      <div class="col-xs-9">
-        <%= @alarm.info %>
+      <div class="group-line">
+        <div class="col-xs-3">
+          处理信息:
+        </div>
+        <div class="col-xs-9">
+          <%= @alarm.info %>
+        </div>
       </div>
       <hr class="line-hr">
-      <div class="col-xs-3">
-        处理者:
-      </div>
-      <div class="col-xs-9">
-        <%= @alarm.user.name %>
+      <div class="group-line">
+        <div class="col-xs-3">
+          处理者:
+        </div>
+        <div class="col-xs-9">
+          <%= @alarm.user.name %>
+        </div>
       </div>
 		</div>
 	</div>
