@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
 
   validates :phone, :name, presence: true
   validates :phone, format: { with: /\A(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}\z/, message: "请输入正确的手机号码" }
-
+  has_many :alarms
+  
   attr_accessor :login
 
   #判断是否需要更新密码
@@ -48,7 +49,7 @@ class User < ActiveRecord::Base
     #where(conditions).where(["phone = :value OR name = :value", { :value => login.strip }]).first
     where(conditions).where(["phone = :value", { :value => login.strip }]).first
   end
-  
+
   protected
   def email_required?
     false

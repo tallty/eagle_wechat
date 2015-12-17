@@ -15,6 +15,7 @@
 class Alarm < ActiveRecord::Base
   has_many :send_log
   belongs_to :customer
+  belongs_to :user
 
   after_create :send_message
 
