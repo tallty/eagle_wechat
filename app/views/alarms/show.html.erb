@@ -3,10 +3,13 @@
 <% end %>
 <div class="warp">
 	<div class="sef-container">
-		<div class="tab-title col-xs-12">
-      <%= @alarm.title %>
-		</div>
-		<div class="tab-line clearfix">
+		<div class="alarm-group tab-line clearfix">
+      <div class="group-line">
+        <div class="col-xs-12 alarm-title">
+          <%= @alarm.title %>
+        </div>
+      </div>
+      <hr class="line-hr-2">
       <div class="group-line">
         <div class="col-xs-3">
           所属模块:
@@ -39,7 +42,6 @@
           <%= @alarm.info %>
         </div>
       </div>
-      <hr class="line-hr">
       <div class="group-line">
         <div class="col-xs-3">
           处理者:
