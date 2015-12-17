@@ -25,7 +25,8 @@ class TaskLog < ActiveRecord::Base
       end_time = Time.parse end_time_str
       if (end_time + task.alarm_threshold.minutes) < now_time
         params = {identifier: task.identifier, title: '', category: '气象数据'}
-        params['content'] = "数据[#{task.name}]告警:超时未解析到新数据."
+        params['content']  = "数据[#{task.name}]告警:超时未解析到新数据."
+        params['customer'] = task.customer
         Alarm.new.build_task_alarm(params)
       end
     end
@@ -41,7 +42,14 @@ class TaskLog < ActiveRecord::Base
   end
 
   def verify_task
-    alarm_params = {identifier: task_identifier, title: task_name, category: '气象数据', alarmed_at: Time.now, rindex: id}
+    alarm_params = {
+      identifier : task_identifier,
+      title      : task_name,
+      category   : '气象数据',
+      alarmed_at : Time.now,
+      rindex     : id,
+      customer   : Task.where(identifier: task_identifier).first.customer
+    }
     # 数据处理异常,告警
     exception = MultiJson.load(exception) rescue ""
     if exception.present?

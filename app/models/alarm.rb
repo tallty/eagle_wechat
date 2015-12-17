@@ -15,7 +15,7 @@
 class Alarm < ActiveRecord::Base
   has_many :send_log
   belongs_to :customer
-  
+
   after_create :send_message
 
   def send_message
@@ -24,6 +24,7 @@ class Alarm < ActiveRecord::Base
   end
 
   # 1分钟轮循任务,判断是否需要告警
+  # 检查服务器是否有问题需要告警
   def process
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
@@ -44,6 +45,7 @@ class Alarm < ActiveRecord::Base
           category: "服务器",
           alarmed_at: last_time,
           rindex: length,
+          customer: machine.customer,
           content: "服务器[#{machine.name}]告警:超时未收到数据!!!"
         }
         alarm = Alarm.where(identifier: e, alarmed_at: last_time).first
@@ -65,9 +67,10 @@ class Alarm < ActiveRecord::Base
   # 数据采集任务告警
   def build_task_alarm(params={})
     identifier = params[:identifier] || params['identifier']
-    now_time = Time.now - 1.minutes
-    alarm = Alarm.where("identifier = ? and alarmed_at > ?", identifier, now_time).first
+
+    alarm = Alarm.where("identifier = ? and end_time is null", identifier).last
     # alarm = Alarm.where(identifier: identifier, alarmed_at: alarmed_at).first
+    # 已经存在告警
     if alarm.present?
       unless alarm.send_log.present?
         alarm.send_log.find_or_create_by(accept_user: 'alex6756', info: alarm.content)
