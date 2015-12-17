@@ -27,9 +27,13 @@
         <%= @alarm.end_time.strftime("%Y-%m-%d %H:%M") %>
       </div>
 
-      <div class="col-xs-12">
-        处理信息:<%= @alarm.info %>
+      <div class="col-xs-3">
+        处理信息:
       </div>
+      <div class="col-xs-9">
+        <%= @alarm.info %>
+      </div>
+      <hr class="line-hr">
       <div class="col-xs-3">
         处理者:
       </div>
