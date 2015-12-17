@@ -17,6 +17,7 @@
 class Member < ActiveRecord::Base
   belongs_to :customer
 
+  # 手机号做主键
   def self.add_member_by_department_id department_id
     users = $group_client.user.full_list(department_id, nil, 0).result["userlist"]
 
