@@ -40,6 +40,8 @@ gem 'by_star'
 gem 'whenever'
 gem 'thread'
 
+gem 'will_paginate', '~> 3.0.6'
+
 gem 'bunny'
 gem 'sneakers'
 # Use Capistrano for deployment

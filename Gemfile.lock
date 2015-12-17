@@ -229,6 +229,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     whenever (0.9.4)
       chronic (>= 0.6.3)
+    will_paginate (3.0.7)
     yajl-ruby (1.2.1)
 
 PLATFORMS
@@ -262,6 +263,7 @@ DEPENDENCIES
   unicorn
   web-console (~> 2.0)
   whenever
+  will_paginate (~> 3.0.6)
 
 BUNDLED WITH
    1.10.6
