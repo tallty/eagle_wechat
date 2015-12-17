@@ -63,7 +63,7 @@ class TotalInterface < ActiveRecord::Base
           all_count: v,
           times: sort_times
         }
-        customer = Interface.where(name: k).first
+        customer = Interface.where(name: k).first.customer
         $redis.hset "interface_sort_#{customer.identifier}_#{day_format}", "#{k}", param.to_json
         sort_times.clear
       end
