@@ -44,7 +44,6 @@ Rails.application.routes.draw do
   resources :weather do
      collection do
        get 'active'    #活跃告警
-       get 'history'    #历史告警
        get 'port'    #调用接口
        get 'meteorologic'    #气象数据
        get 'result'    #诊断结果
@@ -61,9 +60,7 @@ Rails.application.routes.draw do
      collection do
       get :week_index
       get :month_index
-      # get 'week'
       get 'week_show'
-      # get 'month'
       get 'month_show'
     end
    end
@@ -78,7 +75,7 @@ Rails.application.routes.draw do
        end
      end
    end
-   
-   resources :alarms
+
+   resources :alarms, only: [:index, :show]
 
 end
