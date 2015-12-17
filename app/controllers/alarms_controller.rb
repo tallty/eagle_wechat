@@ -1,4 +1,4 @@
-class AlarmController < ApplicationController
+class AlarmsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
 	before_action :current_customer
