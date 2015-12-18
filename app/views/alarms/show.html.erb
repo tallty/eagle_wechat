@@ -78,6 +78,7 @@
 </div>
 <script>
 	$(function(){
+		$("#more").unbind("click");
 		$("#hide-group").hide();
 		$('#more').on('click', function(){
 			is_vis = $("#hide-group").is(":visible");
