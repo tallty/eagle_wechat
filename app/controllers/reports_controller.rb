@@ -10,7 +10,8 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		# @customer = current_customer
-		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily?date=2015-12-17"}
+		Rails.logger.warn params
+		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily"}
 	end
 
 	def daily
