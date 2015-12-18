@@ -4,14 +4,12 @@ class OauthsController < ApplicationController
   respond_to :html
 
   def index
-    Rails.logger.warn "OauthsController's params is: #{params}"
     openid = session[:openid]
-    Rails.logger.warn "openid is: #{openid}"
     if openid.present?
-      target_url = "\/#{params[:target_url]}"
+      target_url = "\/#{params[:target_url]}?date=#{params['date']}"
       redirect_to target_url
     else
-      url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}", "STATE#wechat_redirect")
+      url = $group_client.oauth.authorize_url("http://mcu.buoyantec.com/#{params['target_url']}?date=#{params['date']}", "STATE#wechat_redirect")
       uri = URI.encode(url)
       redirect_to uri
     end
