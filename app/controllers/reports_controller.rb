@@ -10,14 +10,11 @@ class ReportsController < ApplicationController
 	#日报表
 	def index
 		# @customer = current_customer
-		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily"}
+		render :template => 'reports/index', :locals => {:title => "日报表", :route => "daily?date=2015-12-17"}
 	end
 
 	def daily
 		@day_format = @active_day.strftime('%Y-%m-%d')
-		# @customer = Customer.where(id: params[:id]).first
-		# @day_reports = TotalInterface.reports(current_customer, @active_day, :day)
-		# @total_count = TotalInterface.total_count(@day_reports)
 		data = $redis.hvals("interface_sort_#{@customer.identifier}_#{@day_format}")
 		@flag = true
 		if data.present?
