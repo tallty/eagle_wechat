@@ -6,7 +6,7 @@ class ApiUsersController < ApplicationController
 
   def index
     route = params[:route] || "daily"
-    redirect_to "/customers/#{params['customer_id']}/api_users/#{route}_index"
+    redirect_to "/customers/#{params['customer_id']}/api_users/#{route}_index?date=#{params['date']}"
   end
 
   def daily_index
