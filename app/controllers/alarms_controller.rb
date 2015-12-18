@@ -10,7 +10,7 @@ class AlarmsController < ApplicationController
 
   def show
     @alarm = Alarm.where(id: params[:id]).first
-    @catchers = @alarm.send_logs.map {|e| e.get_catcher}.join('; ')
+    @catchers = @alarm.send_logs.map {|e| e.get_catcher}.uniq.join('; ')
   end
 
   private
