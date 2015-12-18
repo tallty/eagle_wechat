@@ -27,7 +27,7 @@ class Task < ActiveRecord::Base
   def self.get_task_name identifier
     task_name = $redis.hget "tasks_info_cache", identifier
 		if task_name.blank?
-			$redis.lpush "error_info_cache", {info: "get task name error", identifier: identifier}.to_json
+			$redis.lpush "error_info_cache", {time: Time.now.strftime("%Y%m%d%H%M"), info: "get task name error", identifier: identifier}.to_json
 		end
 		task_name || ""
   end
