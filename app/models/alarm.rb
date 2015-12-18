@@ -13,7 +13,7 @@
 #
 
 class Alarm < ActiveRecord::Base
-  has_many :send_log
+  has_many :send_logs
   belongs_to :customer
   belongs_to :user
 
@@ -57,13 +57,13 @@ class Alarm < ActiveRecord::Base
         # 判断是否存在此告警
         if alarm.present?
           # 判断是否推送此消息
-          unless alarm.send_log.present?
-            alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
+          unless alarm.send_logs.present?
+            alarm.send_logs.find_or_create_by(accept_user: "alex6756", info: alarm.content)
             alarm.send_message
           end
         else
           alarm = Alarm.create(params)
-          alarm.send_log.find_or_create_by(accept_user: "alex6756", info: alarm.content)
+          alarm.send_logs.find_or_create_by(accept_user: "alex6756", info: alarm.content)
         end
       end
     end

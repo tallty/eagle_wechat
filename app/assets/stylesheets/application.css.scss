@@ -13,7 +13,7 @@
  *= require_tree ./application/.
  *= require ./frame/font-awesome
  */
- 
+
 // Core variables and mixins
 @import "bootstrap-sprockets";
 @import "bootstrap/variables";
@@ -39,3 +39,30 @@
 @import "bootstrap/responsive-utilities";
 
 
+.line-hr-3 {
+  border: 1px solid #e7e7e7;
+  margin: 10px 5px 10px 5px;
+}
+.group-line{
+	height: 26px;
+	line-height: 26px;
+	margin-bottom: 3px;
+	font-size: 14px;
+}
+.group-bottom-line{
+	height: 24px;
+	line-height: 24px;
+	margin-bottom: 3px;
+	font-size: 16px;
+}
+.alarm-group{
+	border-radius: 5px;
+	border-radius: 5px;
+  .more{
+    cursor: pointer;
+    color: #bfbfbf;
+  }
+  .glyphicon{
+    color: #ececec;
+  }
+}
