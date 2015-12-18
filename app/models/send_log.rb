@@ -14,6 +14,6 @@ class SendLog < ActiveRecord::Base
 	belongs_to :alarm
 
 	def self.get_catchers
-		map{|e| Member.where(openid: e.accept_user).first.name }.uniq.join("; ")
+		send_log.map{|e| Member.where(openid: e.accept_user).first.name }.uniq.join("; ")
 	end
 end
