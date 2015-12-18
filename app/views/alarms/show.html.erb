@@ -69,7 +69,7 @@
 			</div>
 			<div class="group-bottom-line">
 				<div id="more" class="more col-xs-12 text-right">
-					展开
+					<span id="more-content">展开</span>
 					<span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span>
 				</div>
 			</div>
@@ -80,7 +80,13 @@
 	$(function(){
 		$("#hide-group").hide();
 		$('#more').on('click', function(){
-			$("#hide-group").toggle();
+			if ($("#hide-group").is(":hidden")) {
+				$("#hide-group").show();
+				$("#more-content").html("关闭");
+			} else {
+				$("#hide-group").hide();
+				$("#more-content").html("展开");
+			}
 		});
 	});
 </script>
