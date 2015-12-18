@@ -82,12 +82,12 @@
 	$(function(){
 		$("#hide-group").hide();
 		$('#more').on('click', function(){
-			if ($("#hide-group").is(":hidden")) {
-				$("#hide-group").show();
-				$("#more-content").html("关闭");
-			} else {
+			if ($("#hide-group").is(":visible")) {
 				$("#hide-group").hide();
 				$("#more-content").html("展开");
+			} else {
+				$("#hide-group").show();
+				$("#more-content").html("关闭");
 			}
 		});
 	});
