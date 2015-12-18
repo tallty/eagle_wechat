@@ -57,7 +57,7 @@
 	          发送信息:
 	        </div>
 	        <div class="col-xs-8">
-	          <%= @alarm.send_logs.first.info %>
+	          <%= @alarm.send_logs.first.try(:info) %>
 	        </div>
 				</div>
 				<div class="group-line">
@@ -80,7 +80,8 @@
 	$(function(){
 		$("#hide-group").hide();
 		$('#more').on('click', function(){
-			if ($("#hide-group").is(":visible")) {
+			is_vis = $("#hide-group").is(":visible")
+			if (is_vis) {
 				$("#hide-group").hide();
 				$("#more-content").html("展开");
 			} else {
