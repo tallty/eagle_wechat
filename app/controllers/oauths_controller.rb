@@ -4,6 +4,7 @@ class OauthsController < ApplicationController
   respond_to :html
 
   def index
+    Rails.logger.warn "OauthsController's params is: #{params}"
     openid = session[:openid]
     Rails.logger.warn "openid is: #{openid}"
     if openid.present?
