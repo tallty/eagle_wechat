@@ -74,7 +74,7 @@ class ReportsController < ApplicationController
 
 	#周报表详情页
 	def week_show
-		Rails.logger.warn "monday is: #{@monday}, sunday is: #{@sunday}"
+		Rails.logger.warn "week show's params is: #{params}"
 		@interface_info = TotalInterface.interface_info(@customer, params[:name], @monday, :week)
 		@api_user_infos = TotalInterface.api_user_infos(@customer, params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
