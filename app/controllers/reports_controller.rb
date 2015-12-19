@@ -76,6 +76,7 @@ class ReportsController < ApplicationController
 	def week_show
 		Rails.logger.warn "week show's params is: #{params}"
 		@interface_info = TotalInterface.interface_info(@customer, params[:name], @monday, :week)
+		Rails.logger.warn "@interface_info is: #{@interface_info}"
 		@api_user_infos = TotalInterface.api_user_infos(@customer, params[:name], @monday, :week)
 		@total_count = TotalInterface.total_count(@api_user_infos)
 	end
