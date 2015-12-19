@@ -29,6 +29,7 @@ class ReportsController < ApplicationController
 
 	#日报表详细页
 	def show
+		Rails.logger.warn "monday is: #{@monday}, sunday is: #{@sunday}"
 		# 接口的图表数据
 		list = TotalInterface.by_day(@active_day).where(name: params[:name]).group(:datetime).sum(:count)
 		# @interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
