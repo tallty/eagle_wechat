@@ -42,13 +42,14 @@ class TaskLog < ActiveRecord::Base
   end
 
   def verify_task
+    customer = Task.where(identifier: task_identifier).first.customer
     alarm_params = {
       identifier: task_identifier,
       title:      task_name,
       category:   '气象数据',
       alarmed_at: Time.now,
       rindex:     id,
-      customer:   Task.where(identifier: task_identifier).first.customer
+      customer:   customer
     }
     # 数据处理异常,告警
     exception = MultiJson.load(exception) rescue ""

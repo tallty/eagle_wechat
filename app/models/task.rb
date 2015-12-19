@@ -32,6 +32,7 @@ class Task < ActiveRecord::Base
 		task_name || ""
   end
 
+	# 检查气象数据是否正常
   def self.process
     now_time = Time.now
     tasks = Task.where("tasks.rate is NOT NULL")
