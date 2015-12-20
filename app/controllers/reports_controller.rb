@@ -31,7 +31,6 @@ class ReportsController < ApplicationController
 	def show
 		# 接口的图表数据
 		list = TotalInterface.by_day(@active_day).where(name: params[:name], identifier: @customer.identifier).group(:datetime).sum(:count)
-		# @interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 
 		sort = list.sort { |x, y| y[1] <=> x[1] }
 		@interface_info = {}
@@ -42,7 +41,7 @@ class ReportsController < ApplicationController
 		data_hash = MultiJson.load(data) rescue {}
 		@total_count = data_hash["all_count"]
 
-		user_api = TotalInterface.user_analyz_to_api(params[:name], @active_day)
+		user_api = TotalInterface.user_analyz_to_api(params[:name], @customer, @active_day)
 		@rotate = []
 		user_api.each do |u|
 			@rotate << {value: u[1], name: ApiUser.where(id: u[0]).first.try(:company) || '未知'}
