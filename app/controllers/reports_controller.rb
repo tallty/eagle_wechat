@@ -30,7 +30,7 @@ class ReportsController < ApplicationController
 	#日报表详细页
 	def show
 		# 接口的图表数据
-		list = TotalInterface.by_day(@active_day).where(name: params[:name]).group(:datetime).sum(:count)
+		list = TotalInterface.by_day(@active_day).where(name: params[:name], identifier: @customer.identifier).group(:datetime).sum(:count)
 		# @interface_info = TotalInterface.interface_info(current_customer, params[:name], @active_day, :day)
 
 		sort = list.sort { |x, y| y[1] <=> x[1] }
