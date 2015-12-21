@@ -23,7 +23,7 @@
           告警时间:
         </div>
         <div class="col-xs-8">
-          <%= @alarm.alarmed_at.strftime("%Y-%m-%d %H:%M") %>
+          <%= @alarm.try(:alarmed_at).strftime("%Y-%m-%d %H:%M") %>
         </div>
       </div>
       <div class="group-line">
@@ -31,7 +31,7 @@
           解除时间:
         </div>
         <div class="col-xs-8">
-          <%= @alarm.end_time.strftime("%Y-%m-%d %H:%M") %>
+          <%= @alarm.end_time.strftime("%Y-%m-%d %H:%M") if @alarm.end_time.present? %>
         </div>
       </div>
       <div class="group-line">
