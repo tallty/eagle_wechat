@@ -43,7 +43,6 @@ Rails.application.routes.draw do
 
   resources :weather do
      collection do
-       get 'active'    #活跃告警
        get 'port'    #调用接口
        get 'meteorologic'    #气象数据
        get 'result'    #诊断结果
