@@ -10,7 +10,7 @@
 				</div>
 			<% end %>
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="select_day" class="select_date">
+				<input type="text" value="<%= @monday == Date.today.beginning_of_week ? '本周' : '其他周' %>" readonly id="select_day" class="select_date">
 			</div>
 			<% if next_day(@monday) >= Date.today %>
 				<div class="col-xs-4 next text-muted">
