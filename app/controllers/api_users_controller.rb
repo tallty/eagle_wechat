@@ -2,6 +2,7 @@ class ApiUsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
 	before_action :current_customer
+  before_action :set_api_user_info, only: [:daily, :week, :month]
   before_action :select_day, only: [:index, :daily, :daily_index]
   before_action :select_week, only: [:week_index]
   before_action :select_month, only: [:month_index]
@@ -41,12 +42,17 @@ class ApiUsersController < ApplicationController
   end
 
   def daily
-    logger.warn params
-    @api_user = ApiUser.where(id: params[:user_id]).first
-    @interfaces = @api_user.interfaces.as_json
     data = TotalInterface.user_interface_count(@api_user, @active_day)
     @interfaces.each {|e| e[:count] = data[e[:name]] || 0}
     @interfaces.sort! {|x, y| y[:count] <=> x[:count]}
+  end
+
+  def week
+
+  end
+
+  def month
+
   end
 
   def show
@@ -56,6 +62,11 @@ class ApiUsersController < ApplicationController
   private
   def current_customer
     @customer = Customer.where(id: params[:customer_id]).first
+  end
+
+  def set_api_user_info
+    @api_user = ApiUser.where(id: params[:user_id]).first
+    @interfaces = @api_user.interfaces.as_json
   end
 
   def select_day
