@@ -1,7 +1,7 @@
 class AlarmsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
-	before_action :current_customer, :only => [:index]
+	before_action :current_customer, :only => [:index, :active]
 
   def index
     page = params[:page] || params['page'] || 1
