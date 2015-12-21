@@ -23,16 +23,16 @@
 				</div>
 			</div>
 			<!-- 后一周 -->
-			<% if Time.at(next_week(@sunday) / 1000) >= Date.today %>
+			<% if next_week(@sunday) > Date.today %>
 				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
-				</div>				
+				</div>
 			<% else %>
 				<%= link_to week_show_reports_path(date: next_week(@sunday), name: params[:name]) do %>
 					<div class="col-xs-4">
 						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
-				<% end %>				
+				<% end %>
 			<% end %>
 		</div>
 
@@ -140,7 +140,7 @@
 			echarts: '/assets/echarts'
 		}
 	});
-	
+
 	// 使用
 	require(
 		[
@@ -149,7 +149,7 @@
 		],
 		function (ec) {
 			$(".air-fw2").each(function(){
-				var myChart = ec.init($(this).get(0));   
+				var myChart = ec.init($(this).get(0));
 				var option = {
 					tooltip : {
 						trigger: 'axis',
@@ -208,8 +208,8 @@
 			        },
 				    ]
 					};
-			// 为echarts对象加载数据 
-			myChart.setOption(option); 
+			// 为echarts对象加载数据
+			myChart.setOption(option);
 			});
 		}
 	);
