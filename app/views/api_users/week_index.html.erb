@@ -4,9 +4,9 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<%= link_to customer_api_users_path(date: last_week(@active_day).strftime("%Y-%m-%d")) do %>
+			<%= link_to customer_api_users_path(date: last_week(@monday)) do %>
 				<div class="col-xs-4 preview">
-					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
+					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一周</span>
 				</div>
 			<% end %>
 			<div class="col-xs-4 text-center">
@@ -14,12 +14,12 @@
 			</div>
 			<% if next_day(@active_day) >= Date.today %>
 				<div class="col-xs-4 next text-muted">
-					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
 			<% else %>
 				<%= link_to customer_api_users_path(date: next_day(@active_day).strftime("%Y-%m-%d")) do %>
 					<div class="col-xs-4 next">
-						<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
 				<% end %>
 			<% end %>
@@ -31,7 +31,7 @@
 			<!-- 存在纪录 -->
 			<% else %>
 				<% @api_users.each_with_index do |item, index| %>
-					<%= link_to daily_customer_api_users_path(user_id: item[:id], date: @day_format) do %>
+					<%= link_to daily_customer_api_users_path(user_id: item[:id], date: @monday) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="col-xs-6 line large-title"><%= index += 1 %>. <%= item[:company] %></div>
               <div class="col-xs-6 line">
