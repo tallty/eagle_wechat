@@ -23,9 +23,9 @@ class TotalInterface < ActiveRecord::Base
 
   scope :transfers_sum, -> (date) {by_day(date).where('api_user_id is not null').group(:identifier).sum(:count)}
 
-  scope :user_analyz_daily, -> (date) {by_day(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
-  scope :user_analyz_week, -> (date) {by_week(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
-  scope :user_analyz_month, -> (date) {by_month(date).where('api_user_id is not null').group(:api_user_id).sum(:count)}
+  scope :user_analyz_daily, -> (customer, date) {by_day(date).where('identifier = ? and api_user_id is not null', customer.identifier).group(:api_user_id).sum(:count)}
+  scope :user_analyz_week, -> (customer, date) {by_week(date).where('identifier = ? and api_user_id is not null', customer.identifier).group(:api_user_id).sum(:count)}
+  scope :user_analyz_month, -> (customer, date) {by_month(date).where('identifier = ? and api_user_id is not null', customer.identifier).group(:api_user_id).sum(:count)}
 
   scope :user_analyz_to_api, -> (name, customer, date) {by_day(date).where(name: name, identifier: customer.identifier).group(:api_user_id).sum(:count)}
 

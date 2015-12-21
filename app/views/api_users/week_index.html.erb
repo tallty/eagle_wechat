@@ -4,7 +4,7 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<%= link_to customer_api_users_path(date: last_day(@active_day).strftime("%Y-%m-%d")) do %>
+			<%= link_to customer_api_users_path(date: last_week(@active_day).strftime("%Y-%m-%d")) do %>
 				<div class="col-xs-4 preview">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
 				</div>

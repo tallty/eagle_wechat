@@ -2,7 +2,9 @@ class ApiUsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :week, :month]
 
 	before_action :current_customer
-  before_action :select_day, only: [:index, :daily, :daily_index, :week_index, :month_index]
+  before_action :select_day, only: [:index, :daily, :daily_index]
+  before_action :select_week, only: [:week_index]
+  before_action :select_month, only: [:month_index]
 
   def index
     route = params[:route] || "daily"
@@ -12,7 +14,7 @@ class ApiUsersController < ApplicationController
   def daily_index
     @day_format = @active_day.strftime("%Y-%m-%d")
     @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
-    count = TotalInterface.user_analyz_daily(@active_day)
+    count = TotalInterface.user_analyz_daily(@customer, @active_day)
     @api_users.each do |user|
       user[:count] = count[user[:id]] || 0
     end
@@ -22,7 +24,7 @@ class ApiUsersController < ApplicationController
   def week_index
     @day_format = @active_day.strftime("%Y-%m-%d")
     @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
-    count = TotalInterface.user_analyz_week(@active_day)
+    count = TotalInterface.user_analyz_week(@customer, @active_day)
     @api_users.each do |user|
       user[:count] = count[user[:id]] || 0
     end
@@ -32,7 +34,7 @@ class ApiUsersController < ApplicationController
   def month_index
     @day_format = @active_day.strftime("%Y-%m-%d")
     @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
-    count = TotalInterface.user_analyz_month(@active_day)
+    count = TotalInterface.user_analyz_month(@customer, @active_day)
     @api_users.each do |user|
       user[:count] = count[user[:id]] || 0
     end
@@ -54,7 +56,7 @@ class ApiUsersController < ApplicationController
 
   private
   def current_customer
-    Customer.where(id: params[:customer_id]).first
+    @customer = Customer.where(id: params[:customer_id]).first
   end
 
   def select_day
