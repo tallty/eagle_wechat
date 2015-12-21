@@ -69,6 +69,7 @@ class ApiUsersController < ApplicationController
   end
 
   def set_api_user_info
+    Rails.logger.warn "set api user info's params is: params"
     @api_user = ApiUser.where(id: params[:user_id]).first
     @interfaces = @api_user.interfaces.as_json
   end
