@@ -4,8 +4,8 @@ class ApiUsersController < ApplicationController
 	before_action :current_customer
   before_action :set_api_user_info, only: [:daily, :week, :month]
   before_action :select_day, only: [:index, :daily, :daily_index]
-  before_action :select_week, only: [:week_index]
-  before_action :select_month, only: [:month_index]
+  before_action :select_week, only: [:week_index, :week]
+  before_action :select_month, only: [:month_index, :month]
 
   def index
     route = params[:route] || "daily"
