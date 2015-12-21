@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<!-- 后一周 -->
-			<% if Time.at(next_week(@sunday) / 1000) >= Date.today %>
+			<% if next_week(@sunday) >= Date.today %>
 				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
