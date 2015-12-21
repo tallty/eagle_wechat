@@ -4,7 +4,7 @@
 <div class="warp">
 	<div class="sef-container">
 		<div class="tab-title col-xs-12">
-			<%= link_to customer_api_users_path(date: last_week(@monday)) do %>
+			<%= link_to week_index_customer_api_users_path(date: last_week(@monday)) do %>
 				<div class="col-xs-4 preview">
 					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一周</span>
 				</div>
@@ -17,7 +17,7 @@
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
 			<% else %>
-				<%= link_to customer_api_users_path(date: next_week(@monday)) do %>
+				<%= link_to week_index_customer_api_users_path(date: next_week(@monday)) do %>
 					<div class="col-xs-4 next">
 						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
