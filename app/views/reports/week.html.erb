@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<!-- 后一周 -->
-			<% if next_week(@sunday) >= Date.today %>
+			<% if next_week(@sunday) > Date.today %>
 				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
@@ -41,7 +41,7 @@
 			<% else %>
 				<% index = 0 %>
 				<% @week_reports.each do |key, value| %>
-					<%= link_to week_show_reports_path(name: key, date: @sunday.to_time.to_i * 1000) do %>
+					<%= link_to week_show_reports_path(name: key, date: @sunday) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="first-line">
 								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= key %></div>
