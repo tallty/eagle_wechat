@@ -15,7 +15,7 @@
 				<input type="text" value="<%= @begin_month.strftime("%Y-%m") %>" readonly id="selected_month_input" class="select_date">
 			</div>
 			<!-- 后一月 -->
-			<% if Time.at(next_month(@end_month) / 1000) >= Date.today %>
+			<% if next_month(@end_month) > Date.today %>
 				<div class="col-xs-4 text-muted">
 					<span class="pull-right"><span>后一月</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
@@ -34,7 +34,7 @@
 			<% else %>
 				<% index = 0 %>
 				<% @month_reports.each do |key, value| %>
-					<%= link_to month_show_reports_path(name: key, date: @begin_month.to_time.to_i * 1000) do %>
+					<%= link_to month_show_reports_path(name: key, date: @begin_month) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="first-line">
 								<div class="col-xs-7 line large-title"><%= index += 1 %>. <%= key %></div>

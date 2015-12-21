@@ -11,12 +11,12 @@ module ReportsHelper
 
 	# 前一月
 	def last_month begin_month
-		(begin_month - 1).beginning_of_month.to_time.to_i * 1000
+		(begin_month - 1).beginning_of_month
 	end
 
 	# 后一月
 	def next_month end_month
-		(end_month + 1).to_time.to_i * 1000
+		end_month + 1
 	end
 
   # 前一周
@@ -26,7 +26,7 @@ module ReportsHelper
 
 	# 后一周
 	def next_week sunday
-		(sunday + 1)
+		sunday + 1
 	end
 
 	# 现实中文星期信息
