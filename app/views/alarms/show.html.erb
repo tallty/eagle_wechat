@@ -65,7 +65,7 @@
 						处理者:
 					</div>
 					<div class="col-xs-8">
-						<%= @alarm.user.name %>
+						<%= @alarm.try(:user).try(:name) %>
 					</div>
 				</div>
 			</div>
