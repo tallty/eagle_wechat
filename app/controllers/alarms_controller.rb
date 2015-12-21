@@ -5,12 +5,17 @@ class AlarmsController < ApplicationController
 
   def index
     page = params[:page] || params['page'] || 1
-    @alarms = Alarm.new.get_alarms(@customer).paginate(:page => page, :per_page => 10)
+    @alarms = Alarm.new.get_history(@customer).paginate(:page => page, :per_page => 10)
   end
 
   def show
     @alarm = Alarm.where(id: params[:id]).first
     @catchers = @alarm.send_logs.map {|e| e.get_catcher}.uniq.join('; ')
+  end
+
+  def active
+    page = params[:page] || params['page'] || 1
+    @alarms = Alarm.new.get_active(@customer).paginate(:page => page, :per_page => 10)
   end
 
   private

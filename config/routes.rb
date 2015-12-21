@@ -76,6 +76,10 @@ Rails.application.routes.draw do
      end
    end
 
-   resources :alarms, only: [:index, :show]
+   resources :alarms, only: [:index, :show] do
+     collection do
+       get :active
+     end
+   end
 
 end

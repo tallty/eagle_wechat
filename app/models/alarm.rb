@@ -24,8 +24,14 @@ class Alarm < ActiveRecord::Base
     $group_client.message.send_text("bianandbian", "", "", 1, self.content)
   end
 
-  def get_alarms customer
+  # 告警历史记录
+  def get_history customer
     customer.alarms.where("end_time is not null")
+  end
+
+  # 当前活跃告警
+  def get_active customer
+    customer.alarms.where("end_time is null")
   end
 
   # 1分钟轮循任务,判断是否需要告警
