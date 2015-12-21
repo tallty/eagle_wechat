@@ -21,12 +21,12 @@ module ReportsHelper
 
   # 前一周
 	def last_week monday
-		(monday - 1).beginning_of_week.to_time.to_i * 1000
+		(monday - 1).beginning_of_week
 	end
 
 	# 后一周
 	def next_week sunday
-		(sunday + 1).to_time.to_i * 1000
+		(sunday + 1)
 	end
 
 	# 现实中文星期信息
