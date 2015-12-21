@@ -1,0 +1,51 @@
+<% content_for :title do %>
+	接口列表
+<% end %>
+<div class="warp">
+	<div class="sef-container">
+		<div class="tab-title col-xs-12">
+			<%= link_to daily_customer_api_users_path(user_id: @api_user.id, date: last_day(@active_day).strftime("%Y-%m-%d")) do %>
+				<div class="col-xs-4 preview">
+					<span class="glyphicon glyphicon-chevron-left icon icon-left" aria-hidden="true"></span> <span>前一天</span>
+				</div>
+			<% end %>
+			<div class="col-xs-4 text-center">
+				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
+			</div>
+			<% if next_day(@active_day) >= Date.today %>
+				<div class="col-xs-4 next text-muted">
+					<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+				</div>
+			<% else %>
+				<%= link_to daily_customer_api_users_path(user_id: @api_user.id, date: next_day(@active_day).strftime("%Y-%m-%d")) do %>
+					<div class="col-xs-4 next">
+						<span class="pull-right"><span>后一天</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="tab-line clearfix">
+			<!-- 无纪录 -->
+			<% if @flag %>
+				<div class="col-xs-12 mes-line"><h4 class="text-center">无纪录</h4></div>
+			<!-- 存在纪录 -->
+			<% else %>
+				<% @interfaces.each_with_index do |item, index| %>
+					<!-- <%= link_to daily_customer_api_users_path(item[:id], date: @day_format) do %> -->
+						<div class="col-xs-11 mes-line">
+							<div class="col-xs-6 line large-title"><%= index += 1 %>. <%= item[:name] %></div>
+              <div class="col-xs-6 line">
+                <span class="small-tab"><i class="fa fa-circle fa-green"></i>调用次数: </span>
+  							<span class="number"><%= item[:count] || 0 %></span>
+              </div>
+						</div>
+						<div class="col-xs-1 icon-threeline">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						</div>
+					<!-- <% end %> -->
+					<div class="col-xs-12" style="padding: 5px"><hr class="line-hr"></div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -42,17 +42,21 @@ class ApiUsersController < ApplicationController
   end
 
   def daily
-    data = TotalInterface.user_interface_count(@api_user, @active_day)
+    data = TotalInterface.user_daily_count(@api_user, @active_day)
     @interfaces.each {|e| e[:count] = data[e[:name]] || 0}
     @interfaces.sort! {|x, y| y[:count] <=> x[:count]}
   end
 
   def week
-
+    data = TotalInterface.user_week_count(@api_user, @active_day)
+    @interfaces.each {|e| e[:count] = data[e[:name]] || 0}
+    @interfaces.sort! {|x, y| y[:count] <=> x[:count]}
   end
 
   def month
-
+    data = TotalInterface.user_month_count(@api_user, @active_day)
+    @interfaces.each {|e| e[:count] = data[e[:name]] || 0}
+    @interfaces.sort! {|x, y| y[:count] <=> x[:count]}
   end
 
   def show

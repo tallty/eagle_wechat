@@ -29,7 +29,9 @@ class TotalInterface < ActiveRecord::Base
 
   scope :user_analyz_to_api, -> (name, customer, date) {by_day(date).where(name: name, identifier: customer.identifier).group(:api_user_id).sum(:count)}
 
-  scope :user_interface_count, -> (user, date) {by_day(date).where(api_user_id: user.id).group(:name).sum(:count)}
+  scope :user_daily_count, -> (user, date) {by_day(date).where(api_user_id: user.id).group(:name).sum(:count)}
+  scope :user_week_count, -> (user, date) {by_week(date).where(api_user_id: user.id).group(:name).sum(:count)}
+  scope :user_month_count, -> (user, date) {by_month(date).where(api_user_id: user.id).group(:name).sum(:count)}
 
   def analy_api_user_data(date, type)
 

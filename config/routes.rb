@@ -71,6 +71,8 @@ Rails.application.routes.draw do
          get :week_index
          get :month_index
          get :daily
+         get :week
+         get :month
        end
      end
    end

@@ -31,7 +31,7 @@
 			<!-- 存在纪录 -->
 			<% else %>
 				<% @api_users.each_with_index do |item, index| %>
-					<%= link_to daily_customer_api_users_path(item[:id], date: @day_format) do %>
+					<%= link_to month_customer_api_users_path(item[:id], date: @day_format) do %>
 						<div class="col-xs-11 mes-line">
 							<div class="col-xs-6 line large-title"><%= index += 1 %>. <%= item[:company] %></div>
               <div class="col-xs-6 line">
