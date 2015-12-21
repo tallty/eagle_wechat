@@ -10,14 +10,14 @@
 				</div>
 			<% end %>
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= @active_day.strftime("%F") %>" readonly id="select_day" class="select_date">
+				<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="select_day" class="select_date">
 			</div>
-			<% if next_day(@active_day) >= Date.today %>
+			<% if next_day(@monday) >= Date.today %>
 				<div class="col-xs-4 next text-muted">
 					<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 				</div>
 			<% else %>
-				<%= link_to customer_api_users_path(date: next_day(@active_day).strftime("%Y-%m-%d")) do %>
+				<%= link_to customer_api_users_path(date: next_day(@monday).strftime("%Y-%m-%d")) do %>
 					<div class="col-xs-4 next">
 						<span class="pull-right"><span>后一周</span> <span class="glyphicon glyphicon-chevron-right icon icon-right" aria-hidden="true"></span></span>
 					</div>
