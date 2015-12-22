@@ -178,16 +178,18 @@
 			$(".air-pie").each(function(){
 				var myChart2 = ec.init($(this).get(0));
 				var option = {
-					tooltip : { trigger: 'axis' },
-					tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    	},
+					// tooltip : { trigger: 'axis' },
+					// tooltip : {
+		      //   trigger: 'item',
+		      //   formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    	// },
 					legend: {
 						orient: 'vertical',
 						x: 'left',
 						data: [
-							
+							<% @users.each do |u| %>
+								'<%= u[1] %>',
+							<% end %>
 						]
 					},
 					calculable : true,
