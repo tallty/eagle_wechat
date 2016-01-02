@@ -29,7 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.5'
 # Use Unicorn as the app server
 gem "faraday"
-gem 'unicorn'
+# gem 'unicorn'
+gem 'puma'
 gem 'devise'
 gem 'redis', '3.2.1'
 gem "redis-namespace"
