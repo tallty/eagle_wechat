@@ -40,13 +40,5 @@ app/.DS_Store
 app/assets/.DS_Store
 app/assets/images/.DS_Store
 
-# Ignore bundler config.
-/.bundle
-
-# Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
-/tmp
-
 /solr
 solr/
