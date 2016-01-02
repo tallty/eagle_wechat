@@ -170,9 +170,7 @@ class TotalInterface < ActiveRecord::Base
 
   # 解析数据
   def analyz_fetch_data(raw_post)
-    params_hash = MultiJson.load($redis.get("interface_fetch_cache"))
-    # params_hash = MultiJson.load raw_post
-    # $redis.set "interface_fetch_cache", raw_post
+    params_hash = MultiJson.load raw_post
     identifier = params_hash["identifier"]
 
     data = MultiJson.load params_hash["data"]
