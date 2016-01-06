@@ -48,7 +48,7 @@ class Task < ActiveRecord::Base
           category: "气象数据",
           alarmed_at: last_time,
           rindex: log.id,
-          content: "气象数据[#{task.name}]告警:超时未收到数据!!!"
+          content: "超时未收到数据!!!"
         }
         alarm = Alarm.where(identifier: "#{task.identifier}", alarmed_at: last_time).first
         if alarm.present?
