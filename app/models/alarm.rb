@@ -22,12 +22,12 @@ class Alarm < ActiveRecord::Base
   def send_message
     # $group_client.message.send_text("alex6756", "", "", 1, self.content)
     # $group_client.message.send_text("bianandbian", "", "", 1, self.content)
-    articles << {
+    articles = [{
       :title => "[告警]#{self.title}",
       :description => "所属模块: #{self.category}\r\n告警时间: #{self.alarmed_at.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: #{self.content}",
       :url => "http://mcu.buoyantec.com/oauths?target_url=alarms/active",
       :picurl => ""
-    }
+    }]
     $group_client.message.send_news("alex6756|bianandbian", "", "", 1, articles, safe=0)
   end
 
