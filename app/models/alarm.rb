@@ -20,8 +20,15 @@ class Alarm < ActiveRecord::Base
   after_create :send_message
 
   def send_message
-    $group_client.message.send_text("alex6756", "", "", 1, self.content)
-    $group_client.message.send_text("bianandbian", "", "", 1, self.content)
+    # $group_client.message.send_text("alex6756", "", "", 1, self.content)
+    # $group_client.message.send_text("bianandbian", "", "", 1, self.content)
+    articles << {
+      :title => "[告警]#{self.title}",
+      :description => "所属模块: #{self.category}\r\n告警时间: #{self.alarmed_at.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: #{self.content}",
+      :url => "http://mcu.buoyantec.com/oauths?target_url=alarms/active",
+      :picurl => ""
+    }
+    $group_client.message.send_news("alex6756|bianandbian", "", "", 1, articles, safe=0)
   end
 
   # 告警历史记录
@@ -57,7 +64,7 @@ class Alarm < ActiveRecord::Base
           alarmed_at: last_time,
           rindex: length,
           customer: machine.customer,
-          content: "服务器[#{machine.name}]告警:超时未收到数据!!!"
+          content: "超时未收到数据!!!"
         }
         alarm = Alarm.where(identifier: e, alarmed_at: last_time).first
         # 判断是否存在此告警

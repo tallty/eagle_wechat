@@ -15,11 +15,12 @@ class SmsLog < ActiveRecord::Base
   belongs_to :customer
   belongs_to :task
 
+  # 无用, 清理
   def self.check_task
 
     $redis.hgetall("task_log_cache").each do |key, value|
       identifier, time = key.split("_")
-      
+
       # 将处理日志详情加入到数据库
       add_task_log value
 
@@ -36,13 +37,13 @@ class SmsLog < ActiveRecord::Base
         send_task_notification task, current_state
       end
 
-      $redis.hdel("task_log_cache", key)      
+      $redis.hdel("task_log_cache", key)
     end
   end
 
   def self.send_task_notification task, current_state
     members = task.try(:customer).try(:members)
-    
+
     sended_users = members.group(:openid).pluck(:openid)
     sended_users << "alex6756"
 
@@ -59,7 +60,7 @@ class SmsLog < ActiveRecord::Base
 
   def self.add_task_log task_detail
     task_hash = MultiJson.load task_detail
-    
+
     file_logs = eval(task_hash["process_result"]["file_list"])
     now_date = DateTime.now.to_date
     file_name = ""
@@ -77,7 +78,7 @@ class SmsLog < ActiveRecord::Base
     end_time = Time.at(task_hash["process_result"]["end_time"].to_f)
 
     TaskLog.create(start_time: start_time, end_time: end_time, task_identifier: task_hash["identifier"],
-      exception: hash["process_result"]["exception"], file_name: file_name)   
+      exception: hash["process_result"]["exception"], file_name: file_name)
   end
 
 end
