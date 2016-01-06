@@ -10,7 +10,17 @@
 				</div>
 			<% end %>
 			<div class="col-xs-4 text-center">
-				<input type="text" value="<%= @monday == Date.today.beginning_of_week ? '本周' : '其他周' %>" readonly id="select_day" class="select_date">
+				<div class="col-xs-12 week-title">
+					<input type="text" value="<%= @monday == Date.today.beginning_of_week ? '本周' : '其他周' %>" readonly id="select_day" class="select_date">
+				</div>
+				<div class="row" style="line-height: 15px;">
+					<div class="col-xs-6">
+						<input type="text" value="<%= @monday.strftime("%F") %>" readonly id="monday_input" class="select_week">
+					</div>
+					<div class="col-xs-6">
+						<input type="text" value="<%= @sunday.strftime("%F") %>" readonly id="sunday_input" class="select_week">
+					</div>
+				</div>
 			</div>
 			<% if next_week(@monday) > Date.today %>
 				<div class="col-xs-4 next text-muted">
