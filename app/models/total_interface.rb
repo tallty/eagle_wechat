@@ -199,6 +199,7 @@ class TotalInterface < ActiveRecord::Base
         if total_interface.try(:count).blank? or total_interface.count < item['interface_count'].to_i
           total_interface.count = item["interface_count"].to_i
         end
+        logger.warn ">>>>>>>>>>>#{total_interface.inspect}<<<<<<<<<<"
         total_interface.save
       end
 
