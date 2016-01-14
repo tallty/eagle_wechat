@@ -178,6 +178,8 @@ class TotalInterface < ActiveRecord::Base
 
       total_interface = nil
       data.each do |item|
+        logger.warn "==================================="
+        logger.warn "#{item}"
         next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
         item_name = Interface.get_interface_name item['interface_name']
         api_user = ApiUser.where(appid: item["appid"]).first
