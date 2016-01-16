@@ -25,6 +25,13 @@ class ApiUser < ActiveRecord::Base
     }
   end
 
+  def write_a_u_id_to_cache
+    users = ApiUser.all
+    users.each do |user|
+      $redis.hset "api_user_info_cache", user.appid, user.id
+    end
+  end
+
   def fetch(url=nil)
     conn = Faraday.new(:url => "http://61.152.122.112:8080") do |faraday|
       faraday.request  :url_encoded
