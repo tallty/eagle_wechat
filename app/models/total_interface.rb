@@ -182,19 +182,21 @@ class TotalInterface < ActiveRecord::Base
         logger.warn "#{item}"
         next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
         item_name = Interface.get_interface_name item['interface_name']
-        api_user = ApiUser.where(appid: item["appid"]).first
-        next if api_user.blank?
+        # api_user = ApiUser.where(appid: item["appid"]).first
+        api_user_id = ApiUser.get_api_user_id(item['appid'])
+        next if api_user_id.blank?
         if item_name.blank?
           item_name = item["name"]
         end
         datetime = Time.parse(item["datetime"])
-        total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user: api_user).first
+        
+        total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user_id: api_user_id).first
         if total_interface.blank?
           total_interface = TotalInterface.new
-          total_interface.datetime   = datetime
-          total_interface.identifier = identifier
-          total_interface.name       = item_name
-          total_interface.api_user   = api_user
+          total_interface.datetime    = datetime
+          total_interface.identifier  = identifier
+          total_interface.name        = item_name
+          total_interface.api_user_id = api_user_id
         end
         if total_interface.try(:count).blank? or total_interface.count < item['interface_count'].to_i
           total_interface.count = item["interface_count"].to_i
