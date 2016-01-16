@@ -32,6 +32,11 @@ class ApiUser < ActiveRecord::Base
     end
   end
 
+  def self.get_api_user_id appid
+    return if appid.blank?
+    $redis.hget "api_user_info_cache", appid
+  end
+
   def fetch(url=nil)
     conn = Faraday.new(:url => "http://61.152.122.112:8080") do |faraday|
       faraday.request  :url_encoded
