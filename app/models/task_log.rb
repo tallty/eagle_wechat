@@ -33,7 +33,6 @@ class TaskLog < ActiveRecord::Base
   end
 
   def build_task_log(params={})
-    Rails.logger.warn "task log params is: #{params}"
     task_identifier = params[:task_identifier] || params['task_identifier']
     start_time = params[:start_time] || params['start_time']
     log = TaskLog.where(task_identifier: task_identifier, start_time: start_time).first
