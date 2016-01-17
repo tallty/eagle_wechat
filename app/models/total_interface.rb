@@ -178,8 +178,6 @@ class TotalInterface < ActiveRecord::Base
 
       total_interface = nil
       data.each do |item|
-        logger.warn "==================================="
-        logger.warn "#{item}"
         next if item['appid'].eql?('ZfQg2xyW04X3umRPsi9H')
         item_name = Interface.get_interface_name item['interface_name']
         # api_user = ApiUser.where(appid: item["appid"]).first
@@ -189,7 +187,7 @@ class TotalInterface < ActiveRecord::Base
           item_name = item["name"]
         end
         datetime = Time.parse(item["datetime"])
-        
+
         total_interface = TotalInterface.where(datetime: datetime, identifier: identifier, name: item_name, api_user_id: api_user_id).first
         if total_interface.blank?
           total_interface = TotalInterface.new
@@ -201,7 +199,6 @@ class TotalInterface < ActiveRecord::Base
         if total_interface.try(:count).blank? or total_interface.count < item['interface_count'].to_i
           total_interface.count = item["interface_count"].to_i
         end
-        logger.warn ">>>>>>>>>>>#{total_interface.inspect}<<<<<<<<<<"
         total_interface.save
       end
 
