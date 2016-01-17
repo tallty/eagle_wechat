@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
 	end
 
 	def daily
-		@day_format = @active_day.strftime('%Y-%m-%d')
+		@day_format = @active_day.strftime('%F')
 		data = $redis.hvals("interface_sort_#{@customer.identifier}_#{@day_format}")
 		@flag = true
 		if data.present?
