@@ -43,20 +43,31 @@ class TaskLog < ActiveRecord::Base
   end
 
   def verify_task
-    customer = Task.where(identifier: task_identifier).first.customer
-    alarm_params = {
-      identifier: task_identifier,
-      title:      task_name,
-      category:   '气象数据',
-      alarmed_at: Time.now,
-      rindex:     id,
-      customer:   customer
-    }
-    # 数据处理异常,告警
-    exception = MultiJson.load(exception) rescue ""
-    if exception.present?
-      alarm_params['content'] = "数据[#{task_name}]告警:数据解析异常, 需要马上解决."
-      Alarm.new.build_task_alarm(alarm_params)
+    # customer = Task.where(identifier: task_identifier).first.customer
+    customer = Task.new.get_customer_by_task task_identifier
+    if customer.present?
+      alarm_params = {
+        identifier: task_identifier,
+        title:      task_name,
+        category:   '气象数据',
+        alarmed_at: Time.now,
+        rindex:     id,
+        customer:   customer
+      }
+      # 数据处理异常,告警
+      exception = MultiJson.load(exception) rescue ""
+      if exception.present?
+        alarm_params['content'] = "数据[#{task_name}]告警:数据解析异常, 需要马上解决."
+        Alarm.new.build_task_alarm(alarm_params)
+      end
+    else
+      articles = [{
+        :title => "[告警]通过获取customer失败!!!",
+        :description => "所属模块: TaskLog.verify_task\r\n告警时间: #{Time.now.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: 通过 task_identifier获取customer失败!!!",
+        :url => "http://mcu.buoyantec.com/oauths?target_url=alarms/active",
+        :picurl => ""
+      }]
+      $group_client.message.send_news("alex6756", "", "", 1, articles, safe=0)
     end
   end
 end
