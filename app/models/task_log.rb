@@ -63,7 +63,7 @@ class TaskLog < ActiveRecord::Base
     else
       articles = [{
         :title => "[告警]通过获取customer失败!!!",
-        :description => "所属模块: TaskLog.verify_task\r\n告警时间: #{Time.now.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: 通过 task_identifier获取customer失败!!!",
+        :description => "所属模块: TaskLog.verify_task\r\n告警时间: #{Time.now.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: 通过 task_identifier: #{task_identifier} 获取customer失败!!!",
         :url => "http://mcu.buoyantec.com/oauths?target_url=alarms/active",
         :picurl => ""
       }]
