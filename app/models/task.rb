@@ -66,7 +66,7 @@ class Task < ActiveRecord::Base
   end
 
 	def get_customer_by_task task_identifier
-	  task = Task.where(identifier: task_identifier).task
+	  task = Task.where(identifier: task_identifier).first
 		return task.try(:customer)
 	end
 
