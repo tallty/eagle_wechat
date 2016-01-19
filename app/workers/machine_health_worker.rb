@@ -4,7 +4,7 @@ class MachineHealthWorker
   from_queue 'machine_health', env: nil
 
   def work(raw_post)
-    TaskProcess.push(raw_post)
+    MachineProcessor.push(raw_post)
     ack!  # we need to let queue know that message was received
   end
 end
