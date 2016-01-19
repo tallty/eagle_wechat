@@ -43,7 +43,7 @@ gem 'thread'
 
 gem 'will_paginate', '~> 3.0.6'
 
-gem 'bunny'
+gem "bunny", ">= 2.2.1"
 gem 'sneakers'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
