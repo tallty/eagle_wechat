@@ -32,7 +32,7 @@ class MachinesController < ApplicationController
   end
 
   def real_hardware_info
-    AnalyzeTask.publish("machine_info", "get machine log.")
+    BasePublisher.publish("machine_health", real_hardware_params.to_json)
     $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
     $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
     $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"

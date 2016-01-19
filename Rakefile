@@ -20,13 +20,14 @@ namespace :rabbitmq do
       Rails.logger.warn "#{payload} => analyze_task"
     end
 
-    # ch.queue('alarm_task', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
-    #   Rails.logger.warn "#{payload} => alarm_task"
-    # end
-
     x = ch.fanout('message.interface')
     ch.queue('analyze_interface', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
       Rails.logger.warn "#{payload} => analyze_interface"
+    end
+
+    x = ch.fanout("message.machine_health")
+    ch.queue("machine_health", durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
+      Rails.logger.warn "#{payload} => Machine Health"
     end
 
     # ch_task = conn.create_channel
