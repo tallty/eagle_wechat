@@ -63,7 +63,7 @@ class Machine < ActiveRecord::Base
     if alarm_info.nil?
       true
     else
-      new_time = $redis.hget("machine_last_update_time", identify)
+      new_time = $redis.hget("machine_last_update_time", identifier)
       (Time.now - 2.minute > Time.parse(new_time)) ? false : true
       # if $redis.lindex("#{identifier}_cpu", -(alarm_info.rindex + 1)).present?
       #   true
