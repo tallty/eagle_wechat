@@ -33,11 +33,6 @@ class MachinesController < ApplicationController
 
   def real_hardware_info
     BasePublisher.publish("machine_health", real_hardware_params.to_json)
-    $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
-    $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
-    $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
-    $redis.lpush "#{real_hardware_params['identifier']}_file_systems", "#{real_hardware_params['info']['file_system']}"
-    $redis.hset("machine_last_update_time", "#{real_hardware_params['identifier']}", Time.now.strftime('%Y-%m-%d %H:%M:%S'))
     render :text => 'ok'
   end
 
