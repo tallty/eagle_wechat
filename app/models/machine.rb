@@ -37,7 +37,7 @@ class Machine < ActiveRecord::Base
     if cache.nil?
       nil
     else
-      memory_data = eval(cache) 
+      memory_data = eval(cache)
       memory_free = memory_data["memory_free_bytes"].to_f
       memory_total = memory_data["memory_total_bytes"].to_f
       memory_used = (((memory_total - memory_free) / memory_total) * 100).round(1)
@@ -51,7 +51,7 @@ class Machine < ActiveRecord::Base
     if cache.nil?
       nil
     else
-      memory_data = eval(cache) 
+      memory_data = eval(cache)
       return memory_data["memory_total_bytes"].to_i - memory_data["memory_free_bytes"].to_i
     end
   end
@@ -63,11 +63,13 @@ class Machine < ActiveRecord::Base
     if alarm_info.nil?
       true
     else
-      if $redis.lindex("#{identifier}_cpu", -(alarm_info.rindex + 1)).present?
-        true
-      else
-        false
-      end
+      new_time = $redis.hget("machine_last_update_time", identify)
+      (Time.now - 2.minute > Time.parse(new_time)) ? false : true
+      # if $redis.lindex("#{identifier}_cpu", -(alarm_info.rindex + 1)).present?
+      #   true
+      # else
+      #   false
+      # end
     end
   end
 
@@ -76,6 +78,6 @@ class Machine < ActiveRecord::Base
   def generate_identifier
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
     self.identifier ||= chars.sample(16).join
-  end  
+  end
 
 end
