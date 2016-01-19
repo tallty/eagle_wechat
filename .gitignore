@@ -42,3 +42,4 @@ app/assets/images/.DS_Store
 
 /solr
 solr/
+.cz.json
