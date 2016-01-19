@@ -16,19 +16,13 @@ namespace :rabbitmq do
     # publish/subscribe
     ch = conn.create_channel
     x = ch.fanout('message.task')
-    ch.queue('analyze_task', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
-      Rails.logger.warn "#{payload} => analyze_task"
-    end
+    ch.queue('analyze_task', durable: true).bind(x).subscribe
 
     x = ch.fanout('message.interface')
-    ch.queue('analyze_interface', durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
-      Rails.logger.warn "#{payload} => analyze_interface"
-    end
+    ch.queue('analyze_interface', durable: true).bind(x).subscribe
 
     x = ch.fanout("message.machine_health")
-    ch.queue("machine_health", durable: true).bind(x).subscribe do |delivery_info, metadata, payload|
-      Rails.logger.warn "#{payload} => Machine Health"
-    end
+    ch.queue("machine_health", durable: true).bind(x).subscribe
 
     # ch_task = conn.create_channel
     # ch_task.fanout('message.task')
