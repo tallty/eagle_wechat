@@ -9,6 +9,10 @@ class MachineProcessor
     $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
     $redis.lpush "#{real_hardware_params['identifier']}_file_systems", "#{real_hardware_params['info']['file_system']}"
     $redis.hset("machine_last_update_time", "#{real_hardware_params['identifier']}", Time.now.strftime('%Y-%m-%d %H:%M:%S'))
+    $redis.ltrim "#{real_hardware_params['identifier']}_cpu", 0, 8640
+    $redis.ltrim "#{real_hardware_params['identifier']}_memory", 0, 8640
+    $redis.ltrim "#{real_hardware_params['identifier']}_net_work", 0, 8640
+    $redis.ltrim "#{real_hardware_params['identifier']}_file_systems", 0, 8640
   end
 
 end
