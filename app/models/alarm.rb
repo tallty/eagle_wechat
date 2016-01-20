@@ -47,26 +47,30 @@ class Alarm < ActiveRecord::Base
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
     last_times.map do |e, v|
-      last_time = Time.parse(v) + 3.minutes
+      alarm_time = Time.parse(v) + 3.minutes
       # 判断服务器是否正常
-      if now_time > last_time
+      if now_time > alarm_time
         # 从告警表判断此告警信息已经存在:
         #   如果不存在,存入数据库并推送消息
         #   如果存在,判断推送消息记录表是否已经成功推送过此条消息
         #     如果推送过,结束.否则推送消息并写入推送消息日志表
-        machine = Machine.where(identifier: e).first
+        # machine = Machine.where(identifier: e).first
+        machine_hash = Machine.get_machine e
+        return if machine_hash.blank?
+        machine_name = machine_hash[:name] || machine_hash['name']
+        machine_customer = machine_hash[:customer] || machine_hash['customer']
         # 服务器故障时的采集信息列表长度
         length = length = $redis.llen("#{e}_cpu").to_i
         params = {
           identifier: e,
-          title: machine.name,
+          title: machine_name,
           category: "服务器",
-          alarmed_at: last_time,
+          alarmed_at: alarm_time,
           rindex: length,
-          customer: machine.customer,
+          customer: machine_customer,
           content: "超时未收到数据!!!"
         }
-        alarm = Alarm.where(identifier: e, alarmed_at: last_time).first
+        alarm = Alarm.where(identifier: e, alarmed_at: alarm_time).first
         # 判断是否存在此告警
         if alarm.present?
           # 判断是否推送此消息

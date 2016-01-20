@@ -75,16 +75,12 @@ class Machine < ActiveRecord::Base
     else
       new_time = $redis.hget("machine_last_update_time", identifier)
       (Time.now - 2.minute > Time.parse(new_time)) ? false : true
-      # if $redis.lindex("#{identifier}_cpu", -(alarm_info.rindex + 1)).present?
-      #   true
-      # else
-      #   false
-      # end
     end
   end
 
-  def self.get_machine_name identifier
-    $redis.hget("machine_info_cache", identifier) || ""
+  def self.get_machine identifier
+    machine_json = $redis.hget("machine_info_cache", identifier)
+    MultiJson.load(machine_json) rescue {}
   end
 
   private
