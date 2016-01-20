@@ -17,7 +17,7 @@ class MachineProcessor
       $redis.ltrim "#{identifier}_file_systems", 0, 8640
     end
     alarm = Alarm.where(identifier: identifier, end_time: nil).last
-    p ">>>>>>>>>>>>>>>>>> #{alarm.inspect}"
+    Rails.logger.warn ">>>>>>>>>>>>>>>>>> #{alarm.inspect}"
     if alarm
       alarm.update_attribute(:end_time, Time.now)
     end
