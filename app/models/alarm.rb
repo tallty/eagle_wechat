@@ -20,8 +20,6 @@ class Alarm < ActiveRecord::Base
   after_create :send_message
 
   def send_message
-    # $group_client.message.send_text("alex6756", "", "", 1, self.content)
-    # $group_client.message.send_text("bianandbian", "", "", 1, self.content)
     articles = [{
       :title => "[告警]#{self.title}",
       :description => "所属模块: #{self.category}\r\n告警时间: #{self.alarmed_at.strftime('%Y-%m-%d %H:%m')}\r\n提示信息: #{self.content}",
@@ -44,7 +42,6 @@ class Alarm < ActiveRecord::Base
   # 1分钟轮循任务,判断是否需要告警
   # 检查服务器是否有问题需要告警
   def process
-    Rails.logger.warn "machine health check"
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
     last_times.map do |e, v|
