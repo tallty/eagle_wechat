@@ -19,7 +19,7 @@ class MachineProcessor
     alarm = Alarm.where(identifier: identifier, end_time: nil).last
     p ">>>>>>>>>>>>>>>>>> #{alarm.inspect}"
     if alarm
-      alarm.updated_attribute(:end_time, Time.now)
+      alarm.update_attribute(:end_time, Time.now)
     end
   end
 
