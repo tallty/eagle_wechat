@@ -4,17 +4,22 @@ class MachineProcessor
   def self.push(raw_post)
     real_hardware_params = MultiJson.load raw_post rescue {}
     return if real_hardware_params.blank?
-    Rails.logger.warn "machine identifier: #{real_hardware_params['identifier']}"
+    identifier = real_hardware_params['identifier'] || real_hardware_params[:identifier]
     $redis.multi do
-      $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
-      $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
-      $redis.lpush "#{real_hardware_params['identifier']}_net_work", "#{real_hardware_params['info']['net_work']}"
-      $redis.lpush "#{real_hardware_params['identifier']}_file_systems", "#{real_hardware_params['info']['file_system']}"
-      $redis.hset("machine_last_update_time", "#{real_hardware_params['identifier']}", Time.now.strftime('%Y-%m-%d %H:%M:%S'))
-      $redis.ltrim "#{real_hardware_params['identifier']}_cpu", 0, 8640
-      $redis.ltrim "#{real_hardware_params['identifier']}_memory", 0, 8640
-      $redis.ltrim "#{real_hardware_params['identifier']}_net_work", 0, 8640
-      $redis.ltrim "#{real_hardware_params['identifier']}_file_systems", 0, 8640
+      $redis.lpush "#{identifier}_cpu", "#{real_hardware_params['info']['cpu']}"
+      $redis.lpush "#{identifier}_memory", "#{real_hardware_params['info']['memory']}"
+      $redis.lpush "#{identifier}_net_work", "#{real_hardware_params['info']['net_work']}"
+      $redis.lpush "#{identifier}_file_systems", "#{real_hardware_params['info']['file_system']}"
+      $redis.hset("machine_last_update_time", "#{identifier}", Time.now.strftime('%Y-%m-%d %H:%M:%S'))
+      $redis.ltrim "#{identifier}_cpu", 0, 8640
+      $redis.ltrim "#{identifier}_memory", 0, 8640
+      $redis.ltrim "#{identifier}_net_work", 0, 8640
+      $redis.ltrim "#{identifier}_file_systems", 0, 8640
+    end
+    alarm = Alarm.where(identifier: identifier, end_time: nil).last
+    p ">>>>>>>>>>>>>>>>>> #{alarm.inspect}"
+    if alarm
+      alarm.updated_attribute(:end_time, Time.now)
     end
   end
 
