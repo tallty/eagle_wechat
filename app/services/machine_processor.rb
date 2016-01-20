@@ -4,6 +4,7 @@ class MachineProcessor
   def self.push(raw_post)
     real_hardware_params = MultiJson.load raw_post rescue {}
     return if real_hardware_params.blank?
+    Rails.logger.warn "machine identifier: #{real_hardware_params['identifier']}"
     $redis.multi do
       $redis.lpush "#{real_hardware_params['identifier']}_cpu", "#{real_hardware_params['info']['cpu']}"
       $redis.lpush "#{real_hardware_params['identifier']}_memory", "#{real_hardware_params['info']['memory']}"
