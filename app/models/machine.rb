@@ -23,6 +23,14 @@ class Machine < ActiveRecord::Base
 
   after_update :write_info_to_cache
 
+  def as_json(options=nil)
+    {
+      name: name,
+      customer: customer.id,
+      explain: explain,
+      operating_status: operating_status
+    }
+  end
   #计算机器的cpu占比
   def cpu_percent
     cache = MachineInfo.get_info("cpu", identifier)
@@ -75,9 +83,13 @@ class Machine < ActiveRecord::Base
     end
   end
 
+  def self.get_machine_name identifier
+    $redis.hget("machine_info_cache", identifier) || ""
+  end
+
   private
   def write_info_to_cache
-    $redis.hset("machine_info_cache", identifier, name)
+    $redis.hset("machine_info_cache", identifier, self.to_json)
   end
 
   def generate_identifier
