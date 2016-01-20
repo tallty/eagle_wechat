@@ -21,6 +21,8 @@ class Machine < ActiveRecord::Base
 
   after_initialize :generate_identifier
 
+  after_update :write_info_to_cache
+
   #计算机器的cpu占比
   def cpu_percent
     cache = MachineInfo.get_info("cpu", identifier)
@@ -74,6 +76,9 @@ class Machine < ActiveRecord::Base
   end
 
   private
+  def write_info_to_cache
+    $redis.hset("machine_info_cache", identifier, name)
+  end
 
   def generate_identifier
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
