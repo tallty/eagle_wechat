@@ -44,6 +44,7 @@ class Alarm < ActiveRecord::Base
   # 1分钟轮循任务,判断是否需要告警
   # 检查服务器是否有问题需要告警
   def process
+    Rails.logger.warn "machine heal check"
     last_times = $redis.hgetall("machine_last_update_time")
     now_time = Time.now
     last_times.map do |e, v|
