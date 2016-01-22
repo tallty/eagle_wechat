@@ -3,6 +3,7 @@ Sneakers.configure({
     :threads => 20,
     :share_threads => true,
     :log => 'log/sneakers.log',
-    :daemonize => true
+    :daemonize => true,
+    :env => 'production'
 })
 Sneakers.logger.level = Logger::INFO
