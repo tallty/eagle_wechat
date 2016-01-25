@@ -18,8 +18,8 @@ class TotalInterface < ActiveRecord::Base
 
   # default_scope { order(count: :DESC) }
   scope :day, -> (date) { by_day(date) }
-  scope :week, -> (date) { between_times(date.beginning_of_week, date.end_of_week) }
-  scope :month, -> (date) { between_times(date.beginning_of_month, date.end_of_month) }
+  scope :week, -> (date) { by_week(date, :strict => true) }
+  scope :month, -> (date) { by_month(date, :strict => true) }
 
   scope :transfers_sum, -> (date) {by_day(date).where('api_user_id is not null').group(:identifier).sum(:count)}
 
