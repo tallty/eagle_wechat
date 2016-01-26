@@ -65,7 +65,7 @@ class Alarm < ActiveRecord::Base
           category: "服务器",
           alarmed_at: alarm_time,
           rindex: length,
-          customer: machine_customer,
+          customer_id: machine_customer,
           content: "超时未收到数据!!!"
         }
         p params
