@@ -68,6 +68,7 @@ class Alarm < ActiveRecord::Base
           customer: machine_customer,
           content: "超时未收到数据!!!"
         }
+        p params
         alarm = Alarm.where(identifier: e, alarmed_at: alarm_time).first
         p alarm
         # 判断是否存在此告警
