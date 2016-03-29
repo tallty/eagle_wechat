@@ -2,27 +2,27 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-require 'sneakers/tasks'
+# require 'sneakers/tasks'
 
 Rails.application.load_tasks
 
-namespace :rabbitmq do
-  desc 'Setup routing'
-  task :setup do
-    require 'bunny'
-    conn = Bunny.new(:automatically_recover => false)
-    conn.start
-
-    # publish/subscribe
-    ch = conn.create_channel
-    x = ch.fanout('message.task')
-    ch.queue('analyze_task', durable: true).bind(x).subscribe
-
-    x = ch.fanout('message.interface')
-    ch.queue('analyze_interface', durable: true).bind(x).subscribe
-
-    x = ch.fanout("message.machine_health")
-    ch.queue("machine_health", durable: true).bind(x).subscribe
+# namespace :rabbitmq do
+#   desc 'Setup routing'
+#   task :setup do
+#     require 'bunny'
+#     conn = Bunny.new(:automatically_recover => false)
+#     conn.start
+#
+#     # publish/subscribe
+#     ch = conn.create_channel
+#     x = ch.fanout('message.task')
+#     ch.queue('analyze_task', durable: true).bind(x).subscribe
+#
+#     x = ch.fanout('message.interface')
+#     ch.queue('analyze_interface', durable: true).bind(x).subscribe
+#
+#     x = ch.fanout("message.machine_health")
+#     ch.queue("machine_health", durable: true).bind(x).subscribe
 
     # ch_task = conn.create_channel
     # ch_task.fanout('message.task')
@@ -34,6 +34,6 @@ namespace :rabbitmq do
     # ch_interface.fanout('message.interface')
     # queue_interface = ch_interface.queue('worker.interface', durable: true)
     # queue_interface.bind('message.interface')
-    conn.close
-  end
-end
+#     conn.close
+#   end
+# end

@@ -43,8 +43,8 @@ gem 'thread'
 
 gem 'will_paginate', '~> 3.0.6'
 
-gem "bunny", ">= 2.2.1"
-gem 'sneakers'
+# gem "bunny", ">= 2.2.1"
+# gem 'sneakers'
 gem 'sidekiq'
 gem 'sinatra'
 # Use Capistrano for deployment
