@@ -4,7 +4,8 @@ class TotalInterfacesController < ApplicationController
   respond_to :json
 
   def fetch
-    BasePublisher.publish("interface", interface_total_params.to_json)
+    # BasePublisher.publish("interface", interface_total_params.to_json)
+    TotalInterface.new.analyz_fetch_data interface_total_params
     render :text => 'ok'
   end
 

@@ -169,12 +169,11 @@ class TotalInterface < ActiveRecord::Base
 
 
   # 解析数据
-  def analyz_fetch_data(raw_post)
+  def analyz_fetch_data(params)
     begin
-      params_hash = MultiJson.load raw_post
-      identifier = params_hash["identifier"]
+      identifier = params[:identifier]
 
-      data = MultiJson.load params_hash["data"]
+      data = MultiJson.load params[:data]
 
       total_interface = nil
       data.each do |item|
