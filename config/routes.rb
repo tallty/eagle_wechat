@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   mount QyWechat::Engine, at: "/"
-
+  mount Sidekiq::Web => '/sidekiq'
+  
   resources :machines do
     collection do
       post :base_hardware_info
