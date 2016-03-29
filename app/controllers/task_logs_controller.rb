@@ -7,7 +7,7 @@ class TaskLogsController < ApplicationController
     # BasePublisher.publish("task", task_log_params.to_json)
 
     return if task_log_params["task_identifier"].blank?
-    process_result = item["process_result"]
+    process_result = task_log_params["process_result"]
     file_name = MultiJson.load(process_result['file_list']).join(';') rescue ""
     log_params = {
       task_identifier: task_log_params['task_identifier'],
