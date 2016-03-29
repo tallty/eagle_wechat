@@ -15,7 +15,7 @@ module EagleWechat
       end
     end
 
-    config.autoload_paths += %W(#{Rails.root}/app/workers)
+    # config.autoload_paths += %W(#{Rails.root}/app/workers)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
