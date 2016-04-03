@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-
+  root 'admin/dashboard#index'
   mount QyWechat::Engine, at: "/"
-  mount Sidekiq::Web => '/sidekiq'
-  
+  authenticate :admin, lambda {|u| u.present? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :machines do
     collection do
       post :base_hardware_info
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   resources :total_interfaces do
     collection do
       post :fetch
+      get :get_sum
     end
   end
   devise_for :users, controllers: {
@@ -34,6 +37,7 @@ Rails.application.routes.draw do
     resources :interfaces do
       resources :api_users, only: [:index, :new, :create, :destroy]
     end
+    resources :dashboard
   end
 
   resources :oauths, only: [:index]
