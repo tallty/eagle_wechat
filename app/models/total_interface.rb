@@ -200,7 +200,7 @@ class TotalInterface < ActiveRecord::Base
         end
         total_interface.save
       end
-
+      
       processor = TotalInterface.new
       # 计算接口调用总数
       processor.write_sum_to_cache

@@ -9,6 +9,11 @@ class TotalInterfacesController < ApplicationController
     render :text => 'ok'
   end
 
+  def get_sum
+    now_day = DateTime.now.strftime("%F")
+    $redis.hget("interface_sum_cache", "#{now_day}_v7XGbzhd")
+  end
+
   private
   def interface_total_params
     params.require(:total_interfaces).permit(:identifier, :data)
