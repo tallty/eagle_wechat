@@ -11,7 +11,8 @@ class TotalInterfacesController < ApplicationController
 
   def get_sum
     now_day = DateTime.now.strftime("%F")
-    $redis.hget("interface_sum_cache", "#{now_day}_v7XGbzhd")
+    sum_interfaces = $redis.hget("interface_sum_cache", "#{now_day}_v7XGbzhd")
+    redner :json => sum_interfaces
   end
 
   private
