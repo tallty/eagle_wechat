@@ -1,0 +1,43 @@
+<div id="real-time-weather" class="weather-container">
+  <div class="tempe">
+    <%= @real_time_weather['tempe'] %>℃
+  </div>
+  <div class="sub-info">
+    <div class="weather"><%= @real_time_weather['weather'] %></div>
+    <div class="update-time"><%= @real_time_weather['datetime'] %>更新</div>
+  </div>
+  <div class="sub-weather-container">
+    <p>
+      <%= image_tag "wind.png" %><span id="real-wind"><%= @real_time_weather['wind_direction']%> <%= @real_time_weather['wind_speed'] %></span>
+    </p>
+    <p>
+      <%= image_tag "air-press.png" %><span id="real-air-press"><%= @real_time_weather['air_pressure']%></span>hpa
+    </p>
+  </div>
+  <div class="sub-weather-container">
+    <p>
+      <%= image_tag "rain.png" %><span id="real-rain"><%= @real_time_weather['rain']%></span>mm
+    </p>
+    <p>
+      <%= image_tag "humi.png" %><span id="real-humi"><%= @real_time_weather['humi'].to_i %></span>%
+    </p>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    var pusher = new Pusher('22aafd365316e4b176ba', {
+      encrypted: true
+    })
+
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+      $("#real-time-weather .tempe").html(data.tempe + "℃");
+      $("#real-time-weather .weather").html(data.weather);
+      $("#real-time-weather .update-time").html(data.datetime + "更新");
+      $("#real-air-press").html(data.air_press);
+      $("#real-rain").html(data.rain);
+      $("#real-humi").html(data.humi);
+      $("#real-wind").html(data.wind_direction + " " + data.wind_speed);
+    });
+  });
+</script>

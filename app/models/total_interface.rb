@@ -37,6 +37,12 @@ class TotalInterface < ActiveRecord::Base
 
   end
 
+  # 接口调用总数
+  def self.get_sum_from_cache(day=nil)
+    now_day = day || DateTime.now
+    sum_interfaces = $redis.hget("interface_sum_cache", "#{now_day.strftime("%F")}_v7XGbzhd")
+  end
+
   # 最新接口调用总数写入redis
   def write_sum_to_cache(day=nil)
     today = day || Time.now.to_date
@@ -200,7 +206,7 @@ class TotalInterface < ActiveRecord::Base
         end
         total_interface.save
       end
-      
+
       processor = TotalInterface.new
       # 计算接口调用总数
       processor.write_sum_to_cache

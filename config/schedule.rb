@@ -6,15 +6,19 @@
 # Example:
 #
 set :output, "./log/cron_log.log"
-set :job_template, "/usr/bin/timeout 1800 /bin/bash -l -c ':job'"
+# set :job_template, "/usr/bin/timeout 1800 /bin/bash -l -c ':job'"
 
 # Learn more: http://github.com/javan/whenever
 every 1.minutes do
-  runner 'Alarm.new.process'
+  # runner 'Alarm.new.process'
+end
+
+every 1.minutes do
+  runner 'Weather.new.pusher_data'
 end
 
 every 5.minutes do
-  runner 'Interface.new.process'
+  # runner 'Interface.new.process'
 end
 
 every 1.day, :at => '1:45' do
@@ -22,9 +26,9 @@ every 1.day, :at => '1:45' do
 end
 
 every 1.day, :at => '8:00' do
-  runner 'SendReport.send_report'
+  # runner 'SendReport.send_report'
 end
 
 every 1.minutes do
-  runner "TaskLog.new.process"
+  # runner "TaskLog.new.process"
 end

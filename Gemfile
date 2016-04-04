@@ -47,6 +47,8 @@ gem 'will_paginate', '~> 3.0.6'
 # gem 'sneakers'
 gem 'sidekiq'
 gem 'sinatra'
+
+gem 'pusher'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

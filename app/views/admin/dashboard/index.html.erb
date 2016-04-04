@@ -1,0 +1,94 @@
+<div id="header" class="row">
+  <div class="logo">
+    <%= image_tag "qxj.png" %>
+    上海市气象局
+  </div>
+  <%= render partial: "/admin/share/interface_count" %>
+  <%= render partial: "/admin/share/real_time_weather" %>
+  <div id="now-timer" class="now-timer">
+
+  </div>
+</div>
+<div class="monitor-content">
+  <div class="content-left">
+    <div class="interface-chart">
+
+    </div>
+    <div class="bottom-container">
+      <div class="data-process-content">
+
+      </div>
+      <div class="machine-content">
+        <div class="title">
+          服务器监控
+        </div>
+        <div class="list">
+          <div class="list-header">
+            <div class="">服务器名称</div>
+            <div class="">CPU</div>
+            <div class="">内存</div>
+            <div class="">硬盘</div>
+          </div>
+          <div class="list-content">
+            <% @machines.each do |machine| %>
+            <%= machine %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="district-weathers" class="content-right">
+    <div class="title">
+      实况数据
+    </div>
+    <div class="sub-title">
+      <div>实况</div>
+      <div>温度</div>
+      <div>风速</div>
+      <div>湿度</div>
+      <div>小时雨量</div>
+      <div>气压</div>
+      <div>能见度</div>
+    </div>
+    <div class="weathers-content">
+      <% @district_weathers.each do |item| %>
+        <div class="line-content">
+          <div><%= item['site_name'] %></div>
+          <div><%= item['tempe']%></div>
+          <div><%= item['wind_speed']%></div>
+          <div><%= item['humi']%></div>
+          <div><%= item['rain']%></div>
+          <div><%= item['air_pressure']%></div>
+          <div><%= item['visibility']%></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $(function(){
+    var now_time;
+
+    function show_time() {
+      now_time = new Date();
+      $("#now-timer").html(timeStamp2String(now_time));
+    }
+    show_time();
+
+    setInterval( function() {
+      show_time();
+    },1000);
+
+    function timeStamp2String(datetime){
+      var today = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
+      var year = datetime.getFullYear();
+      var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+      var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+      var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+      var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+      var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+      return year + "." + month + "." + date+" "+ today[datetime.getDay()] +hour+":"+minute+":"+second;
+    }
+  });
+</script>
