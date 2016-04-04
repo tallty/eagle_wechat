@@ -31,7 +31,10 @@
           </div>
           <div class="list-content">
             <% @machines.each do |machine| %>
-            <%= machine %>
+              <div class="machine-name"><%= machine['name']%></div>
+              <div class="cpu-name"><%= machine.cpu_percent%></div>
+              <div class="memory-name"><%= machine.memory_percent%></div>
+              <div class="disk-name"><%= machine.memory_percent%></div>
             <% end %>
           </div>
         </div>
