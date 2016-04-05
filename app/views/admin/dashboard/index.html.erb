@@ -157,7 +157,7 @@
                   data:[
                     <% @interface_distri.each do |e| %>
                       {
-                        value: e['all_count'], name: "<%= e['name']%>"
+                        value: <%= e['all_count'] %>, name: "<%= e['name']%>"
                       },
                     <% end %>
                   ]
