@@ -25,6 +25,16 @@ class ApiUser < ActiveRecord::Base
     }
   end
 
+  def get_api_user_sort customer, datetime
+    api_users = customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
+    count = TotalInterface.user_analyz_daily(customer, datetime)
+    api_users.each do |user|
+      user[:count] = count[user[:id]] || 0
+    end
+    api_users.sort! { |x, y| y[:count] <=> x[:count] }
+    api_users
+  end
+
   def write_a_u_id_to_cache
     users = ApiUser.all
     users.each do |user|
