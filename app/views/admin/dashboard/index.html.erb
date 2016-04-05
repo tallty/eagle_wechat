@@ -146,9 +146,12 @@
                     }
                   },
                   data:[
-                    {value:335, name:'直达'},
-                    {value:679, name:'营销广告'},
-                    {value:1548, name:'搜索引擎', selected:true}
+                    <% @api_users_sort.each do |user| %>
+                      {
+                        value: <%= user['count'] %>,
+                        name: "<%= user['company']%>"
+                      },
+                    <% end %>
                   ]
               },
               {

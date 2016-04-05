@@ -14,12 +14,13 @@ class ApiUsersController < ApplicationController
 
   def daily_index
     @day_format = @active_day.strftime("%Y-%m-%d")
-    @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
-    count = TotalInterface.user_analyz_daily(@customer, @active_day)
-    @api_users.each do |user|
-      user[:count] = count[user[:id]] || 0
-    end
-    @api_users.sort! { |x, y| y[:count] <=> x[:count] }
+    @api_users = ApiUser.new.get_api_user_sort current_customer, @day_format
+    # @api_users = current_customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
+    # count = TotalInterface.user_analyz_daily(@customer, @active_day)
+    # @api_users.each do |user|
+    #   user[:count] = count[user[:id]] || 0
+    # end
+    # @api_users.sort! { |x, y| y[:count] <=> x[:count] }
   end
 
   def week_index
