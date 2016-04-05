@@ -37,6 +37,11 @@ class TotalInterface < ActiveRecord::Base
 
   end
 
+  def all_count_by_datetime customer
+    datetime = DateTime.now.to_date
+    customer.total_interfaces.where("datetime > ?", datetime).group(:name).pluck(:datetime, :count, :name)
+  end
+
   # 接口调用总数
   def self.get_sum_from_cache(day=nil)
     now_day = day || DateTime.now
