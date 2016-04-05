@@ -18,6 +18,9 @@ module Admin
         @interface_counter[name] = result
       end
 
+      interface_arr = $redis.hvals("interface_sort_v7XGbzhd_#{DateTime.now.to_date}")
+      @interface_distri = interface_arr.map { |e| MultiJson.load(e) }
+      @interface_distri.each { |e| e.delete('times') }
 		end
 
 
