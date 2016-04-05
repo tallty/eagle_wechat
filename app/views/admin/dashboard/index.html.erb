@@ -148,8 +148,8 @@
                   data:[
                     <% @api_users_sort.each do |user| %>
                       {
-                        value: <%= user['count'] %>,
-                        name: "<%= user['company']%>"
+                        value: <%= user[:count] %>,
+                        name: "<%= user[:company]%>"
                       },
                     <% end %>
                   ]
