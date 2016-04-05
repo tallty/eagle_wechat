@@ -25,7 +25,7 @@ module Admin
       @task_logs = TaskLog.new.get_task_logs(Customer.first.id)
       @task_names = []
       @task_logs.each {|e| @task_names << e[0]}
-      @task_names.uniq
+      @task_names = @task_names.uniq
 		end
 
 
