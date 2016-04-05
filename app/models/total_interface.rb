@@ -37,9 +37,9 @@ class TotalInterface < ActiveRecord::Base
 
   end
 
-  def all_count_by_datetime(customer, datetime=nil)
+  def all_count_by_datetime(customer, name, datetime=nil)
     datetime = datetime || DateTime.now.to_date
-    customer.total_interfaces.where("datetime > ? and name in ('生活指数', '上海当天预报', '全市预警', '上海区县主站实况', '上海自动站历史')", datetime).pluck(:datetime, :count, :name)
+    customer.total_interfaces.where("datetime > ? and name = ?", datetime, name).pluck(:datetime, :count)
   end
 
   # 接口调用总数
