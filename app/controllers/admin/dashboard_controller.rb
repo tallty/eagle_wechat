@@ -24,7 +24,7 @@ module Admin
       @api_users_sort = ApiUser.new.get_api_user_sort(Customer.first, DateTime.now.strftime("%F"))
       @task_logs = TaskLog.new.get_task_logs(Customer.first.id)
       @task_names = []
-      @task_logs.each {|e| @task_names << e[1]}
+      @task_logs.each {|e| @task_names << e[0]}
       @task_names.uniq
 		end
 

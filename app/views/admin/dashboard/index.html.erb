@@ -169,7 +169,13 @@
       $('#task-chart').each(function(){
         var myChart3 = ec.init($(this).get(0));
         var task_logs = [
-          
+          <% @task_logs.each do |log| %>
+            [
+              "<%= log[0] %>",
+              <%= log[2] %>,
+              <%= log[1] %>
+            ],
+          <% end %>
         ]
         var task_names = [
           <% @task_names.each do |name|%>
