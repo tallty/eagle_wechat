@@ -1,0 +1,24 @@
+<div class="data-process-content">
+  <div id="task-chart" class=""></div>
+</div>
+<div class="machine-content">
+  <div class="title">
+    服务器监控
+  </div>
+  <div class="list">
+    <div class="list-header">
+      <div class="">服务器名称</div>
+      <div class="">CPU</div>
+      <div class="">内存</div>
+      <div class="">硬盘</div>
+    </div>
+    <div class="list-content">
+      <% @machines.each do |machine| %>
+        <div class="machine-name"><%= machine['name']%></div>
+        <div class="cpu-name"><span><%= machine.cpu_percent%></span></div>
+        <div class="memory-name"><span><%= machine.memory_percent%></span></div>
+        <div class="disk-name"><span><%= machine.memory_percent%></span></div>
+      <% end %>
+    </div>
+  </div>
+</div>

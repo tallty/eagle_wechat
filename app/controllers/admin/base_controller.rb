@@ -4,10 +4,9 @@ class Admin::BaseController < ApplicationController
   layout 'admin'
 
   def current_customer
-    logger.warn params
     Customer.where(id: params[:customer_id]).first
   end
-  
+
   # 侧边栏所有菜单
   def set_left_bar
   	@systems = System.includes(sub_systems: :patterns).all

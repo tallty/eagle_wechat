@@ -15,7 +15,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require ./echarts/echarts
-//= require ./echarts/chart/pie
-//= require ./echarts/chart/line
+//= require_tree ./echarts/chart/.
 //= require_tree ./application/.
 //= require turbolinks

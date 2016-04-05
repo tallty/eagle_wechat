@@ -1,0 +1,27 @@
+<div id="district-weathers" class="content-right">
+  <div class="title">
+    实况数据
+  </div>
+  <div class="sub-title">
+    <div>实况</div>
+    <div>温度</div>
+    <div>风速</div>
+    <div>湿度</div>
+    <div>小时雨量</div>
+    <div>气压</div>
+    <div>能见度</div>
+  </div>
+  <div class="weathers-content">
+    <% @district_weathers.each do |item| %>
+      <div class="line-content">
+        <div><%= item['site_name'] %></div>
+        <div><%= item['tempe']%></div>
+        <div><%= item['wind_speed']%></div>
+        <div><%= item['humi']%></div>
+        <div><%= item['rain']%></div>
+        <div><%= item['air_pressure']%></div>
+        <div><%= item['visibility']%></div>
+      </div>
+    <% end %>
+  </div>
+</div>
