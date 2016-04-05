@@ -189,11 +189,28 @@ body {
               }
             }
             .list-content {
+              overflow: hidden;
+              padding-top: 10px;
               div {
                 width: 25%;
+                height: 62px;
+                line-height: 62px;
+                margin-top: 10px;
                 float: left;
                 text-align: center;
                 font-size: 20px;
+              }
+              .cpu-name span{
+                background-color: #50f5fa;
+                padding: 10px 30px;
+              }
+              .memory-name span {
+                background-color: #d48c20;
+                padding: 10px 30px;
+              }
+              .disk-name span {
+                background-color: #1566b0;
+                padding: 10px 30px;
               }
             }
           }
