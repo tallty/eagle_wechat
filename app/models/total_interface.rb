@@ -37,8 +37,8 @@ class TotalInterface < ActiveRecord::Base
 
   end
 
-  def all_count_by_datetime customer
-    datetime = DateTime.now.to_date
+  def all_count_by_datetime(customer, datetime=nil)
+    datetime = datetime || DateTime.now.to_date
     customer.total_interfaces.where("datetime > ?", datetime).group(:name).pluck(:datetime, :count, :name)
   end
 
