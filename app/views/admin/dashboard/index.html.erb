@@ -69,18 +69,13 @@
           tooltip : { trigger: 'axis' },
           legend: {
             textStyle: {color: '#fff'},
-            data: [
-              <% @interface_counter.keys.each do |key| %>
-                "<%= key %>",
-              <% end %>
-            ]
+            data: [ '生活指数']
           },
           grid: {
             show: false,
             borderWidth: 0,
-            left: '3%',
-            right: '1%',
-            bottom: '3%',
+            x2: 5,
+            y2: 35,
             containLabel: true
           },
           xAxis : [
@@ -101,15 +96,13 @@
               axisLabel: {textStyle: {color: '#fff'}}}
           ],
           series : [
-            <% @interface_counter.each do |e, i| %>
               {
-                name: "<%= e %>",
+                name: "生活指数",
                 type:'line',
                 stack: '总量',
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data: <%= i.values %>
-              },
-            <% end %>
+                data: [1,23,234,234,3453,1213,343,2341,31234,34545,64553,3222]
+              }
           ]
         };
 
