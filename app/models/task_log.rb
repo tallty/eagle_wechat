@@ -32,6 +32,12 @@ class TaskLog < ActiveRecord::Base
     end
   end
 
+  def get_task_logs customer_id
+    sql = ActiveRecord::Base.connection
+    datetime = (DateTime.now - 1.hour).strftime("%F %H:%M:%S")
+    result = sql.select_all("select l.start_time, l.task_name, l.end_time from task_logs as l, tasks as t where l.start_time > '#{datetime}' and l.task_identifier = t.identifier and t.customer_id = #{customer_id};")
+  end
+
   def build_task_log(params={})
     task_identifier = params[:task_identifier] || params['task_identifier']
     start_time = params[:start_time] || params['start_time']
