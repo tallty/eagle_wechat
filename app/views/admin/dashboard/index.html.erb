@@ -69,7 +69,11 @@
           tooltip : { trigger: 'axis' },
           legend: {
             textStyle: {color: '#fff'},
-            data: <%= @interface_counter.keys %>
+            data: [
+              <% @interface_counter.keys.each do |key| %>
+                <%= key %>,
+              <% end %>
+            ]
           },
           grid: {
             show: false,
