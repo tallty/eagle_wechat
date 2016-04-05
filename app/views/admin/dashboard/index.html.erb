@@ -103,7 +103,7 @@
           series : [
             <% @interface_counter.each do |e, i| %>
               {
-                name: <%= e %>,
+                name: "<%= e %>",
                 type:'line',
                 stack: '总量',
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
