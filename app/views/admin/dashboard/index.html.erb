@@ -119,6 +119,11 @@
           },
           legend: {
             
+            data:[
+              <% @result.each do |e| %>
+                "<%= e.with_indifferent_access['name']%>",
+              <% end %>
+            ]
           },
           series : [
               {
