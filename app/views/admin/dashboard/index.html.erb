@@ -32,10 +32,9 @@
       $("#now-timer").html(timeStamp2String(now_time));
     }
     show_time();
-
     setInterval( function() {
       show_time();
-    },100000);
+    },1000);
 
     function timeStamp2String(datetime){
       var today = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
@@ -62,12 +61,11 @@
         var myChart = ec.init($(this).get(0));
         // options start
         option = {
-          title: {
-            text: '接口调用情况', textStyle: {color: '#fff'}
-          },
+          title: { text: '接口调用情况', textStyle: {color: '#fff'} },
           tooltip : { trigger: 'axis' },
           legend: {
-            textStyle: {color: '#fff'}, x: 'right', y: 'top',
+            x: 'right', y: 'top',
+            textStyle: {color: '#fff'},
             data: [
               <% @interface_counter.keys.each do |key| %>
                 "<%= key %>",

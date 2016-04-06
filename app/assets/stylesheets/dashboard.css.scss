@@ -245,12 +245,15 @@ body {
           height: 42px;
           line-height: 42px;
           font-size: 14px;
-          border-bottom: 1px solid #fff;
           div {
             width: 14%;
             float: left;
             border: 0;
           }
+        }
+        .line {
+          border-bottom: 1px solid #fff;
+          opacity:0.5;
         }
       }
     }
