@@ -25,6 +25,16 @@ class ApiUser < ActiveRecord::Base
     }
   end
 
+  def simplify_sort customer, datetime
+    all_result = get_api_user_sort customer, datetime
+    result = Array.new(all_result[0..1])
+    if all_result.size > 2
+      other_count = all_result[1..-1].inject(0) {|sum,value| sum + value[:count]}
+      result << {:company => '其它', :count => other_count}
+    end
+    result
+  end
+
   def get_api_user_sort customer, datetime
     api_users = customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
     count = TotalInterface.user_analyz_daily(customer, datetime)
@@ -32,7 +42,7 @@ class ApiUser < ActiveRecord::Base
       user[:count] = count[user[:id]] || 0
     end
     api_users.sort! { |x, y| y[:count] <=> x[:count] }
-    api_users
+
   end
 
   def write_a_u_id_to_cache
