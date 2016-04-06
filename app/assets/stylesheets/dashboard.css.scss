@@ -100,6 +100,17 @@ body {
       color: #50e3c2;
       font-size: 30px;
       text-align: left;
+      .year {
+        width: 50%;
+        float: left;
+        font-size: 28px;
+      }
+      .date {
+
+      }
+      .hour {
+        font-size: 42px;
+      }
     }
     .interface-count {
       width: 45%;
@@ -108,12 +119,16 @@ body {
       font-family: HelveticaNeue;
       font-size: 100px;
       text-align: right;
-      .download_count {
+      img {
+        width: 42px;
+        padding-right: 10px;
+      }
+      .download-count {
         width: 50%;
         float: left;
         color: #50e3c2;
       }
-      .upload_count {
+      .upload-count {
         width: 50%;
         float: left;
         color: #d4a120;

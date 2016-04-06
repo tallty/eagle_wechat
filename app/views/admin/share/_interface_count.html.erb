@@ -1,6 +1,6 @@
 <div id="interface-sum" class="interface-count">
-  <div class="download_count"><%= @sum_interface %></div>
-  <div class="upload_count"><%= @upload_count %></div>
+  <div class="download-count"><%= image_tag "download.png"%><span><%= @sum_interface %></span></div>
+  <div class="upload-count"><%= image_tag "upload.png"%><span><%= @upload_count %></span></div>
 </div>
 <script type="text/javascript">
   $(function(){
@@ -13,8 +13,8 @@
           xhr.setRequestHeader('Accept', 'application/json');
         },
         success: function(data) {
-          $("#interface-sum > .download_count").html(data.down);
-          $("#interface-sum > .upload_count").html(data.upload);
+          $("#interface-sum > .download-count > span").html(data.down);
+          $("#interface-sum > .upload-count > span").html(data.upload);
         }
       });
     }

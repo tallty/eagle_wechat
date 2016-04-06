@@ -35,7 +35,7 @@
 
     setInterval( function() {
       show_time();
-    },1000);
+    },100000);
 
     function timeStamp2String(datetime){
       var today = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
@@ -45,7 +45,7 @@
       var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
       var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
       var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-      return year + "." + month + "." + date+" "+ today[datetime.getDay()] +hour+":"+minute+":"+second;
+      return "<div class='year'>" + year + "." + month + "." + date+"</div> <div class='date'>"+ today[datetime.getDay()] + "</div><div class='hour'>" +hour+":"+minute+":"+second + "</div>";
     }
   });
 
