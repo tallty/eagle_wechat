@@ -33,43 +33,226 @@ body {
 .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5 {
   padding: 0;
 }
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1800px) {
   #header {
-    height: 130px;
+    height: 100px;
     .logo {
-      width: 17%;
-      padding-left: .76925em;
-      padding-top: 22px;
+      width: 14%;
+      height: 100%;
+      line-height: 100px;
+      padding-left: 18px;
+      float: left;
       font-family: "STHeitiSC-Light";
       color: #fff;
-      font-size: 2em;
+      font-size: 20px;
       text-align: left;
       img {
-        width: 2em;
+        width: 56px;
       }
     }
     .now-timer {
-      padding-top: 14px;
+      width: 14%;
+      height: 100px;
+      float: left;
+      padding-top: 10px;
       color: #50e3c2;
-      font-size: 30px;
+      font-size: 24px;
       text-align: left;
+      .year {
+        width: 50%;
+        float: left;
+        font-size: 20px;
+      }
+      .date {
+        width: 50%;
+        padding-left: 14px;
+        float: left;
+      }
+      .hour {
+        font-size: 32px;
+      }
     }
     .interface-count {
+      width: 45%;
+      height: 100px;
+      float: left;
       font-family: HelveticaNeue;
-      font-size: 100px;
-      color: #50e3c2;
-      text-align: center;
+      font-size: 78px;
+      text-align: right;
+      img {
+        width: 36px;
+        padding-right: 8px;
+      }
+      .download-count {
+        width: 50%;
+        float: left;
+        color: #50e3c2;
+      }
+      .upload-count {
+        width: 50%;
+        float: left;
+        color: #d4a120;
+      }
     }
-    .sub-weather-container {
-      font-size: 21px;
+    .weather-container {
+      width: 27%;
+      height: 100px;
+      float: left;
+      .tempe {
+        width: 65%;
+        float: left;
+        font-family: HelveticaNeue-Light;
+        font-size: 72px;
+        color: #fff;
+        text-align: right;
+      }
+      .sub-info {
+        width: 35%;
+        height: 100px;
+        float: left;
+        .weather {
+          float: left;
+          width: 60%;
+          height: 100%;
+        }
+        .update-time {
+          float: left;
+          width: 40%;
+          height: 100%;
+        }
+      }
     }
   }
-  #real-time-weather {
-    .tempe {
-      font-family: HelveticaNeue-Light;
-      font-size: 91.47px;
-      color: #fff;
-      text-align: center;
+  .monitor-content {
+    position: absolute;
+    top: 108px;
+    bottom: 8px;
+    width: 100%;
+    .content-left {
+      width: 73%;
+      height: 100%;
+      margin-left: 9px;
+      margin-right: 6px;
+      float: left;
+      .top-container {
+        width: 100%;
+        height: 344px;
+        border: 1px solid #284c70;
+        .top-left-chart {
+          width: 49%;
+          float: left;
+        }
+        .top-right-chart {
+          width: 49%;
+          float: left;
+        }
+      }
+      .bottom-container {
+        height: 340px;
+        margin-top: 5px;
+        .data-process-content {
+          width: 50%;
+          height: 100%;
+          margin-right: 5px;
+          float: left;
+          border: 1px solid #284c70;
+        }
+        .machine-content {
+          width: 49.26%;
+          height: 100%;
+          float: left;
+          border: 1px solid #284c70;
+          .title {
+            padding: 8px 0;
+            text-align: center;
+            font-size: 22px;
+            color: #50e3c2;
+          }
+          .list {
+            .list-header {
+              height: 42px;
+              line-height: 42px;
+              div {
+                width: 25%;
+                float: left;
+                text-align: center;
+                font-size: 18px;
+              }
+            }
+            .list-content {
+              overflow: hidden;
+              padding-top: 8px;
+              div {
+                width: 25%;
+                height: 52px;
+                line-height: 52px;
+                margin-top: 10px;
+                float: left;
+                text-align: center;
+                font-size: 16px;
+              }
+              .cpu-name span{
+                background-color: #50f5fa;
+                padding: 8px 24px;
+              }
+              .memory-name span {
+                background-color: #d48c20;
+                padding: 8px 24px;
+              }
+              .disk-name span {
+                background-color: #1566b0;
+                padding: 8px 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .content-right {
+      width: 25.5%;
+      height: 100%;
+      float: left;
+      border: 1px solid #284c70;
+      .title {
+        width: 100%;
+        padding: 12px 0;
+        font-family: "STHeitiSC-Light";
+        font-size: 22px;
+        color: #50e3c2;
+        text-align: center;
+      }
+      .sub-title {
+        width: 100%;
+        height: 36px;
+        margin: 0;
+        background: #28adb6;
+        div {
+          width: 14%;
+          height: 36px;
+          line-height: 36px;
+          float: left;
+          border: 0;
+          font-family: "STHeitiSC-Light";
+          font-size: 12px;
+          color: #fff;
+          text-align: center;
+        }
+      }
+      .weathers-content {
+        width: 100%;
+        padding: 0 10px;
+        .line-content {
+          height: 42px;
+          line-height: 42px;
+          font-size: 14px;
+          border-bottom: 1px solid #fff;
+          div {
+            width: 14%;
+            float: left;
+            border: 0;
+          }
+        }
+      }
     }
   }
 }
