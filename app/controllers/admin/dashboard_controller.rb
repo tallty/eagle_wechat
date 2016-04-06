@@ -1,5 +1,5 @@
 module Admin
-	class DashboardController < BaseController
+	class DashboardController < ApplicationController
     include ActionView::Helpers::NumberHelper
 
     layout 'dashboard'
