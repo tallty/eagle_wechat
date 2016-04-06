@@ -20,8 +20,11 @@ module Admin
       end
 
       interface_arr = $redis.hvals("interface_sort_v7XGbzhd_#{DateTime.now.to_date}")
-      @interface_distri = interface_arr.map { |e| MultiJson.load(e) }
-      @interface_distri.each { |e| e.delete('times') }
+      interface_arr = interface_arr.map { |e| MultiJson.load(e) }
+      interface_arr.each { |e| e.delete('times') }
+      interface_arr.sort! {|item, item2| item2['all_count'] <=> item['all_count']}
+      @result = Array.new(interface_arr[0..2])
+      @result << {:name => '其它', :all_count => interface_arr[2..-1].inject(0) {|sum, value| sum + value['all_count']}}
       @api_users_sort = ApiUser.new.get_api_user_sort(Customer.first, DateTime.now.strftime("%F"))
       @task_logs = TaskLog.new.get_task_logs(Customer.first.id)
       @task_names = []

@@ -121,8 +121,8 @@
             orient: 'vertical', textStyle: {color: '#fff', fontSize: 12},
             x: 'left', y: 'top',
             data:[
-              <% @interface_distri.each do |e| %>
-                "<%= e['name']%>",
+              <% @result.each do |e| %>
+                "<%= e.with_indifferent_access['name']%>",
               <% end %>
             ]
           },
@@ -141,8 +141,8 @@
                   data:[
                     <% @api_users_sort.each do |user| %>
                       {
-                        value: <%= user[:count] %>,
-                        name: "<%= user[:company]%>"
+                        value: <%= user.with_indifferent_access['count'] %>,
+                        name: "<%= user.with_indifferent_access['company']%>"
                       },
                     <% end %>
                   ]
@@ -152,9 +152,9 @@
                   x: '60%', width: '35%', funnelAlign: 'left', max: 1048,
                   center: ['70%', '60%'],
                   data:[
-                    <% @interface_distri.each do |e| %>
+                    <% @result.each do |e| %>
                       {
-                        value: <%= e['all_count'] %>, name: "<%= e['name']%>"
+                        value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
                       },
                     <% end %>
                   ]
