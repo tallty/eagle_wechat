@@ -10,8 +10,9 @@ class TotalInterfacesController < ApplicationController
   end
 
   def get_sum
-    sum_interfaces = number_with_delimiter(TotalInterface.get_sum_from_cache)
-    render :json => {data: sum_interfaces}
+    download_count = number_with_delimiter(TotalInterface.get_sum_from_cache)
+    upload_count = number_with_delimiter(UploadInfo.new.get_total)
+    render :json => {down: download_count, upload: upload_count}
   end
 
   private

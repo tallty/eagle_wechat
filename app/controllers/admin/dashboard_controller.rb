@@ -9,6 +9,7 @@ module Admin
       @real_time_weather = Weather.new.get_real_time_weather
       @district_weathers = Weather.new.get_district_weather
       @sum_interface =  number_with_delimiter(TotalInterface.get_sum_from_cache)
+      @upload_count = number_with_delimiter(UploadInfo.new.get_total)
       @machines = Customer.first.machines.where(operating_status: 1)
 
       names = ['生活指数', '上海当天预报', '全市预警', '上海区县主站实况', '上海自动站历史']
