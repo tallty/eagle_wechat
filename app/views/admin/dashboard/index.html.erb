@@ -118,15 +118,8 @@
             formatter: "{a} <br/>{b} : {c} ({d}%)"
           },
           legend: {
-            textStyle: {color: '#fff', fontSize: 12},
-            x: 'right', y: 'center',
-            data:[
-              <% @result.each do |e| %>
-                "<%= e.with_indifferent_access['name']%>",
-              <% end %>
-            ]
+            
           },
-          calculable : false,
           series : [
               {
                   name:'访问来源', type:'pie', selectedMode: 'single',
