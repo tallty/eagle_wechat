@@ -61,10 +61,9 @@
         var myChart = ec.init($(this).get(0));
         // options start
         option = {
-          title: { text: '接口调用情况', textStyle: {color: '#fff'} },
           tooltip : { trigger: 'axis' },
           legend: {
-            x: 'left', y: 'center',
+            x: 'left', y: 'top',
             textStyle: {color: '#fff'},
             data: [
               <% @interface_counter.keys.each do |key| %>
