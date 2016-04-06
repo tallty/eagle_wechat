@@ -3,7 +3,7 @@
     <%= @real_time_weather['tempe'] %>℃
   </div>
   <div class="sub-info">
-    <div class="weather"><%= @real_time_weather['weather'] %></div>
+    <div class="weather"><%= image_tag "small_icon/#{@real_time_weather['weather']}" %></div>
     <div class="update-time"><%= @real_time_weather['datetime'] %>更新</div>
   </div>
 </div>
@@ -16,7 +16,7 @@
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(data) {
       $("#real-time-weather .tempe").html(data.tempe + "℃");
-      $("#real-time-weather .weather").html(data.weather);
+      $("#real-time-weather .weather").html("<image src='http://139.196.105.29/assets/small_icon/"+data.weather+"'/>");
       $("#real-time-weather .update-time").html(data.datetime + "更新");
     });
   });

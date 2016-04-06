@@ -112,13 +112,19 @@ body {
         float: left;
         .weather {
           float: left;
-          width: 60%;
+          padding-top: 40px;
+          padding-left: 5px;
+          width: 50%;
           height: 100%;
+          img {
+            width: 50px;
+          }
         }
         .update-time {
           float: left;
-          width: 40%;
+          width: 50%;
           height: 100%;
+          padding-top: 65px;
         }
       }
     }
