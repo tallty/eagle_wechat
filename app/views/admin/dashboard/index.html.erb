@@ -118,7 +118,8 @@
             formatter: "{a} <br/>{b} : {c} ({d}%)"
           },
           legend: {
-            
+            orient: 'vertical', textStyle: {color: '#fff', fontSize: 12},
+            x: 'right', y: 'center',
             data:[
               <% @result.each do |e| %>
                 "<%= e.with_indifferent_access['name']%>",
@@ -129,7 +130,7 @@
               {
                   name:'访问来源', type:'pie', selectedMode: 'single',
                   radius : [0, 50], x: '50%', width: '40%',
-                  center: ['60%', '50%'],
+                  center: ['45%', '50%'],
                   funnelAlign: 'right', max: 1548,
                   itemStyle : {
                     normal : {
@@ -148,7 +149,7 @@
               {
                   name:'接口调用信息', type:'pie', radius : [70, 100],
                   x: '60%', width: '35%', funnelAlign: 'left', max: 1048,
-                  center: ['60%', '50%'],
+                  center: ['45%', '50%'],
                   data:[
                     <% @result.each do |e| %>
                       {
