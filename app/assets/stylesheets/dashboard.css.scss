@@ -97,13 +97,9 @@ body {
       height: 130px;
       float: left;
       padding-top: 14px;
-      div {
-        width: 50%;
-        float: left;
-        text-align: left;
-        color: #50e3c2;
-        font-size: 30px;
-      }
+      color: #50e3c2;
+      font-size: 30px;
+      text-align: left;
     }
     .interface-count {
       width: 45%;
@@ -111,8 +107,17 @@ body {
       float: left;
       font-family: HelveticaNeue;
       font-size: 100px;
-      color: #50e3c2;
       text-align: right;
+      .download_count {
+        width: 50%;
+        float: left;
+        color: #50e3c2;
+      }
+      .upload_count {
+        width: 50%;
+        float: left;
+        color: #d4a120;
+      }
     }
     .weather-container {
       width: 25%;
