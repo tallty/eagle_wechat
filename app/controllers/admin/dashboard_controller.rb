@@ -1,7 +1,7 @@
 module Admin
 	class DashboardController < ApplicationController
     include ActionView::Helpers::NumberHelper
-
+    skip_before_filter :authenticate_user!
     layout 'dashboard'
     respond_to :html, :js
 
