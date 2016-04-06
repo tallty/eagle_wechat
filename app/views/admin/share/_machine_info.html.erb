@@ -17,7 +17,7 @@
         <div class="machine-name"><%= machine['name']%></div>
         <div class="cpu-name"><span><%= machine.cpu_percent%></span></div>
         <div class="memory-name"><span><%= machine.memory_percent%></span></div>
-        <div class="disk-name"><span><%= machine.memory_percent%></span></div>
+        <div class="disk-name"><span><%= MachineInfo.get_info("file_systems", machine.identifier) %></span></div>
       <% end %>
     </div>
   </div>
