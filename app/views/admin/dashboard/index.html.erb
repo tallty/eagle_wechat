@@ -191,7 +191,6 @@
                 "<%= name %>",
               <% end %>
             ]
-
             option = {
                 title: {text : '数据处理图', textStyle: {color: '#fff'}},
                 tooltip: {
@@ -203,9 +202,9 @@
                 legend: {
                   data: task_names, textStyle: {color: '#fff'}, y: 30, show: true
                 },
-                grid: {borderWidth: 0, x: 35, y: 120, x2: 10, y2: 30},
+                grid: {borderWidth: 0, x: 35, y: 130, x2: 10, y2: 50},
                 dataRange: {
-                  min: 0, max: 30, orient: 'horizontal', y: 30, x: 'center',
+                  min: 0, max: 30, orient: 'horizontal', y: 60, x: 'center',
                   color:['lightgreen','orange'], splitNumber: 5, textStyle: {color: '#fff'}
                 },
                 xAxis : [
@@ -221,11 +220,6 @@
                     ]
                   }
                 ],
-                dataZoom: {
-                  show: true,
-                  start : 30,
-                  end : 70
-                },
                 yAxis : [{type : 'value', splitNumber: 3, axisLabel: {textStyle: {color: '#fff'}}}],
                 animation: false,
                 series : [
