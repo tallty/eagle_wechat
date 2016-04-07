@@ -12,9 +12,9 @@
     <div class="list-content">
       <% @machines.each do |machine| %>
         <div class="machine-name"><%= machine['name']%></div>
-        <div class="cpu-name"><span><%= machine.cpu_percent%></span></div>
-        <div class="memory-name"><span><%= machine.memory_percent%></span></div>
-        <div class="disk-name"><span><%= eval(MachineInfo.get_info("file_systems", machine.identifier))["percent_used"][-2].to_i%> %</span></div>
+        <div class="cpu-name"><%= machine.cpu_percent%></div>
+        <div class="memory-name"><%= machine.memory_percent%></div>
+        <div class="disk-name"><%= eval(MachineInfo.get_info("file_systems", machine.identifier))["percent_used"][-2].to_i%> %</div>
       <% end %>
     </div>
   </div>
