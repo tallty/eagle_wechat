@@ -34,7 +34,7 @@ class TaskLog < ActiveRecord::Base
 
   def get_task_logs customer_id
     sql = ActiveRecord::Base.connection
-    datetime = (DateTime.now - 3.hour).strftime("%F %H:%M:%S")
+    datetime = (DateTime.now - 2.hour).strftime("%F %H:%M:%S")
     result = sql.select_all("select l.task_name, l.start_time, t.rate, l.end_time - l.start_time from task_logs as l, tasks as t where l.start_time > '#{datetime}' and l.task_identifier = t.identifier and t.customer_id = #{customer_id} and t.rate > 0;")
     result.rows
   end
