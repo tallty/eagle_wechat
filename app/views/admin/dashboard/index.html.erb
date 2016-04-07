@@ -197,9 +197,6 @@
                   trigger: 'axis',
                   axisPointer:{
                     show: true, type: 'cross', lineStyle: {type: 'dashed', width: 1}
-                  },
-                  formatter: function(params) {
-                    return params.seriesName;
                   }
                 },
                 legend: {
@@ -233,14 +230,14 @@
                         tooltip : {
                             trigger: 'item',
                             formatter : function (params) {
-                                return params.value[1] + '<br/>'
+                                return params.seriesName + '<br/>'
                                        + params.value[0] + ', '
                                        + params.value[2];
                             },
                             axisPointer:{show: true}
                         },
                         symbolSize: function (value){
-                            return value[2];
+                            return value[2] * 1.5;
                         },
                         data: [
                           <% log[1].each do |l| %>
