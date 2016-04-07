@@ -244,7 +244,7 @@
                             axisPointer:{show: true}
                         },
                         symbolSize: function (value){
-                            return Math.round(value[2]);
+                            return Math.round(value[2]) / 10;
                         },
                         data: [
                           <% log[1].each do |l| %>
