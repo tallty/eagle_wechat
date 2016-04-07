@@ -12,6 +12,7 @@
           xhr.setRequestHeader('Accept', 'application/json');
         },
         success: function(data) {
+          $("#interface-sum > .all_count > span").html(data.all_count);
           $("#interface-sum > .download > span").html(data.down);
           $("#interface-sum > .upload > span").html(data.upload);
         }
