@@ -106,8 +106,8 @@ body {
           }
           .list {
             .list-header {
-              height: 52px;
-              line-height: 52px;
+              height: 4.7vh;
+              line-height: 4.7vh;
               div {
                 width: 25%;
                 float: left;
@@ -117,15 +117,15 @@ body {
             }
             .list-content {
               overflow: hidden;
-              padding-top: 10px;
+              padding-top: 0.911vh;
               div {
                 width: 25%;
-                height: 62px;
-                line-height: 62px;
-                margin-top: 10px;
+                height: 4.706vh;
+                line-height: 4.706vh;
+                margin-top: .905vh;
                 float: left;
                 text-align: center;
-                font-size: 20px;
+                font-size: 1.11vw;
               }
               .cpu-name span{
                 background-color: #50f5fa;
