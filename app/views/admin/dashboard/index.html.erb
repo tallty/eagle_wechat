@@ -34,7 +34,7 @@
 <script>
   $(function(){
     init_container_height();
-    init_chart();
+    // init_chart();
 
     function init_container_height() {
       var w_height = document.body.clientHeight;
@@ -240,7 +240,15 @@
                         symbolSize: function (value){
                             return value[2];
                         },
-                        data: <%= log[1] %>
+                        data: [
+                          <% log[1].each do |l| %>
+                            [
+                              new Date(l[0]),
+                              l[1],
+                              l[2]
+                            ],
+                          <% end %>,
+                        ]
                     },
                   <% end %>
                 ]
