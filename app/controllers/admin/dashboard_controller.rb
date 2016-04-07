@@ -8,7 +8,8 @@ module Admin
 		def index
       @real_time_weather = Weather.new.get_real_time_weather
       @district_weathers = Weather.new.get_district_weather
-      @sum_interface =  number_with_delimiter(TotalInterface.get_sum_from_cache)
+      @all_interface_count =  number_with_delimiter(TotalInterface.sum(:count))
+      @today_interface_count =  number_with_delimiter(TotalInterface.get_sum_from_cache)
       @upload_count = number_with_delimiter(UploadInfo.new.get_total)
       @machines = Customer.first.machines.where(operating_status: 1)
 
