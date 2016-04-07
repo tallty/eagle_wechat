@@ -246,9 +246,13 @@
                         symbol: 'circle',
                         symbolSize: function (value){
                             v = Math.round(value[2]);
-                            if (v < 20) {
+                            if (v < 10) {
+                              return v * 5;
+                            } else if (v > 10 && v < 20){
                               return v * 4;
-                            } else if (v > 20 && v < 100){
+                            } else if (v > 20 && v < 30){
+                              return v * 3;
+                            } else if (v > 30 && v < 70){
                               return v * 2;
                             } else {
                               return v / 10;
