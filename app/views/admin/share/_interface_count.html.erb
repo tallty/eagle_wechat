@@ -14,7 +14,8 @@
         },
         success: function(data) {
           $("#interface-sum > .download-count > span").html(data.down);
-          $("#interface-sum > .upload-count > span").html(data.upload);
+          if data.upload > 0
+            $("#interface-sum > .upload-count > span").html(data.upload);
         }
       });
     }
