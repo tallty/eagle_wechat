@@ -236,19 +236,19 @@
                         symbolSize: function (value){
                             v = Math.round(value[2]);
                             if (0 == v) {
-                              return 3;
+                              return 15;
                             } else if (v > 0 && v < 5) {
-                              return v * 1.5;
+                              return 20;
                             } else if (v > 5 && v < 10){
-                              return v * 0.7;
+                              return 25;
                             } else if (v > 10 && v < 20){
-                              return v * 0.5;
+                              return 30;
                             } else if (v > 20 && v < 30){
-                              return v * 0.9;
+                              return 35;
                             } else if (v > 30 && v < 70){
-                              return v * 0.2;
+                              return 40;
                             } else {
-                              return v / 10;
+                              return 50;
                             }
                         },
                         data: [
