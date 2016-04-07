@@ -245,7 +245,11 @@
                         },
                         symbol: 'circle',
                         symbolSize: function (value){
-                            return Math.round(value[2]) / 10;
+                            v = Math.round(value[2]);
+                            if v < 100
+                              return v * 10;
+                            else
+                              return v / 10;
                         },
                         data: [
                           <% log[1].each do |l| %>
