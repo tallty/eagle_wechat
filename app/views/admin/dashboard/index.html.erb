@@ -192,7 +192,7 @@
               <% end %>
             ]
             option = {
-                title: {text : '数据处理图', textStyle: {color: '#fff'}},
+                title: {text: '数据处理图', x: 'center', textStyle: {color: '#fff'}},
                 tooltip: {
                   trigger: 'axis',
                   axisPointer:{
@@ -200,11 +200,11 @@
                   }
                 },
                 legend: {
-                  data: task_names, textStyle: {color: '#fff'}, y: 30, show: true
+                  data: task_names, textStyle: {color: '#fff'}, x: 'left' y: 35, show: true
                 },
-                grid: {borderWidth: 0, x: 35, y: 130, x2: 10, y2: 50},
+                grid: {borderWidth: 0, x: 35, y: 130, x2: 20, y2: 50},
                 dataRange: {
-                  min: 0, max: 30, orient: 'horizontal', y: 60, x: 'center',
+                  min: 0, max: 30, orient: 'horizontal', y: 80, x: 'right',
                   color:['lightgreen','orange'], splitNumber: 5, textStyle: {color: '#fff'}
                 },
                 xAxis : [
