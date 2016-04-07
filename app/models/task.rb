@@ -15,7 +15,7 @@ class Task < ActiveRecord::Base
 	belongs_to :customer
   has_many :sms_logs, dependent: :destroy
 	after_initialize :task_identifier
-
+	
   def write_task_info_to_cache
     tasks = Task.all
     tasks.each do |task|
