@@ -230,9 +230,16 @@
                         tooltip : {
                             trigger: 'item',
                             formatter : function (params) {
+                                var date = new Date(params.value[0]);
                                 return params.seriesName + '<br/>'
-                                       + params.value[0] + ', '
-                                       + params.value[2];
+                                       + '开始时间:'
+                                       + date.getFullYear() + '-'
+                                       + (date.getMonth() + 1) + '-'
+                                       + date.getDate() + ' '
+                                       + date.getHours() + ':'
+                                       + date.getMinutes()
+                                       + '<br/>'
+                                       + '耗时:' + params.value[2];
                             },
                             axisPointer:{show: true}
                         },
