@@ -4,7 +4,9 @@ class Weather
 
   def run
     urls = ["publicdata/data?type=ten_day_forecast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i",
-      "publicdata/data?type=country_forcast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i&city=北京"]
+      "publicdata/data?type=country_forcast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i&city=北京",
+      "publicdata/data?type=real_aqi&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i",
+      "publicdata/data?type=aqi_forecast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i"]
     250.times do |i|
       urls.each do |url|
         params = {
