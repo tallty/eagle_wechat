@@ -210,7 +210,7 @@
                 },
                 xAxis : [
                   {
-                    type : 'category', splitLine: {show: false},
+                    type : 'time', splitLine: {show: false},
                     axisLabel: {
                       textStyle: {color: '#fff'}
                     },
@@ -221,7 +221,7 @@
                     ]
                   }
                 ],
-                yAxis : [{type : 'time', axisLabel: {textStyle: {color: '#fff'}}}],
+                yAxis : [{type : 'value', axisLabel: {textStyle: {color: '#fff'}}}],
                 animation: false,
                 series : [
                   <% @task_logs.each do |log|%>
