@@ -186,15 +186,6 @@
           // task log chart
           $('#task-chart').each(function(){
             var myChart3 = ec.init($(this).get(0));
-            var task_logs = [
-              <% @task_logs.each do |log| %>
-                [
-                  "<%= log[0] %>",
-                  <%= log[2] %>,
-                  <%= (log[1] / 10).to_i %>
-                ],
-              <% end %>
-            ]
             var task_names = [
               <% @task_names.each do |name|%>
                 "<%= name %>",
@@ -240,8 +231,8 @@
                         tooltip : {
                             trigger: 'item',
                             formatter : function (params) {
-                                return params.value[0] + '<br/>'
-                                       + params.value[1] + ', '
+                                return params.value[1] + '<br/>'
+                                       + params.value[0] + ', '
                                        + params.value[2];
                             },
                             axisPointer:{show: true}
