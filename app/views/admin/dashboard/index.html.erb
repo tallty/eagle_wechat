@@ -246,9 +246,9 @@
                         symbol: 'circle',
                         symbolSize: function (value){
                             v = Math.round(value[2]);
-                            if (v < 50) {
-                              return v * 2.5;
-                            } else if (v > 50 && v < 100){
+                            if (v < 20) {
+                              return v * 4;
+                            } else if (v > 20 && v < 100){
                               return v * 2;
                             } else {
                               return v / 10;
