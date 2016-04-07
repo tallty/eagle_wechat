@@ -11,7 +11,7 @@
     </div>
     <div class="list-content">
       <% @machines.each do |machine| %>
-        <div class="machine-name"><%= machine['name']%></div>
+        <div class="machine-name"><%= truncate(machine['name'], 4)%></div>
         <div class="cpu-name"><%= machine.cpu_percent%></div>
         <div class="memory-name"><%= machine.memory_percent%></div>
         <div class="disk-name"><%= eval(MachineInfo.get_info("file_systems", machine.identifier))["percent_used"][-2].to_i%> %</div>
