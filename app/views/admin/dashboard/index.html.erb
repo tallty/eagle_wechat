@@ -236,17 +236,17 @@
                         symbolSize: function (value){
                             v = Math.round(value[2]);
                             if (v < 5) {
-                              return 10;
+                              return 5;
                             } else if (v > 5 && v < 10){
-                              return 15;
+                              return 10;
                             } else if (v > 10 && v < 20){
-                              return 20;
+                              return 15;
                             } else if (v > 20 && v < 30){
-                              return 25;
+                              return 20;
                             } else if (v > 30 && v < 70){
-                              return 30;
+                              return 25;
                             } else {
-                              return 35;
+                              return 30;
                             }
                         },
                         data: [
