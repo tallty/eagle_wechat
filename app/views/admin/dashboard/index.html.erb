@@ -235,20 +235,18 @@
                         symbol: 'circle',
                         symbolSize: function (value){
                             v = Math.round(value[2]);
-                            if (0 == v) {
-                              return 15;
-                            } else if (v > 0 && v < 5) {
-                              return 20;
+                            if (v < 5) {
+                              return 10;
                             } else if (v > 5 && v < 10){
-                              return 25;
+                              return 15;
                             } else if (v > 10 && v < 20){
-                              return 30;
+                              return 20;
                             } else if (v > 20 && v < 30){
-                              return 35;
+                              return 25;
                             } else if (v > 30 && v < 70){
-                              return 40;
+                              return 30;
                             } else {
-                              return 50;
+                              return 35;
                             }
                         },
                         data: [
