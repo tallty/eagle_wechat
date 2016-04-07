@@ -235,7 +235,9 @@
                         symbol: 'circle',
                         symbolSize: function (value){
                             v = Math.round(value[2]);
-                            if (v < 10) {
+                            if (0 == v) {
+                              return 1;
+                            } else if (v < 10) {
                               return v * 5;
                             } else if (v > 10 && v < 20){
                               return v * 0.5;
