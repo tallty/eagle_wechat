@@ -12,8 +12,8 @@
           xhr.setRequestHeader('Accept', 'application/json');
         },
         success: function(data) {
-          $("#interface-sum > .download-count > span").html(data.down);
-          $("#interface-sum > .upload-count > span").html(data.upload);
+          $("#interface-sum > .download > span").html(data.down);
+          $("#interface-sum > .upload > span").html(data.upload);
         }
       });
     }
