@@ -34,7 +34,7 @@
 <script>
   $(function(){
     init_container_height();
-    // init_chart();
+    init_chart();
 
     function init_container_height() {
       var w_height = document.body.clientHeight;
@@ -216,7 +216,7 @@
                     },
                     data : [
                       <% @task_logs.first[1].each do |item|%>
-                        "<%= item[1] %>",
+                        new Date("<%= item[0] %>"),
                       <% end %>
                     ]
                   }
