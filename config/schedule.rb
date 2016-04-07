@@ -11,10 +11,11 @@ set :output, "./log/cron_log.log"
 # Learn more: http://github.com/javan/whenever
 every 1.minutes do
   # runner 'Alarm.new.process'
+  runner 'Weather.new.run'
 end
 
 every 1.minutes do
-  runner 'Weather.new.pusher_data'
+  # runner 'Weather.new.pusher_data'
 end
 
 every 5.minutes do

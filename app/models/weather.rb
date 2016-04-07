@@ -2,14 +2,19 @@ class Weather
   include BaseModel
   include BasePusher
 
-  def self.run
-	  url = "publicdata/data?type=country_forcast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i&city=北京"
-    params = {
-      method: 'get',
-      fwq: 'http://61.152.122.112:8080',
-      url: URI.encode(url)
-    }
-    result = get_data(params, head_params)
+  def run
+    urls = ["publicdata/data?type=ten_day_forecast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i",
+      "publicdata/data?type=country_forcast&appid=3b9Xc0Xky1dM155537Au&appkey=OGSi7t39lB13d00L78vr53Fxgj7D5i&city=北京"]
+    250.times do |i|
+      urls.each do |url|
+        params = {
+          method: 'get',
+          fwq: 'http://61.152.122.112:8080',
+          url: URI.encode(url)
+        }
+        result = get_data(params, {})
+      end
+    end
 	end
 
   def get_real_time_weather
