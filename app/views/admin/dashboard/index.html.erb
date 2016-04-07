@@ -1,22 +1,25 @@
 <div id="header" class="row">
-  <div class="logo">
-    <%= image_tag "qxj.png" %>
+  <div class="col-xs-2 logo">
+    <%= image_tag "qxj.png"%>
     上海市气象局
   </div>
-  <%= render partial: "/admin/share/interface_count" %>
-  <%= render partial: "/admin/share/real_time_weather" %>
-  <div id="now-timer" class="now-timer"></div>
+  <div class="col-xs-6">
+    <%= render partial: "/admin/share/interface_count" %>
+  </div>
+  <div id="real-time-weather" class="col-xs-2">
+    <%= render partial: "/admin/share/real_time_weather" %>
+  </div>
+  <div id="now-timer" class="col-xs-2"></div>
 </div>
-<div class="monitor-content">
-  <div class="content-left">
-
+<div class="row monitor-container">
+  <div class="col-xs-9 chart-container">
     <div class="top-container">
-      <div class="title">接口调用</div>
+      <div class="title text-center">接口调用</div>
       <div class="top-container-chart">
-        <div id='user-chart' class="top-left-chart">
+        <div id='user-chart' class="col-xs-6">
 
         </div>
-        <div id='interface-chart' class="top-right-chart">
+        <div id='interface-chart' class="col-xs-6">
 
         </div>
       </div>
@@ -25,12 +28,27 @@
       <%= render partial: '/admin/share/machine_info'%>
     </div>
   </div>
-  <%= render partial: "/admin/share/auto_stations" %>
+
+  <div class="col-xs-3 district-weathers">
+    <%= render partial: "/admin/share/auto_stations" %>
+  </div>
 </div>
 <script>
   $(function(){
-    var now_time;
+    init_container_height();
+    init_chart();
 
+    function init_container_height() {
+      var w_height = document.body.clientHeight;
+      $('.monitor-container').height(w_height - 115);
+      var top_container_height = $('.top-container').height();
+      var chart_container_height = $('.chart-container').height();
+      $('.top-container-chart').height(top_container_height - 43);
+      $('.bottom-container').height(chart_container_height - top_container_height);
+      $("#user-chart, #interface-chart").height(top_container_height - 43);
+      $("#task-chart").height($(".bottom-container").height());
+    }
+    var now_time;
     function show_time() {
       now_time = new Date();
       $("#now-timer").html(timeStamp2String(now_time));
@@ -39,7 +57,6 @@
     setInterval( function() {
       show_time();
     },1000);
-
     function timeStamp2String(datetime){
       var today = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
       var year = datetime.getFullYear();
@@ -48,191 +65,193 @@
       var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
       var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
       var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-      return "<div class='year'>" + year + "." + month + "." + date+"</div> <div class='date'>"+ today[datetime.getDay()] + "</div><div class='hour'>" +hour+":"+minute+":"+second + "</div>";
+      return "<div class='row'><div class='col-xs-7 year'>" + year + "." + month + "." + date+"</div> <div class='col-xs-5 date'>"+ today[datetime.getDay()] + "</div></div><div class='row'><div class='hour col-xs-12'>" +hour+":"+minute+":"+second + "</div></div>";
     }
-  });
 
-  require.config({
-    paths: {
-      echarts:'/assets/echarts'
-    }
-  });
-  require(
-    ['echarts', 'echarts/chart/line', 'echarts/chart/scatter', 'echarts/chart/pie'],
-    function(ec){
-      // user chart
-      $('#user-chart').each(function(){
-        var myChart = ec.init($(this).get(0));
-        // options start
-        option = {
-          tooltip : { trigger: 'axis' },
-          legend: {
-            x: 'left', y: 'top',
-            textStyle: {color: '#fff'},
-            data: [
-              <% @interface_counter.keys.each do |key| %>
-                "<%= key %>",
-              <% end %>
-            ]
-          },
-          grid: {
-            show: false, borderWidth: 0, x: 50, x2: 5, y2: 35,
-            containLabel: true
-          },
-          xAxis : [{
-            type: 'category',
-            boundaryGap: false,
-            splitLine: {show: false},
-            axisLabel: {textStyle: {color: '#fff'}},
-            data : [23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10,
-                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-                    ]
-          }],
-          yAxis : [
-            {type: 'value', splitLine: {show: false},
-            axisLabel: {textStyle: {color: '#fff'}}}
-          ],
-          series : [
-            <% @interface_counter.each do |e, i| %>
-              {
-                name: "<%= e %>",
-                type:'line',
-                stack: '总量',
-                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data: <%= i.values %>
-              },
-            <% end %>
-          ]
-        };
-        // options end
-
-        myChart.setOption(option);
+    function init_chart() {
+      require.config({
+        paths: {
+          echarts:'/assets/echarts'
+        }
       });
-
-      //interface chart
-      $('#interface-chart').each(function(){
-        var myChart2 = ec.init($(this).get(0));
-        // options start
-        option = {
-          tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-          },
-          legend: {
-            orient: 'vertical', textStyle: {color: '#fff', fontSize: 12},
-            x: 'right', y: '20',
-            data:[
-              <% @result.each do |e| %>
-                "<%= e.with_indifferent_access['name']%>",
-              <% end %>
-            ]
-          },
-          series : [
-              {
-                  name:'访问来源', type:'pie', selectedMode: 'single',
-                  radius : [0, 50], x: '50%', width: '40%',
-                  center: ['45%', '50%'],
-                  funnelAlign: 'right', max: 1548,
-                  itemStyle : {
-                    normal : {
-                      label : {position : 'inner'}, labelLine : {show : false}
-                    }
+      require(
+        ['echarts', 'echarts/chart/line', 'echarts/chart/scatter', 'echarts/chart/pie'],
+        function(ec){
+          // user chart
+          $('#user-chart').each(function(){
+            var myChart = ec.init($(this).get(0));
+            // options start
+            option = {
+              tooltip : { trigger: 'axis' },
+              legend: {
+                x: 'left', y: 'top',
+                textStyle: {color: '#fff'},
+                data: [
+                  <% @interface_counter.keys.each do |key| %>
+                    "<%= key %>",
+                  <% end %>
+                ]
+              },
+              grid: {
+                show: false, borderWidth: 0, x: 50, x2: 5, y2: 35,
+                containLabel: true
+              },
+              xAxis : [{
+                type: 'category',
+                boundaryGap: false,
+                splitLine: {show: false},
+                axisLabel: {textStyle: {color: '#fff'}},
+                data : [23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10,
+                        9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+                        ]
+              }],
+              yAxis : [
+                {type: 'value', splitLine: {show: false},
+                axisLabel: {textStyle: {color: '#fff'}}}
+              ],
+              series : [
+                <% @interface_counter.each do |e, i| %>
+                  {
+                    name: "<%= e %>",
+                    type:'line',
+                    stack: '总量',
+                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                    data: <%= i.values %>
                   },
-                  data:[
-                    <% @api_users_sort.each do |user| %>
-                      {
-                        value: <%= user.with_indifferent_access['count'] %>,
-                        name: "<%= user.with_indifferent_access['company']%>"
-                      },
-                    <% end %>
-                  ]
+                <% end %>
+              ]
+            };
+            // options end
+
+            myChart.setOption(option);
+          });
+
+          //interface chart
+          $('#interface-chart').each(function(){
+            var myChart2 = ec.init($(this).get(0));
+            // options start
+            option = {
+              tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
               },
-              {
-                  name:'接口调用信息', type:'pie', radius : [70, 100],
-                  x: '60%', width: '35%', funnelAlign: 'left', max: 1048,
-                  center: ['45%', '50%'],
-                  data:[
-                    <% @result.each do |e| %>
-                      {
-                        value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
+              legend: {
+                orient: 'vertical', textStyle: {color: '#fff', fontSize: 12},
+                x: 'right', y: '20',
+                data:[
+                  <% @result.each do |e| %>
+                    "<%= e.with_indifferent_access['name']%>",
+                  <% end %>
+                ]
+              },
+              series : [
+                  {
+                      name:'访问来源', type:'pie', selectedMode: 'single',
+                      radius : [0, 50], x: '50%', width: '40%',
+                      center: ['45%', '50%'],
+                      funnelAlign: 'right', max: 1548,
+                      itemStyle : {
+                        normal : {
+                          label : {position : 'inner'}, labelLine : {show : false}
+                        }
                       },
-                    <% end %>
-                  ]
-              }
-          ]
-        };
-        // options end
-        myChart2.setOption(option);
-      });
+                      data:[
+                        <% @api_users_sort.each do |user| %>
+                          {
+                            value: <%= user.with_indifferent_access['count'] %>,
+                            name: "<%= user.with_indifferent_access['company']%>"
+                          },
+                        <% end %>
+                      ]
+                  },
+                  {
+                      name:'接口调用信息', type:'pie', radius : [70, 100],
+                      x: '60%', width: '35%', funnelAlign: 'left', max: 1048,
+                      center: ['45%', '50%'],
+                      data:[
+                        <% @result.each do |e| %>
+                          {
+                            value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
+                          },
+                        <% end %>
+                      ]
+                  }
+              ]
+            };
+            // options end
+            myChart2.setOption(option);
+          });
 
-      // task log chart
-      $('#task-chart').each(function(){
-        var myChart3 = ec.init($(this).get(0));
-        var task_logs = [
-          <% @task_logs.each do |log| %>
-            [
-              "<%= log[0] %>",
-              <%= log[2] %>,
-              <%= (log[1] / 10).to_i %>
-            ],
-          <% end %>
-        ]
-        var task_names = [
-          <% @task_names.each do |name|%>
-            "<%= name %>",
-          <% end %>
-        ]
-
-        option = {
-            title: {text : '数据处理图', textStyle: {color: '#fff'}},
-            tooltip: {
-              trigger: 'axis',
-              axisPointer:{
-                show: true, type: 'cross', lineStyle: {type: 'dashed', width: 1}
-              }
-            },
-            legend: {
-              data: task_names, textStyle: {color: '#fff'}, show: false
-            },
-            grid: {borderWidth: 0, x: 35, y: 60, x2: 10, y2: 30},
-            dataRange: {
-              min: 0, max: 30, orient: 'horizontal', y: 30, x: 'center',
-              color:['lightgreen','orange'], splitNumber: 5, textStyle: {color: '#fff'}
-            },
-            xAxis : [
-              {
-                type : 'category', splitLine: {show: false},
-                axisLabel: {
-                  textStyle: {color: '#fff'}
-                },
-                data : task_names
-              }
-            ],
-            yAxis : [{type : 'value', axisLabel: {textStyle: {color: '#fff'}}}],
-            animation: false,
-            series : [
-                {
-                    name:'series2',
-                    type:'scatter',
-                    tooltip : {
-                        trigger: 'item',
-                        formatter : function (params) {
-                            return params.value[0] + '<br/>'
-                                   + params.value[1] + ', '
-                                   + params.value[2];
-                        },
-                        axisPointer:{show: true}
-                    },
-                    symbolSize: function (value){
-                        return value[2];
-                    },
-                    data: task_logs
-                }
+          // task log chart
+          $('#task-chart').each(function(){
+            var myChart3 = ec.init($(this).get(0));
+            var task_logs = [
+              <% @task_logs.each do |log| %>
+                [
+                  "<%= log[0] %>",
+                  <%= log[2] %>,
+                  <%= (log[1] / 10).to_i %>
+                ],
+              <% end %>
             ]
-        };
-        // options end
-        myChart3.setOption(option);
-      });
+            var task_names = [
+              <% @task_names.each do |name|%>
+                "<%= name %>",
+              <% end %>
+            ]
+
+            option = {
+                title: {text : '数据处理图', textStyle: {color: '#fff'}},
+                tooltip: {
+                  trigger: 'axis',
+                  axisPointer:{
+                    show: true, type: 'cross', lineStyle: {type: 'dashed', width: 1}
+                  }
+                },
+                legend: {
+                  data: task_names, textStyle: {color: '#fff'}, show: false
+                },
+                grid: {borderWidth: 0, x: 35, y: 60, x2: 10, y2: 30},
+                dataRange: {
+                  min: 0, max: 30, orient: 'horizontal', y: 30, x: 'center',
+                  color:['lightgreen','orange'], splitNumber: 5, textStyle: {color: '#fff'}
+                },
+                xAxis : [
+                  {
+                    type : 'category', splitLine: {show: false},
+                    axisLabel: {
+                      textStyle: {color: '#fff'}
+                    },
+                    data : task_names
+                  }
+                ],
+                yAxis : [{type : 'value', axisLabel: {textStyle: {color: '#fff'}}}],
+                animation: false,
+                series : [
+                    {
+                        name:'series2',
+                        type:'scatter',
+                        tooltip : {
+                            trigger: 'item',
+                            formatter : function (params) {
+                                return params.value[0] + '<br/>'
+                                       + params.value[1] + ', '
+                                       + params.value[2];
+                            },
+                            axisPointer:{show: true}
+                        },
+                        symbolSize: function (value){
+                            return value[2];
+                        },
+                        data: task_logs
+                    }
+                ]
+            };
+            // options end
+            myChart3.setOption(option);
+          });
+        }
+      );
     }
-  );
+  });
 </script>

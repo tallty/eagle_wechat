@@ -1,7 +1,5 @@
-<div id="interface-sum" class="interface-count">
-  <div class="download-count"><%= image_tag "download.png"%><span><%= @sum_interface %></span></div>
-  <div class="upload-count"><%= image_tag "upload.png"%><span><%= @upload_count %></span></div>
-</div>
+<div class="col-xs-7 interface-count download"><%= image_tag "download.png"%><span><%= @sum_interface %></span></div>
+<div class="col-xs-5 interface-count upload"><%= image_tag "upload.png"%><span><%= @upload_count %></span></div>
 <script type="text/javascript">
   $(function(){
     function get_interface_count() {
@@ -14,8 +12,7 @@
         },
         success: function(data) {
           $("#interface-sum > .download-count > span").html(data.down);
-          if data.upload > 0
-            $("#interface-sum > .upload-count > span").html(data.upload);
+          $("#interface-sum > .upload-count > span").html(data.upload);
         }
       });
     }

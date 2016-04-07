@@ -20,6 +20,7 @@ body {
   color: #fff;
   background-color: #242a53;
   background-image: image_url("bg.png");
+  font-size: 100%;
   -moz-background-size:100% 100%;
   background-size: 100% 100%;
   filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
@@ -30,398 +31,83 @@ body {
 .row {
   margin: 0;
 }
-.col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5 {
-  padding: 0;
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6,
+.col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+  padding-left: 0.3vw;
+  padding-right: 0.3vw;
 }
-@media screen and (max-width: 1800px) {
-  #header {
-    height: 100px;
-    .logo {
-      width: 14%;
-      height: 100%;
-      line-height: 100px;
-      padding-left: 18px;
-      float: left;
-      font-family: "STHeitiSC-Light";
-      color: #fff;
-      font-size: 20px;
-      text-align: left;
-      img {
-        width: 56px;
-      }
-    }
-    .now-timer {
-      width: 14%;
-      height: 100px;
-      float: left;
-      padding-top: 22px;
-      color: #50e3c2;
-      font-size: 24px;
-      text-align: left;
-      .year {
-        width: 50%;
-        float: left;
-        font-size: 20px;
-      }
-      .date {
-        width: 50%;
-        padding-left: 14px;
-        float: left;
-      }
-      .hour {
-        font-size: 32px;
-      }
-    }
-    .interface-count {
-      width: 47%;
-      height: 100px;
-      float: left;
-      font-family: HelveticaNeue;
-      font-size: 78px;
-      text-align: right;
-      img {
-        width: 32px;
-        padding-right: 6px;
-      }
-      .download-count {
-        width: 50%;
-        float: left;
-        color: #50e3c2;
-      }
-      .upload-count {
-        width: 50%;
-        float: left;
-        color: #d4a120;
-      }
-    }
-    .weather-container {
-      width: 25%;
-      height: 100px;
-      float: left;
-      .tempe {
-        width: 65%;
-        float: left;
-        font-family: HelveticaNeue-Light;
-        font-size: 72px;
-        color: #fff;
-        text-align: right;
-      }
-      .sub-info {
-        width: 35%;
-        height: 100px;
-        float: left;
-        .weather {
-          float: left;
-          padding-top: 40px;
-          padding-left: 5px;
-          width: 50%;
-          height: 100%;
-          img {
-            width: 50px;
-          }
-        }
-        .update-time {
-          float: left;
-          width: 50%;
-          height: 100%;
-          padding-top: 65px;
-        }
-      }
+.logo {
+  height: 9.6vh;
+  line-height: 9.6vh;
+  font-size: 1.8vw;
+  img {
+    width: 4vw;
+  }
+}
+.interface-count {
+  height: 9.6vh;
+  line-height: 9.6vh;
+  font-size: 5vw;
+  img {
+    width: 1.8vw;
+    padding-right: 0.4vw;
+  }
+}
+.upload {
+  color: #d4a120;
+}
+#real-time-weather {
+  height: 9.6vh;
+  line-height: 9.6vh;
+  font-size: 3.6vw;
+  text-align: left;
+  .pic {
+    text-align: center;
+    padding-top: 1.1vw;
+    img {
+      width: 3vw;
     }
   }
-  .monitor-content {
-    position: absolute;
-    top: 108px;
-    bottom: 8px;
-    width: 100%;
-    .content-left {
-      width: 73%;
-      height: 100%;
-      margin-left: 9px;
-      margin-right: 6px;
-      float: left;
-      .top-container {
-        width: 100%;
-        height: 344px;
-        border: 1px solid #284c70;
-        .title {
-          width: 100%;
-          height: 42px;
-          line-height: 42px;
-          text-align: center;
-          font-family:STHeitiSC-Light;
-          font-size:24px;
-          color:#50e3c2;
-        }
-        .top-container-chart {
-          height: 300px;
-          .top-left-chart {
-            width: 49%;
-            float: left;
-          }
-          .top-right-chart {
-            width: 49%;
-            float: left;
-          }
-        }
-      }
-      .bottom-container {
-        height: 340px;
-        margin-top: 5px;
-        .data-process-content {
-          width: 50%;
-          height: 100%;
-          margin-right: 5px;
-          float: left;
-          border: 1px solid #284c70;
-        }
-        .machine-content {
-          width: 49.26%;
-          height: 100%;
-          float: left;
-          border: 1px solid #284c70;
-          .title {
-            padding: 8px 0;
-            text-align: center;
-            font-size: 22px;
-            color: #50e3c2;
-          }
-          .list {
-            .list-header {
-              height: 42px;
-              line-height: 42px;
-              div {
-                width: 25%;
-                float: left;
-                text-align: center;
-                font-size: 18px;
-              }
-            }
-            .list-content {
-              overflow: hidden;
-              padding-top: 8px;
-              div {
-                width: 25%;
-                height: 52px;
-                line-height: 52px;
-                margin-top: 10px;
-                float: left;
-                text-align: center;
-                font-size: 16px;
-              }
-              .cpu-name span{
-                background-color: #50f5fa;
-                padding: 8px 24px;
-              }
-              .memory-name span {
-                background-color: #d48c20;
-                padding: 8px 24px;
-              }
-              .disk-name span {
-                background-color: #1566b0;
-                padding: 8px 24px;
-              }
-            }
-          }
-        }
-      }
-    }
-    .content-right {
-      width: 25.5%;
-      height: 100%;
-      float: left;
+}
+#now-timer {
+  height: 9.6vh;
+  padding-top: 0.6vw;
+  color: #50e3c2;
+  .year {
+    font-size: 1.5vw;
+  }
+  .date {
+    font-size: 1.6vw;
+  }
+  .hour {
+    font-size: 2.1vw;
+  }
+}
+.monitor-container {
+  margin-top: 1vh;
+  .chart-container {
+    height: 100%;
+    .top-container {
+      height: 50%;
       border: 1px solid #284c70;
       .title {
-        width: 100%;
-        padding: 12px 0;
-        font-family: "STHeitiSC-Light";
-        font-size: 22px;
-        color: #50e3c2;
-        text-align: center;
-      }
-      .sub-title {
-        width: 100%;
-        height: 36px;
-        margin: 0;
-        background: #28adb6;
-        div {
-          width: 14%;
-          height: 36px;
-          line-height: 36px;
-          float: left;
-          border: 0;
-          font-family: "STHeitiSC-Light";
-          font-size: 12px;
-          color: #fff;
-          text-align: center;
-        }
-      }
-      .weathers-content {
-        width: 100%;
-        padding: 0 10px;
-        .line-content {
-          height: 42px;
-          line-height: 42px;
-          font-size: 14px;
-          div {
-            width: 14%;
-            float: left;
-            border: 0;
-          }
-        }
-        .line {
-          border-bottom: 1px solid #fff;
-          opacity:0.5;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  #header {
-    height: 130px;
-    .logo {
-      width: 14%;
-      height: 130px;
-      line-height: 110px;
-      padding-left: .76925em;
-      padding-top: 22px;
-      float: left;
-      font-family: "STHeitiSC-Light";
-      color: #fff;
-      font-size: 2em;
-      text-align: left;
-      img {
-        width: 2.8em;
-      }
-    }
-    .now-timer {
-      width: 16%;
-      height: 130px;
-      float: left;
-      padding-top: 32px;
-      color: #50e3c2;
-      font-size: 30px;
-      text-align: left;
-      .year {
-        width: 50%;
-        float: left;
-        font-size: 28px;
-      }
-      .date {
-
-      }
-      .hour {
-        font-size: 42px;
-      }
-    }
-    .interface-count {
-      width: 45%;
-      height: 130px;
-      float: left;
-      font-family: HelveticaNeue;
-      font-size: 100px;
-      text-align: right;
-      img {
-        width: 42px;
-        padding-right: 10px;
-      }
-      .download-count {
-        width: 50%;
-        float: left;
+        height: 3.6vh;
+        line-height: 3.6vh;
+        font-family: STHeitiSC-Light;
+        font-size: 1.2vw;
         color: #50e3c2;
       }
-      .upload-count {
-        width: 50%;
-        float: left;
-        color: #d4a120;
+      .top-container-chart {
+
       }
     }
-    .weather-container {
-      width: 25%;
-      height: 130px;
-      float: left;
-      .tempe {
-        width: 65%;
-        float: left;
-        font-family: HelveticaNeue-Light;
-        font-size: 91.47px;
-        color: #fff;
-        text-align: right;
-      }
-      .sub-info {
-        width: 35%;
-        float: left;
-        padding-top: 80px;
-        .weather {
-          float: left;
-          width: 50%;
-          text-align: center;
-        }
-        .update-time {
-          float: left;
-          width: 50%;
-          padding-top: 20px;
-          text-align: left;
-        }
-      }
-    }
-  }
-  .monitor-content {
-    position: absolute;
-    top: 150px;
-    bottom: 15px;
-    width: 100%;
-    .content-left {
-      width: 72%;
-      height: 100%;
-      margin-left: 20px;
-      margin-right: 16px;
-      float: left;
-      .top-container {
-        width: 100%;
-        height: 495px;
-        border: 1px solid #284c70;
+    .bottom-container {
+      .machine-content {
+        height: 100%;
         .title {
-          width: 100%;
-          height: 62px;
-          line-height: 62px;
-          text-align: center;
-          font-family:STHeitiSC-Light;
-          font-size:28px;
-          color:#50e3c2;
-        }
-        .top-container-chart {
-          height: 430px;
-          .top-left-chart {
-            width: 49%;
-            float: left;
-          }
-          .top-right-chart {
-            width: 49%;
-            float: left;
-          }
-        }
-      }
-      .bottom-container {
-        margin-top: 10px;
-        .data-process-content {
-          width: 50%;
-          height: 435px;
-          margin-right: 9px;
-          float: left;
-          border: 1px solid #284c70;
-        }
-        .machine-content {
-          width: 49.26%;
-          height: 435px;
-          float: left;
-          border: 1px solid #284c70;
-          .title {
-            padding: 10px 0;
+            padding: 0.9vh 0;
             text-align: center;
-            font-size: 26px;
+            font-size: 1.2vw;
             color: #50e3c2;
           }
           .list {
@@ -461,60 +147,47 @@ body {
               }
             }
           }
-        }
-      }
-    }
-    .content-right {
-      width: 25%;
-      height: 100%;
-      float: left;
-      border: 1px solid #284c70;
-      .title {
-        width: 100%;
-        padding: 18px 0;
-        font-family: "STHeitiSC-Light";
-        font-size: 26px;
-        color: #50e3c2;
-        text-align: center;
-      }
-      .sub-title {
-        width: 100%;
-        height: 62px;
-        margin: 0;
-        background: #28adb6;
-        div {
-          width: 14%;
-          height: 62px;
-          line-height: 62px;
-          float: left;
-          border: 0;
-          font-family: "STHeitiSC-Light";
-          font-size: 16px;
-          color: #fff;
-          text-align: center;
-        }
-      }
-      .weathers-content {
-        width: 100%;
-        padding: 0 10px;
-        .line-content {
-          height: 52px;
-          line-height: 52px;
-          font-size: 18px;
-          div {
-            width: 14%;
-            float: left;
-            border: 0;
-          }
-        }
-        .line {
-          border-bottom: 1px solid #fff;
-          opacity:0.5;
-        }
       }
     }
   }
-}
-#task-chart, #user-chart, #interface-chart {
-  height: 100%;
+  .district-weathers {
+    height: 100%;
+    border: 1px solid #284c70;
+    .title {
+      height: 2vw;
+      line-height: 2vw;
+      margin-top: 0.7vw;
+      font-size: 1.6vw;
+      color: #50e3c2;
+    }
+    .sub-title {
+      font-size: 1vw;
+      height: 2.4vw;
+      line-height: 2.4vw;
+      margin-top: 0.7vw;
+      opacity:0.52;
+      background:#28adb6;
+      div {
+        width: 14%;
+        float: left;
+      }
+    }
+    .weathers-content {
+      margin-top: 0.8vw;
+      .row {
+        div {
+          width: 14%;
+          height: 2.6vw;
+          line-height: 2.6vw;
+          float: left;
+          font-family: STHeitiSC-Light;
+          font-size: 1vw;
+        }
+      }
+      .line {
+        opacity:0.5;
+        border:1px solid #fff;
+      }
+    }
+  }
 }
