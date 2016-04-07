@@ -10,7 +10,7 @@ GIT
       yajl-ruby (~> 1.2.0)
 
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://gems.ruby-china.org/
   specs:
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
