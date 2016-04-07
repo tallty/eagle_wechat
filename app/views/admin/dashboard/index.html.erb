@@ -223,14 +223,19 @@
                     axisLabel: {
                       textStyle: {color: '#fff'}
                     },
-                    data : task_names
+                    data : [
+                      <% @task_logs.first[1].each do |item|%>
+                        "<%= item[1] %>",
+                      <% end %>
+                    ]
                   }
                 ],
                 yAxis : [{type : 'value', axisLabel: {textStyle: {color: '#fff'}}}],
                 animation: false,
                 series : [
+                  <% @task_logs.each do |log|%>
                     {
-                        name:'series2',
+                        name: "<%= log[0] %>",
                         type:'scatter',
                         tooltip : {
                             trigger: 'item',
@@ -244,8 +249,9 @@
                         symbolSize: function (value){
                             return value[2];
                         },
-                        data: task_logs
-                    }
+                        data: <%= log %>
+                    },
+                  <% end %>
                 ]
             };
             // options end

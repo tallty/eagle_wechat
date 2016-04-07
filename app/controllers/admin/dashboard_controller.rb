@@ -30,10 +30,15 @@ module Admin
       end
       @api_users_sort = ApiUser.new.simplify_sort(Customer.first, DateTime.now.strftime("%F"))
 
-      @task_logs = TaskLog.new.get_task_logs(Customer.first.id)
-      @task_names = []
-      @task_logs.each {|e| @task_names << e[0]}
-      @task_names = @task_names.uniq
+      t_logs = TaskLog.new.get_task_logs(Customer.first.id)
+      ta = Hash.new
+      t_name = nil
+      @task_logs.each do |item|
+        t_name = item[0]
+        ta[t_name] ||= []
+        ta[t_name] << item[1..-1]
+      end
+      @task_names = ta.keys
 		end
 
 
