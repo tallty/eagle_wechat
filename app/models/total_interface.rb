@@ -38,10 +38,10 @@ class TotalInterface < ActiveRecord::Base
   end
 
   def all_count_by_datetime(customer, name, datetime=nil)
-    datetime = datetime || DateTime.now.to_date - 1.day
+    datetime = datetime || DateTime.now - 1.day
     counts = customer.total_interfaces.where("datetime > ? and name = ?", datetime, name).group(:datetime).sum(:count)
     result = {}
-    counts.each { |e,i| result[e.strftime("%F %H:%M:%S")] = i }
+    counts.each { |e,i| result[e.strftime("%H:%M")] = i }
     result
   end
 
