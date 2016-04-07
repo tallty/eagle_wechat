@@ -123,25 +123,27 @@ body {
               overflow: hidden;
               padding-top: 0.911vh;
               div {
-                width: 25%;
-                height: 4.706vh;
-                line-height: 4.706vh;
-                margin-top: .905vh;
+                width: 24%;
+                height: 5.2vh;
+                line-height: 5.2vh;
+                margin-top: 1.1vh;
+                margin-right: 10px;
+                margin-left: 10px;
                 float: left;
                 text-align: center;
                 font-size: 1.11vw;
               }
               .cpu-name span{
                 background-color: #50f5fa;
-                padding: 10px 30px;
+                // padding: 10px 30px;
               }
               .memory-name span {
                 background-color: #d48c20;
-                padding: 10px 30px;
+                // padding: 10px 30px;
               }
               .disk-name span {
                 background-color: #1566b0;
-                padding: 10px 30px;
+                // padding: 10px 30px;
               }
             }
           }
