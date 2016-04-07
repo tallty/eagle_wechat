@@ -42,9 +42,9 @@
       var top_container_height = $('.top-container').height();
       var chart_container_height = $('.chart-container').height();
       $('.top-container-chart').height(top_container_height - 43);
-      $('.bottom-container').height(chart_container_height - top_container_height);
+      $('.bottom-container').height(chart_container_height - top_container_height - 12);
       $("#user-chart, #interface-chart").height(top_container_height - 43);
-      $("#task-chart").height($(".bottom-container").height());
+      $("#task-chart").height($(".bottom-container").height() - 2);
     }
     var now_time;
     function show_time() {
