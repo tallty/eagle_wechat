@@ -88,4 +88,14 @@ Rails.application.routes.draw do
      end
    end
 
+  resource :monitor, only: [:show] do
+    collection do
+      get :stations
+      get :machines
+      get :counts
+      get :interfaces
+      get :task_logs
+    end
+  end
+
 end

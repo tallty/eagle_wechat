@@ -1,0 +1,3 @@
+json.all_interface_count @all_interface_count
+json.today_interface_count @today_interface_count
+json.upload_count @upload_count
