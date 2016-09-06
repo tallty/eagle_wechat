@@ -6,8 +6,8 @@ threads 2, 64
 workers 2
 
 app_name = 'eagle_wechat'
-application_path = "/#{app_name}"
-directory "#{application_path}/public"
+application_path = "/home/deploy/#{app_name}"
+directory application_path
 
 pidfile "#{application_path}/tmp/pids/puma.pid"
 state_path "#{application_path}/tmp/sockets/puma.state"
