@@ -1,4 +1,5 @@
 json.linechart(@interface_counter) do |name, infos|
+  json.name name
   json.infos(infos) do |time, count|
     json.time time
     json.count count
