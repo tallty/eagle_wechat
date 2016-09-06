@@ -37,7 +37,7 @@ class Weather
       fwq: 'http://61.152.122.112:8080',
       url: 'api/v1/auto_stations/master.json?appid=LV08MwglXetHcxdaUTIR&appkey=3LpFnUP84xhj5HaIcmKGAC2yezMgY9'
     }
-    result = get_data(params)
+    result = get_data(params)['data']
   end
 
   def pusher_data
