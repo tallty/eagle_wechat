@@ -1,4 +1,4 @@
-class MonitorController < ApplicationController
+class MonitorsController < ApplicationController
   include ActionView::Helpers::NumberHelper
   protect_from_forgery except: [ :stations, :machines, :counts,
     :interfaces, :task_logs ]
