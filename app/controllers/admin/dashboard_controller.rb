@@ -6,7 +6,7 @@ module Admin
     respond_to :html, :js
 
 		def index
-      @real_time_weather = Weather.new.get_real_time_weather
+      # @real_time_weather = Weather.new.get_real_time_weather
       @district_weathers = Weather.new.get_district_weather
       @all_interface_count =  number_with_delimiter(TotalInterface.sum(:count))
       @today_interface_count =  number_with_delimiter(TotalInterface.get_sum_from_cache)

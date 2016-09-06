@@ -13,12 +13,12 @@
 <div class="weathers-content col-xs-12">
   <% @district_weathers.each do |item| %>
     <div class="row">
-      <div class="text-center"><%= item['site_name'] %></div>
+      <div class="text-center"><%= item['name'] %></div>
       <div class="text-center"><%= item['tempe']%></div>
       <div class="text-center"><%= item['wind_speed']%></div>
       <div class="text-center"><%= item['humi']%></div>
       <div class="text-center"><%= item['rain']%></div>
-      <div class="text-right"><%= item['air_pressure']%></div>
+      <div class="text-right"><%= item['pressure']%></div>
       <div class="text-right"><%= item['visibility']%></div>
     </div>
     <div class="line"></div>

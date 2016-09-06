@@ -34,8 +34,8 @@ class Weather
   def get_district_weather
     params = {
       method: 'get',
-      fwq: 'http://222.66.83.20:9090',
-      url: 'sh_main_stations'
+      fwq: 'http://61.152.122.112:8080'
+      url: 'api/v1/auto_stations/master.json?appid=LV08MwglXetHcxdaUTIR&appkey=3LpFnUP84xhj5HaIcmKGAC2yezMgY9'
     }
     result = get_data(params)
   end
