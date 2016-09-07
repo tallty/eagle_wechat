@@ -52,6 +52,10 @@ gem 'sidekiq'
 gem 'sinatra'
 
 gem 'pusher'
+
+# Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible.
+# Read me: https://github.com/cyu/rack-cors
+gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
