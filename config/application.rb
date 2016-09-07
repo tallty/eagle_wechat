@@ -47,5 +47,4 @@ module EagleWechat
       end
     end
   end
-  end
 end
