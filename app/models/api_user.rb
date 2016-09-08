@@ -37,7 +37,8 @@ class ApiUser < ActiveRecord::Base
   end
 
   def get_api_user_sort customer, datetime
-    api_users = customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
+    # api_users = customer.api_users.where("company <> ?", "测试接口[大唐]").as_json
+    api_users = customer.api_users.where.not(company: ["测试接口[大唐]", "青浦爱天气"]).as_json
     count = TotalInterface.user_analyz_daily(customer, datetime)
     api_users.each do |user|
       user[:count] = count[user[:id]] || 0
