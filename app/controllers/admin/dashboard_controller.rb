@@ -24,9 +24,10 @@ module Admin
       interface_arr = interface_arr.map { |e| MultiJson.load(e) }
       interface_arr.each { |e| e.delete('times') }
       interface_arr.sort! {|item, item2| item2['all_count'] <=> item['all_count']}
-      @result = Array.new(interface_arr[0..4])
-      if interface_arr.size > 5
-        @result << {:name => '其它', :all_count => interface_arr[4..-1].inject(0) {|sum, value| sum + value['all_count']}}
+      length = 3
+      @result = Array.new(interface_arr[0..length-1])
+      if interface_arr.size > length
+        @result << {:name => '其它', :all_count => interface_arr[length-1..-1].inject(0) {|sum, value| sum + value['all_count']}}
       end
       @api_users_sort = ApiUser.new.simplify_sort(Customer.first, DateTime.now.strftime("%F"))
 

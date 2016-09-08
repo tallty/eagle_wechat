@@ -146,7 +146,7 @@
               },
               series : [
                   {
-                      name:'访问来源', type:'pie', selectedMode: 'single',
+                      name:'接口调用信息', type:'pie', selectedMode: 'single',
                       radius : [0, '30%'], x: '50%', width: '40%',
                       center: ['45%', '50%'],
                       funnelAlign: 'right', max: 1548,
@@ -156,22 +156,22 @@
                         }
                       },
                       data:[
-                        <% @api_users_sort.each do |user| %>
+                        <% @result.each do |e| %>
                           {
-                            value: <%= user.with_indifferent_access['count'] %>,
-                            name: "<%= user.with_indifferent_access['company']%>"
+                            value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
                           },
                         <% end %>
                       ]
                   },
                   {
-                      name:'接口调用信息', type:'pie', radius : ['45%', '75%'],
+                      name:'访问来源', type:'pie', radius : ['45%', '75%'],
                       x: '60%', width: '35%', funnelAlign: 'left', max: 1048,
                       center: ['45%', '50%'],
                       data:[
-                        <% @result.each do |e| %>
+                        <% @api_users_sort.each do |user| %>
                           {
-                            value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
+                            value: <%= user.with_indifferent_access['count'] %>,
+                            name: "<%= user.with_indifferent_access['company']%>"
                           },
                         <% end %>
                       ]
