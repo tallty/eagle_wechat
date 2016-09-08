@@ -27,7 +27,7 @@ class ApiUser < ActiveRecord::Base
 
   def simplify_sort customer, datetime
     all_result = get_api_user_sort customer, datetime
-    length = 4
+    length = 5
     result = Array.new(all_result[0..length-1])
     if all_result.size > length
       other_count = all_result[length - 1..-1].inject(0) {|sum,value| sum + value[:count]}
