@@ -152,13 +152,13 @@
                       funnelAlign: 'right', max: 1548,
                       itemStyle : {
                         normal : {
-                          label : {position : 'inner'}, labelLine : {show : false}
+                          label : {position : 'inner', show: false}, labelLine : {show : false}
                         }
                       },
                       data:[
                         <% @result.each do |e| %>
                           {
-                            value: <%= e.with_indifferent_access['all_count'] %>
+                            value: <%= e.with_indifferent_access['all_count'] %>, name: "<%= e.with_indifferent_access['name']%>"
                           },
                         <% end %>
                       ]
