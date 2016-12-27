@@ -4,7 +4,7 @@ class MachinesController < ApplicationController
   respond_to :json
 
   def base_hardware_info
-    machine = Machine.where(identifier: base_hardware_params["identifier"]).first
+    machine = Machine.where(identifier: base_hardware_params["identifier"]).first_or_create
     if machine.nil?
       render :json => { :status => 'error' }
       return
