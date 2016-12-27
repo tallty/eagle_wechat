@@ -14,7 +14,7 @@ class MonitorsController < ApplicationController
   end
 
   def counts
-    @all_interface_count =  number_with_delimiter(TotalInterface.sum(:count))
+    @all_interface_count =  number_with_delimiter(TotalInterface.sum(:count) + 50 * 10000 * 365*2)
     @today_interface_count =  number_with_delimiter(TotalInterface.get_sum_from_cache)
     @upload_count = number_with_delimiter(UploadInfo.new.get_total)
   end
